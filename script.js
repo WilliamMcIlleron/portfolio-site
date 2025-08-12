@@ -82,9 +82,17 @@ document.querySelector('#devblogcard').addEventListener('click', function() {
         const title = this.querySelector('.project-title').textContent;
         window.open("https://williamsdevblog.netlify.app", "_blank");
     });
+    document.querySelector('#kivarshotscard').addEventListener('click', function() {
+        const title = this.querySelector('.project-title').textContent;
+        window.open("https://kivarshots.netlify.app", "_blank");
+    });
+    document.querySelector('#devblogcard').addEventListener('click', function() {
+        const title = this.querySelector('.project-title').textContent;
+        window.open("https://shotsbyzondo.netlify.app", "_blank");
+    });
 
 
-// Form submission handler
+/* Form submission handler
 function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -103,7 +111,7 @@ function handleSubmit(event) {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
     }, 2000);
-}
+}*/
 
 // Initialize particles
 createParticles();
