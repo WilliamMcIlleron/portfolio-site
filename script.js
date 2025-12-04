@@ -76,7 +76,7 @@ document.querySelector('#todolistcard').addEventListener('click', function() {
     });
 document.querySelector('#clientlandingcard').addEventListener('click', function() {
         const title = this.querySelector('.project-title').textContent;
-        window.open("https://clientlanding.netlify.app", "_blank");
+        window.open("https://cafenamelandingpage.netlify.app", "_blank");
     });
 document.querySelector('#devblogcard').addEventListener('click', function() {
         const title = this.querySelector('.project-title').textContent;
