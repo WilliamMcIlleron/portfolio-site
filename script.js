@@ -90,6 +90,10 @@ document.querySelector('#devblogcard').addEventListener('click', function() {
         const title = this.querySelector('.project-title').textContent;
         window.open("https://shotsbyzondo.netlify.app", "_blank");
     });
+    document.querySelector('#kohibyifukucard').addEventListener('click', function() {
+        const title = this.querySelector('.project-title').textContent;
+        window.open("https://www.kohibyifuku.co.za", "_blank");
+    });
 
 
 /* Form submission handler
