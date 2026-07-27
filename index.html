@@ -2,191 +2,378 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Front-end Developer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>William McIlleron — I build and run small web products</title>
+    <meta name="description" content="Johannesburg web developer. I build and run small web products: Lumen, a site system for wedding photographers, and Faircopy, a proposal tool for freelancers. Open to select client work.">
+    <meta name="author" content="William McIlleron">
+    <meta name="theme-color" content="#f4f1ea" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#14130f" media="(prefers-color-scheme: dark)">
+
+    <link rel="canonical" href="https://williammcilleron.netlify.app/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="William McIlleron">
+    <meta property="og:title" content="William McIlleron — I build and run small web products">
+    <meta property="og:description" content="Lumen, a site system for wedding photographers. Faircopy, a proposal tool for freelancers. Open to select client work.">
+    <meta property="og:url" content="https://williammcilleron.netlify.app/">
+    <meta property="og:image" content="https://williammcilleron.netlify.app/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="William McIlleron — I build small web products and run the ones that work.">
+    <meta name="twitter:image" content="https://williammcilleron.netlify.app/og.png">
+
+    <!-- summary_large_image, not summary — otherwise a 1200x630 card gets cropped to a thumbnail. -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="alternate" type="application/rss+xml" title="William McIlleron — Writing" href="/feed.xml">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "William McIlleron",
+      "url": "https://williammcilleron.netlify.app/",
+      "email": "williamjonahmci@gmail.com",
+      "jobTitle": "Web Developer",
+      "description": "Johannesburg web developer. I build and run small web products: Lumen, a site system for wedding photographers, and Faircopy, a proposal tool for freelancers. Open to select client work.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Johannesburg",
+        "addressRegion": "Gauteng",
+        "addressCountry": "ZA"
+      },
+      "sameAs": ["https://github.com/WilliamMcIlleron"],
+      "knowsAbout": ["HTML", "CSS", "JavaScript", "TypeScript", "Astro", "Next.js", "Tailwind CSS", "Supabase", "Web accessibility", "Web performance", "Local SEO"]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&display=swap">
     <link rel="stylesheet" href="styles.css">
+
+    <script>
+        // Set before first paint: avoids a flash of the wrong theme, and lets CSS
+        // hide scroll-reveal content only when JS is around to reveal it again.
+        (function () {
+            var root = document.documentElement;
+            root.classList.add('js');
+            try {
+                var saved = localStorage.getItem('theme');
+                if (saved === 'light' || saved === 'dark') root.dataset.theme = saved;
+            } catch (e) { /* private mode — fall back to the media query */ }
+        })();
+    </script>
 </head>
 <body>
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loader"></div>
-    </div>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- Background Particles -->
-    <div class="bg-particles" id="particles"></div>
+    <header class="masthead">
+        <div class="masthead__inner wrap">
+            <a class="wordmark" href="#top">
+                William McIlleron<span class="wordmark__dot">.</span>
+            </a>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <a href="#home" class="logo">William McIlleron</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+            <nav class="nav" id="nav" aria-label="Primary">
+                <ul class="nav__list">
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#writing">Writing</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1 class="hero-title">Front-End Developer</h1>
-            <p class="hero-subtitle">Crafting Digital Experiences</p>
-            <p class="hero-description">
-                I'm a passionate developer who loves creating beautiful, functional, and user-centered digital experiences. 
-                With knowledge in modern web technologies, I bring ideas to life through code.
-            </p>
-            <a href="#projects" class="cta-button">View My Work</a>
-        </div>
-    </section>
+            <div class="masthead__actions">
+                <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch to dark theme">
+                    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <circle cx="12" cy="12" r="4.2"/>
+                        <path d="M12 2.4v2.6M12 19v2.6M4.2 12H1.6M22.4 12h-2.6M5.6 5.6 7.4 7.4M16.6 16.6l1.8 1.8M18.4 5.6 16.6 7.4M7.4 16.6l-1.8 1.8"/>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M20 14.2A8.4 8.4 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2Z"/>
+                    </svg>
+                </button>
 
-    <!-- About Section -->
-    <section class="section" id="about">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <p>Hello! I'm a front-end developer with a passion for crafting exceptional digital experiences. With a steadily increasing amount of experience in web development, I specialize in creating responsive, accessible, and visually stunning websites and applications.</p>
-                <br>
-                <p>I believe in the power of clean code, thoughtful design, and user-centered development. When I'm not coding, you can find me exploring new technologies, climbing, or spending time with my friends, online or not.</p>
+                <button class="icon-btn nav-toggle" id="navToggle" type="button"
+                        aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+                    <span class="nav-toggle__bar"></span>
+                    <span class="nav-toggle__bar"></span>
+                </button>
             </div>
-            <div class="about-image">
-                <div class="profile-card">
-                    <div class="avatar">WM</div>
-                    <h3>William McIlleron</h3>
-                    <p>Front-End Developer</p>
-                    <a href="https://www.upwork.com/freelancers/~013534dc4fbaff03c3" class="cta-button" id="hire-btn" target="_blank">Hire Me</a>
+        </div>
+    </header>
+
+    <main id="main">
+        <!-- ── Hero ───────────────────────────────────────────────── -->
+        <section class="hero" id="top">
+            <div class="wrap">
+                <p class="eyebrow reveal">Developer &middot; Johannesburg</p>
+
+                <h1 class="hero__title reveal">
+                    I build small web products<br>
+                    and <em>run the ones that work.</em>
+                </h1>
+
+                <p class="hero__lede reveal">
+                    Right now that's Lumen, a site system for wedding photographers, and
+                    Faircopy, a proposal tool for freelancers. I design them, build them,
+                    deploy them, and answer the support emails.
+                </p>
+
+                <div class="hero__actions reveal">
+                    <a class="btn btn--solid" href="#work">See what I'm building</a>
+                    <a class="btn btn--ghost" href="#contact">Get in touch</a>
+                </div>
+
+                <p class="status reveal">
+                    <span class="status__dot" aria-hidden="true"></span>
+                    Open to select client work
+                </p>
+            </div>
+        </section>
+
+        <!-- ── Work ───────────────────────────────────────────────── -->
+        <section class="section" id="work">
+            <div class="wrap section__grid">
+                <div class="section__aside">
+                    <p class="section__label">01 &mdash; Work</p>
+                </div>
+
+                <div class="section__body">
+                    <h2 class="section__title reveal">What I'm building</h2>
+
+                    <p class="group-label reveal">Products</p>
+                    <ul class="work-list">
+                        <li class="reveal">
+                            <!-- TODO: swap for the real Lumen domain when it's pointed. -->
+                            <a class="work" href="https://lumen-10d.pages.dev" target="_blank" rel="noopener">
+                                <span class="work__idx">01</span>
+                                <span class="work__main">
+                                    <span class="work__title">Lumen</span>
+                                    <span class="work__desc">A site system for wedding photographers. Every client site comes off one codebase and a single config file, including a ranking page per town generated from an array — which is what makes a three-hour turnaround possible. Sold as a build plus a monthly care plan.</span>
+                                </span>
+                                <span class="work__meta">Astro · Tailwind · Cloudflare</span>
+                                <span class="work__arrow" aria-hidden="true">&#8599;</span>
+                            </a>
+                        </li>
+                        <li class="reveal">
+                            <div class="work work--static">
+                                <span class="work__idx">02</span>
+                                <span class="work__main">
+                                    <span class="work__title">Faircopy <span class="work__status">In development</span></span>
+                                    <span class="work__desc">Paste a messy client brief, get back a proposal you can edit, save and export. Built for freelancers who lose work to the gap between the call and the quote.</span>
+                                </span>
+                                <span class="work__meta">Next.js · Supabase</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <p class="group-label reveal">Client work</p>
+                    <ul class="work-list">
+                        <li class="reveal">
+                            <a class="work" href="https://www.kohibyifuku.co.za" target="_blank" rel="noopener">
+                                <span class="work__idx">03</span>
+                                <span class="work__main">
+                                    <span class="work__title">Kohi by Ifuku</span>
+                                    <span class="work__desc">A coffee shop's site — menu, hours and directions, tuned to load instantly on a phone in the queue.</span>
+                                </span>
+                                <span class="work__meta">HTML · CSS · JS</span>
+                                <span class="work__arrow" aria-hidden="true">&#8599;</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <p class="group-label reveal">Also built</p>
+                    <ul class="work-list">
+                        <li class="reveal">
+                            <a class="work" href="https://williamsdevblog.netlify.app" target="_blank" rel="noopener">
+                                <span class="work__idx">04</span>
+                                <span class="work__main">
+                                    <span class="work__title">Dev Blog</span>
+                                    <span class="work__desc">A blog layout designed around long-form reading: measured line lengths, real typographic hierarchy.</span>
+                                </span>
+                                <span class="work__meta">HTML · CSS · JS</span>
+                                <span class="work__arrow" aria-hidden="true">&#8599;</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
-        
-    </section>
+        </section>
 
-    <!-- Skills Section -->
-    <section class="section" id="skills">
-        <h2 class="section-title">Skills & Expertise</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <div class="skill-icon">🎨</div>
-                <h3 class="skill-name">Frontend Development</h3>
-                <p class="skill-description">HTML5, CSS3, JavaScript ES6+, Wordpress</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="section" id="projects">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card" id="kohibyifukucard">
-            <div class="project-image">☕</div>
-            <div class="project-content">
-                <h3 class="project-title">Kohi by Ifuku</h3>
-                <p class="project-description">A beautiful website for a a nearby cafe!</p>
-                <div class="project-tags">
-                    <span class="tag">HTML</span>
-                    <span class="tag">JS</span>
-                    <span class="tag">CSS</span>
+        <!-- ── About ──────────────────────────────────────────────── -->
+        <section class="section section--rule" id="about">
+            <div class="wrap section__grid">
+                <div class="section__aside">
+                    <p class="section__label">02 &mdash; About</p>
                 </div>
-            </div>
-            </div>
-            <div class="project-card" id="kivarshotscard">
-                <div class="project-image">📷</div>
-                <div class="project-content">
-                    <h3 class="project-title">Kivar Shots</h3>
-                    <p class="project-description">A website for a local photographer!</p>
-                    <div class="project-tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">JS</span>
-                        <span class="tag">CSS</span>
+
+                <div class="section__body">
+                    <h2 class="section__title reveal">A bit about me</h2>
+
+                    <div class="prose reveal">
+                        <p>
+                            I'm William, a developer in Johannesburg. I build web products and
+                            then run them, which means I do the design, the code, the deploys and
+                            the support emails. It's a useful discipline — you stop shipping
+                            things that are clever to build and annoying to own.
+                        </p>
+                        <p>
+                            Lumen is the main one. It's a site system for wedding photographers,
+                            sold as a build plus a monthly care plan rather than a one-off. Every
+                            client site runs off the same codebase and one config file, so a new
+                            one goes live in an afternoon instead of a fortnight.
+                        </p>
+                        <p>
+                            I still take client work when the fit is right — small businesses who
+                            need one site that works properly and then stays out of their way. In
+                            practice that means pages that load in about a second on a phone with
+                            bad signal, forms that actually submit, and layouts that hold together
+                            at 320&nbsp;pixels wide. I care about accessibility, because a site
+                            people can't use isn't finished.
+                        </p>
+                        <p>
+                            When I'm not building, I'm usually climbing or picking apart some
+                            technology I have no immediate use for.
+                        </p>
                     </div>
-                </div>
-            </div>
-            <div class="project-card" id="shotsbyzondocard">
-                <div class="project-image">📸</div>
-                <div class="project-content">
-                    <h3 class="project-title">ShotsByZondo</h3>
-                    <p class="project-description">A website for another local photographer!</p>
-                    <div class="project-tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">JS</span>
-                        <span class="tag">Tailwind CSS</span>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card" id="todolistcard">
-                <div class="project-image">🚀</div>
-                <div class="project-content">
-                    <h3 class="project-title">Simple To Do List</h3>
-                    <p class="project-description">A basic to do list!</p>
-                    <div class="project-tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">JS</span>
-                        <span class="tag">CSS</span>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card" id="clientlandingcard">
-                <div class="project-image">📊</div>
-                <div class="project-content">
-                    <h3 class="project-title">Client Landing Page</h3>
-                    <p class="project-description">A page to attract potential clients for a made up business</p>
-                    <div class="project-tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card" id="devblogcard">
-                <div class="project-image">📝</div>
-                <div class="project-content">
-                    <h3 class="project-title">Dev Blog Site</h3>
-                    <p class="project-description">A sleek website for a blog made by a web dev (maybe me one day?)</p>
-                    <div class="project-tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">JS</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section class="section" id="contact">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-content">
-            <p>I'm always excited to work on new projects and collaborate with amazing people. Let's create something extraordinary together!</p>
-            <form class="contact-form" name="portfolio-contact-form" method="POST" netlify>
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
+                    <dl class="capabilities reveal">
+                        <div class="capability">
+                            <dt>Build</dt>
+                            <dd>HTML &middot; CSS &middot; JavaScript &middot; TypeScript</dd>
+                        </div>
+                        <div class="capability">
+                            <dt>Frameworks</dt>
+                            <dd>Astro &middot; Next.js &middot; Tailwind CSS &middot; WordPress</dd>
+                        </div>
+                        <div class="capability">
+                            <dt>Platform</dt>
+                            <dd>Supabase &middot; Cloudflare Pages &middot; Netlify &middot; Git</dd>
+                        </div>
+                        <div class="capability">
+                            <dt>Focus</dt>
+                            <dd>Performance &middot; Accessibility &middot; Local SEO &middot; Responsive layout</dd>
+                        </div>
+                    </dl>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Send Message</button>
-            </form>
-        </div>
-    </section>
+            </div>
+        </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="social-links">
-            <a href="mailto:williamjonahmci@icloud.com" class="social-link">📧</a>
-            <a href="https://www.upwork.com/freelancers/~013534dc4fbaff03c3" class="social-link" target="_blank"><img src="./1929180_upwork_icon.png" alt="upwork logo"></a>
-            <a href="https://github.com/WilliamMcIlleron" class="social-link" target="_blank"><img src="./icons8-github-30.png" alt="github logo"></a>
-            <!--a href="#" class="social-link">🐦</a-->
+        <!-- ── Writing ────────────────────────────────────────────── -->
+        <section class="section section--rule" id="writing">
+            <div class="wrap section__grid">
+                <div class="section__aside">
+                    <p class="section__label">03 &mdash; Writing</p>
+                </div>
+
+                <div class="section__body">
+                    <h2 class="section__title reveal">Notes from building things</h2>
+
+                    <p class="prose reveal">
+                        Mostly about running small products rather than just building them —
+                        what I tried, what it cost, and what the numbers actually said.
+                    </p>
+
+                    <ul class="work-list" style="margin-top: 2.5rem;">
+                        <li class="reveal">
+                            <a class="work" href="/writing/i-filtered-for-bad-websites/">
+                                <span class="work__idx">01</span>
+                                <span class="work__main">
+                                    <span class="work__title">I filtered for bad websites. I should have filtered for budget.</span>
+                                    <span class="work__desc">23 cold DMs to wedding photographers, 3 replies, 0 closes. Two of the replies said the same thing — and it wasn't about my pitch.</span>
+                                </span>
+                                <span class="work__meta">27 Jul 2026</span>
+                                <span class="work__arrow" aria-hidden="true">&#8594;</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <p class="prose reveal" style="margin-top: 2rem;">
+                        <a href="/writing/" class="text-link">All writing &#8594;</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Contact ────────────────────────────────────────────── -->
+        <section class="section section--rule" id="contact">
+            <div class="wrap section__grid">
+                <div class="section__aside">
+                    <p class="section__label">04 &mdash; Contact</p>
+                </div>
+
+                <div class="section__body">
+                    <h2 class="section__title reveal">Start a project</h2>
+
+                    <p class="prose reveal">
+                        Tell me roughly what you need and what you're working with. I'll come
+                        back to you within a day or two — usually with questions.
+                    </p>
+
+                    <ul class="contact-links reveal">
+                        <li><a href="mailto:williamjonahmci@gmail.com">williamjonahmci@gmail.com</a></li>
+                        <li><a href="https://github.com/WilliamMcIlleron" target="_blank" rel="noopener">GitHub <span aria-hidden="true">&#8599;</span></a></li>
+                    </ul>
+
+                    <form class="form reveal" id="contactForm"
+                          name="portfolio-contact-form"
+                          method="POST"
+                          action="/thanks.html"
+                          data-netlify="true"
+                          netlify-honeypot="company">
+                        <input type="hidden" name="form-name" value="portfolio-contact-form">
+
+                        <!-- Honeypot: hidden from people, irresistible to bots. -->
+                        <p class="hp">
+                            <label>Company <input name="company" tabindex="-1" autocomplete="off"></label>
+                        </p>
+
+                        <div class="field">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" autocomplete="name" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" autocomplete="email" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="project">What kind of project?</label>
+                            <select id="project" name="project" required>
+                                <option value="" disabled selected>Choose one</option>
+                                <option>A wedding photography site (Lumen)</option>
+                                <option>A new website</option>
+                                <option>A redesign of an existing site</option>
+                                <option>Fixing or speeding up a site I have</option>
+                                <option>Ongoing changes and upkeep</option>
+                                <option>Something else</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="message">Tell me a bit more</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+
+                        <button class="btn btn--solid" type="submit" id="submitBtn">Send message</button>
+
+                        <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="wrap footer__inner">
+            <p>&copy; 2026 William McIlleron</p>
+            <p class="footer__note">Written by hand in HTML, CSS and JavaScript.</p>
         </div>
-        <p>&copy; 2025 William McIlleron. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
