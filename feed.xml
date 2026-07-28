@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>William McIlleron — Writing</title>
+    <title>William McIlleron · Writing</title>
     <link>https://williammcilleron.netlify.app/writing/</link>
     <description>Notes from building and running small web products.</description>
     <language>en</language>
@@ -12,7 +12,7 @@
       <title>I filtered for bad websites. I should have filtered for budget.</title>
       <link>https://williammcilleron.netlify.app/writing/i-filtered-for-bad-websites/</link>
       <guid isPermaLink="true">https://williammcilleron.netlify.app/writing/i-filtered-for-bad-websites/</guid>
-      <description>23 cold DMs to wedding photographers, 3 replies, 0 closes. Two of the replies said the same thing — and it wasn't about my pitch.</description>
+      <description>23 cold DMs to wedding photographers, 3 replies, 0 closes. Two of the replies said the same thing, and it wasn't about my pitch.</description>
       <pubDate>Mon, 27 Jul 2026 09:00:00 +0200</pubDate>
     </item>
   </channel>

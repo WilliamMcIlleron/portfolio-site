@@ -173,7 +173,7 @@
                 .then(function (response) {
                     if (!response.ok) throw new Error(response.status);
                     form.reset();
-                    status.textContent = 'Thanks — that came through. I\'ll reply within a day or two.';
+                    status.textContent = 'Thanks, that came through. I\'ll reply within a day or two.';
                 })
                 .catch(function () {
                     status.classList.add('is-error');
