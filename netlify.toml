@@ -17,3 +17,10 @@
   for = "/favicon.svg"
   [headers.values]
     Cache-Control = "public, max-age=604800"
+
+# nosniff is set site-wide above, so the XSL must arrive with a stylesheet
+# content type or browsers refuse to apply the transform and show raw XML.
+[[headers]]
+  for = "/feed.xsl"
+  [headers.values]
+    Content-Type = "text/xsl; charset=utf-8"
