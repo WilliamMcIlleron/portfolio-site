@@ -19,11 +19,21 @@
 const TO = process.env.CONTACT_TO || 'williamjonahmci@gmail.com';
 const FROM = process.env.CONTACT_FROM || 'Portfolio <onboarding@resend.dev>';
 
+// Field order in the email, not just the labels. Covers both forms on the
+// site; anything a given form doesn't submit is skipped.
 const LABELS = {
     name: 'Name',
     email: 'Email',
+    town: 'Shoots in',
+    website: 'Current site',
     project: 'Project type',
     message: 'Message'
+};
+
+// So a photographer enquiry is obvious in the inbox without opening it.
+const SUBJECTS = {
+    'lumen-enquiry': 'Lumen enquiry',
+    'portfolio-contact-form': 'Portfolio enquiry'
 };
 
 function escapeHtml(value) {
@@ -38,9 +48,11 @@ exports.handler = async function (event) {
         return { statusCode: 200, body: 'skipped' };
     }
 
-    let data;
+    let data, formName;
     try {
-        data = (JSON.parse(event.body).payload || {}).data || {};
+        const payload = JSON.parse(event.body).payload || {};
+        data = payload.data || {};
+        formName = payload.form_name || data['form-name'];
     } catch (error) {
         console.error('Could not parse submission payload:', error);
         return { statusCode: 400, body: 'bad payload' };
@@ -55,7 +67,9 @@ exports.handler = async function (event) {
     }
 
     const senderName = data.name || 'Someone';
-    const subject = 'Portfolio enquiry — ' + senderName + (data.project ? ' (' + data.project + ')' : '');
+    const qualifier = data.project || data.town;
+    const subject = (SUBJECTS[formName] || 'Website enquiry') + ' — ' + senderName +
+        (qualifier ? ' (' + qualifier + ')' : '');
 
     const text = fields
         .map(function (f) { return f.label + ': ' + f.value; })
