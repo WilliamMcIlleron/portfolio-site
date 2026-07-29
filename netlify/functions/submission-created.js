@@ -27,7 +27,8 @@ const LABELS = {
     town: 'Shoots in',
     website: 'Current site',
     project: 'Project type',
-    message: 'Message'
+    message: 'Message',
+    source: 'Came from'
 };
 
 // So a photographer enquiry is obvious in the inbox without opening it.

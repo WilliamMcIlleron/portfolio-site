@@ -262,6 +262,7 @@
                 <form class="form" name="lumen-enquiry" method="POST" action="/thanks.html"
                       data-netlify="true" netlify-honeypot="company">
                     <input type="hidden" name="form-name" value="lumen-enquiry">
+                    <input type="hidden" name="source" id="source" value="unknown">
                     <p class="hp"><label>Company <input name="company" tabindex="-1" autocomplete="off"></label></p>
 
                     <div class="field">
@@ -304,5 +305,36 @@
             </p>
         </div>
     </footer>
+
+    <script>
+        // Records where an enquiry came from. Tag your own links with ?src=
+        // (?src=ig-bio, ?src=dm) and that wins; otherwise fall back to the
+        // referring site. Held in sessionStorage so a detour via the terms
+        // page doesn't lose it.
+        (function () {
+            var field = document.getElementById('source');
+            if (!field) return;
+
+            var src = new URLSearchParams(location.search).get('src');
+
+            try {
+                if (src) {
+                    sessionStorage.setItem('src', src);
+                } else {
+                    src = sessionStorage.getItem('src');
+                }
+            } catch (e) { /* private mode, carry on without it */ }
+
+            if (!src) {
+                try {
+                    src = document.referrer ? new URL(document.referrer).hostname : 'direct';
+                } catch (e) {
+                    src = 'direct';
+                }
+            }
+
+            field.value = src;
+        })();
+    </script>
 </body>
 </html>
