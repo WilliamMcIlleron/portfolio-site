@@ -381,6 +381,40 @@ p + p { margin-top: 1rem; }
     white-space: nowrap;
 }
 
+/* --- Terms ---------------------------------------------------------------- */
+
+.terms { padding-block: clamp(2.5rem, 7vw, 4.5rem); }
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 2.5rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.back-link:hover { color: var(--accent); }
+
+.terms__title { font-size: clamp(1.875rem, 1.4rem + 2vw, 2.75rem); max-width: none; }
+
+.terms__lede { margin-top: 1rem; color: var(--muted); }
+
+.terms__body { margin-top: 3rem; }
+
+.terms__body h2 {
+    font-size: 1.3125rem;
+    max-width: none;
+    margin-bottom: 0.75rem;
+}
+
+.terms__body > h2:not(:first-child) { margin-top: 2.75rem; }
+
+.terms__body p { color: var(--muted); }
+
+.terms__body .ticks { margin-top: 1rem; }
+
+.terms__body a { color: var(--accent); }
+
 /* --- Footer --------------------------------------------------------------- */
 
 .footer {
