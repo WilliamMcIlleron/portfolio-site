@@ -78,6 +78,14 @@
     .browser__bar i { width: 12px; height: 12px; border-radius: 50%; background: #c9c0b3; display: block; }
     .browser img { width: 100%; display: block; }
     .drop { display: grid; place-items: center; min-height: 320px; background: var(--tint); color: var(--muted); font-size: 24px; text-align: center; padding: 40px; }
+
+    /* Stacked before/after. The two frames share whatever height the headline
+       leaves behind, and the shots crop from the top, which is the part of a
+       homepage worth comparing. */
+    .fill { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+    .fill .shot { flex: 1; min-height: 0; overflow: hidden; background: var(--tint); }
+    .fill .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+    .fill .drop { height: 100%; min-height: 0; }
 </style>
 </head>
 <body>
@@ -86,7 +94,8 @@
     <label for="tpl">Template</label>
     <select id="tpl">
         <option value="screen">Screen · one shot</option>
-        <option value="split">Before and after</option>
+        <option value="split">Before and after · side by side</option>
+        <option value="stack">Before and after · stacked</option>
         <option value="statement">Statement</option>
         <option value="intro">Intro · you</option>
         <option value="slide">Carousel slide</option>
@@ -153,6 +162,21 @@
         return '<div style="width:100%;border-radius:8px;overflow:hidden">' + inner + '</div>';
     }
 
+    // Same idea as framed(), but the shot stretches to fill its slot instead
+    // of taking its natural height. Phone makes no sense across a full 1080,
+    // so it falls through to the bare version.
+    function framedFill(src) {
+        var inner = src
+            ? '<div class="shot"><img src="' + src + '" alt=""></div>'
+            : '<div class="drop">Pick a screenshot<br>with the Image button above</div>';
+        if (frameSel.value === 'browser') {
+            return '<div class="browser fill" style="flex:1;min-height:0">' +
+                     '<div class="browser__bar"><i></i><i></i><i></i></div>' + inner +
+                   '</div>';
+        }
+        return '<div class="fill" style="flex:1;min-height:0;border:1px solid var(--rule);border-radius:12px;overflow:hidden">' + inner + '</div>';
+    }
+
     var TEMPLATES = {
         screen: function () {
             return '<div class="pad" style="height:100%;display:flex;flex-direction:column;gap:56px">' +
@@ -172,6 +196,26 @@
                 '<div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;min-height:0">' +
                   '<div><p class="eyebrow" style="margin-bottom:18px" contenteditable>Before</p>' + framed(state.img, true) + '</div>' +
                   '<div><p class="eyebrow" style="margin-bottom:18px" contenteditable>After</p>' + framed(state.img2, true) + '</div>' +
+                '</div>' +
+                '<div class="foot"><span class="handle" contenteditable>@williamwebdev</span></div>' +
+              '</div>';
+        },
+
+        stack: function () {
+            function block(label, src) {
+                return '<figure style="flex:1;display:flex;flex-direction:column;min-height:0;margin:0">' +
+                         '<p class="eyebrow" style="margin-bottom:14px" contenteditable>' + label + '</p>' +
+                         framedFill(src) +
+                       '</figure>';
+            }
+            return '<div style="height:100%;display:flex;flex-direction:column;gap:32px;padding:64px 64px 72px">' +
+                '<div>' +
+                  '<p class="eyebrow" contenteditable>Client · rebuild</p>' +
+                  '<h1 contenteditable style="font-family:var(--serif);font-weight:400;font-size:62px;line-height:1.05;letter-spacing:-.02em;margin-top:18px;max-width:19ch">The old site, and the one that replaced it.</h1>' +
+                '</div>' +
+                '<div style="flex:1;display:flex;flex-direction:column;gap:28px;min-height:0">' +
+                  block('Before', state.img) +
+                  block('After', state.img2) +
                 '</div>' +
                 '<div class="foot"><span class="handle" contenteditable>@williamwebdev</span></div>' +
               '</div>';
@@ -213,6 +257,10 @@
     };
 
     function render() {
+        // A phone frame across the full 1080 is meaningless, so the stacked
+        // template quietly moves you to the browser chrome it was built for.
+        if (tpl.value === 'stack' && frameSel.value === 'phone') frameSel.value = 'browser';
+
         canvas.style.background = state.bg;
         canvas.style.color = dark() ? '#faf7f2' : '#2a2622';
         canvas.innerHTML = TEMPLATES[tpl.value]();
@@ -225,7 +273,7 @@
             });
         }
 
-        var needsTwo = tpl.value === 'split';
+        var needsTwo = tpl.value === 'split' || tpl.value === 'stack';
         document.getElementById('img2').hidden = !needsTwo;
         document.getElementById('img2label').hidden = !needsTwo;
         frameSel.disabled = tpl.value === 'statement' || tpl.value === 'intro' || tpl.value === 'slide';
