@@ -403,10 +403,14 @@
     if (form && summary) {
         form.setAttribute('novalidate', '');
 
+        // Covers every form on the site; a field a given form doesn't have
+        // simply never comes up, and anything missing here still gets the
+        // generic fallback in showError.
         var MESSAGES = {
             name: 'Tell me your name.',
             email: 'I need an email address to reply to.',
-            project: 'Pick the closest kind of project.'
+            project: 'Pick the closest kind of project.',
+            business: 'What is the business called?'
         };
 
         function fieldsOf(f) {

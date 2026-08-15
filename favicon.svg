@@ -1,6 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#15140f"/>
-  <path d="M13 20 L22.5 44 L32 26 L41.5 44 L51 20"
-        fill="none" stroke="#b23c17" stroke-width="6"
-        stroke-linecap="round" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="W">
+  <!-- Self-contained tile rather than a bare glyph: it carries its own ground,
+       so it holds up against light and dark browser chrome alike without
+       needing a prefers-color-scheme swap that some browsers cache oddly. -->
+  <rect width="64" height="64" rx="15" fill="#14171a"/>
+  <!-- Two overlapping V strokes rather than one five-point zigzag. The old
+       single path put a join at the middle apex, which at 16px filled in and
+       read as a scribble; separate strokes keep the notch open. -->
+  <g fill="none" stroke="#5fbf95" stroke-width="7"
+     stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 19 L23.5 45 L33 22"/>
+    <path d="M31 22 L40.5 45 L50 19"/>
+  </g>
 </svg>

@@ -19,22 +19,28 @@
 const TO = process.env.CONTACT_TO || 'williamjonahmci@gmail.com';
 const FROM = process.env.CONTACT_FROM || 'Portfolio <onboarding@resend.dev>';
 
-// Field order in the email, not just the labels. Covers both forms on the
-// site; anything a given form doesn't submit is skipped.
+// Field order in the email, not just the labels. This is a whitelist: a field
+// that isn't named here never reaches the inbox, however faithfully the form
+// submits it. `budget` was missing, so every budget answer was being dropped.
 const LABELS = {
     name: 'Name',
     email: 'Email',
+    business: 'Business',
+    area: 'Works in',
     town: 'Shoots in',
     website: 'Current site',
     project: 'Project type',
+    budget: 'Budget',
     message: 'Message',
     source: 'Came from'
 };
 
-// So a photographer enquiry is obvious in the inbox without opening it.
+// So the trade is obvious in the inbox without opening it.
 const SUBJECTS = {
     'lumen-enquiry': 'Lumen enquiry',
-    'portfolio-contact-form': 'Portfolio enquiry'
+    'portfolio-contact-form': 'Portfolio enquiry',
+    'solar-enquiry': 'Solar enquiry',
+    'skincare-enquiry': 'Skin & beauty enquiry'
 };
 
 function escapeHtml(value) {
@@ -68,7 +74,7 @@ exports.handler = async function (event) {
     }
 
     const senderName = data.name || 'Someone';
-    const qualifier = data.project || data.town;
+    const qualifier = data.business || data.project || data.area || data.town;
     const subject = (SUBJECTS[formName] || 'Website enquiry') + ' — ' + senderName +
         (qualifier ? ' (' + qualifier + ')' : '');
 

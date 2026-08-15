@@ -396,13 +396,20 @@ a { color: inherit; }
     gap: 0.5rem;
     padding: 1.5rem 2.5rem 1.6rem 0;
     text-decoration: none;
-    /* The shared spine. Only the first door carries it, so there is exactly
-       one rule between the two rather than two abutting hairlines. */
+    /* The shared spine. Only the left-hand door of each pair carries it, so
+       there is exactly one rule between two doors rather than two abutting
+       hairlines. Same reasoning for the row rule below. */
     border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
     transition: background-color var(--t-paint) var(--ease);
 }
 
-.door:last-child { padding-inline: 2.5rem 0; border-right: 0; }
+.door:nth-child(even) { padding-inline: 2.5rem 0; border-right: 0; }
+
+/* The bottom row closes on the section that follows it, not on a rule of
+   its own. Keyed to position-from-the-end so adding a door doesn't strand a
+   hairline halfway down the grid. */
+.door:nth-last-child(-n+2) { border-bottom: 0; }
 
 .door:hover,
 .door:focus-visible { background: var(--accent-wash); }
@@ -799,6 +806,31 @@ a.proof__item:focus-visible {
     font-weight: 500;
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* --- Screenshot figure -----------------------------------------------------
+   Used on the trade pages to show a real page rather than describe one. The
+   sunken background matters while the image is still loading: a bordered box
+   the right shape holds its place, so nothing below it jumps.               */
+
+.shot {
+    margin: 0;
+    max-width: 62rem;
+}
+
+.shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--rule);
+    background: var(--sunken);
+}
+
+.shot figcaption {
+    margin-top: 0.9rem;
+    max-width: 40rem;
+    font-size: 0.9375rem;
     color: var(--muted);
 }
 
@@ -1236,6 +1268,21 @@ a.proof__item:focus-visible {
 }
 
 @media (max-width: 46rem) {
+    /* Four doors side by side is a menu; four stacked is a decision. */
+    .gate { grid-template-columns: 1fr; }
+
+    .door,
+    .door:nth-child(even) {
+        padding-inline: 0;
+        border-right: 0;
+    }
+
+    /* Restated, not inherited: the two-column rule above clears the bottom
+       border on the last *two* doors, which stacked would leave the second
+       from last running into its neighbour. */
+    .door:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
+    .door:last-child { border-bottom: 0; }
+
     .nav-toggle { display: flex; }
 
     .nav {
