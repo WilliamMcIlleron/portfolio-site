@@ -515,15 +515,23 @@ a { color: inherit; }
 .door:focus-visible .door__go span { translate: 4px 0; }
 
 @media (max-width: 46rem) {
+    /* Four doors side by side is a menu; four stacked is a decision. */
     .gate { grid-template-columns: 1fr; margin-top: 2.25rem; }
 
-    .door {
+    /* The even-child selector has to be named too, or the right-hand column
+       keeps the inline padding the two-column layout gave it. */
+    .door,
+    .door:nth-child(even) {
         padding: 1.1rem 0 1.2rem;
         border-right: 0;
         border-bottom: 1px solid var(--line);
     }
 
-    .door:last-child { padding-inline: 0; border-bottom: 0; }
+    /* Restated, not inherited: the two-column rule clears the bottom border on
+       the last *two* doors, which stacked leaves the second from last running
+       into its neighbour. */
+    .door:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
+    .door:last-child { border-bottom: 0; }
 
     /* Tightened so door 02 clears the fold on a 812px phone. At the desktop
        spacing its heading sat at y≈804 and a one-thumb visitor never saw that
@@ -721,8 +729,13 @@ a { color: inherit; }
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* Gone below 60rem, not shrunk. That is where .proof__featured stacks and the
+   screenshot takes order:-1 to the top of the card — so the badge, still pinned
+   top-right, sat on the demo's own headline and made both unreadable. It is
+   decorative (aria-hidden) and the card is already a link with a
+   "PRODUCT · LIVE DEMO" kicker, so nothing is lost by dropping it. */
 @media (max-width: 60rem) {
-    .badge { width: 5.5rem; height: 5.5rem; top: 0.6rem; right: 0.6rem; }
+    .badge { display: none; }
 }
 
 /* --- Scroll progress ------------------------------------------------------- */
@@ -1314,21 +1327,8 @@ a.proof__item:focus-visible {
 }
 
 @media (max-width: 46rem) {
-    /* Four doors side by side is a menu; four stacked is a decision. */
-    .gate { grid-template-columns: 1fr; }
-
-    .door,
-    .door:nth-child(even) {
-        padding-inline: 0;
-        border-right: 0;
-    }
-
-    /* Restated, not inherited: the two-column rule above clears the bottom
-       border on the last *two* doors, which stacked would leave the second
-       from last running into its neighbour. */
-    .door:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
-    .door:last-child { border-bottom: 0; }
-
+    /* The stacked gate lives in the earlier 46rem block, next to the gate's own
+       rules. This one is the mobile nav. */
     .nav-toggle { display: flex; }
 
     .nav {
@@ -1346,10 +1346,17 @@ a.proof__item:focus-visible {
 
     /* Scrim. Without it the panel's own ground sat straight on top of hero
        text with a 1.36:1 hairline between them, and the page scrolled
-       underneath. The body scroll lock is in script.js. */
+       underneath. The body scroll lock is in script.js.
+
+       absolute, NOT fixed. .masthead carries backdrop-filter, and that makes it
+       the containing block for fixed descendants — so `top: 100%` resolved
+       against the 4.5rem masthead instead of the viewport and landed the scrim
+       exactly where the nav panel starts. Being positioned, it then painted over
+       the links: the whole menu came out washed and 2px blurred. Against .nav
+       (itself absolute) 100% means "below the panel", which is what was meant. */
     .nav.is-open::after {
         content: '';
-        position: fixed;
+        position: absolute;
         inset: 100% 0 -100vh 0;
         background: color-mix(in srgb, var(--paper) 78%, transparent);
         backdrop-filter: blur(2px);
