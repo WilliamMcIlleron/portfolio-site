@@ -18,6 +18,61 @@
        below-fold sections carry `.reveal`.
    ========================================================================== */
 
+/* --- Fonts -----------------------------------------------------------------
+   Self-hosted and subsetted, not fetched from Google. That was 215KB for
+   these faces; the identical glyphs are 74KB here. Almost none of the saving
+   came from cutting characters — it came from cutting variable-font axes.
+   A two-axis Newsreader carries delta data for every weight at every optical
+   size, and this site uses three fixed combinations of them.
+
+   So Newsreader is instanced: no axes, opsz baked at 48. It is a display face
+   here — body copy is Karla — so it runs between 22px and 100px and the axis
+   was buying subtlety at those sizes for 130KB. Karla stays variable but
+   clipped to 400–600, which beats shipping three static cuts.
+
+   Re-subsetting, if the character set ever changes:
+     python -m fontTools.varLib.instancer SRC.ttf opsz=48 wght=400 -o tmp.ttf
+     python -m fontTools.subset tmp.ttf --output-file=out.woff2 --flavor=woff2 \
+       --unicodes="U+0020-007E,U+00A0-00FF,U+2013,U+2014,U+2018,U+2019,\
+U+201C,U+201D,U+2026,U+2190,U+2192,U+2197" \
+       --layout-features="kern,liga,calt,ccmp,mark,mkmk,rlig,locl" --no-hinting
+
+   Both families are SIL OFL 1.1. Licences sit beside the files in /fonts/.   */
+
+@font-face {
+    font-family: 'Newsreader';
+    src: url('/fonts/newsreader-400.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Newsreader';
+    src: url('/fonts/newsreader-500.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Newsreader';
+    src: url('/fonts/newsreader-italic-400.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Karla';
+    src: url('/fonts/karla-var.woff2') format('woff2');
+    /* A range, not a value: this one file covers 400 through 600, which is
+       every weight the sans is set at. */
+    font-weight: 400 600;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* --- Tokens --------------------------------------------------------------- */
 
 /* Dark is the default. Light is opt-in via the toggle, which writes
@@ -351,7 +406,6 @@ a { color: inherit; }
        titles, which is most of why it read as flat. */
     font-size: clamp(2.75rem, 1.1rem + 6.6vw, 6.25rem);
     font-weight: 400;
-    font-variation-settings: 'opsz' 96;
     line-height: 0.98;
     letter-spacing: -0.035em;
     text-wrap: balance;
@@ -417,7 +471,6 @@ a { color: inherit; }
 .door__n {
     font-family: var(--display);
     font-size: 0.875rem;
-    font-variation-settings: 'opsz' 16;
     color: var(--muted);
     font-variant-numeric: tabular-nums;
     transition: color var(--t-fade) var(--ease);
@@ -430,7 +483,6 @@ a { color: inherit; }
     font-family: var(--display);
     font-size: clamp(1.375rem, 1.1rem + 1.1vw, 1.875rem);
     font-weight: 400;
-    font-variation-settings: 'opsz' 32;
     /* Looser than the h1's 1.04 and the h2's 1.12 because it is smaller and
        always wraps to two or three lines — leading opens as size drops. */
     line-height: 1.3;
@@ -542,7 +594,6 @@ a { color: inherit; }
     margin: 0;
     font-family: var(--display);
     font-size: 1.375rem;
-    font-variation-settings: 'opsz' 24;
     line-height: 1;
     color: var(--ink);
     font-variant-numeric: tabular-nums;
@@ -623,7 +674,6 @@ a { color: inherit; }
 .marquee__item {
     font-family: var(--display);
     font-size: 1.0625rem;
-    font-variation-settings: 'opsz' 20;
     color: var(--muted);
 }
 
@@ -707,7 +757,6 @@ a { color: inherit; }
     font-family: var(--display);
     font-size: clamp(1.75rem, 1.3rem + 1.9vw, 2.625rem);
     font-weight: 400;
-    font-variation-settings: 'opsz' 48;
     line-height: 1.12;
     letter-spacing: -0.022em;
     text-wrap: balance;
@@ -793,7 +842,6 @@ a.proof__item:focus-visible {
     font-family: var(--display);
     font-size: 1.25rem;
     font-weight: 400;
-    font-variation-settings: 'opsz' 28;
     line-height: 1.25;
 }
 
@@ -865,7 +913,6 @@ a.proof__item:focus-visible {
     font-family: var(--display);
     font-size: 1.25rem;
     font-weight: 400;
-    font-variation-settings: 'opsz' 28;
     line-height: 1.25;
     margin-bottom: 0.4rem;
 }
@@ -1169,7 +1216,6 @@ a.proof__item:focus-visible {
     font-family: var(--display);
     font-size: 1.1875rem;
     font-weight: 400;
-    font-variation-settings: 'opsz' 28;
     line-height: 1.3;
     transition: color var(--t-fade) var(--ease);
 }
