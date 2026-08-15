@@ -507,6 +507,32 @@ a { color: inherit; }
     color: var(--accent);
 }
 
+/* --- About intro / portrait ------------------------------------------------ */
+
+.about__intro {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    margin-bottom: 2.5rem;
+}
+
+.about__portrait {
+    width: 6.5rem;
+    height: 6.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--rule);
+    filter: grayscale(1);
+    flex-shrink: 0;
+}
+
+.about__title { margin-bottom: 0; }
+
+@media (max-width: 30rem) {
+    .about__intro { gap: 1.25rem; }
+    .about__portrait { width: 4.5rem; height: 4.5rem; }
+}
+
 /* --- Prose & capabilities ------------------------------------------------- */
 
 .prose {
