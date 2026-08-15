@@ -1009,6 +1009,23 @@ a.proof__item:focus-visible {
 
 .capability dd { margin: 0; font-size: 0.9375rem; }
 
+/* solar/ and skincare/ reuse .capability with an <h3>+<p> pair instead of
+   <dt>+<dd>. The 8rem label column above is sized for a short dt term, not a
+   full heading, so it wraps titles into a cramped strip. Stack them instead. */
+.capability:has(h3) {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+}
+
+.capability h3 {
+    margin: 0;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.capability p { margin: 0; font-size: 0.9375rem; color: var(--muted); }
+
 /* --- Contact -------------------------------------------------------------- */
 
 .contact {
