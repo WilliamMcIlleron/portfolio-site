@@ -992,6 +992,25 @@ a.proof__item:focus-visible {
 .prose p + p { margin-top: 1.15rem; }
 .prose strong { color: var(--ink); font-weight: 600; }
 
+.prose a,
+.post__body a {
+    color: var(--ink);
+    text-decoration-color: var(--line);
+    text-underline-offset: 3px;
+    transition: color var(--t-fade) var(--ease), text-decoration-color var(--t-fade) var(--ease);
+}
+
+.prose a:hover,
+.post__body a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+
+.eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: var(--track-tight);
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
 .capabilities {
     margin-top: 2.5rem;
     display: grid;
@@ -1279,6 +1298,132 @@ a.proof__item:focus-visible {
     color: var(--muted);
     white-space: nowrap;
 }
+
+/* --- Post (single article) ------------------------------------------------- */
+
+.post {
+    padding-block: clamp(3rem, 8vh, 5rem) clamp(4rem, 10vh, 7rem);
+}
+
+.post__back {
+    display: inline-block;
+    margin-bottom: 2.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color var(--t-fade) var(--ease);
+}
+
+.post__back:hover { color: var(--accent); }
+
+.post__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: var(--track-tight);
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.post__title {
+    max-width: 20ch;
+    font-family: var(--display);
+    font-size: clamp(2rem, 1.3rem + 2.8vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+}
+
+.post__standfirst {
+    margin-top: 1.5rem;
+    max-width: 46ch;
+    font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+    color: var(--muted);
+    text-wrap: pretty;
+}
+
+.post__body {
+    margin-top: 3rem;
+    max-width: 62ch;
+    font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem);
+    line-height: 1.7;
+    text-wrap: pretty;
+}
+
+.post__body > * + * { margin-top: 1.5rem; }
+
+.post__body h2 {
+    margin-top: 3rem;
+    font-family: var(--display);
+    font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+}
+
+.post__body ul,
+.post__body ol { padding-left: 1.25rem; }
+
+.post__body li + li { margin-top: 0.6rem; }
+
+.post__body strong { color: var(--ink); font-weight: 600; }
+
+/* No accent side-tab here either — line, not accent, so the quote reads as a
+   quotation rather than a highlighted callout competing with real CTAs. */
+.post__body blockquote {
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--line);
+    font-family: var(--display);
+    font-size: 1.2em;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+.post__body hr {
+    margin-block: 2.5rem;
+    border: 0;
+    border-top: 1px solid var(--rule);
+}
+
+.post__foot {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule);
+    max-width: 62ch;
+    font-size: 0.9375rem;
+    color: var(--muted);
+}
+
+.post__foot a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 1px;
+    transition: color var(--t-fade) var(--ease), border-color var(--t-paint) var(--ease);
+}
+
+.post__foot a:hover { color: var(--accent); border-color: var(--accent); }
+
+/* --- Message page (404, thanks) --------------------------------------------
+   No masthead, no footer — a single centred screen with one way back. */
+
+.message-page {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    padding-block: 4rem;
+}
+
+.message-page .section__title { margin-top: 0.35rem; max-width: 20ch; }
+.message-page .prose { margin-top: 0.5rem; }
+.message-page__actions { margin-top: 1.5rem; }
 
 .text-link {
     display: inline-block;

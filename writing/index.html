@@ -6,8 +6,7 @@
 
     <title>Writing · William McIlleron</title>
     <meta name="description" content="Notes from building and running small web products: what worked, what didn't, and the numbers behind both.">
-    <meta name="theme-color" content="#f4f1ea" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#14130f" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#14171a">
 
     <link rel="canonical" href="https://williammcilleron.netlify.app/writing/">
     <meta property="og:type" content="website">
@@ -15,24 +14,27 @@
     <meta property="og:title" content="Writing · William McIlleron">
     <meta property="og:description" content="Notes from building and running small web products: what worked, what didn't, and the numbers behind both.">
     <meta property="og:url" content="https://williammcilleron.netlify.app/writing/">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://williammcilleron.netlify.app/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="William McIlleron: websites that keep working after they go live.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://williammcilleron.netlify.app/og.png">
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="alternate" type="application/rss+xml" title="William McIlleron · Writing" href="/feed.xml">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-    <link rel="stylesheet" href="/legacy.css">
+    <link rel="preload" href="/fonts/karla-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/newsreader-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/styles.css">
 
     <script>
         (function () {
             var root = document.documentElement;
             root.classList.add('js');
             try {
-                var saved = localStorage.getItem('theme');
-                if (saved === 'light' || saved === 'dark') root.dataset.theme = saved;
-            } catch (e) { /* private mode — fall back to the media query */ }
+                if (localStorage.getItem('theme') === 'light') root.dataset.theme = 'light';
+            } catch (e) { /* private mode — stay dark */ }
         })();
     </script>
 </head>
@@ -41,19 +43,19 @@
 
     <header class="masthead">
         <div class="masthead__inner wrap">
-            <a class="wordmark" href="/">William McIlleron<span class="wordmark__dot">.</span></a>
+            <a class="wordmark" href="/">William McIlleron</a>
 
             <nav class="nav" id="nav" aria-label="Primary">
                 <ul class="nav__list">
                     <li><a href="/#work">Work</a></li>
+                    <li><a href="/#process">How I work</a></li>
                     <li><a href="/#about">About</a></li>
-                    <li><a href="/writing/" aria-current="true">Writing</a></li>
                     <li><a href="/#contact">Contact</a></li>
                 </ul>
             </nav>
 
             <div class="masthead__actions">
-                <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch to dark theme">
+                <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch to light theme">
                     <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <circle cx="12" cy="12" r="4.2"/>
                         <path d="M12 2.4v2.6M12 19v2.6M4.2 12H1.6M22.4 12h-2.6M5.6 5.6 7.4 7.4M16.6 16.6l1.8 1.8M18.4 5.6 16.6 7.4M7.4 16.6l-1.8 1.8"/>
@@ -63,7 +65,7 @@
                     </svg>
                 </button>
 
-                <button class="icon-btn nav-toggle" id="navToggle" type="button"
+                <button class="nav-toggle" id="navToggle" type="button"
                         aria-expanded="false" aria-controls="nav" aria-label="Open menu">
                     <span class="nav-toggle__bar"></span>
                     <span class="nav-toggle__bar"></span>
@@ -72,48 +74,48 @@
         </div>
     </header>
 
-    <main id="main" class="section">
-        <div class="wrap section__grid">
-            <div class="section__aside">
-                <p class="section__label">Writing</p>
-            </div>
+    <main id="main">
+        <section class="section">
+            <div class="wrap">
+                <div class="section__head reveal">
+                    <h1 class="section__title">Notes from building things</h1>
+                    <p class="section__intro">
+                        Mostly about running small products rather than just building them:
+                        what I tried, what it cost, and what the numbers actually said.
+                    </p>
+                </div>
 
-            <div class="section__body">
-                <h1 class="section__title reveal">Notes from building things</h1>
-
-                <p class="prose reveal">
-                    Mostly about running small products rather than just building them:
-                    what I tried, what it cost, and what the numbers actually said.
-                </p>
-
-                <ul class="work-list" style="margin-top: 3rem;">
-                    <li class="reveal">
-                        <a class="work" href="/writing/i-filtered-for-bad-websites/">
-                            <span class="work__idx">01</span>
-                            <span class="work__main">
-                                <span class="work__title">I filtered for bad websites. I should have filtered for budget.</span>
-                                <span class="work__desc">23 cold DMs to wedding photographers, 3 replies, 0 closes. Two of the replies said the same thing, and it wasn't about my pitch.</span>
-                            </span>
-                            <span class="work__meta">27 Jul 2026</span>
-                            <span class="work__arrow" aria-hidden="true">&#8594;</span>
+                <ul class="post-list reveal">
+                    <li>
+                        <a href="/writing/i-filtered-for-bad-websites/">
+                            <h3>I filtered for bad websites. I should have filtered for budget.</h3>
+                            <time datetime="2026-07-27">27 Jul 2026</time>
+                            <p>
+                                23 cold DMs to wedding photographers, 3 replies, 0 closes. Two of
+                                the replies said the same thing, and it wasn't about my pitch.
+                            </p>
                         </a>
                     </li>
                 </ul>
 
-                <p class="prose reveal" style="margin-top: 3rem;">
-                    <a href="/feed.xml">RSS feed</a> if you'd rather not check back.
-                </p>
+                <a class="text-link text-link--standalone" href="/feed.xml">RSS feed</a>
             </div>
-        </div>
+        </section>
     </main>
 
     <footer class="footer">
         <div class="wrap footer__inner">
-            <p>&copy; 2026 William McIlleron</p>
-            <p class="footer__note"><a href="/photographers/">For photographers</a></p>
+            <p>&copy; <span id="year">2026</span> William McIlleron &middot; Johannesburg</p>
+            <p class="footer__links">
+                <a href="/photographers/">Photographers</a>
+                <a href="/solar/">Solar</a>
+                <a href="/skincare/">Skin &amp; beauty</a>
+                <a href="mailto:williamjonahmci@gmail.com">Email</a>
+                <a href="https://github.com/WilliamMcIlleron" target="_blank" rel="noopener">GitHub<span class="vh"> (opens in a new tab)</span></a>
+            </p>
         </div>
     </footer>
 
-    <script src="/legacy.js" defer></script>
+    <script src="/script.js" defer></script>
 </body>
 </html>
