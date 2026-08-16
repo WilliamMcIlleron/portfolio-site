@@ -992,16 +992,26 @@ a.proof__item:focus-visible {
 .prose p + p { margin-top: 1.15rem; }
 .prose strong { color: var(--ink); font-weight: 600; }
 
-.prose a,
-.post__body a {
+.prose a {
     color: var(--ink);
     text-decoration-color: var(--line);
     text-underline-offset: 3px;
     transition: color var(--t-fade) var(--ease), text-decoration-color var(--t-fade) var(--ease);
 }
 
-.prose a:hover,
-.post__body a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+.prose a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+
+/* Its own rule, not shared with .prose a: .prose's own text is --muted, so an
+   --ink link brightens against it. .post__body text is --ink already, so the
+   same rule would make a link identical in colour to the paragraph around it. */
+.post__body a {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+    text-underline-offset: 3px;
+    transition: color var(--t-fade) var(--ease);
+}
+
+.post__body a:hover { color: var(--accent-hover); }
 
 .eyebrow {
     font-size: 0.75rem;
@@ -1271,6 +1281,10 @@ a.proof__item:focus-visible {
     transform: translateX(6px);
 }
 
+/* h2 on /writing/, where the list sits directly under the page's own h1;
+   h3 on the homepage, where it sits under that section's own h2. Same list,
+   different heading depth depending on what owns the page. */
+.post-list h2,
 .post-list h3 {
     font-family: var(--display);
     font-size: 1.1875rem;
@@ -1279,6 +1293,8 @@ a.proof__item:focus-visible {
     transition: color var(--t-fade) var(--ease);
 }
 
+.post-list a:hover h2,
+.post-list a:focus-visible h2,
 .post-list a:hover h3,
 .post-list a:focus-visible h3 { color: var(--accent); }
 
@@ -1384,6 +1400,17 @@ a.proof__item:focus-visible {
     line-height: 1.4;
 }
 
+/* Marks a quote as someone else's words, not the author's own aside. Only
+   the verbatim third-party quotes carry one — the distinction is the point. */
+.post__body blockquote cite {
+    display: block;
+    margin-top: 0.6rem;
+    font-family: var(--body);
+    font-size: 0.8125rem;
+    font-style: normal;
+    color: var(--muted);
+}
+
 .post__body hr {
     margin-block: 2.5rem;
     border: 0;
@@ -1410,7 +1437,9 @@ a.proof__item:focus-visible {
 .post__foot a:hover { color: var(--accent); border-color: var(--accent); }
 
 /* --- Message page (404, thanks) --------------------------------------------
-   No masthead, no footer — a single centred screen with one way back. */
+   No masthead, no footer — a single centred screen with one way back. The
+   wordmark stays, muted, so the page still says whose site this is; a full
+   masthead would compete with the one thing the screen needs to say. */
 
 .message-page {
     min-height: 100svh;
@@ -1421,6 +1450,7 @@ a.proof__item:focus-visible {
     padding-block: 4rem;
 }
 
+.message-page .wordmark { color: var(--muted); margin-bottom: 0.5rem; }
 .message-page .section__title { margin-top: 0.35rem; max-width: 20ch; }
 .message-page .prose { margin-top: 0.5rem; }
 .message-page__actions { margin-top: 1.5rem; }
