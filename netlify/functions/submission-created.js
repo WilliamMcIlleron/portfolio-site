@@ -37,7 +37,9 @@ const LABELS = {
 
 // So the trade is obvious in the inbox without opening it.
 const SUBJECTS = {
-    'lumen-enquiry': 'Lumen enquiry',
+    // Form name kept as-is: renaming it in the HTML would create a second
+    // Netlify form and strand every submission already filed under this one.
+    'lumen-enquiry': 'Photographer enquiry',
     'portfolio-contact-form': 'Portfolio enquiry',
     'solar-enquiry': 'Solar enquiry',
     'skincare-enquiry': 'Skin & beauty enquiry'
