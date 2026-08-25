@@ -425,120 +425,9 @@ a { color: inherit; }
     text-wrap: pretty;
 }
 
-/* --- The fork ------------------------------------------------------------- */
-
-/* --- The gate -------------------------------------------------------------
-   Deliberately NOT a card. An earlier version gave the two doors the same
-   border-box chrome as .proof__item, so the page's central decision looked
-   like a portfolio tile and read as "browse" rather than "choose". Here the
-   only structure is one shared rule between two columns: no fill, no border
-   box, no lift. The numerals do the work the boxes were failing to do.       */
-
-.gate {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-top: 3.25rem;
-    /* --ink, not --line: this is the most important rule on the page and it
-       should be the brightest. The step and pricing rules below are --line so
-       they no longer outshout the decision. */
-    border-top: 1px solid var(--ink);
-}
-
-.door {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1.5rem 2.5rem 1.6rem 0;
-    text-decoration: none;
-    /* The shared spine. Only the left-hand door of each pair carries it, so
-       there is exactly one rule between two doors rather than two abutting
-       hairlines. Same reasoning for the row rule below. */
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    transition: background-color var(--t-paint) var(--ease);
-}
-
-.door:nth-child(even) { padding-inline: 2.5rem 0; border-right: 0; }
-
-/* The bottom row closes on the section that follows it, not on a rule of
-   its own. Keyed to position-from-the-end so adding a door doesn't strand a
-   hairline halfway down the grid. */
-.door:nth-last-child(-n+2) { border-bottom: 0; }
-
-.door:hover,
-.door:focus-visible { background: var(--accent-wash); }
-
-.door__n {
-    font-family: var(--display);
-    font-size: 0.875rem;
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-    transition: color var(--t-fade) var(--ease);
-}
-
-.door:hover .door__n,
-.door:focus-visible .door__n { color: var(--accent); }
-
-.door__label {
-    font-family: var(--display);
-    font-size: clamp(1.375rem, 1.1rem + 1.1vw, 1.875rem);
-    font-weight: 400;
-    /* Looser than the h1's 1.04 and the h2's 1.12 because it is smaller and
-       always wraps to two or three lines — leading opens as size drops. */
-    line-height: 1.3;
-    letter-spacing: -0.018em;
-    color: var(--ink);
-    text-wrap: balance;
-}
-
-.door__desc {
-    margin-top: 0.15rem;
-    font-size: 0.9375rem;
-    color: var(--muted);
-    max-width: 32ch;
-}
-
-.door__go {
-    margin-top: auto;
-    padding-top: 1.1rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--accent);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-}
-
-.door__go span { transition: translate var(--t-move) var(--ease); }
-
-.door:hover .door__go span,
-.door:focus-visible .door__go span { translate: 4px 0; }
-
 @media (max-width: 46rem) {
-    /* Four doors side by side is a menu; four stacked is a decision. */
-    .gate { grid-template-columns: 1fr; margin-top: 2.25rem; }
-
-    /* The even-child selector has to be named too, or the right-hand column
-       keeps the inline padding the two-column layout gave it. */
-    .door,
-    .door:nth-child(even) {
-        padding: 1.1rem 0 1.2rem;
-        border-right: 0;
-        border-bottom: 1px solid var(--line);
-    }
-
-    /* Restated, not inherited: the two-column rule clears the bottom border on
-       the last *two* doors, which stacked leaves the second from last running
-       into its neighbour. */
-    .door:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
-    .door:last-child { border-bottom: 0; }
-
-    /* Tightened so door 02 clears the fold on a 812px phone. At the desktop
-       spacing its heading sat at y≈804 and a one-thumb visitor never saw that
-       half of the page existed. */
     .hero { padding-block: 2rem 2.25rem; }
     .hero__lede { margin-top: 1.25rem; }
-    .door__desc { max-width: none; }
     .status { margin-top: 1.75rem; }
 }
 
@@ -653,91 +542,6 @@ a { color: inherit; }
     .readout dd { font-size: 1rem; }
 }
 
-/* --- Marquee ---------------------------------------------------------------
-   Full-bleed, and the content is the argument: these are the searches a
-   couple actually types. It is the only place on the page that breaks the
-   72rem measure, which is what makes it land.                              */
-
-.marquee {
-    --speed: 44s;
-    position: relative;
-    display: flex;
-    overflow: hidden;
-    padding-block: 1.1rem;
-    border-block: 1px solid var(--rule);
-    user-select: none;
-    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-}
-
-.marquee__track {
-    display: flex;
-    flex-shrink: 0;
-    gap: 2.5rem;
-    padding-right: 2.5rem;
-    white-space: nowrap;
-    animation: marquee var(--speed) linear infinite;
-}
-
-.marquee__item {
-    font-family: var(--display);
-    font-size: 1.0625rem;
-    color: var(--muted);
-}
-
-.marquee__item::before {
-    content: '“';
-    color: var(--accent);
-}
-
-.marquee__item::after {
-    content: '”';
-    color: var(--accent);
-}
-
-@keyframes marquee { to { transform: translateX(-100%); } }
-
-.marquee:hover .marquee__track { animation-play-state: paused; }
-
-/* --- Rotating badge --------------------------------------------------------
-   Joonas Sandell's circular text ring. Sits on the Lumen row where it does a
-   real job: it labels the screenshot as a working demo you can open.        */
-
-.badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 7rem;
-    height: 7rem;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.badge svg { width: 100%; height: 100%; animation: spin 22s linear infinite; }
-
-/* No letter-spacing here: textLength/lengthAdjust on the <textPath> owns the
-   spacing, and anything set here would just be absorbed by it. */
-.badge text {
-    font-family: var(--body);
-    font-size: 9.5px;
-    font-weight: 600;
-    text-transform: uppercase;
-    fill: var(--accent-ink);
-}
-
-.badge circle { fill: var(--accent); }
-
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* Gone below 60rem, not shrunk. That is where .proof__featured stacks and the
-   screenshot takes order:-1 to the top of the card — so the badge, still pinned
-   top-right, sat on the demo's own headline and made both unreadable. It is
-   decorative (aria-hidden) and the card is already a link with a
-   "PRODUCT · LIVE DEMO" kicker, so nothing is lost by dropping it. */
-@media (max-width: 60rem) {
-    .badge { display: none; }
-}
-
 /* --- Scroll progress ------------------------------------------------------- */
 
 .progress {
@@ -750,6 +554,34 @@ a { color: inherit; }
     background: var(--accent);
     z-index: 300;
     pointer-events: none;
+}
+
+/* --- Syzygy band -----------------------------------------------------------
+   The one element that breaks the 72rem measure, now that the marquee is
+   gone. Full-bleed and sunken so it reads as a different surface rather than
+   as a fourth card: it is a door out of the page, not another project on it.
+                                                                            */
+
+.band {
+    background: var(--sunken);
+    border-block: 1px solid var(--rule);
+    padding-block: clamp(2.25rem, 5vw, 3rem);
+}
+
+.band__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem 2.5rem;
+}
+
+.band__text {
+    max-width: 52ch;
+    font-family: var(--display);
+    font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+    line-height: 1.45;
+    text-wrap: pretty;
 }
 
 /* --- Section scaffold ----------------------------------------------------- */
@@ -784,39 +616,6 @@ a { color: inherit; }
 /* --- Proof ---------------------------------------------------------------- */
 
 .proof { display: grid; gap: 1rem; }
-
-/* Lumen gets a featured row with the demo screenshot: it is the product, and
-   an audience that sells images deserves to see one. Also breaks the rhythm —
-   three identical card grids in a row read as one repeated pattern. */
-.proof__featured {
-    position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    text-decoration: none;
-    overflow: hidden;
-    transition: border-color var(--t-paint) var(--ease);
-}
-
-.proof__featured:hover,
-.proof__featured:focus-visible { border-color: var(--accent); }
-
-.proof__body {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1.6rem 1.75rem 1.75rem;
-}
-
-.proof__shot {
-    width: 100%;
-    height: 100%;
-    min-height: 13rem;
-    object-fit: cover;
-    object-position: left top;
-    border-left: 1px solid var(--rule);
-}
 
 .proof__rest {
     display: grid;
@@ -1624,16 +1423,13 @@ a.proof__item:focus-visible {
 /* --- Responsive ----------------------------------------------------------- */
 
 @media (max-width: 60rem) {
-    .proof__featured { grid-template-columns: 1fr; }
-    .proof__shot { order: -1; min-height: 0; max-height: 15rem; border-left: 0; border-bottom: 1px solid var(--rule); }
     .about { grid-template-columns: 1fr; }
     .about__portrait { width: 9rem; }
     .contact { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 46rem) {
-    /* The stacked gate lives in the earlier 46rem block, next to the gate's own
-       rules. This one is the mobile nav. */
+    /* The earlier 46rem block holds the hero. This one is the mobile nav. */
     .nav-toggle { display: flex; }
 
     .nav {
@@ -1701,20 +1497,10 @@ a.proof__item:focus-visible {
 
     .js .reveal { opacity: 1; translate: none; }
 
-    /* The blanket rule above would run the marquee once, instantly, leaving
-       the track parked off-screen with the content gone. Stop it properly and
-       let the band scroll by hand instead. */
-    .marquee { overflow-x: auto; mask-image: none; -webkit-mask-image: none; }
-    .marquee__track { animation: none !important; }
-    .marquee__track[aria-hidden='true'] { display: none; }
-    .badge svg { animation: none !important; }
     .status__dot { animation: none !important; }
 }
 
 @media print {
-    /* The gate stays: printing the portfolio but dropping both offers would
-       lose the point of the page. */
     .masthead, .skip-link, .form { display: none; }
     body { background: #fff; color: #000; }
-    .door { border-color: #999; }
 }

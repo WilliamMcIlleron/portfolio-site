@@ -11,12 +11,12 @@
     <link rel="canonical" href="https://williammcilleron.netlify.app/photographers/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Websites for wedding photographers">
-    <meta property="og:description" content="Couples search for a photographer by town. Lumen builds you a site with a page for every town you shoot in, so they find you.">
+    <meta property="og:description" content="Lumen built wedding photographers a page for every town they shoot, so couples searching by town could find them. It stopped taking new clients in August 2026.">
     <meta property="og:url" content="https://williammcilleron.netlify.app/photographers/">
     <meta property="og:image" content="https://williammcilleron.netlify.app/og.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Lumen: websites for wedding photographers, with a page for every town you shoot.">
+    <meta property="og:image:alt" content="Lumen: websites for wedding photographers, with a page for every town they shoot.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://williammcilleron.netlify.app/og.png">
 
@@ -47,13 +47,14 @@
             <p class="eyebrow">For wedding photographers</p>
             <h1>Couples are searching for a photographer in your town. Right now they are finding somebody else.</h1>
             <p class="hero__lede">
-                I build wedding photography websites with a page for every town and venue
-                you shoot, so you turn up in the searches couples actually make. Live in
-                under a week, and I look after it afterwards.
+                That was the argument for Lumen: a wedding photography website with a page
+                for every town and venue you shoot, live in under a week and looked after
+                afterwards. I stopped selling it in August 2026. This page is what it said,
+                kept as it was.
             </p>
             <div class="hero__actions">
-                <a class="btn" href="#enquire">Talk to me about it</a>
-                <a class="btn btn--ghost" href="https://lumendemo.pages.dev" target="_blank" rel="noopener">See a full example</a>
+                <a class="btn" href="https://lumendemo.pages.dev" target="_blank" rel="noopener">See a full example</a>
+                <a class="btn btn--ghost" href="#pricing">Why it stopped</a>
             </div>
         </div>
     </header>
@@ -237,50 +238,22 @@
         </section>
 
         <!-- ── Enquire ────────────────────────────────────────────── -->
+        <!-- ── Where to find me ───────────────────────────────────── -->
+        <!-- Was the Lumen enquiry form and a free-audit offer. Both came off on
+             2026-08-25: a form collecting enquiries for something I will not
+             build is worse than no form, and the audit was a live offer. The
+             `lumen-enquiry` key stays in netlify/functions/submission-created.js
+             so old submissions still render correctly in the inbox. -->
         <section class="section" id="enquire">
-            <div class="wrap enquire">
-                <div class="enquire__text">
-                    <p class="label">Talk to me</p>
-                    <h2>Tell me where you shoot.</h2>
-                    <p>
-                        Send me your Instagram handle and the town you work in and I will
-                        look at what you currently rank for, free, and tell you honestly
-                        whether a new site would change anything. No strings attached.
-                    </p>
-                    <p class="enquire__direct">
-                        Or email me at <a href="mailto:williamjonahmci@gmail.com">williamjonahmci@gmail.com</a>.
-                    </p>
-                </div>
-
-                <form class="form" name="lumen-enquiry" method="POST" action="/thanks.html"
-                      data-netlify="true" netlify-honeypot="company">
-                    <input type="hidden" name="form-name" value="lumen-enquiry">
-                    <input type="hidden" name="source" id="source" value="unknown">
-                    <p class="hp"><label>Company <input name="company" tabindex="-1" autocomplete="off"></label></p>
-
-                    <div class="field">
-                        <label for="name">Your name</label>
-                        <input type="text" id="name" name="name" autocomplete="name" required>
-                    </div>
-                    <div class="field">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" autocomplete="email" required>
-                    </div>
-                    <div class="field">
-                        <label for="town">Where do you shoot?</label>
-                        <input type="text" id="town" name="town" placeholder="Town or area" required>
-                    </div>
-                    <div class="field">
-                        <label for="website">Current website or Instagram <span>optional</span></label>
-                        <input type="text" id="website" name="website">
-                    </div>
-                    <div class="field">
-                        <label for="message">Anything else <span>optional</span></label>
-                        <textarea id="message" name="message" rows="4"></textarea>
-                    </div>
-
-                    <button class="btn" type="submit">Send it</button>
-                </form>
+            <div class="wrap narrow">
+                <p class="label">Where to find me</p>
+                <h2>I still build websites. Just not this one.</h2>
+                <p>
+                    If you found this page looking for someone to build you a site, that work
+                    carries on. The pricing and the contact form are on
+                    <a href="/">the main site</a>, or email me at
+                    <a href="mailto:williamjonahmci@gmail.com">williamjonahmci@gmail.com</a>.
+                </p>
             </div>
         </section>
     </main>
