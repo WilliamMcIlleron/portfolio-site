@@ -171,6 +171,46 @@
                             <a class="text-link" href="https://www.kohibyifuku.co.za" target="_blank" rel="noopener">Open the site<span class="vh"> (opens in a new tab)</span></a>
                         </p>
                     </article>
+
+                    <article class="work-item reveal">
+                        <span class="work-item__kind">Project · Running</span>
+                        <h2 class="work-item__title">Vivarium</h2>
+                        <p>
+                            A personal, non-client artificial-life simulation. A free simulate
+                            loop runs every five minutes with no LLM involved: grazers and
+                            hunters in a predator-prey relationship, terrain, a day-night cycle.
+                            Separately, a guardrailed evolve loop calls Claude Code CLI a few
+                            times a day to propose one real code change to the simulation's own
+                            rules.
+                        </p>
+                        <p>
+                            The interesting part is the guardrail engineering, not the ecosystem
+                            content: a working pattern for letting an LLM modify its own codebase
+                            without needing to trust it, because every constraint is enforced in
+                            code rather than asked for in the prompt. Evolve can only write three
+                            paths, a diff cap measured against the actual changed lines, not file
+                            length, holds it to 900 lines and 8 files a run, and a daily budget
+                            caps it at three runs. The 17-test suite has to pass before anything
+                            commits. A rejected or failing proposal is reverted whole, never
+                            partially applied.
+                        </p>
+                        <p>
+                            Six evolve runs so far, none landed. Four were rejected by a guardrail
+                            bug that measured proposed files' full length instead of the real
+                            diff, making success mathematically impossible until it was caught and
+                            fixed on 2026-09-04. One failed to parse as JSON; one was reverted this
+                            week when a fix for the world's known extinction risk broke on a test
+                            that didn't model real terrain. The world is currently at tick 87, one
+                            grazer against seven hunters, that same risk happening live. The public
+                            view below is a snapshot from deployment, not yet syncing
+                            automatically.
+                        </p>
+                        <span class="work-item__stack">Python &middot; vanilla JS/Canvas &middot; Cloudflare Workers/KV &middot; Windows Task Scheduler &middot; Claude Code CLI</span>
+                        <p class="work-links">
+                            <a class="text-link" href="https://github.com/WilliamMcIlleron/vivarium" target="_blank" rel="noopener">Code<span class="vh"> (opens in a new tab)</span></a>
+                            <a class="text-link" href="https://vivarium.williamjonahmci.workers.dev" target="_blank" rel="noopener">Watch it<span class="vh"> (opens in a new tab)</span></a>
+                        </p>
+                    </article>
                 </div>
             </div>
         </section>
