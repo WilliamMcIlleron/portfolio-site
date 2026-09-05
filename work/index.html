@@ -195,12 +195,14 @@
                             partially applied.
                         </p>
                         <p>
-                            Six evolve runs so far, none landed. Four were rejected by a guardrail
-                            bug that measured proposed files' full length instead of the real
-                            diff, making success mathematically impossible until it was caught and
-                            fixed on 2026-09-04. One failed to parse as JSON; one was reverted this
-                            week when a fix for the world's known extinction risk broke on a test
-                            that didn't model real terrain.
+                            Seven evolve runs so far, one landed. Four were rejected by a
+                            guardrail bug that measured proposed files' full length instead of the
+                            real diff, making success mathematically impossible until it was
+                            caught and fixed on 2026-09-04. One failed to parse as JSON, one was
+                            reverted when a fix broke on a test that didn't model real terrain. The
+                            one that landed gave grazers a camouflage gene: it shrinks a hunting
+                            hunter's effective sense range specifically against that grazer, and
+                            grazers now visibly fade toward the background in proportion to it.
                         </p>
                         <span class="work-item__stack">Python &middot; vanilla JS/Canvas &middot; Cloudflare Workers/KV &middot; Windows Task Scheduler &middot; Claude Code CLI</span>
                         <p class="work-links">
