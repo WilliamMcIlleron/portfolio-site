@@ -731,6 +731,40 @@ a.proof__item:focus-visible {
     margin-top: 1.1rem;
 }
 
+/* --- The client quote -----------------------------------------------------
+   One quote, and it lives inside the project it refers to rather than in a
+   testimonials band. The live site and the monthly are the evidence; the quote
+   corroborates them. Standing on its own it would read as decoration on a site
+   that publishes its own failures two sections further down. Same
+   line-not-accent treatment as the quotes in /writing/, so it reads as someone
+   else's words instead of a callout competing with the links beneath it.    */
+
+.work-quote {
+    margin-top: 1.2rem;
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--line);
+}
+
+/* Beats `.work-item p`, which is muted body copy. This is the client speaking,
+   so it takes the display face and full-contrast ink. */
+.work-item .work-quote p {
+    margin-top: 0;
+    font-family: var(--display);
+    font-size: 1.0625rem;
+    font-style: italic;
+    line-height: 1.45;
+    color: var(--ink);
+}
+
+.work-quote cite {
+    display: block;
+    margin-top: 0.7rem;
+    font-family: var(--body);
+    font-size: 0.8125rem;
+    font-style: normal;
+    color: var(--muted);
+}
+
 /* --- The syzygy strip ------------------------------------------------------
    Not a card, deliberately. It is a door out of the page, so it gets the
    accent wash and the full measure instead of sitting in the grid with the
