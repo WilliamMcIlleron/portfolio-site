@@ -4,7 +4,7 @@
   <channel>
     <title>William McIlleron · Writing</title>
     <link>https://williammcilleron.netlify.app/writing/</link>
-    <description>Notes from building and running web products.</description>
+    <description>Notes from building and running systems.</description>
     <language>en</language>
     <atom:link href="https://williammcilleron.netlify.app/feed.xml" rel="self" type="application/rss+xml"/>
 
