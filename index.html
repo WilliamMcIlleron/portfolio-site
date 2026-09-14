@@ -227,10 +227,13 @@
         </section>
 
         <!-- ── Services ───────────────────────────────────────────── -->
-        <!-- One section, not four doors. The vertical split was built for
-             campaigns that are not running, and the trade pages it fed are
-             still live and still linked from the footer. The prices below are
-             unchanged: they are the ones already published and quoted. -->
+        <!-- Two sections now, not four doors. The vertical split that used to
+             exist was built for campaigns that are not running, and the trade
+             pages it fed are still live and still linked from the footer. The
+             prices in the first section are unchanged: they are the ones
+             already published and quoted. The second section is new
+             (2026-09-14) and deliberately carries no price list — see its own
+             comment below for why. -->
         <section class="section" id="services">
             <div class="wrap">
                 <div class="section__head reveal">
@@ -291,6 +294,52 @@
                     <p>No charge, nothing agreed until you say so. Prefer
                     <a href="#contact">the form</a> or email instead? I reply within two working
                     days, usually the same day.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Systems & integrations ─────────────────────────────── -->
+        <!-- Deliberately has no price list, unlike Services above. A website's
+             shape barely varies, so it fits three fixed tiers. This work
+             doesn't: the scope depends entirely on what a client already runs
+             and what it needs to talk to. Publishing numbers here would mean
+             inventing them with no track record behind them, which is worse
+             than not publishing any. Scope on a call instead, same as the
+             free first step above, then quote from there. -->
+        <section class="section" id="systems">
+            <div class="wrap">
+                <div class="section__head reveal">
+                    <h2 class="section__title">Bigger, more technical builds</h2>
+                    <p class="section__intro">
+                        Backends, integrations and automation. Scoped on a call, not off a
+                        price list.
+                    </p>
+                </div>
+
+                <div class="prose reveal">
+                    <p>
+                        Not every job is a website. Silver Lakes runs on Paystack subaccounts
+                        with a server-side split a buyer can't edit in devtools, and every table
+                        locked to its owner with row-level security. Faircopy runs real billing:
+                        webhooks, credit grants, quotas, a subscription flow that actually
+                        collects money. Vivarium's evolve loop calls Claude Code CLI against its
+                        own codebase inside guardrails enforced in code rather than asked for in
+                        a prompt. That's the kind of work this covers: the part that has to be
+                        correct, not just look right.
+                    </p>
+                    <p>
+                        There's no fixed price for this the way there is for a website above —
+                        the shape of the work depends entirely on what you're already running
+                        and what it needs to talk to. Tell me what it is and I'll tell you
+                        honestly whether I can help, and what it would cost, before anything
+                        starts.
+                    </p>
+                </div>
+
+                <div class="cta-row reveal">
+                    <a class="btn" href="#contact">Tell me what you're building
+                       <span aria-hidden="true">&#8594;</span></a>
+                    <p>No charge to scope it. If it's not a fit, I'll say so.</p>
                 </div>
             </div>
         </section>
@@ -430,6 +479,7 @@
                                 <option>A redesign of an existing site</option>
                                 <option>Fixing or speeding up a site I have</option>
                                 <option>Ongoing changes and upkeep</option>
+                                <option>A system, integration or automation</option>
                                 <option>Something else</option>
                             </select>
                         </div>
