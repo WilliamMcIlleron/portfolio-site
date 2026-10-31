@@ -48,7 +48,7 @@
         "https://www.linkedin.com/in/williammcilleron",
         "https://www.instagram.com/williamwebdev"
       ],
-      "knowsAbout": ["HTML", "CSS", "JavaScript", "TypeScript", "Astro", "Next.js", "Tailwind CSS", "Three.js", "Supabase", "Web accessibility", "Web performance", "Local SEO"]
+      "knowsAbout": ["HTML", "CSS", "JavaScript", "TypeScript", "Astro", "Next.js", "Tailwind CSS", "Three.js", "Supabase", "Web accessibility", "Web performance", "Local SEO", "Google Ads"]
     }
     </script>
 
@@ -141,6 +141,12 @@
                     Available for new work
                 </p>
 
+                <div class="cta-row">
+                    <a class="btn" href="#contact">Start a project <span aria-hidden="true">&#8594;</span></a>
+                    <p>Or <a href="/work/">see the work first</a>, or
+                    <a href="https://wa.me/27723555350" target="_blank" rel="noopener">message me on WhatsApp<span class="vh"> (opens in a new tab)</span></a>.</p>
+                </div>
+
                 <!-- script.js inserts .readout here: live page weight, first
                      paint, viewport and Johannesburg time. -->
             </div>
@@ -150,7 +156,9 @@
         <!-- Three cards, not a portfolio. MVS leads because it is the only one here
              where somebody pays every month for exactly what the hero promises: a
              site that keeps working after it goes live. Faircopy is the most complete
-             build; Kohi is the other one still running. Lumen came off this list when
+             build; Silver Lakes is the most technical one that is live. Kohi came off
+             this list on 2026-10-31: the live kohibyifuku.co.za is not this build, and
+             the redesign is waiting on the owner's go-ahead. Lumen came off this list when
              MVS went on it. The documented kill is still evidence and is not hidden,
              it is on /work/ with the numbers, and the intro below points straight at
              it. Everything else lives there too. -->
@@ -173,7 +181,8 @@
                                 A twelve-year-old pool company in Greenstone with eleven staff and,
                                 until August 2026, no website at all. It started as a cold pitch
                                 nobody asked for. It is now a paying client on a monthly, so the
-                                hosting and the changes stay mine.
+                                hosting and the changes stay mine, and in October 2026 he signed
+                                on for me to run his Google Ads as well.
                             </span>
                             <span class="proof__stack">HTML · CSS · JS · Cloudflare</span>
                         </a>
@@ -190,15 +199,16 @@
                             <span class="proof__stack">Next.js · Supabase</span>
                         </a>
 
-                        <a class="proof__item reveal" href="https://www.kohibyifuku.co.za" target="_blank" rel="noopener">
-                            <span class="proof__kind">Client · Live</span>
-                            <span class="proof__title">Kohi by Ifuku<span class="vh"> (opens in a new tab)</span></span>
+                        <a class="proof__item reveal" href="https://silverlakesmarketplace.co.za" target="_blank" rel="noopener">
+                            <span class="proof__kind">Project · Live</span>
+                            <span class="proof__title">Silver Lakes Marketplace<span class="vh"> (opens in a new tab)</span></span>
                             <span class="proof__desc">
-                                A coffee shop's site: menu, hours and directions, tuned to load
-                                instantly on a phone in the queue. Live since it was built, and
-                                still mine to look after.
+                                A neighbour-to-neighbour marketplace for the estates around Silver
+                                Lakes in Pretoria East, built with a co-founder. Accounts, listings,
+                                offers, messaging, ratings and an admin panel, with every table
+                                locked to its owner by row-level security.
                             </span>
-                            <span class="proof__stack">HTML · CSS · JS</span>
+                            <span class="proof__stack">Supabase · Postgres RLS · vanilla JS</span>
                         </a>
                     </div>
                 </div>
@@ -344,6 +354,56 @@
             </div>
         </section>
 
+        <!-- ── Ads ────────────────────────────────────────────────── -->
+        <!-- Added 2026-10-31. The growth retainer is the recurring offer the
+             spec-demo method exists for (hub/growth-engine-model.md), and this
+             page said nothing about it. Rules from that file: no claimed
+             results until the first live account has run, client pays the
+             ad platforms directly, AI parts of any video are named, never AI
+             people posing as customers. No published fee: one client so far,
+             and the fee depends on channels and content. -->
+        <section class="section" id="ads">
+            <div class="wrap">
+                <div class="section__head reveal">
+                    <h2 class="section__title">Ads that bring the work in</h2>
+                    <p class="section__intro">
+                        A website catches the people already looking for you by name. Ads
+                        reach the ones who haven't found you yet.
+                    </p>
+                </div>
+
+                <div class="prose reveal">
+                    <p>
+                        I run Google search ads for local service businesses, pointed at a page
+                        built to turn a visit into a call or a WhatsApp. If your work
+                        photographs well (pools, kitchens, renovations, carports), I also make
+                        short ad videos from your own job photos and run them on Facebook and
+                        Instagram, which reach people before they start searching.
+                    </p>
+                    <p>
+                        You pay Google and Meta directly from your own card, so the ad spend
+                        never passes through me and you can see every rand of it. Every claim
+                        in an ad is shown on your real photos, and if any part of a video is
+                        made with AI, I tell you which part. Each month you get a short report:
+                        what was spent, how many enquiries came in, and what each one cost.
+                    </p>
+                    <p>
+                        MVS Global Pools signed on for this in October 2026, so I won't quote
+                        you results I don't have yet. The fee depends on which channels and how
+                        much video, and I'll give you the number on the first call.
+                    </p>
+                </div>
+
+                <div class="cta-row reveal">
+                    <a class="btn"
+                       href="https://wa.me/27723555350?text=Hi%20William%2C%20I%27d%20like%20to%20ask%20about%20running%20ads%20for%20my%20business."
+                       target="_blank" rel="noopener">Ask about ads on WhatsApp
+                       <span aria-hidden="true">&#8594;</span><span class="vh"> (opens in a new tab)</span></a>
+                    <p>No charge to talk it through. If ads won't pay for themselves in your trade, I'll say so.</p>
+                </div>
+            </div>
+        </section>
+
         <!-- ── About ──────────────────────────────────────────────── -->
         <section class="section" id="about">
             <div class="wrap">
@@ -385,7 +445,7 @@
                             </div>
                             <div class="capability">
                                 <dt>Focus</dt>
-                                <dd>Performance &middot; Accessibility &middot; Local SEO &middot; Responsive layout</dd>
+                                <dd>Performance &middot; Accessibility &middot; Local SEO &middot; Google Ads &middot; Responsive layout</dd>
                             </div>
                         </dl>
                     </div>
@@ -480,6 +540,7 @@
                                 <option>Fixing or speeding up a site I have</option>
                                 <option>Ongoing changes and upkeep</option>
                                 <option>A system, integration or automation</option>
+                                <option>Ads for my business</option>
                                 <option>Something else</option>
                             </select>
                         </div>
