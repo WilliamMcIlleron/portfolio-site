@@ -756,6 +756,16 @@ a.proof__item:focus-visible {
     color: var(--ink);
 }
 
+/* Homepage copy of the MVS quote, under the three proof cards. */
+.home-quote { margin-top: 2rem; max-width: 46rem; }
+.home-quote p {
+    font-family: var(--display);
+    font-size: 1.1875rem;
+    font-style: italic;
+    line-height: 1.45;
+    color: var(--ink);
+}
+
 .work-quote cite {
     display: block;
     margin-top: 0.7rem;

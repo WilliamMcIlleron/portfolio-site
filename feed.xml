@@ -9,12 +9,5 @@
     <atom:link href="https://williammcilleron.netlify.app/feed.xml" rel="self" type="application/rss+xml"/>
 
     <!-- Newest first. Add a new <item> here whenever you publish. -->
-    <item>
-      <title>I filtered for bad websites. I should have filtered for budget.</title>
-      <link>https://williammcilleron.netlify.app/writing/i-filtered-for-bad-websites/</link>
-      <guid isPermaLink="true">https://williammcilleron.netlify.app/writing/i-filtered-for-bad-websites/</guid>
-      <description>23 cold DMs to wedding photographers, 3 replies, 0 closes. Two of the replies said the same thing, and it wasn't about my pitch.</description>
-      <pubDate>Mon, 27 Jul 2026 09:00:00 +0200</pubDate>
-    </item>
   </channel>
 </rss>
