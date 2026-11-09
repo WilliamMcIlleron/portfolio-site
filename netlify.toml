@@ -24,3 +24,19 @@
   for = "/feed.xsl"
   [headers.values]
     Content-Type = "text/xsl; charset=utf-8"
+
+# Writing is hidden until there is a post to show. The old post was removed on
+# 2026-11-09; its URL was on LinkedIn, so send it home rather than to a 404.
+# Delete the /writing/ rule (and restore the nav, footer and homepage links)
+# when the first new post goes up.
+[[redirects]]
+  from = "/writing/i-filtered-for-bad-websites/*"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/writing/*"
+  to = "/"
+  status = 302
+  force = true
