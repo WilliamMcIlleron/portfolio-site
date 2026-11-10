@@ -1190,6 +1190,70 @@ a.proof__item:focus-visible {
 
 .form__errors:empty { display: none; }
 
+/* Multi-choice group (project kind). A fieldset, so a screen reader hears the
+   legend with each box. Rows are full-width tap targets, 44px tall at least. */
+.field--choices { border: 0; padding: 0; margin: 0; min-width: 0; }
+
+.field--choices legend {
+    padding: 0;
+    margin-bottom: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: var(--track-tight);
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.field--choices legend span.optional {
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+}
+
+.choices { display: grid; gap: 0.5rem; }
+
+.field--choices .choice {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 2.75rem;
+    padding: 0.55rem 0.95rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-size: 1rem;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    cursor: pointer;
+    transition: border-color var(--t-paint) var(--ease),
+                background-color var(--t-paint) var(--ease);
+}
+
+.choice:hover { border-color: var(--ink); }
+
+.choice input {
+    flex-shrink: 0;
+    width: 1.125rem;
+    height: 1.125rem;
+    margin: 0;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+
+.choice:has(input:checked) {
+    border-color: var(--accent);
+    background: var(--accent-wash);
+}
+
+.choice:has(input:focus-visible) {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* JS marks the first box invalid when none are ticked; show it on the group. */
+.field--choices:has([aria-invalid='true']) .choice { border-color: var(--invalid); }
+
 .form .btn { justify-self: start; }
 
 .hp {

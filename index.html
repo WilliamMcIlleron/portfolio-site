@@ -528,19 +528,23 @@
                             <input type="email" id="email" name="email" autocomplete="email" required>
                         </div>
 
-                        <div class="field">
-                            <label for="project">What kind of project?</label>
-                            <select id="project" name="project" required>
-                                <option value="" disabled selected>Choose one</option>
-                                <option>A new website</option>
-                                <option>A redesign of an existing site</option>
-                                <option>Fixing or speeding up a site I have</option>
-                                <option>Ongoing changes and upkeep</option>
-                                <option>A system, integration or automation</option>
-                                <option>Ads for my business</option>
-                                <option>Something else</option>
-                            </select>
-                        </div>
+                        <!-- Checkboxes, not a select: a business often needs a site
+                             and ads together. Same name on each box, so Netlify
+                             stores them as a list. At least one is enforced in
+                             script.js (native `required` on a checkbox group
+                             would demand all of them). -->
+                        <fieldset class="field field--choices">
+                            <legend>What kind of project? <span class="optional">(pick all that apply)</span></legend>
+                            <div class="choices">
+                                <label class="choice"><input type="checkbox" id="project" name="project" value="A new website"><span>A new website</span></label>
+                                <label class="choice"><input type="checkbox" name="project" value="A redesign of an existing site"><span>A redesign of an existing site</span></label>
+                                <label class="choice"><input type="checkbox" name="project" value="Fixing or speeding up a site I have"><span>Fixing or speeding up a site I have</span></label>
+                                <label class="choice"><input type="checkbox" name="project" value="Ongoing changes and upkeep"><span>Ongoing changes and upkeep</span></label>
+                                <label class="choice"><input type="checkbox" name="project" value="A system, integration or automation"><span>A system, integration or automation</span></label>
+                                <label class="choice"><input type="checkbox" name="project" value="Ads for my business"><span>Ads for my business</span></label>
+                                <label class="choice"><input type="checkbox" name="project" value="Something else"><span>Something else</span></label>
+                            </div>
+                        </fieldset>
 
                         <!-- Optional on purpose. Forcing a budget disclosure before
                              someone will even talk to you costs more enquiries than
