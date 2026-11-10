@@ -409,9 +409,21 @@
         var MESSAGES = {
             name: 'Tell me your name.',
             email: 'I need an email address to reply to.',
-            project: 'Pick the closest kind of project.',
+            project: 'Pick at least one kind of project.',
             business: 'What is the business called?'
         };
+
+        // "At least one" for the project checkboxes. Native `required` on a
+        // checkbox group demands every box, so the first box carries a custom
+        // validity instead and the rest of this file treats it like any field.
+        var projectBoxes = form.querySelectorAll('input[type="checkbox"][name="project"]');
+
+        function syncProjectGroup() {
+            if (!projectBoxes.length) return;
+            var any = Array.prototype.some.call(projectBoxes, function (b) { return b.checked; });
+            projectBoxes[0].setCustomValidity(any ? '' : 'Pick at least one kind of project.');
+        }
+        syncProjectGroup();
 
         function fieldsOf(f) {
             return Array.prototype.slice.call(f.elements).filter(function (el) {
@@ -445,6 +457,7 @@
         var submitted = false;
 
         function validate(report) {
+            syncProjectGroup();
             var bad = fieldsOf(form).filter(function (el) { return !el.checkValidity(); });
 
             fieldsOf(form).forEach(function (el) {
@@ -476,11 +489,19 @@
         // Only start correcting live once they've tried once — nagging someone
         // mid-typing on their first pass is worse than saying nothing.
         form.addEventListener('blur', function (event) {
-            if (!submitted || !event.target.name) return;
+            // Checkboxes are judged as a group on input; tabbing between them
+            // must not flash the "pick one" error.
+            if (!submitted || !event.target.name || event.target.type === 'checkbox') return;
             if (event.target.checkValidity()) { clearError(event.target); } else { showError(event.target); }
         }, true);
 
         form.addEventListener('input', function (event) {
+            if (event.target.type === 'checkbox') {
+                // validate(false) re-syncs the group and clears the error on
+                // the first box once anything is ticked.
+                if (submitted) validate(false); else syncProjectGroup();
+                return;
+            }
             if (submitted && event.target.checkValidity()) {
                 clearError(event.target);
                 validate(false);
