@@ -3,10 +3,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>William McIlleron · Writing</title>
-    <link>https://williammcilleron.netlify.app/writing/</link>
+    <link>https://williammcilleron.com/writing/</link>
     <description>Notes from building and running systems.</description>
     <language>en</language>
-    <atom:link href="https://williammcilleron.netlify.app/feed.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://williammcilleron.com/feed.xml" rel="self" type="application/rss+xml"/>
 
     <!-- Newest first. Add a new <item> here whenever you publish. -->
   </channel>
