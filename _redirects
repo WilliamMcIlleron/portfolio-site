@@ -1,0 +1,6 @@
+# Writing is hidden until there is a post to show (removed 2026-11-09; its URL
+# was on LinkedIn, so send it home rather than to a 404). Delete both rules and
+# restore the nav, footer and homepage links when the first new post goes up.
+/writing/i-filtered-for-bad-websites/*  /  301
+/writing/*  /  302
+/writing  /  302

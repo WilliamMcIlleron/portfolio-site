@@ -258,8 +258,8 @@
              stays, because that offer is standing and is on the homepage too.
 
              Every field here is in the LABELS whitelist in
-             netlify/functions/submission-created.js. Adding one without adding
-             a key there drops it silently from the notification email. -->
+             functions/api/contact.js. Adding one without adding
+             a key there drops it silently from the stored enquiry and the email. -->
         <section class="section" id="enquire">
             <div class="wrap enquire">
                 <div class="enquire__text">
@@ -275,8 +275,7 @@
                     </p>
                 </div>
 
-                <form class="form" name="lumen-enquiry" method="POST" action="/thanks.html"
-                      data-netlify="true" netlify-honeypot="company">
+                <form class="form" name="lumen-enquiry" method="POST" action="/api/contact">
                     <input type="hidden" name="form-name" value="lumen-enquiry">
                     <input type="hidden" name="source" id="source" value="unknown">
                     <p class="hp"><label>Company <input name="company" tabindex="-1" autocomplete="off"></label></p>
