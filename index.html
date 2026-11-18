@@ -502,9 +502,7 @@
                     <form class="form reveal" id="contactForm"
                           name="portfolio-contact-form"
                           method="POST"
-                          action="/thanks.html"
-                          data-netlify="true"
-                          netlify-honeypot="company">
+                          action="/api/contact">
                         <input type="hidden" name="form-name" value="portfolio-contact-form">
                         <!-- Same source tracking the Lumen form already has. -->
                         <input type="hidden" name="source" id="source" value="unknown">
@@ -529,8 +527,9 @@
                         </div>
 
                         <!-- Checkboxes, not a select: a business often needs a site
-                             and ads together. Same name on each box, so Netlify
-                             stores them as a list. At least one is enforced in
+                             and ads together. Same name on each box, so the
+                             form posts them as a repeated field that
+                             functions/api/contact.js joins into a list. At least one is enforced in
                              script.js (native `required` on a checkbox group
                              would demand all of them). -->
                         <fieldset class="field field--choices">
