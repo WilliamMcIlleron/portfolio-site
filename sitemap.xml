@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://williammcilleron.netlify.app/</loc>
+    <loc>https://williammcilleron.com/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://williammcilleron.netlify.app/work/</loc>
+    <loc>https://williammcilleron.com/work/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://williammcilleron.netlify.app/photographers/</loc>
+    <loc>https://williammcilleron.com/photographers/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://williammcilleron.netlify.app/solar/</loc>
+    <loc>https://williammcilleron.com/solar/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://williammcilleron.netlify.app/skincare/</loc>
+    <loc>https://williammcilleron.com/skincare/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://williammcilleron.netlify.app/photographers/terms/</loc>
+    <loc>https://williammcilleron.com/photographers/terms/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
