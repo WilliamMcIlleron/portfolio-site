@@ -77,14 +77,20 @@ export async function onRequestPost(context) {
 
     const received = new Date().toISOString();
 
-    // 1. Store first.
-    if (env.ENQUIRIES) {
+    // 1. Store first. The record is updated with the email outcome below, so a
+    // failed or skipped notification is visible in storage, not only in logs.
+    const key = 'enquiry:' + received + '-' + crypto.randomUUID().slice(0, 8);
+    const record = { received, form: formName, data, email: 'pending' };
+    async function save() {
+        if (!env.ENQUIRIES) return;
         try {
-            const id = received + '-' + crypto.randomUUID().slice(0, 8);
-            await env.ENQUIRIES.put('enquiry:' + id, JSON.stringify({ received, form: formName, data }));
+            await env.ENQUIRIES.put(key, JSON.stringify(record));
         } catch (error) {
             console.error('KV write failed:', error);
         }
+    }
+    if (env.ENQUIRIES) {
+        await save();
     } else {
         console.warn('ENQUIRIES KV is not bound: enquiry will only be emailed.');
     }
@@ -130,15 +136,22 @@ export async function onRequestPost(context) {
                 },
                 body: JSON.stringify(body)
             });
-            if (!response.ok) {
-                console.error('Resend rejected the message:', response.status, await response.text());
+            if (response.ok) {
+                record.email = 'sent';
+            } else {
+                const detail = (await response.text()).slice(0, 300);
+                console.error('Resend rejected the message:', response.status, detail);
+                record.email = 'failed: ' + response.status + ' ' + detail;
             }
         } catch (error) {
             console.error('Resend request failed:', error);
+            record.email = 'failed: ' + String(error && error.message || error).slice(0, 300);
         }
     } else {
         console.warn('RESEND_API_KEY or CONTACT_TO missing: enquiry stored, not emailed.');
+        record.email = 'skipped: ' + (env.RESEND_API_KEY ? '' : 'no RESEND_API_KEY ') + (env.CONTACT_TO ? '' : 'no CONTACT_TO');
     }
+    await save();
 
     return thanks(request);
 }
