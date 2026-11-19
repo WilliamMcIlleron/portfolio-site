@@ -6,9 +6,9 @@
        become the default output of AI design tools; a site whose pitch is
        craft can't wear it. Dark is now the default ground, with light as an
        explicit opt-in via the header toggle.
-     · Two families, not three. Newsreader for display, Karla for everything
-       else including the uppercase labels that used to need IBM Plex Mono.
-       Body copy now has a voice instead of falling back to the system stack.
+     · Three families, each with one job. Bricolage Grotesque for headings
+       (bold in the hero), DM Sans for reading text, Geist Mono for small
+       labels, counters and prices. Newsreader, Karla and Space Grotesk are gone.
      · Accent belongs to actions, plus the filled shape behind the h1's moving word that
        carries the whole proposition. Labels and decorative marks are muted.
      · Durations ranked by property — transform first, colour last — so a
@@ -19,59 +19,28 @@
    ========================================================================== */
 
 /* --- Fonts -----------------------------------------------------------------
-   Self-hosted and subsetted, not fetched from Google. That was 215KB for
-   these faces; the identical glyphs are 74KB here. Almost none of the saving
-   came from cutting characters — it came from cutting variable-font axes.
-   A two-axis Newsreader carries delta data for every weight at every optical
-   size, and this site uses three fixed combinations of them.
+   Self-hosted, not fetched from Google. The Google files carry axes this site
+   never uses, so each was cut down with fontTools (pin the axes, keep the
+   weights actually set, subset to Latin):
 
-   So Newsreader is instanced: no axes, opsz baked at 48. It is a display face
-   here — body copy is Karla — so it runs between 22px and 100px and the axis
-   was buying subtlety at those sizes for 130KB. Karla stays variable but
-   clipped to 400–600, which beats shipping three static cuts.
+     Bricolage Grotesque  opsz pinned at 48, weight 600 to 800     33 KB
+     DM Sans              opsz pinned at 14, weight 400 to 600     20 KB
+     Geist Mono           weight 400 to 500                        13 KB
 
-   Re-subsetting, if the character set ever changes:
-     python -m fontTools.varLib.instancer SRC.ttf opsz=48 wght=400 -o tmp.ttf
-     python -m fontTools.subset tmp.ttf --output-file=out.woff2 --flavor=woff2 \
-       --unicodes="U+0020-007E,U+00A0-00FF,U+2013,U+2014,U+2018,U+2019,\
-U+201C,U+201D,U+2026,U+2190,U+2192,U+2197" \
-       --layout-features="kern,liga,calt,ccmp,mark,mkmk,rlig,locl" --no-hinting
+   Each family also has a ~1 KB patch holding only the macron letters
+   (o with macron, i with macron) so "Kōhī" is set in the site fonts; it is
+   loaded only when a page uses those characters (unicode-range).
 
-   Both families are SIL OFL 1.1. Licences sit beside the files in /fonts/.   */
+   Re-trimming: python -m fontTools.varLib.instancer SRC.ttf opsz=48 wght=600:800
+   then python -m fontTools.subset with --flavor=woff2 and the same unicodes.
+   All three are SIL OFL 1.1. Licences sit beside the files in /fonts/. */
 
-@font-face {
-    font-family: 'Newsreader';
-    src: url('/fonts/newsreader-400.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Newsreader';
-    src: url('/fonts/newsreader-500.woff2') format('woff2');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Space Grotesk';
-    src: url('/fonts/spacegrotesk-var.woff2') format('woff2');
-    font-weight: 500 600;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Karla';
-    src: url('/fonts/karla-var.woff2') format('woff2');
-    /* A range, not a value: this one file covers 400 through 600, which is
-       every weight the sans is set at. */
-    font-weight: 400 600;
-    font-style: normal;
-    font-display: swap;
-}
+@font-face { font-family: 'Bricolage Grotesque'; src: url('/fonts/bricolage-var.woff2') format('woff2'); font-weight: 600 800; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Bricolage Grotesque'; src: url('/fonts/bricolage-macron.woff2') format('woff2'); font-weight: 600 800; font-style: normal; font-display: swap; unicode-range: U+012A-012B, U+014C-014D; }
+@font-face { font-family: 'DM Sans'; src: url('/fonts/dmsans-var.woff2') format('woff2'); font-weight: 400 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'DM Sans'; src: url('/fonts/dmsans-macron.woff2') format('woff2'); font-weight: 400 600; font-style: normal; font-display: swap; unicode-range: U+012A-012B, U+014C-014D; }
+@font-face { font-family: 'Geist Mono'; src: url('/fonts/geistmono-var.woff2') format('woff2'); font-weight: 400 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Geist Mono'; src: url('/fonts/geistmono-macron.woff2') format('woff2'); font-weight: 400 500; font-style: normal; font-display: swap; unicode-range: U+012A-012B, U+014C-014D; }
 
 /* --- Tokens --------------------------------------------------------------- */
 
@@ -104,8 +73,9 @@ U+201C,U+201D,U+2026,U+2190,U+2192,U+2197" \
     --accent-wash:  rgba(95, 191, 149, 0.10);
     --invalid:      #ff8a6b;
 
-    --display: 'Newsreader', Georgia, 'Times New Roman', serif;
-    --body:    'Karla', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --display: 'Bricolage Grotesque', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --body:    'DM Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --label:   'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
     /* One value. Every uppercase label left on the page is a dense inline one
        — stack lines, field labels, dates — and they all want the tight
@@ -236,7 +206,7 @@ a { color: inherit; }
 .wordmark {
     font-family: var(--display);
     font-size: 1.0625rem;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: -0.015em;
     text-decoration: none;
     white-space: nowrap;
@@ -405,7 +375,7 @@ a { color: inherit; }
     /* Pushed hard. The page had no scale event between the h1 and the section
        titles, which is most of why it read as flat. */
     font-size: clamp(2.75rem, 1.1rem + 6.6vw, 6.25rem);
-    font-weight: 400;
+    font-weight: 600;
     line-height: 0.98;
     letter-spacing: -0.035em;
     text-wrap: balance;
@@ -428,15 +398,15 @@ em { font-style: normal; font-weight: 500; }
    one Pause button stops all of it (WCAG 2.2.2). Words: 5 x 2s = a 10s pass,
    first change 1s after load. Only animates under .js and with motion allowed:
    otherwise "Websites" stays put and the cards sit still.
-   The type is Space Grotesk (self-hosted, /fonts/); the rest of the site is
-   still Newsreader and Karla, which is a decision for the whole site. */
+   The type is the site's own: Bricolage Grotesque bold for the word, with Geist
+   Mono for the counter and labels. */
 @property --z { syntax: '<length>'; inherits: false; initial-value: 0px; }
 
 .hero--home { overflow-x: clip; --slot: 2s; --cycle: 10s; --ease: cubic-bezier(.2, .7, .2, 1); }
 .hero--home .hero__title {
-    font-family: 'Space Grotesk', var(--body);
-    font-weight: 600;
-    letter-spacing: -0.045em;
+    font-family: var(--display);
+    font-weight: 700;
+    letter-spacing: -0.04em;
     line-height: 0.98;
     font-size: clamp(2.125rem, 1rem + 5.2vw, 3.75rem);
     max-width: none;
@@ -445,7 +415,7 @@ em { font-style: normal; font-weight: 500; }
 .hw { grid-area: 1 / 1; opacity: 0; }
 .hw:first-child { opacity: 1; }
 .hw__n, .hero__list, .wcard__chip {
-    font-family: var(--body);
+    font-family: var(--label);
     font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: 0.14em;
@@ -456,8 +426,8 @@ em { font-style: normal; font-weight: 500; }
 .hw__u { display: block; height: 0.375rem; margin-top: 0.875rem; background: var(--accent); transform-origin: left; }
 .hero--home .hero__for {
     margin-top: 1.5rem;
-    font-family: 'Space Grotesk', var(--body);
-    font-weight: 500;
+    font-family: var(--display);
+    font-weight: 600;
     font-size: clamp(1.25rem, 1rem + 1.1vw, 2rem);
     letter-spacing: -0.02em;
     line-height: 1.1;
@@ -478,6 +448,7 @@ em { font-style: normal; font-weight: 500; }
 .rot-pause {
     margin-top: 1rem; padding: 0.5rem 0; border: 0; background: none; color: var(--muted);
     font: inherit; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+    font-family: var(--label);
 }
 .rot-pause:hover { color: var(--ink); }
 .rot-pause:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
@@ -607,6 +578,7 @@ em { font-style: normal; font-weight: 500; }
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 .readout dd {
@@ -616,6 +588,7 @@ em { font-style: normal; font-weight: 500; }
     line-height: 1;
     color: var(--ink);
     font-variant-numeric: tabular-nums;
+    font-weight: 600;
 }
 
 .readout dd span { font-size: 0.75rem; color: var(--muted); }
@@ -630,6 +603,7 @@ em { font-style: normal; font-weight: 500; }
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 .readout__live i {
@@ -704,6 +678,7 @@ em { font-style: normal; font-weight: 500; }
     font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
     line-height: 1.45;
     text-wrap: pretty;
+    font-weight: 600;
 }
 
 /* --- Section scaffold ----------------------------------------------------- */
@@ -723,7 +698,7 @@ em { font-style: normal; font-weight: 500; }
 .section__title {
     font-family: var(--display);
     font-size: clamp(1.75rem, 1.3rem + 1.9vw, 2.625rem);
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.12;
     letter-spacing: -0.022em;
     text-wrap: balance;
@@ -770,12 +745,13 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 .proof__title {
     font-family: var(--display);
     font-size: 1.25rem;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.25;
 }
 
@@ -789,6 +765,7 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 /* --- Work page -------------------------------------------------------------
@@ -817,13 +794,14 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 .work-item__title {
     margin-top: 0.4rem;
     font-family: var(--display);
     font-size: 1.375rem;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.2;
 }
 
@@ -842,6 +820,7 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 /* A row rather than a list, because two or three links on one line read as
@@ -875,6 +854,7 @@ a.proof__item:focus-visible {
     font-size: 1.25rem;
     line-height: 1.45;
     color: var(--ink);
+    font-weight: 600;
 }
 .work-item .work-quote p::before { content: '\201C'; color: var(--accent); margin-right: 0.08em; }
 
@@ -885,6 +865,7 @@ a.proof__item:focus-visible {
     font-size: 1.375rem;
     line-height: 1.45;
     color: var(--ink);
+    font-weight: 600;
 }
 .home-quote p::before { content: '\201C'; color: var(--accent); margin-right: 0.08em; }
 
@@ -932,6 +913,7 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--accent);
+    font-family: var(--label);
 }
 
 .work-strip__go span { transition: translate var(--t-move) var(--ease); }
@@ -993,7 +975,7 @@ a.proof__item:focus-visible {
 .steps h3 {
     font-family: var(--display);
     font-size: 1.25rem;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.25;
     margin-bottom: 0.4rem;
 }
@@ -1087,6 +1069,7 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 .capabilities {
@@ -1112,6 +1095,7 @@ a.proof__item:focus-visible {
     text-transform: uppercase;
     color: var(--muted);
     padding-top: 0.15rem;
+    font-family: var(--label);
 }
 
 .capability dd { margin: 0; font-size: 0.9375rem; }
@@ -1187,7 +1171,7 @@ a.proof__item:focus-visible {
     border: 1px solid var(--line);
     border-radius: 100px;
     color: var(--muted);
-    font-family: inherit;
+    font-family: var(--label);
     font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: var(--track-tight);
@@ -1224,6 +1208,7 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 .field input,
@@ -1324,6 +1309,7 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 .field--choices legend span.optional {
@@ -1420,7 +1406,7 @@ a.proof__item:focus-visible {
 .post-list h3 {
     font-family: var(--display);
     font-size: 1.1875rem;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.3;
     transition: color var(--t-fade) var(--ease);
 }
@@ -1445,6 +1431,7 @@ a.proof__item:focus-visible {
     text-transform: uppercase;
     color: var(--muted);
     white-space: nowrap;
+    font-family: var(--label);
 }
 
 /* --- Post (single article) ------------------------------------------------- */
@@ -1475,13 +1462,14 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 .post__title {
     max-width: 20ch;
     font-family: var(--display);
     font-size: clamp(2rem, 1.3rem + 2.8vw, 3.5rem);
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.06;
     letter-spacing: -0.03em;
     text-wrap: balance;
@@ -1509,7 +1497,7 @@ a.proof__item:focus-visible {
     margin-top: 3rem;
     font-family: var(--display);
     font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.2;
     letter-spacing: -0.015em;
 }
@@ -1529,6 +1517,7 @@ a.proof__item:focus-visible {
     font-family: var(--display);
     font-size: 1.2em;
     line-height: 1.4;
+    font-weight: 600;
 }
 
 /* Marks a quote as someone else's words, not the author's own aside. Only

@@ -162,7 +162,7 @@
         window.addEventListener('resize', sweep);
         window.addEventListener('load', revealInView);
 
-        // Newsreader and Karla arrive after first paint, and the swap reflows
+        // The site fonts arrive after first paint, and the swap reflows
         // the page — pulling elements into view with no scroll event to notice.
         if (document.fonts && document.fonts.ready) {
             document.fonts.ready.then(revealInView);
