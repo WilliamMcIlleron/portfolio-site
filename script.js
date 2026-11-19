@@ -118,10 +118,14 @@
     }
 
     function revealInView() {
+        // Read every position first, then write: a class change between two
+        // reads would force a fresh layout of the whole page each time.
+        var vh = window.innerHeight, hits = [];
         revealables.forEach(function (el) {
             var r = el.getBoundingClientRect();
-            if (r.top < window.innerHeight && r.bottom > 0) show(el);
+            if (r.top < vh && r.bottom > 0) hits.push(el);
         });
+        hits.forEach(show);
     }
 
     function revealAll() { revealables.forEach(show); }

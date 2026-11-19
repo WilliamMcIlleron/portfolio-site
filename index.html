@@ -90,6 +90,7 @@
                 <ul class="nav__list">
                     <li><a href="/work/">Work</a></li>
                     <li><a href="#services">Services</a></li>
+                    <li><a href="#audit">Check your site</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -166,7 +167,7 @@
                 <div class="hero__stage">
                     <div class="hero__rig" id="heroRig">
                         <a class="wcard wcard--1" href="https://www.kohibyifuku.co.za" target="_blank" rel="noopener">
-                            <img src="/work-kohi.webp" width="1040" height="650" alt="Home page of Kōhī by Ifuku, a café and listening room in Milpark" decoding="async">
+                            <img src="/work-kohi.webp" width="1040" height="650" alt="Home page of Kōhī by Ifuku, a café and listening room in Milpark" fetchpriority="high" decoding="async">
                             <span class="wcard__chip">Kōhī by Ifuku <b>Live</b><span class="vh"> (opens in a new tab)</span></span>
                         </a>
                         <a class="wcard wcard--2" href="https://mvsglobalpools.co.za" target="_blank" rel="noopener">
@@ -179,6 +180,37 @@
                         </a>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- ── Check your site ────────────────────────────────────── -->
+        <!-- A live audit of a home page, using the same checks as the hand audits
+             (HTTPS, phone fit, one-tap contact, contact details, booking, search
+             text, schema, ad tracking, footer year, size). It fetches the page
+             once and keeps no copy; /api/audit is Turnstile-protected and rate
+             limited. Wording lives in functions/_lib/report.js. -->
+        <section class="section" id="audit">
+            <div class="wrap">
+                <div class="section__head">
+                    <h2 class="section__title">Check your site</h2>
+                    <p class="section__intro">
+                        Paste your address. In a few seconds you'll see what a customer sees on
+                        a phone, and what Google can read.
+                    </p>
+                </div>
+
+                <form class="audit__form" id="auditForm" novalidate>
+                    <label class="vh" for="auditUrl">Your website address</label>
+                    <input id="auditUrl" name="url" type="text" inputmode="url" autocapitalize="off"
+                           autocomplete="url" spellcheck="false" placeholder="yourbusiness.co.za">
+                    <button class="btn" id="auditGo" type="submit">Check my site</button>
+                </form>
+                <p class="audit__note">I fetch your home page once. I don't keep a copy of it.</p>
+                <p class="audit__msg" id="auditMsg" role="alert" hidden></p>
+                <ol class="audit__steps" id="auditSteps" aria-live="polite" hidden></ol>
+                <div class="ts" id="tsAudit"></div>
+                <div class="audit__report" id="auditReport" hidden></div>
+                <button class="audit__again" id="auditAgain" type="button" hidden>Check another site</button>
             </div>
         </section>
 
@@ -613,5 +645,6 @@
     </footer>
 
     <script src="script.js" defer></script>
+    <script src="/audit.js" defer></script>
 </body>
 </html>
