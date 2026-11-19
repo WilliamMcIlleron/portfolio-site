@@ -1722,3 +1722,29 @@ a.proof__item:focus-visible {
     .masthead, .skip-link, .form { display: none; }
     body { background: #fff; color: #000; }
 }
+
+/* ── Services rows (home) ───────────────────────────────────────────────────
+   One panel per job, told apart by fill rather than by hairlines. Number and
+   price are the quiet second voice in the label face. */
+.svc { list-style: none; margin: 2.5rem 0 0; padding: 0; display: grid; gap: 1rem; }
+.svc__row { display: grid; gap: 1rem 2.5rem; padding: clamp(1.5rem, 3vw, 2.25rem); border-radius: 1.5rem; background: var(--surface); }
+.svc__n { font-family: var(--label); font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.14em; color: var(--accent); }
+.svc__t { font-family: var(--display); font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.125rem); margin-bottom: 0.9rem; }
+.svc__main > p, .svc__side > p { max-width: 62ch; }
+.svc__main > p + p { margin-top: 0.9rem; }
+.svc__side { color: var(--muted); font-size: 0.9375rem; }
+.svc__side > p + p { margin-top: 0.6rem; }
+.svc__price { font-family: var(--display); font-weight: 600; letter-spacing: -0.02em; font-size: 1.25rem; color: var(--ink); margin-bottom: 0.5rem; }
+.svc__price b { color: var(--accent); font-weight: 700; }
+.svc__side b { color: var(--ink); font-weight: 600; }
+.svc__row .steps { margin: 1.5rem 0; }
+.svc__row .steps h4 { font-family: var(--display); font-weight: 600; letter-spacing: -0.02em; font-size: 1.0625rem; }
+@media (min-width: 56rem) {
+    .svc__row { grid-template-columns: 3rem minmax(0, 1fr) 16rem; }
+}
+
+/* Trade pages (skincare, solar) use the home hero system with a statement
+   headline instead of the word list, so the type is smaller. */
+.hero--trade .hero__title { font-size: clamp(2rem, 1rem + 3vw, 2.875rem); line-height: 1.04; }
+.hero--trade .hero__title em { color: var(--accent); font-style: normal; }
+.hero--trade .cta-row { margin-top: 1.75rem; }
