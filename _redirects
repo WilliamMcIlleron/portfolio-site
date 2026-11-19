@@ -4,3 +4,7 @@
 /writing/i-filtered-for-bad-websites/*  /  301
 /writing/*  /  302
 /writing  /  302
+
+# The audit checker's tests and helper modules are repo files, not site pages.
+/tests/*      /404.html  404
+/functions/*  /404.html  404
