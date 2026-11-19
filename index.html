@@ -58,7 +58,6 @@
          without it the preload is discarded and fetched a second time. -->
     <link rel="preload" href="/fonts/karla-var.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/newsreader-400.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/newsreader-italic-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.css">
 
     <script>
@@ -124,14 +123,24 @@
                      script ran — and stayed invisible forever if that script never
                      loaded. -->
                 <h1 class="hero__title">
-                    Websites for growing businesses,<br>
-                    <em>built and looked&nbsp;after.</em>
+                    <span class="vh">Websites, Google ads, booking systems, brands and social media for growing businesses.</span>
+                    <span class="hero__vis" aria-hidden="true">
+                        <span class="rot" id="rot">
+                            <span class="rot__w" style="--i:0">Websites</span>
+                            <span class="rot__w" style="--i:1">Google ads</span>
+                            <span class="rot__w" style="--i:2">Booking systems</span>
+                            <span class="rot__w" style="--i:3">Brands</span>
+                            <span class="rot__w" style="--i:4">Social media</span>
+                        </span>
+                        <span class="hero__for">for growing businesses.</span>
+                    </span>
                 </h1>
+                <button class="rot-pause" id="rotPause" type="button" aria-pressed="false" hidden>Pause the moving word</button>
 
                 <p class="hero__lede">
-                    I'm William. I build fast websites for growing businesses, keep them running
-                    after they go live, and set up the Google and Meta ads that send people to
-                    them. Based in Johannesburg, working with businesses anywhere.
+                    I'm William. I build it, set it up and look after it once it's live: fast websites,
+                    Google and Meta ads, booking systems, brands and social media. Based in
+                    Johannesburg, working with businesses anywhere.
                 </p>
 
                 <p class="status">

@@ -9,7 +9,7 @@
      · Two families, not three. Newsreader for display, Karla for everything
        else including the uppercase labels that used to need IBM Plex Mono.
        Body copy now has a voice instead of falling back to the system stack.
-     · Accent belongs to actions, plus the one italic clause in the h1 that
+     · Accent belongs to actions, plus the filled shape behind the h1's moving word that
        carries the whole proposition. Labels and decorative marks are muted.
      · Durations ranked by property — transform first, colour last — so a
        hover reads as one event. Nothing transitions `all`.
@@ -52,14 +52,6 @@ U+201C,U+201D,U+2026,U+2190,U+2192,U+2197" \
     src: url('/fonts/newsreader-500.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Newsreader';
-    src: url('/fonts/newsreader-italic-400.woff2') format('woff2');
-    font-weight: 400;
-    font-style: italic;
     font-display: swap;
 }
 
@@ -409,12 +401,80 @@ a { color: inherit; }
     line-height: 0.98;
     letter-spacing: -0.035em;
     text-wrap: balance;
-    max-width: 15ch;
+    max-width: 17ch;
 }
 
+/* Used by the skincare and solar trade pages for the second half of their h1. */
 .hero__title em {
-    font-style: italic;
+    font-style: normal;
     color: var(--accent);
+}
+
+/* Emphasis elsewhere is weight, not slant. */
+em { font-style: normal; font-weight: 500; }
+
+/* Rotating headline word. Every word sits in one grid cell, so the cell is as
+   wide and tall as the widest word and nothing moves when the word changes.
+   The accent fills a shape behind the word (STANDARD.md rule 3) instead of
+   slanting it. Only animates under .js: without script, and under
+   prefers-reduced-motion, the first word stays put. Starts 1s after load so it
+   is seen, plays 3 passes, then rests on "Websites"; hover or tap replays it,
+   and the Pause button (WCAG 2.2.2) stops it at any time. 5 words x 3s = 15s. */
+.hero__vis { display: block; }
+.rot { display: grid; justify-items: start; }
+.rot__w {
+    grid-area: 1 / 1;
+    width: fit-content;
+    padding: 0.02em 0.16em 0.09em;
+    margin-bottom: 0.05em;
+    border-radius: 0.16em;
+    background: var(--accent);
+    color: var(--accent-ink);
+    opacity: 0;
+    transform: translateY(55%);
+}
+.rot__w:first-child { opacity: 1; transform: none; }
+.hero__for { display: block; text-wrap: balance; }
+
+.js .rot__w {
+    animation: rotw 15s cubic-bezier(.2, .7, .2, 1) 3;
+    animation-delay: calc(1s + var(--i) * 3s);
+}
+.js .rot__w:first-child { animation-name: rotw0; }
+.rot.is-paused .rot__w { animation-play-state: paused; }
+
+@keyframes rotw {
+    0%   { opacity: 0; transform: translateY(55%); }
+    3%   { opacity: 1; transform: none; }
+    17%  { opacity: 1; transform: none; }
+    20%  { opacity: 0; transform: translateY(-55%); }
+    100% { opacity: 0; transform: translateY(-55%); }
+}
+@keyframes rotw0 {
+    0%   { opacity: 1; transform: none; }
+    17%  { opacity: 1; transform: none; }
+    20%  { opacity: 0; transform: translateY(-55%); }
+    100% { opacity: 0; transform: translateY(-55%); }
+}
+
+.rot-pause {
+    margin-top: 1.25rem;
+    padding: 0.5rem 0;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    font: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.rot-pause:hover { color: var(--ink); }
+.rot-pause:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.rot-pause[aria-pressed="true"]::after { content: ' (paused)'; }
+@media (prefers-reduced-motion: reduce) {
+    .rot__w { animation: none !important; }
+    .rot-pause { display: none; }
 }
 
 .hero__lede {
@@ -750,21 +810,21 @@ a.proof__item:focus-visible {
 .work-item .work-quote p {
     margin-top: 0;
     font-family: var(--display);
-    font-size: 1.0625rem;
-    font-style: italic;
+    font-size: 1.25rem;
     line-height: 1.45;
     color: var(--ink);
 }
+.work-item .work-quote p::before { content: '\201C'; color: var(--accent); margin-right: 0.08em; }
 
 /* Homepage copy of the MVS quote, under the three proof cards. */
 .home-quote { margin-top: 2rem; max-width: 46rem; }
 .home-quote p {
     font-family: var(--display);
-    font-size: 1.1875rem;
-    font-style: italic;
+    font-size: 1.375rem;
     line-height: 1.45;
     color: var(--ink);
 }
+.home-quote p::before { content: '\201C'; color: var(--accent); margin-right: 0.08em; }
 
 .work-quote cite {
     display: block;
@@ -1406,7 +1466,6 @@ a.proof__item:focus-visible {
     border-left: 2px solid var(--line);
     font-family: var(--display);
     font-size: 1.2em;
-    font-style: italic;
     line-height: 1.4;
 }
 
