@@ -5,6 +5,12 @@
 /writing/*  /  302
 /writing  /  302
 
-# The audit checker's tests and helper modules are repo files, not site pages.
-/tests/*      /404.html  404
-/functions/*  /404.html  404
+# The audit checker's tests, helper modules and backend notes are repo files,
+# not site pages.
+/tests/*            /404.html  404
+/functions/*        /404.html  404
+/AUDIT-BACKEND.md   /404.html  404
+
+# Shareable audit reports: every /check/{id} is served by one page, which reads
+# the report from /api/check/{id}.
+/check/*  /check/index.html  200
