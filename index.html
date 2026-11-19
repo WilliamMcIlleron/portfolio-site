@@ -116,7 +116,7 @@
 
     <main id="main">
         <!-- ── Hero ───────────────────────────────────────────────── -->
-        <section class="hero" id="top">
+        <section class="hero hero--home" id="top">
             <div class="wrap">
                 <!-- No `reveal` on anything above the fold. It used to be here,
                      which meant the h1 and the lede were opacity:0 until a deferred
@@ -124,18 +124,15 @@
                      loaded. -->
                 <h1 class="hero__title">
                     <span class="vh">Websites, Google ads, booking systems, brands and social media for growing businesses.</span>
-                    <span class="hero__vis" aria-hidden="true">
-                        <span class="rot" id="rot">
-                            <span class="rot__w" style="--i:0">Websites</span>
-                            <span class="rot__w" style="--i:1">Google ads</span>
-                            <span class="rot__w" style="--i:2">Booking systems</span>
-                            <span class="rot__w" style="--i:3">Brands</span>
-                            <span class="rot__w" style="--i:4">Social media</span>
-                        </span>
-                        <span class="hero__for">for growing businesses.</span>
+                    <span class="hw-stack" aria-hidden="true">
+                        <span class="hw" style="--i:0"><span class="hw__n">01 / 05</span><span class="hw__w">Websites</span><span class="hw__u"></span></span>
+                        <span class="hw" style="--i:1"><span class="hw__n">02 / 05</span><span class="hw__w">Google ads</span><span class="hw__u"></span></span>
+                        <span class="hw" style="--i:2"><span class="hw__n">03 / 05</span><span class="hw__w">Booking systems</span><span class="hw__u"></span></span>
+                        <span class="hw" style="--i:3"><span class="hw__n">04 / 05</span><span class="hw__w">Brands</span><span class="hw__u"></span></span>
+                        <span class="hw" style="--i:4"><span class="hw__n">05 / 05</span><span class="hw__w">Social media</span><span class="hw__u"></span></span>
                     </span>
                 </h1>
-                <button class="rot-pause" id="rotPause" type="button" aria-pressed="false" hidden>Pause the moving word</button>
+                <p class="hero__for" aria-hidden="true">for growing businesses.</p>
 
                 <p class="hero__lede">
                     I'm William. I build it, set it up and look after it once it's live: fast websites,
@@ -154,8 +151,34 @@
                     <a href="https://wa.me/27723555350" target="_blank" rel="noopener">message me on WhatsApp<span class="vh"> (opens in a new tab)</span></a>.</p>
                 </div>
 
+                <ul class="hero__list" aria-hidden="true">
+                    <li>Websites</li>
+                    <li>Google ads</li>
+                    <li>Booking systems</li>
+                    <li>Brands</li>
+                    <li>Social media</li>
+                </ul>
+                <button class="rot-pause" id="rotPause" type="button" aria-pressed="false" hidden>Pause the moving word</button>
+
                 <!-- script.js inserts .readout here: live page weight, first
                      paint, viewport and Johannesburg time. -->
+
+                <div class="hero__stage">
+                    <div class="hero__rig" id="heroRig">
+                        <a class="wcard wcard--1" href="https://www.kohibyifuku.co.za" target="_blank" rel="noopener">
+                            <img src="/work-kohi.webp" width="1040" height="650" alt="Home page of Kōhī by Ifuku, a café and listening room in Milpark" decoding="async">
+                            <span class="wcard__chip">Kōhī by Ifuku <b>Live</b><span class="vh"> (opens in a new tab)</span></span>
+                        </a>
+                        <a class="wcard wcard--2" href="https://mvsglobalpools.co.za" target="_blank" rel="noopener">
+                            <img src="/work-mvs.webp" width="1040" height="650" alt="Home page of MVS Global Pools, a pool building and renovation company" decoding="async" loading="lazy">
+                            <span class="wcard__chip">MVS Global Pools <b>Client site</b><span class="vh"> (opens in a new tab)</span></span>
+                        </a>
+                        <a class="wcard wcard--3" href="https://silverlakesmarketplace.co.za" target="_blank" rel="noopener">
+                            <img src="/work-silverlakes.webp" width="1040" height="650" alt="Home page of Silver Lakes Marketplace, a local buy and sell site" decoding="async" loading="lazy">
+                            <span class="wcard__chip">Silver Lakes Marketplace <b>Live, work paused</b><span class="vh"> (opens in a new tab)</span></span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 

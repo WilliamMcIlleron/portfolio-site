@@ -557,38 +557,36 @@
     var year = document.getElementById('year');
     if (year) year.textContent = new Date().getFullYear();
 
-    /* --- Rotating headline word ------------------------------------------- */
-    // The loop itself is CSS (see .rot in styles.css). This adds the Pause
-    // control, and replays the loop on hover, tap or click once its three
-    // passes have finished. Nothing here is needed to read the page.
+    /* --- Home hero ---------------------------------------------------------- */
+    // The word loop and the floating cards are CSS (see .hero--home in
+    // styles.css). This adds the Pause button, which stops all of it, and a
+    // small pointer tilt for the cards on desktop. Nothing here is needed to
+    // read the page.
     (function () {
-        var rot = document.getElementById('rot');
+        var hero = document.querySelector('.hero--home');
         var btn = document.getElementById('rotPause');
-        var title = document.querySelector('.hero__title');
-        if (!rot || !btn || !title || reduceMotion.matches) return;
-        var words = rot.querySelectorAll('.rot__w');
-        var last = words[words.length - 1];
-        var done = false;
+        var rig = document.getElementById('heroRig');
+        if (!hero || reduceMotion.matches) return;
 
-        btn.hidden = false;
-        btn.addEventListener('click', function () {
-            var paused = rot.classList.toggle('is-paused');
-            btn.setAttribute('aria-pressed', String(paused));
-        });
-
-        last.addEventListener('animationend', function () { done = true; });
-
-        function replay() {
-            if (!done || rot.classList.contains('is-paused')) return;
-            done = false;
-            words.forEach(function (w, i) {
-                w.style.animation = 'none';
-                void w.offsetWidth;
-                w.style.animation = '';
-                w.style.animationDelay = (i * 3) + 's';
+        if (btn) {
+            btn.hidden = false;
+            btn.addEventListener('click', function () {
+                var paused = hero.classList.toggle('is-paused');
+                btn.setAttribute('aria-pressed', String(paused));
             });
         }
-        title.addEventListener('pointerenter', replay);
-        title.addEventListener('click', replay);
+
+        if (rig && matchMedia('(hover: hover) and (min-width: 72rem)').matches) {
+            var raf = 0;
+            addEventListener('pointermove', function (e) {
+                if (raf) return;
+                raf = requestAnimationFrame(function () {
+                    raf = 0;
+                    var x = e.clientX / innerWidth - 0.5, y = e.clientY / innerHeight - 0.5;
+                    rig.style.setProperty('--ry', (x * 8).toFixed(2) + 'deg');
+                    rig.style.setProperty('--rx', (-y * 6).toFixed(2) + 'deg');
+                });
+            }, { passive: true });
+        }
     })();
 })();
