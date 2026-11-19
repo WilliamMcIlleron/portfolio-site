@@ -445,14 +445,24 @@ em { font-style: normal; font-weight: 500; }
 @keyframes hw-in0 { 0% { opacity: 1; transform: none; } 16% { opacity: 1; transform: none; } 20% { opacity: 0; transform: translateY(-40%); } 100% { opacity: 0; transform: translateY(-40%); } }
 @keyframes hw-bar { 0% { transform: scaleX(0); } 90%, 100% { transform: scaleX(1); } }
 
-.rot-pause {
-    margin-top: 1rem; padding: 0.5rem 0; border: 0; background: none; color: var(--muted);
-    font: inherit; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
-    font-family: var(--label);
+/* Pause control (WCAG 2.2.2): a small icon, not a label. It sits beside the
+   live word's counter, or at the foot of the cards on the trade pages. It
+   shows the play icon while paused. */
+.hw-wrap { position: relative; }
+.hw-pause {
+    position: absolute; display: grid; place-items: center; width: 1.5rem; height: 1.5rem; padding: 0;
+    border: 0; border-radius: 50%; background: transparent; color: var(--muted); opacity: 0.6; cursor: pointer;
+    transition: color 0.25s ease, opacity 0.25s ease, background-color 0.25s ease;
 }
-.rot-pause:hover { color: var(--ink); }
-.rot-pause:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.rot-pause[aria-pressed="true"]::after { content: ' (paused)'; }
+.hw-pause[hidden] { display: none; }
+.hw-pause svg { fill: currentColor; }
+.hw-pause:hover { color: var(--ink); opacity: 1; background: color-mix(in srgb, var(--ink) 10%, transparent); }
+.hw-pause:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; opacity: 1; }
+.hw-pause[data-paused="1"] { color: var(--accent); opacity: 1; }
+.hw-pause[data-paused="1"] .i-pause, .hw-pause:not([data-paused="1"]) .i-play { display: none; }
+.hw-pause--word { top: -0.25rem; left: 4.9rem; }
+.hw-pause--stage { right: 3%; top: 3%; pointer-events: auto; }
+@media (max-width: 71.99rem) { .hw-pause--stage { display: none; } }
 .hero--home .readout { display: none; }
 
 /* floating work */
@@ -507,7 +517,7 @@ em { font-style: normal; font-weight: 500; }
     .js .hw, .js .hw__u, .js .wcard { animation: none !important; }
     .js .hw__u { transform: scaleX(1); }
     .hero__rig { transition: none; }
-    .rot-pause { display: none; }
+    .hw-pause { display: none; }
 }
 
 .hero__lede {
