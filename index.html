@@ -123,16 +123,19 @@
                      which meant the h1 and the lede were opacity:0 until a deferred
                      script ran — and stayed invisible forever if that script never
                      loaded. -->
-                <h1 class="hero__title">
-                    <span class="vh">Websites, Google ads, booking systems, brands and social media for growing businesses.</span>
-                    <span class="hw-stack" aria-hidden="true">
-                        <span class="hw" style="--i:0"><span class="hw__n">01 / 05</span><span class="hw__w">Websites</span><span class="hw__u"></span></span>
-                        <span class="hw" style="--i:1"><span class="hw__n">02 / 05</span><span class="hw__w">Google ads</span><span class="hw__u"></span></span>
-                        <span class="hw" style="--i:2"><span class="hw__n">03 / 05</span><span class="hw__w">Booking systems</span><span class="hw__u"></span></span>
-                        <span class="hw" style="--i:3"><span class="hw__n">04 / 05</span><span class="hw__w">Brands</span><span class="hw__u"></span></span>
-                        <span class="hw" style="--i:4"><span class="hw__n">05 / 05</span><span class="hw__w">Social media</span><span class="hw__u"></span></span>
-                    </span>
-                </h1>
+                <div class="hw-wrap">
+                    <h1 class="hero__title">
+                        <span class="vh">Websites, Google ads, booking systems, brands and social media for growing businesses.</span>
+                        <span class="hw-stack" aria-hidden="true">
+                            <span class="hw" style="--i:0"><span class="hw__n">01 / 05</span><span class="hw__w">Websites</span><span class="hw__u"></span></span>
+                            <span class="hw" style="--i:1"><span class="hw__n">02 / 05</span><span class="hw__w">Google ads</span><span class="hw__u"></span></span>
+                            <span class="hw" style="--i:2"><span class="hw__n">03 / 05</span><span class="hw__w">Booking systems</span><span class="hw__u"></span></span>
+                            <span class="hw" style="--i:3"><span class="hw__n">04 / 05</span><span class="hw__w">Brands</span><span class="hw__u"></span></span>
+                            <span class="hw" style="--i:4"><span class="hw__n">05 / 05</span><span class="hw__w">Social media</span><span class="hw__u"></span></span>
+                        </span>
+                    </h1>
+                    <button class="hw-pause hw-pause--word" id="rotPause" type="button" data-what="word" aria-label="Pause the moving word" hidden><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false"><path class="i-pause" d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/><path class="i-play" d="M4.5 2.5l9 5.5-9 5.5z"/></svg></button>
+                </div>
                 <p class="hero__for" aria-hidden="true">for growing businesses.</p>
 
                 <p class="hero__lede">
@@ -159,7 +162,6 @@
                     <li>Brands</li>
                     <li>Social media</li>
                 </ul>
-                <button class="rot-pause" id="rotPause" type="button" aria-pressed="false" hidden>Pause the moving word</button>
 
                 <!-- script.js inserts .readout here: live page weight, first
                      paint, viewport and Johannesburg time. -->
@@ -167,15 +169,15 @@
                 <div class="hero__stage">
                     <div class="hero__rig" id="heroRig">
                         <a class="wcard wcard--1" href="https://www.kohibyifuku.co.za" target="_blank" rel="noopener">
-                            <img src="/work-kohi.webp" width="1040" height="650" alt="Home page of Kōhī by Ifuku, a café and listening room in Milpark" fetchpriority="high" decoding="async">
+                            <img src="/work-kohi.webp" srcset="/work-kohi-640.webp 640w, /work-kohi.webp 1200w" sizes="(min-width: 72rem) 24rem, 80vw" width="1200" height="750" alt="Home page of Kōhī by Ifuku, a café and listening room in Milpark" fetchpriority="high" decoding="async">
                             <span class="wcard__chip">Kōhī by Ifuku <b>Live</b><span class="vh"> (opens in a new tab)</span></span>
                         </a>
                         <a class="wcard wcard--2" href="https://mvsglobalpools.co.za" target="_blank" rel="noopener">
-                            <img src="/work-mvs.webp" width="1040" height="650" alt="Home page of MVS Global Pools, a pool building and renovation company" decoding="async" loading="lazy">
+                            <img src="/work-mvs.webp" srcset="/work-mvs-640.webp 640w, /work-mvs.webp 1200w" sizes="(min-width: 72rem) 24rem, 80vw" width="1200" height="750" alt="Home page of MVS Global Pools, a pool building and renovation company" decoding="async" loading="lazy">
                             <span class="wcard__chip">MVS Global Pools <b>Client site</b><span class="vh"> (opens in a new tab)</span></span>
                         </a>
                         <a class="wcard wcard--3" href="https://silverlakesmarketplace.co.za" target="_blank" rel="noopener">
-                            <img src="/work-silverlakes.webp" width="1040" height="650" alt="Home page of Silver Lakes Marketplace, a local buy and sell site" decoding="async" loading="lazy">
+                            <img src="/work-silverlakes.webp" srcset="/work-silverlakes-640.webp 640w, /work-silverlakes.webp 1200w" sizes="(min-width: 72rem) 24rem, 80vw" width="1200" height="750" alt="Home page of Silver Lakes Marketplace, a local buy and sell site" decoding="async" loading="lazy">
                             <span class="wcard__chip">Silver Lakes Marketplace <b>Live, work paused</b><span class="vh"> (opens in a new tab)</span></span>
                         </a>
                     </div>
@@ -350,7 +352,8 @@
                         <div class="svc__side">
                             <p class="svc__price"><b>R2,000</b> a single page</p>
                             <p>R850 for each page after the first. Most sites land between R5,000 and R25,000.</p>
-                            <p><b>R500</b> a month for upkeep, optional. Domains aren't included: you buy the name, I point it at the site.</p>
+                            <p><b>Upkeep from R750 a month</b>, optional. The price depends on what it covers: hosting, backups and small changes for a one-page site is the starting point, and bigger sites and projects cost more.</p>
+                            <p>Domains aren't included: you buy the name, I point it at the site.</p>
                         </div>
                     </li>
 
@@ -409,20 +412,26 @@
                             <p>
                                 When your logo, colours and fonts look different on your site,
                                 Google profile, Facebook, Instagram and WhatsApp, a customer
-                                wonders if it's the same business. There are two sizes of job.
+                                wonders if it's the same business. There are three sizes of job.
                             </p>
                             <p>
                                 <strong>A fix</strong> when what you have doesn't match: a clean
                                 version of your logo with a one-page style sheet, then profiles
                                 that all look like one business.
-                                <strong>A brand system</strong> when you want the whole thing: a
+                                <strong>A brand system</strong> when you want it done properly: a
                                 logo set, colours, type, post templates, stationery and a
                                 guidelines document you keep.
+                            </p>
+                            <p>
+                                <strong>A full brand from scratch</strong> if you don't have one
+                                yet: I design the logo and everything around it, from the first
+                                sketches to the finished set, so the business looks like one thing
+                                from the first day.
                             </p>
                         </div>
                         <div class="svc__side">
                             <p class="svc__price">Quoted per business</p>
-                            <p>After I've looked at what you have.</p>
+                            <p>After I've looked at what you have, or talked through what you're starting from.</p>
                         </div>
                     </li>
 

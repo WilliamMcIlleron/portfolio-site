@@ -576,7 +576,8 @@
             btn.hidden = false;
             btn.addEventListener('click', function () {
                 var paused = hero.classList.toggle('is-paused');
-                btn.setAttribute('aria-pressed', String(paused));
+                btn.dataset.paused = paused ? '1' : '';
+                btn.setAttribute('aria-label', (paused ? 'Play' : 'Pause') + ' the moving ' + (btn.dataset.what || 'word'));
             });
         }
 
