@@ -30,9 +30,8 @@
          stylesheet instead of a round trip after it. crossorigin is required
          even same-origin: fonts are fetched in anonymous CORS mode, and
          without it the preload is discarded and fetched a second time. -->
-    <link rel="preload" href="/fonts/karla-var.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/newsreader-400.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/newsreader-italic-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/dmsans-var.woff2" as="font" type="font/woff2" crossorigin>
 
     <link rel="stylesheet" href="/styles.css">
 
@@ -109,7 +108,7 @@
     </header>
 
     <main id="main">
-        <section class="hero">
+        <section class="hero hero--home hero--trade">
             <div class="wrap">
                 <h1 class="hero__title">
                     Instagram is where they check you out.
@@ -126,6 +125,25 @@
                 <div class="cta-row">
                     <a class="btn" href="#enquire">Get a page built <span aria-hidden="true">&#8594;</span></a>
                     <a class="text-link text-link--standalone" href="#included">What's on it</a>
+                </div>
+
+                <button class="rot-pause" id="rotPause" type="button" aria-pressed="false" hidden>Pause the moving cards</button>
+
+                <div class="hero__stage">
+                    <div class="hero__rig" id="heroRig">
+                        <a class="wcard wcard--1" href="/demos/skincare/" target="_blank" rel="noopener">
+                            <img src="/demo-skin-home.webp" width="1040" height="650" alt="Home page of Soft Light Skin Studio, a made-up skin studio: a headline, a soft plant illustration and three treatments" fetchpriority="high" decoding="async">
+                            <span class="wcard__chip">Home page <b>Demo</b><span class="vh"> (opens in a new tab)</span></span>
+                        </a>
+                        <a class="wcard wcard--2" href="/demos/skincare/treatments.html" target="_blank" rel="noopener">
+                            <img src="/demo-skin-prices.webp" width="1040" height="650" alt="Treatments and prices page of Soft Light Skin Studio, a made-up skin studio, with a price list" decoding="async" loading="lazy">
+                            <span class="wcard__chip">Treatments and prices <b>Demo</b><span class="vh"> (opens in a new tab)</span></span>
+                        </a>
+                        <a class="wcard wcard--3" href="/demos/skincare/book.html" target="_blank" rel="noopener">
+                            <img src="/demo-skin-book.webp" width="1040" height="650" alt="Booking and parking page of Soft Light Skin Studio, a made-up skin studio, with a request form" decoding="async" loading="lazy">
+                            <span class="wcard__chip">Book and parking <b>Demo</b><span class="vh"> (opens in a new tab)</span></span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>

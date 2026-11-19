@@ -6,10 +6,10 @@
        become the default output of AI design tools; a site whose pitch is
        craft can't wear it. Dark is now the default ground, with light as an
        explicit opt-in via the header toggle.
-     · Two families, not three. Newsreader for display, Karla for everything
-       else including the uppercase labels that used to need IBM Plex Mono.
-       Body copy now has a voice instead of falling back to the system stack.
-     · Accent belongs to actions, plus the one italic clause in the h1 that
+     · Three families, each with one job. Bricolage Grotesque for headings
+       (bold in the hero), DM Sans for reading text, Geist Mono for small
+       labels, counters and prices. Newsreader, Karla and Space Grotesk are gone.
+     · Accent belongs to actions, plus the filled shape behind the h1's moving word that
        carries the whole proposition. Labels and decorative marks are muted.
      · Durations ranked by property — transform first, colour last — so a
        hover reads as one event. Nothing transitions `all`.
@@ -19,59 +19,28 @@
    ========================================================================== */
 
 /* --- Fonts -----------------------------------------------------------------
-   Self-hosted and subsetted, not fetched from Google. That was 215KB for
-   these faces; the identical glyphs are 74KB here. Almost none of the saving
-   came from cutting characters — it came from cutting variable-font axes.
-   A two-axis Newsreader carries delta data for every weight at every optical
-   size, and this site uses three fixed combinations of them.
+   Self-hosted, not fetched from Google. The Google files carry axes this site
+   never uses, so each was cut down with fontTools (pin the axes, keep the
+   weights actually set, subset to Latin):
 
-   So Newsreader is instanced: no axes, opsz baked at 48. It is a display face
-   here — body copy is Karla — so it runs between 22px and 100px and the axis
-   was buying subtlety at those sizes for 130KB. Karla stays variable but
-   clipped to 400–600, which beats shipping three static cuts.
+     Bricolage Grotesque  opsz pinned at 48, weight 600 to 800     33 KB
+     DM Sans              opsz pinned at 14, weight 400 to 600     20 KB
+     Geist Mono           weight 400 to 500                        13 KB
 
-   Re-subsetting, if the character set ever changes:
-     python -m fontTools.varLib.instancer SRC.ttf opsz=48 wght=400 -o tmp.ttf
-     python -m fontTools.subset tmp.ttf --output-file=out.woff2 --flavor=woff2 \
-       --unicodes="U+0020-007E,U+00A0-00FF,U+2013,U+2014,U+2018,U+2019,\
-U+201C,U+201D,U+2026,U+2190,U+2192,U+2197" \
-       --layout-features="kern,liga,calt,ccmp,mark,mkmk,rlig,locl" --no-hinting
+   Each family also has a ~1 KB patch holding only the macron letters
+   (o with macron, i with macron) so "Kōhī" is set in the site fonts; it is
+   loaded only when a page uses those characters (unicode-range).
 
-   Both families are SIL OFL 1.1. Licences sit beside the files in /fonts/.   */
+   Re-trimming: python -m fontTools.varLib.instancer SRC.ttf opsz=48 wght=600:800
+   then python -m fontTools.subset with --flavor=woff2 and the same unicodes.
+   All three are SIL OFL 1.1. Licences sit beside the files in /fonts/. */
 
-@font-face {
-    font-family: 'Newsreader';
-    src: url('/fonts/newsreader-400.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Newsreader';
-    src: url('/fonts/newsreader-500.woff2') format('woff2');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Newsreader';
-    src: url('/fonts/newsreader-italic-400.woff2') format('woff2');
-    font-weight: 400;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Karla';
-    src: url('/fonts/karla-var.woff2') format('woff2');
-    /* A range, not a value: this one file covers 400 through 600, which is
-       every weight the sans is set at. */
-    font-weight: 400 600;
-    font-style: normal;
-    font-display: swap;
-}
+@font-face { font-family: 'Bricolage Grotesque'; src: url('/fonts/bricolage-var.woff2') format('woff2'); font-weight: 600 800; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Bricolage Grotesque'; src: url('/fonts/bricolage-macron.woff2') format('woff2'); font-weight: 600 800; font-style: normal; font-display: swap; unicode-range: U+012A-012B, U+014C-014D; }
+@font-face { font-family: 'DM Sans'; src: url('/fonts/dmsans-var.woff2') format('woff2'); font-weight: 400 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'DM Sans'; src: url('/fonts/dmsans-macron.woff2') format('woff2'); font-weight: 400 600; font-style: normal; font-display: swap; unicode-range: U+012A-012B, U+014C-014D; }
+@font-face { font-family: 'Geist Mono'; src: url('/fonts/geistmono-var.woff2') format('woff2'); font-weight: 400 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Geist Mono'; src: url('/fonts/geistmono-macron.woff2') format('woff2'); font-weight: 400 500; font-style: normal; font-display: swap; unicode-range: U+012A-012B, U+014C-014D; }
 
 /* --- Tokens --------------------------------------------------------------- */
 
@@ -104,8 +73,9 @@ U+201C,U+201D,U+2026,U+2190,U+2192,U+2197" \
     --accent-wash:  rgba(95, 191, 149, 0.10);
     --invalid:      #ff8a6b;
 
-    --display: 'Newsreader', Georgia, 'Times New Roman', serif;
-    --body:    'Karla', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --display: 'Bricolage Grotesque', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --body:    'DM Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --label:   'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
     /* One value. Every uppercase label left on the page is a dense inline one
        — stack lines, field labels, dates — and they all want the tight
@@ -236,7 +206,7 @@ a { color: inherit; }
 .wordmark {
     font-family: var(--display);
     font-size: 1.0625rem;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: -0.015em;
     text-decoration: none;
     white-space: nowrap;
@@ -405,16 +375,139 @@ a { color: inherit; }
     /* Pushed hard. The page had no scale event between the h1 and the section
        titles, which is most of why it read as flat. */
     font-size: clamp(2.75rem, 1.1rem + 6.6vw, 6.25rem);
-    font-weight: 400;
+    font-weight: 600;
     line-height: 0.98;
     letter-spacing: -0.035em;
     text-wrap: balance;
-    max-width: 15ch;
+    max-width: 17ch;
 }
 
+/* Used by the skincare and solar trade pages for the second half of their h1. */
 .hero__title em {
-    font-style: italic;
+    font-style: normal;
     color: var(--accent);
+}
+
+/* Emphasis elsewhere is weight, not slant. */
+em { font-style: normal; font-weight: 500; }
+
+/* ── Home hero ─────────────────────────────────────────────────────────────
+   Scoped to .hero--home so the trade pages keep their own h1.
+   One live word at a time (counter, big word, an underline that draws itself),
+   beside three real sites as floating cards. Everything that moves is CSS and
+   one Pause button stops all of it (WCAG 2.2.2). Words: 5 x 2s = a 10s pass,
+   first change 1s after load. Only animates under .js and with motion allowed:
+   otherwise "Websites" stays put and the cards sit still.
+   The type is the site's own: Bricolage Grotesque bold for the word, with Geist
+   Mono for the counter and labels. */
+@property --z { syntax: '<length>'; inherits: false; initial-value: 0px; }
+
+.hero--home { overflow-x: clip; --slot: 2s; --cycle: 10s; --ease: cubic-bezier(.2, .7, .2, 1); }
+.hero--home .hero__title {
+    font-family: var(--display);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.98;
+    font-size: clamp(2.125rem, 1rem + 5.2vw, 3.75rem);
+    max-width: none;
+}
+.hw-stack { display: grid; }
+.hw { grid-area: 1 / 1; opacity: 0; }
+.hw:first-child { opacity: 1; }
+.hw__n, .hero__list, .wcard__chip {
+    font-family: var(--label);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+.hw__n { display: block; margin-bottom: 0.9rem; color: var(--accent); letter-spacing: 0.14em; }
+.hw__w { display: block; white-space: nowrap; }
+.hw__u { display: block; height: 0.375rem; margin-top: 0.875rem; background: var(--accent); transform-origin: left; }
+.hero--home .hero__for {
+    margin-top: 1.5rem;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(1.25rem, 1rem + 1.1vw, 2rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+.hero__list {
+    display: flex; flex-wrap: wrap; gap: 0.375rem 1rem;
+    margin: 1.75rem 0 0; padding: 0; list-style: none;
+    color: var(--muted);
+}
+.js .hw { animation: hw-in var(--cycle) var(--ease) infinite; animation-delay: calc(1s + var(--i) * var(--slot)); }
+.js .hw:first-child { animation-name: hw-in0; }
+.js .hw__u { transform: scaleX(0); animation: hw-bar var(--slot) linear infinite; animation-delay: calc(1s + var(--i) * var(--slot)); }
+.js .hw:first-child .hw__u { animation-delay: 1s; }
+@keyframes hw-in  { 0% { opacity: 0; transform: translateY(40%); } 4% { opacity: 1; transform: none; } 16% { opacity: 1; transform: none; } 20% { opacity: 0; transform: translateY(-40%); } 100% { opacity: 0; transform: translateY(-40%); } }
+@keyframes hw-in0 { 0% { opacity: 1; transform: none; } 16% { opacity: 1; transform: none; } 20% { opacity: 0; transform: translateY(-40%); } 100% { opacity: 0; transform: translateY(-40%); } }
+@keyframes hw-bar { 0% { transform: scaleX(0); } 90%, 100% { transform: scaleX(1); } }
+
+.rot-pause {
+    margin-top: 1rem; padding: 0.5rem 0; border: 0; background: none; color: var(--muted);
+    font: inherit; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+    font-family: var(--label);
+}
+.rot-pause:hover { color: var(--ink); }
+.rot-pause:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.rot-pause[aria-pressed="true"]::after { content: ' (paused)'; }
+.hero--home .readout { display: none; }
+
+/* floating work */
+.hero__stage { margin: 2.25rem calc(var(--gutter) * -1) 0; padding: 0.25rem var(--gutter) 1rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.hero__rig { display: flex; gap: 0.875rem; }
+.wcard {
+    position: relative; flex: 0 0 min(80%, 22rem); aspect-ratio: 8 / 5; scroll-snap-align: start;
+    border-radius: 0.875rem; overflow: hidden; background: var(--surface); color: var(--ink); text-decoration: none;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--ink) 10%, transparent);
+}
+.wcard img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; }
+.wcard__chip {
+    position: absolute; left: 0.625rem; bottom: 0.625rem; padding: 0.45rem 0.7rem; border-radius: 999px;
+    background: color-mix(in srgb, var(--paper) 82%, transparent); backdrop-filter: blur(6px);
+}
+.wcard__chip b { margin-left: 0.5rem; font-weight: 600; color: var(--accent); }
+.wcard:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+@media (min-width: 72rem) {
+    .hero--home { min-height: min(100svh, 48rem); display: flex; align-items: center; }
+    .hero--home > .wrap { position: relative; }
+    .hero--home .wrap > :not(.hero__stage) { max-width: min(100%, 31rem); }
+    .hero--home .hero__lede { max-width: 40ch; }
+    .hero__stage {
+        position: absolute; top: 0; bottom: 0; right: 0; width: 50%;
+        margin: 0; padding: 0; overflow: visible; scroll-snap-type: none; pointer-events: none;
+        perspective: 1500px; perspective-origin: 30% 45%;
+    }
+    .hero__rig {
+        position: absolute; inset: 0; display: block; transform-style: preserve-3d;
+        transform: rotateY(var(--ry, 0deg)) rotateX(var(--rx, 0deg));
+        transition: transform 0.9s var(--ease);
+    }
+    .wcard {
+        position: absolute; width: min(26vw, 24rem); flex: none; pointer-events: auto;
+        transform: rotateY(-16deg) rotateX(6deg) rotateZ(-3deg) translateZ(var(--z, 0px));
+        box-shadow: 0 2.5rem 5rem -1.25rem rgba(0, 0, 0, 0.7), 0 0 0 1px color-mix(in srgb, var(--ink) 10%, transparent);
+        transition: --z 0.8s var(--ease), box-shadow 0.8s var(--ease);
+    }
+    .js .wcard { animation: wfloat 9s ease-in-out infinite; animation-delay: var(--d, 0s); }
+    .wcard--1 { left: 6%;  top: 8%;  --z: 70px;  --d: 0s; }
+    .wcard--2 { left: 34%; top: 36%; --z: 20px;  --d: -3s; }
+    .wcard--3 { left: 8%;  top: 62%; --z: -30px; --d: -6s; }
+    .wcard:hover, .wcard:focus-visible {
+        --z: 90px;
+        box-shadow: 0 3.5rem 7rem -1.25rem rgba(0, 0, 0, 0.8), 0 0 0 1px color-mix(in srgb, var(--accent) 55%, transparent);
+    }
+}
+@keyframes wfloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -0.875rem; } }
+.hero--home.is-paused .hw, .hero--home.is-paused .hw__u, .hero--home.is-paused .wcard { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+    .js .hw, .js .hw__u, .js .wcard { animation: none !important; }
+    .js .hw__u { transform: scaleX(1); }
+    .hero__rig { transition: none; }
+    .rot-pause { display: none; }
 }
 
 .hero__lede {
@@ -485,6 +578,7 @@ a { color: inherit; }
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 .readout dd {
@@ -494,6 +588,7 @@ a { color: inherit; }
     line-height: 1;
     color: var(--ink);
     font-variant-numeric: tabular-nums;
+    font-weight: 600;
 }
 
 .readout dd span { font-size: 0.75rem; color: var(--muted); }
@@ -508,6 +603,7 @@ a { color: inherit; }
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 .readout__live i {
@@ -582,6 +678,7 @@ a { color: inherit; }
     font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
     line-height: 1.45;
     text-wrap: pretty;
+    font-weight: 600;
 }
 
 /* --- Section scaffold ----------------------------------------------------- */
@@ -601,7 +698,7 @@ a { color: inherit; }
 .section__title {
     font-family: var(--display);
     font-size: clamp(1.75rem, 1.3rem + 1.9vw, 2.625rem);
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.12;
     letter-spacing: -0.022em;
     text-wrap: balance;
@@ -648,12 +745,13 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 .proof__title {
     font-family: var(--display);
     font-size: 1.25rem;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.25;
 }
 
@@ -667,6 +765,7 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 /* --- Work page -------------------------------------------------------------
@@ -695,13 +794,14 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 .work-item__title {
     margin-top: 0.4rem;
     font-family: var(--display);
     font-size: 1.375rem;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.2;
 }
 
@@ -720,6 +820,7 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 /* A row rather than a list, because two or three links on one line read as
@@ -750,21 +851,23 @@ a.proof__item:focus-visible {
 .work-item .work-quote p {
     margin-top: 0;
     font-family: var(--display);
-    font-size: 1.0625rem;
-    font-style: italic;
+    font-size: 1.25rem;
     line-height: 1.45;
     color: var(--ink);
+    font-weight: 600;
 }
+.work-item .work-quote p::before { content: '\201C'; color: var(--accent); margin-right: 0.08em; }
 
 /* Homepage copy of the MVS quote, under the three proof cards. */
 .home-quote { margin-top: 2rem; max-width: 46rem; }
 .home-quote p {
     font-family: var(--display);
-    font-size: 1.1875rem;
-    font-style: italic;
+    font-size: 1.375rem;
     line-height: 1.45;
     color: var(--ink);
+    font-weight: 600;
 }
+.home-quote p::before { content: '\201C'; color: var(--accent); margin-right: 0.08em; }
 
 .work-quote cite {
     display: block;
@@ -810,6 +913,7 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--accent);
+    font-family: var(--label);
 }
 
 .work-strip__go span { transition: translate var(--t-move) var(--ease); }
@@ -871,7 +975,7 @@ a.proof__item:focus-visible {
 .steps h3 {
     font-family: var(--display);
     font-size: 1.25rem;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.25;
     margin-bottom: 0.4rem;
 }
@@ -965,6 +1069,7 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 .capabilities {
@@ -990,6 +1095,7 @@ a.proof__item:focus-visible {
     text-transform: uppercase;
     color: var(--muted);
     padding-top: 0.15rem;
+    font-family: var(--label);
 }
 
 .capability dd { margin: 0; font-size: 0.9375rem; }
@@ -1065,7 +1171,7 @@ a.proof__item:focus-visible {
     border: 1px solid var(--line);
     border-radius: 100px;
     color: var(--muted);
-    font-family: inherit;
+    font-family: var(--label);
     font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: var(--track-tight);
@@ -1102,6 +1208,7 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 .field input,
@@ -1202,6 +1309,7 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 .field--choices legend span.optional {
@@ -1298,7 +1406,7 @@ a.proof__item:focus-visible {
 .post-list h3 {
     font-family: var(--display);
     font-size: 1.1875rem;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.3;
     transition: color var(--t-fade) var(--ease);
 }
@@ -1323,6 +1431,7 @@ a.proof__item:focus-visible {
     text-transform: uppercase;
     color: var(--muted);
     white-space: nowrap;
+    font-family: var(--label);
 }
 
 /* --- Post (single article) ------------------------------------------------- */
@@ -1353,13 +1462,14 @@ a.proof__item:focus-visible {
     letter-spacing: var(--track-tight);
     text-transform: uppercase;
     color: var(--muted);
+    font-family: var(--label);
 }
 
 .post__title {
     max-width: 20ch;
     font-family: var(--display);
     font-size: clamp(2rem, 1.3rem + 2.8vw, 3.5rem);
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.06;
     letter-spacing: -0.03em;
     text-wrap: balance;
@@ -1387,7 +1497,7 @@ a.proof__item:focus-visible {
     margin-top: 3rem;
     font-family: var(--display);
     font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.2;
     letter-spacing: -0.015em;
 }
@@ -1406,8 +1516,8 @@ a.proof__item:focus-visible {
     border-left: 2px solid var(--line);
     font-family: var(--display);
     font-size: 1.2em;
-    font-style: italic;
     line-height: 1.4;
+    font-weight: 600;
 }
 
 /* Marks a quote as someone else's words, not the author's own aside. Only
@@ -1612,3 +1722,76 @@ a.proof__item:focus-visible {
     .masthead, .skip-link, .form { display: none; }
     body { background: #fff; color: #000; }
 }
+
+/* ── Services rows (home) ───────────────────────────────────────────────────
+   One panel per job, told apart by fill rather than by hairlines. Number and
+   price are the quiet second voice in the label face. */
+.svc { list-style: none; margin: 2.5rem 0 0; padding: 0; display: grid; gap: 1rem; }
+.svc__row { display: grid; gap: 1rem 2.5rem; padding: clamp(1.5rem, 3vw, 2.25rem); border-radius: 1.5rem; background: var(--surface); }
+.svc__n { font-family: var(--label); font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.14em; color: var(--accent); }
+.svc__t { font-family: var(--display); font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.125rem); margin-bottom: 0.9rem; }
+.svc__main > p, .svc__side > p { max-width: 62ch; }
+.svc__main > p + p { margin-top: 0.9rem; }
+.svc__side { color: var(--muted); font-size: 0.9375rem; }
+.svc__side > p + p { margin-top: 0.6rem; }
+.svc__price { font-family: var(--display); font-weight: 600; letter-spacing: -0.02em; font-size: 1.25rem; color: var(--ink); margin-bottom: 0.5rem; }
+.svc__price b { color: var(--accent); font-weight: 700; }
+.svc__side b { color: var(--ink); font-weight: 600; }
+.svc__row .steps { margin: 1.5rem 0; }
+.svc__row .steps h4 { font-family: var(--display); font-weight: 600; letter-spacing: -0.02em; font-size: 1.0625rem; }
+@media (min-width: 56rem) {
+    .svc__row { grid-template-columns: 3rem minmax(0, 1fr) 16rem; }
+}
+
+/* Trade pages (skincare, solar) use the home hero system with a statement
+   headline instead of the word list, so the type is smaller. */
+.hero--trade .hero__title { font-size: clamp(2rem, 1rem + 3vw, 2.875rem); line-height: 1.04; }
+.hero--trade .hero__title em { color: var(--accent); font-style: normal; }
+.hero--trade .cta-row { margin-top: 1.75rem; }
+
+/* ── Site checker ───────────────────────────────────────────────────────────
+   Marks are an open circle and a tick in the text colour, not red and green:
+   the report states facts, it doesn't grade. */
+.audit__form { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; max-width: 40rem; }
+.audit__form input {
+    flex: 1 1 16rem; min-width: 0; font: inherit; color: var(--ink); background: var(--surface);
+    border: 0; border-radius: 999px; padding: 0.95rem 1.4rem;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 25%, transparent);
+}
+.audit__form input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.audit__note { margin-top: 0.75rem; font-size: 0.875rem; color: var(--muted); }
+.audit__msg { margin-top: 1rem; max-width: 40rem; font-size: 0.9375rem; color: var(--ink); }
+.audit__msg a { color: var(--accent); }
+.audit__steps { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: 0.35rem; font-size: 0.9375rem; color: var(--muted); }
+.audit__steps li::before { content: '\2713'; display: inline-block; width: 1.5em; color: var(--accent); }
+.audit__steps li.is-now { color: var(--ink); }
+.audit__steps li.is-now::before { content: '\2192'; }
+.audit__report { margin-top: 1.75rem; max-width: 46rem; padding: clamp(1.25rem, 3vw, 2rem); border-radius: 1.5rem; background: var(--surface); }
+.audit__rh { font-family: var(--display); font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; font-size: clamp(1.375rem, 1rem + 1.2vw, 1.875rem); }
+.audit__rh:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.audit__time { margin-top: 0.4rem; font-family: var(--label); font-size: 0.75rem; letter-spacing: 0.06em; color: var(--muted); }
+.audit__h { margin-top: 1.75rem; font-family: var(--label); font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+.audit__list { list-style: none; margin: 0.75rem 0 0; padding: 0; display: grid; gap: 0.75rem; }
+.audit__item { display: grid; grid-template-columns: 1.5rem 1fr; gap: 0.6rem; align-items: start; }
+.audit__item .mark { margin-top: 0.2rem; color: var(--accent); }
+.audit__item .mark--open { color: var(--muted); }
+.audit__num { font-family: var(--label); font-size: 0.75rem; color: var(--accent); padding-top: 0.3rem; }
+.audit__txt { font-size: 0.9375rem; line-height: 1.5; }
+.audit__notes { margin: 1.25rem 0 0; padding-left: 1.1rem; font-size: 0.8125rem; color: var(--muted); }
+.audit__cant { margin-top: 0.5rem; font-size: 0.9375rem; color: var(--muted); max-width: 56ch; }
+.audit__share { margin-top: 1.75rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; }
+.audit__sharelbl { font-family: var(--label); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); flex-basis: 100%; }
+.audit__sharein { flex: 1 1 14rem; min-width: 0; font: inherit; font-size: 0.8125rem; color: var(--ink); background: var(--paper); border: 0; border-radius: 0.6rem; padding: 0.6rem 0.8rem; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 18%, transparent); }
+.audit__copy, .audit__again { font: inherit; font-size: 0.875rem; font-weight: 600; color: var(--ink); background: none; border: 0; padding: 0.55rem 0; cursor: pointer; text-decoration: underline; text-underline-offset: 0.25em; }
+.audit__again { margin-top: 1rem; display: block; }
+.audit__copy:focus-visible, .audit__again:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.audit__lead { margin-top: 1.5rem; max-width: 46rem; padding: clamp(1.25rem, 3vw, 2rem); border-radius: 1.5rem; background: var(--surface); }
+.audit__leadform { margin-top: 1rem; display: grid; gap: 0.9rem; max-width: 26rem; }
+.audit__leadform label { display: grid; gap: 0.3rem; font-size: 0.875rem; color: var(--muted); }
+.audit__leadform input { font: inherit; color: var(--ink); background: var(--paper); border: 0; border-radius: 0.6rem; padding: 0.75rem 0.9rem; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 22%, transparent); }
+.audit__leadform input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.audit__leadform .btn { justify-self: start; }
+.audit__err { font-size: 0.875rem; color: var(--invalid); }
+.audit__done { font-size: 1rem; }
+.audit__done:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.ts:empty { display: none; }

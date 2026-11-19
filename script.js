@@ -118,10 +118,14 @@
     }
 
     function revealInView() {
+        // Read every position first, then write: a class change between two
+        // reads would force a fresh layout of the whole page each time.
+        var vh = window.innerHeight, hits = [];
         revealables.forEach(function (el) {
             var r = el.getBoundingClientRect();
-            if (r.top < window.innerHeight && r.bottom > 0) show(el);
+            if (r.top < vh && r.bottom > 0) hits.push(el);
         });
+        hits.forEach(show);
     }
 
     function revealAll() { revealables.forEach(show); }
@@ -162,7 +166,7 @@
         window.addEventListener('resize', sweep);
         window.addEventListener('load', revealInView);
 
-        // Newsreader and Karla arrive after first paint, and the swap reflows
+        // The site fonts arrive after first paint, and the swap reflows
         // the page — pulling elements into view with no scroll event to notice.
         if (document.fonts && document.fonts.ready) {
             document.fonts.ready.then(revealInView);
@@ -556,4 +560,37 @@
 
     var year = document.getElementById('year');
     if (year) year.textContent = new Date().getFullYear();
+
+    /* --- Home hero ---------------------------------------------------------- */
+    // The word loop and the floating cards are CSS (see .hero--home in
+    // styles.css). This adds the Pause button, which stops all of it, and a
+    // small pointer tilt for the cards on desktop. Nothing here is needed to
+    // read the page.
+    (function () {
+        var hero = document.querySelector('.hero--home');
+        var btn = document.getElementById('rotPause');
+        var rig = document.getElementById('heroRig');
+        if (!hero || reduceMotion.matches) return;
+
+        if (btn) {
+            btn.hidden = false;
+            btn.addEventListener('click', function () {
+                var paused = hero.classList.toggle('is-paused');
+                btn.setAttribute('aria-pressed', String(paused));
+            });
+        }
+
+        if (rig && matchMedia('(hover: hover) and (min-width: 72rem)').matches) {
+            var raf = 0;
+            addEventListener('pointermove', function (e) {
+                if (raf) return;
+                raf = requestAnimationFrame(function () {
+                    raf = 0;
+                    var x = e.clientX / innerWidth - 0.5, y = e.clientY / innerHeight - 0.5;
+                    rig.style.setProperty('--ry', (x * 8).toFixed(2) + 'deg');
+                    rig.style.setProperty('--rx', (-y * 6).toFixed(2) + 'deg');
+                });
+            }, { passive: true });
+        }
+    })();
 })();
