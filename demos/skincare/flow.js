@@ -19,14 +19,17 @@
       if (window.scrollY > top) window.scrollTo({ top: top, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
     }
   }
-  function ics(lines) { return lines.join("\r\n") + "\r\n"; }
-  function icsEsc(s) { return String(s).replace(/\\/g, "\\\\").replace(/([,;])/g, "\\$1").replace(/\n/g, "\\n"); }
-  function utcStamp(d) { return d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, ""); }
-  function download(name, text, type) {
-    var blob = new Blob([text], { type: type }), url = URL.createObjectURL(blob), a = document.createElement("a");
-    a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  /* Calendar links: pre-filled event pages that open in a new tab, nothing is downloaded. SAST = UTC+2, no DST. */
+  function calLinks(title, startUtc, mins, where, details) {
+    var end = new Date(startUtc.getTime() + mins * 60000), q = encodeURIComponent;
+    function g(d) { return d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, ""); }
+    function iso(d) { return d.toISOString().replace(/\.\d{3}/, ""); }
+    return {
+      google: "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + q(title) + "&dates=" + g(startUtc) + "/" + g(end) + "&details=" + q(details) + "&location=" + q(where),
+      outlook: "https://outlook.live.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&subject=" + q(title) + "&startdt=" + q(iso(startUtc)) + "&enddt=" + q(iso(end)) + "&body=" + q(details) + "&location=" + q(where)
+    };
   }
+  function utcStamp(d) { return d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, ""); }
   function hm(t) { return t; }
   function nowTime() { var d = new Date(); return S.pad(d.getHours()) + ":" + S.pad(d.getMinutes()); }
 
@@ -141,6 +144,11 @@
       $("#c-what").textContent = t.name + " on " + S.niceDate(st.date) + " at " + st.time + ".";
       $("#c-wa").textContent = waText();
       $("#c-wa-time").textContent = st.bookedAt || nowTime();
+      var p = st.date.split("-"), hmv = st.time.split(":");
+      var L = calLinks(t.name + " at Soft Light Skin Studio (demo)", new Date(Date.UTC(+p[0], +p[1] - 1, +p[2], +hmv[0] - 2, +hmv[1])), t.mins,
+        "Unit 4, 12 Sample Lane, Linden, Johannesburg (made-up address)",
+        "Reference " + st.ref + ". Arrive 10 minutes early. Come with a clean face if you can. This is a demo booking for a made-up business.");
+      $("#cal-google").href = L.google; $("#cal-outlook").href = L.outlook;
       showStep(B, 6, focus);
       $("#b-summary").hidden = true; B.parentNode.classList.add("flow--done");
     }
@@ -162,21 +170,6 @@
           st.ref = "SL-" + (Date.now() % 1e6).toString(36).toUpperCase().padStart(4, "0") + Math.floor(Math.random() * 36 * 36).toString(36).toUpperCase().padStart(2, "0");
           st.bookedAt = nowTime(); st.step = 6; save(); done(true);
         }, 700);
-        return;
-      }
-      if (e.target.closest("#ics")) {
-        var t = S.tById[st.treatment], p = st.date.split("-"), hmv = st.time.split(":");
-        var start = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2], +hmv[0] - 2, +hmv[1])); /* SAST = UTC+2, no DST */
-        var end = new Date(start.getTime() + t.mins * 60000);
-        download("soft-light-" + st.ref + ".ics", ics([
-          "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Soft Light Skin Studio (demo)//Booking//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
-          "BEGIN:VEVENT", "UID:" + st.ref + "@softlight.demo", "DTSTAMP:" + utcStamp(new Date()), "DTSTART:" + utcStamp(start), "DTEND:" + utcStamp(end),
-          "SUMMARY:" + icsEsc(t.name + " at Soft Light Skin Studio (demo)"),
-          "LOCATION:" + icsEsc("Unit 4, 12 Sample Lane, Linden, Johannesburg (made-up address)"),
-          "DESCRIPTION:" + icsEsc("Reference " + st.ref + ". Arrive 10 minutes early. Come with a clean face if you can. This is a demo booking for a made-up business."),
-          "BEGIN:VALARM", "TRIGGER:-PT2H", "ACTION:DISPLAY", "DESCRIPTION:" + icsEsc(t.name + " in two hours"), "END:VALARM",
-          "END:VEVENT", "END:VCALENDAR"]), "text/calendar;charset=utf-8");
-        S.announce("Calendar file downloaded.");
         return;
       }
       if (e.target.closest("#again")) { S.write(S.SS, KEY, null); location.href = "book.html"; }
