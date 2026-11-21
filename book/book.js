@@ -276,7 +276,7 @@
     var infoBtns = Array.prototype.slice.call(form.querySelectorAll('.info'));
     function setInfo(btn, open) {
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        $(btn.getAttribute('aria-controls')).hidden = !open;
+        $(btn.getAttribute('aria-controls')).parentNode.classList.toggle('is-open', open);
     }
     infoBtns.forEach(function (btn) {
         var pinned = false;

@@ -63,7 +63,7 @@
 }
 
 /* Info (i) next to each topic: hover, focus or tap shows what it includes. */
-.choice-item { display: grid; gap: 0.4rem; }
+.choice-item { display: block; }
 .choice-row { position: relative; }
 .choice-row .choice { padding-right: 3rem; } /* room for the (i) so a long label never runs under it */
 /* The (i) sits inside the option's box: a small circle, no box of its own.
@@ -78,8 +78,26 @@
 .info:hover, .info[aria-expanded='true'] { color: var(--accent); }
 .info[aria-expanded='true'] { background: var(--accent-wash); }
 .info:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; }
-.info-text {
-    padding: 0.75rem 1rem; border-left: 2px solid var(--accent); background: var(--surface);
-    color: var(--ink); font-size: 0.9375rem; line-height: 1.55;
+/* The description opens and closes smoothly: the wrapper animates its row height from 0 to the
+   text's own height, and the text fades and slides in a few pixels. Collapsed text is
+   visibility:hidden (after the close finishes), so screen readers and Tab skip it. */
+.info-collapse {
+    display: grid; grid-template-rows: 0fr;
+    transition: grid-template-rows 0.24s var(--ease);
 }
-.info-text[hidden] { display: none; }
+.info-collapse.is-open { grid-template-rows: 1fr; }
+.info-text {
+    min-height: 0; overflow: hidden; margin-top: 0.4rem;
+    padding: 0 1rem; border-left: 2px solid var(--accent); background: var(--surface);
+    color: var(--ink); font-size: 0.9375rem; line-height: 1.55;
+    opacity: 0; translate: 0 -4px; visibility: hidden;
+    transition: opacity 0.2s var(--ease), translate 0.24s var(--ease), padding 0.24s var(--ease), margin-top 0.24s var(--ease), visibility 0s linear 0.24s;
+}
+.info-collapse:not(.is-open) .info-text { margin-top: 0; }
+.info-collapse.is-open .info-text {
+    padding-block: 0.75rem; opacity: 1; translate: 0 0; visibility: visible;
+    transition-delay: 0s;
+}
+@media (prefers-reduced-motion: reduce) {
+    .info-collapse, .info-text { transition: none; }
+}
