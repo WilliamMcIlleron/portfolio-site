@@ -4,3 +4,6 @@
 
 # Local secrets for `wrangler pages dev`.
 .dev.vars
+
+# Local Cloudflare Pages dev runtime (npx wrangler pages dev) writes here.
+.wrangler/
