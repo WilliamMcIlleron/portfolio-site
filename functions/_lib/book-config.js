@@ -13,11 +13,11 @@ export const UTC_OFFSET_HOURS = 2;
 /** Day of week: 0 Sunday ... 6 Saturday. Times are 'HH:MM' SAST, [open, close]. */
 export const TERM_HOURS = {
     1: ['15:30', '18:00'], 2: ['15:30', '18:00'], 3: ['15:30', '18:00'], 4: ['15:30', '18:00'], 5: ['15:30', '18:00'],
-    6: ['09:00', '17:00'], // [VERIFY] William said "all day Saturday"; 09:00 to 17:00 is an assumption
+    6: ['09:00', '17:00'], // William confirmed 21 Nov: 09:00 to 17:00, the same as holiday hours
 };
 export const HOLIDAY_HOURS = {
-    1: ['10:00', '18:00'], 2: ['10:00', '18:00'], 3: ['10:00', '18:00'],
-    4: ['10:00', '18:00'], 5: ['10:00', '18:00'], 6: ['10:00', '18:00'],
+    1: ['09:00', '17:00'], 2: ['09:00', '17:00'], 3: ['09:00', '17:00'],
+    4: ['09:00', '17:00'], 5: ['09:00', '17:00'], 6: ['09:00', '17:00'],
 };
 
 /**
