@@ -61,3 +61,21 @@
 @media (prefers-reduced-motion: reduce) {
     .chip span { transition: none; }
 }
+
+/* Info (i) next to each topic: hover, focus or tap shows what it includes. */
+.choice-item { display: grid; gap: 0.4rem; }
+.choice-row { display: flex; gap: 0.5rem; align-items: stretch; }
+.choice-row .choice { flex: 1; min-width: 0; }
+.info {
+    flex: 0 0 auto; display: grid; place-items: center; width: 2.75rem; min-height: 2.75rem; padding: 0;
+    background: var(--surface); border: 1px solid var(--line); color: var(--muted); cursor: pointer; font: inherit;
+    transition: color var(--t-paint) var(--ease), border-color var(--t-paint) var(--ease), background-color var(--t-paint) var(--ease);
+}
+.info:hover, .info[aria-expanded='true'] { color: var(--accent); border-color: var(--accent); }
+.info[aria-expanded='true'] { background: var(--accent-wash); }
+.info:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.info-text {
+    padding: 0.75rem 1rem; border-left: 2px solid var(--accent); background: var(--surface);
+    color: var(--ink); font-size: 0.9375rem; line-height: 1.55;
+}
+.info-text[hidden] { display: none; }

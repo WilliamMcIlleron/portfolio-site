@@ -18,7 +18,7 @@
     var errBox = $('bookErrors'), progress = $('bookProgress'), nextBtn = $('bookNext'), backBtn = $('bookBack');
     var steps = Array.prototype.slice.call(form.querySelectorAll('.book__step'));
     var TOTAL = steps.length;
-    var cur = 1, days = [], slotsLoaded = false, picked = null, busy = false;
+    var cur = 1, days = [], slotsLoaded = false, picked = null, busy = false, activeDate = null;
     var WEEKDAY_LONG = { Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday', Thu: 'Thursday', Fri: 'Friday', Sat: 'Saturday', Sun: 'Sunday' };
 
     form.hidden = false;
@@ -41,7 +41,7 @@
         nextBtn.firstChild.nodeValue = n === TOTAL ? 'Book this call ' : 'Continue ';
         nextBtn.disabled = false;
         showError('');
-        if (n === 3 && !slotsLoaded) loadSlots();
+        if (n === 3) { if (slotsLoaded) refreshSlots(); else loadSlots(); }
         if (n === 4) { $('chosenSlot').textContent = picked ? 'Call on ' + picked.day + ' at ' + picked.time + ' (South African time), 20 minutes.' : ''; prepareTurnstile(); }
         if (focus !== false) {
             var head = steps[n - 1].querySelector('legend, h2');
@@ -77,16 +77,40 @@
 
     /* ---- slots ----------------------------------------------------------- */
 
+    // Always ask the server for the current list: a slot someone else (or you, a minute ago) just booked must disappear.
+    function fetchSlots() {
+        return fetch('/api/book/slots', { headers: { accept: 'application/json' }, cache: 'no-store' })
+            .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+            .then(function (res) { if (!res.ok || !res.j.ok) throw new Error('slots'); return res.j.days || []; });
+    }
+    function stillOpen(start) {
+        return days.some(function (d) { return d.slots.some(function (s) { return s.start === start; }); });
+    }
+    function refreshSlots() {
+        if (!slotsLoaded) return loadSlots();
+        return fetchSlots().then(function (fresh) {
+            if (JSON.stringify(fresh) === JSON.stringify(days)) return;
+            days = fresh;
+            if (picked && !stillOpen(picked.start)) {
+                picked = null;
+                if (cur === 4) { go(3); }
+                showError('That time was just taken. Pick another one.');
+            }
+            if (cur === 3) renderSlots();
+        }).catch(function () { /* keep what is on screen; the server still refuses a taken slot */ });
+    }
+    document.addEventListener('visibilitychange', function () { if (!document.hidden && cur >= 3 && !busy) refreshSlots(); });
+    window.addEventListener('pageshow', function (e) { if (e.persisted && cur >= 3 && !busy) refreshSlots(); });
+    setInterval(function () { if (!document.hidden && cur >= 3 && !busy) refreshSlots(); }, 45000);
+
     function loadSlots() {
         var area = $('slotArea');
         area.setAttribute('aria-busy', 'true');
         area.textContent = '';
         area.appendChild(el('p', { 'class': 'book__status' }, 'Loading times…'));
-        return fetch('/api/book/slots', { headers: { accept: 'application/json' } })
-            .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
-            .then(function (res) {
-                if (!res.ok || !res.j.ok) throw new Error('slots');
-                days = res.j.days || [];
+        return fetchSlots()
+            .then(function (fresh) {
+                days = fresh;
                 slotsLoaded = true;
                 renderSlots();
             })
@@ -126,16 +150,15 @@
             span.appendChild(el('small', {}, parts[2]));
             label.appendChild(input); label.appendChild(span);
             dayRow.appendChild(label);
-            input.addEventListener('change', function () { renderTimes(d); });
+            input.addEventListener('change', function () { activeDate = d.date; renderTimes(d); });
         });
         dayField.appendChild(dayRow);
         area.appendChild(dayField);
         area.appendChild(el('div', { id: 'timeArea', 'class': 'book__times' }));
-        if (picked) {
-            var keep = days.filter(function (d) { return d.date === picked.date; })[0];
-            if (keep) { area.querySelector('input[name="day"][value="' + keep.date + '"]').checked = true; renderTimes(keep); }
-            else picked = null;
-        }
+        var want = picked ? picked.date : activeDate;
+        var keep = want && days.filter(function (d) { return d.date === want; })[0];
+        if (keep) { area.querySelector('input[name="day"][value="' + keep.date + '"]').checked = true; renderTimes(keep); }
+        else { activeDate = null; picked = null; }
     }
 
     function renderTimes(d) {
@@ -248,6 +271,22 @@
     }
 
     /* ---- start ----------------------------------------------------------- */
+
+    // The (i) next to each topic: hover or focus shows what it includes, a tap or Enter pins it open, Escape closes.
+    var infoBtns = Array.prototype.slice.call(form.querySelectorAll('.info'));
+    function setInfo(btn, open) {
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        $(btn.getAttribute('aria-controls')).hidden = !open;
+    }
+    infoBtns.forEach(function (btn) {
+        var pinned = false;
+        btn.addEventListener('click', function () { pinned = !pinned; setInfo(btn, pinned); });
+        btn.addEventListener('mouseenter', function () { setInfo(btn, true); });
+        btn.addEventListener('mouseleave', function () { if (!pinned) setInfo(btn, false); });
+        btn.addEventListener('focus', function () { if (btn.matches(':focus-visible')) setInfo(btn, true); });
+        btn.addEventListener('blur', function () { if (!pinned) setInfo(btn, false); });
+        btn.addEventListener('keydown', function (e) { if (e.key === 'Escape') { pinned = false; setInfo(btn, false); } });
+    });
 
     // Topics can come in on the link: /book/?need=website or /book/?need=ads,brand
     try {
