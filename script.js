@@ -513,49 +513,6 @@
         });
     }
 
-    /* --- Copy the email address ------------------------------------------- */
-
-    // Progressive enhancement: the button is created here, so with JS off the
-    // address is just a mailto link and nothing is missing.
-    var mailLink = document.querySelector('.contact-links a[href^="mailto:"]');
-
-    if (mailLink && navigator.clipboard) {
-        var address = mailLink.getAttribute('href').replace('mailto:', '');
-        var copy = document.createElement('button');
-        copy.type = 'button';
-        copy.className = 'copy-btn';
-        copy.textContent = 'Copy';
-        copy.setAttribute('aria-label', 'Copy email address to clipboard');
-
-        // Screen readers get nothing from a textContent swap on the button they
-        // just pressed, so state goes to a live region as well as the label.
-        var announce = document.createElement('span');
-        announce.className = 'vh';
-        announce.setAttribute('role', 'status');
-        announce.setAttribute('aria-live', 'polite');
-
-        function setCopyState(label, announcement, copied) {
-            copy.textContent = label;
-            copy.setAttribute('aria-label', announcement || 'Copy email address to clipboard');
-            if (copied) { copy.dataset.copied = 'true'; } else { delete copy.dataset.copied; }
-            announce.textContent = announcement || '';
-        }
-
-        var revert;
-        copy.addEventListener('click', function () {
-            navigator.clipboard.writeText(address).then(function () {
-                setCopyState('Copied', 'Email address copied to clipboard', true);
-                clearTimeout(revert);
-                revert = setTimeout(function () { setCopyState('Copy', null, false); }, 2500);
-            }).catch(function () {
-                setCopyState('Copy failed', 'Could not copy. Select the address and press control C.', false);
-            });
-        });
-
-        mailLink.parentNode.appendChild(copy);
-        mailLink.parentNode.appendChild(announce);
-    }
-
     /* --- Footer year ------------------------------------------------------ */
 
     var year = document.getElementById('year');
