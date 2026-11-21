@@ -1,6 +1,5 @@
 /* Soft Light Skin Studio (demo). One design system for every page. */
 @font-face{font-family:"Instrument Serif";src:url(fonts/InstrumentSerif-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"Instrument Serif";src:url(fonts/InstrumentSerif-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
 @font-face{font-family:"Serif Fallback";src:local("Times New Roman"),local("TimesNewRomanPSMT"),local("Liberation Serif");size-adjust:84.5%}
 @font-face{font-family:"Sans Fallback";src:local("Arial"),local("ArialMT"),local("Liberation Sans");size-adjust:103%}
 @font-face{font-family:"Manrope";src:url(fonts/Manrope-normal.woff2) format("woff2");font-weight:400 600;font-style:normal;font-display:swap}
@@ -44,7 +43,7 @@ ul,ol{margin:0;padding:0;list-style:none}
 .prose{max-width:60ch;color:var(--ink-2)}
 .prose p+p{margin-top:1em}
 .display{font-size:clamp(3.25rem,1.6rem + 6.6vw,8.75rem);line-height:.92;letter-spacing:-.03em}
-.display em,.h2 em{font-style:italic}
+.display em,.h2 em,.h1 em,.h3 em,em{font-style:normal;color:var(--accent)}
 .h1{font-size:clamp(3rem,1.8rem + 5vw,7rem);line-height:.95;letter-spacing:-.03em}
 .h2{font-size:clamp(2.4rem,1.6rem + 3vw,4.5rem);line-height:1;letter-spacing:-.025em}
 .h3{font-size:clamp(1.75rem,1.3rem + 1.2vw,2.5rem);line-height:1.05}
