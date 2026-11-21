@@ -246,7 +246,7 @@
             resetTurnstile(); setBusy(false);
             if (res.j && res.j.ok) return done(res.j);
             var msg = (res.j && res.j.message) || 'Something broke on my side. Try again in a minute.';
-            if (res.status === 409 && /time|taken|available/i.test(msg) && !/two calls/.test(msg)) { // the slot is gone: back to the times, refreshed
+            if (res.status === 409 && /time|taken|available|full/i.test(msg) && !/two calls/.test(msg)) { // the slot is gone: back to the times, refreshed
                 picked = null; slotsLoaded = false; go(3); showError(msg); return;
             }
             showError(msg);

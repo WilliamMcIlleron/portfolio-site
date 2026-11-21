@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { slotsForDate, hoursFor, isBookable, openDays, whenLabel, localTime, endOf } from '../functions/_lib/book-slots.js';
+import { slotsForDate, hoursFor, isBookable, openDays, whenLabel, localTime, endOf, isSchoolDay, dayRange } from '../functions/_lib/book-slots.js';
 
 // Saturday 21 Nov 2026, 08:00 SAST.
 const NOW = new Date('2026-11-21T06:00:00Z');
@@ -92,4 +92,15 @@ test('labels use South African time', () => {
 test('a slot near midnight UTC keeps the right local day', () => {
     // 2026-12-05 is a Saturday in the holidays: last slot 16:40 SAST = 14:40 UTC; first 09:00 SAST = 07:00 UTC.
     assert.equal(slotsForDate('2026-12-05')[0], '2026-12-05T07:00:00Z');
+});
+
+test('school days are term-time Monday to Friday only', () => {
+    for (const d of ['2026-11-23', '2026-11-27', '2027-01-13', '2027-05-04']) assert.equal(isSchoolDay(d), true, d); // 13 Jan and 4 May are the first days back
+    for (const d of ['2026-11-28', '2026-11-29']) assert.equal(isSchoolDay(d), false, d + ' (weekend)');
+    for (const d of ['2026-12-01', '2027-01-12', '2027-04-12', '2027-08-09']) assert.equal(isSchoolDay(d), false, d + ' (holiday)');
+    assert.equal(isSchoolDay('2026-12-16'), false); // blackout day
+});
+
+test('dayRange covers one local day in UTC', () => {
+    assert.deepEqual(dayRange('2026-11-23'), { from: '2026-11-22T22:00:00Z', to: '2026-11-23T22:00:00Z' });
 });

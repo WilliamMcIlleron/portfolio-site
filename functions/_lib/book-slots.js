@@ -7,7 +7,7 @@
 
 import {
     SLOT_MINUTES, MIN_NOTICE_HOURS, HORIZON_DAYS, UTC_OFFSET_HOURS,
-    TERM_HOURS, HOLIDAY_HOURS, HOLIDAYS, BLACKOUT_DATES,
+    TERM_HOURS, HOLIDAY_HOURS, HOLIDAYS, BLACKOUT_DATES, SCHOOL_DAY_CAP,
 } from './book-config.js';
 
 const MS_MIN = 60000;
@@ -43,6 +43,20 @@ export function hoursFor(dateStr) {
     const holiday = HOLIDAYS.some(([a, b]) => dateStr >= a && dateStr <= b);
     const row = (holiday ? HOLIDAY_HOURS : TERM_HOURS)[weekdayOf(dateStr)];
     return row ? [toMin(row[0]), toMin(row[1])] : null;
+}
+
+/** A term-time Monday to Friday: the days the daily cap on calls applies to. */
+export function isSchoolDay(dateStr) {
+    const wd = weekdayOf(dateStr);
+    if (wd < 1 || wd > 5) return false;
+    if (BLACKOUT_DATES.includes(dateStr)) return false;
+    return !HOLIDAYS.some(([a, b]) => dateStr >= a && dateStr <= b);
+}
+
+/** The UTC range [from, to) covering one local date. */
+export function dayRange(dateStr) {
+    const from = Date.parse(dateStr + 'T00:00:00Z') - OFFSET_MS;
+    return { from: iso(from), to: iso(from + MS_DAY) };
 }
 
 /** All slot ids for a local date, in order. Ignores notice, horizon and bookings. */
@@ -94,7 +108,10 @@ export function endOf(id) {
 export function openDays(now, taken = new Set(), busy = []) {
     const w = bookingWindow(now);
     const days = [];
+    const takenPerDay = {};
+    for (const id of taken) { const d = localDate(Date.parse(id)); takenPerDay[d] = (takenPerDay[d] || 0) + 1; }
     for (let date = localDate(now.getTime()); date <= w.lastDate; date = addDays(date, 1)) {
+        if (isSchoolDay(date) && (takenPerDay[date] || 0) >= SCHOOL_DAY_CAP) continue; // the day is full
         const slots = slotsForDate(date).filter((id) => {
             const ms = Date.parse(id);
             return ms >= w.earliest && !taken.has(id) && !busy.some((b) => ms < b.end && ms + SLOT_MINUTES * MS_MIN > b.start);

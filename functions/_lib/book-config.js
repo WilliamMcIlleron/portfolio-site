@@ -10,6 +10,12 @@ export const MIN_NOTICE_HOURS = 12;
 export const HORIZON_DAYS = 21;
 export const UTC_OFFSET_HOURS = 2;
 
+/**
+ * Most calls on one school day (a term-time Monday to Friday). Saturdays, school holidays and
+ * blackout days have no cap. Keeps evenings free for homework and exams.
+ */
+export const SCHOOL_DAY_CAP = 3;
+
 /** Day of week: 0 Sunday ... 6 Saturday. Times are 'HH:MM' SAST, [open, close]. */
 export const TERM_HOURS = {
     1: ['15:30', '18:00'], 2: ['15:30', '18:00'], 3: ['15:30', '18:00'], 4: ['15:30', '18:00'], 5: ['15:30', '18:00'],

@@ -30,6 +30,7 @@ export const COPY = {
     malformed: 'Something was wrong with that request. Refresh the page and try again.',
     slot: "That time isn't available any more. Pick another one.",
     taken: 'Someone just took that time. Pick another one.',
+    dayfull: 'That day is fully booked. Pick another day.',
     name: 'Add your name.',
     email: "That email address doesn't look right.",
     phone: "That number doesn't look right. Digits only, like 082 123 4567.",
