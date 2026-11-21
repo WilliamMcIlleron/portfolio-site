@@ -69,6 +69,7 @@
     out.price.textContent = E.rand(r.priceLow) + ' to ' + E.rand(r.priceHigh);
     out.save.textContent = E.rand(r.saveLow) + ' to ' + E.rand(r.saveHigh);
     out.pb.textContent = E.years(r.paybackFast) + ' to ' + E.years(r.paybackSlow) + ' years';
+    out.peek.textContent = r.kWp + ' kWp + ' + r.batteryKWh + ' kWh, ' + E.rand(r.priceLow) + ' to ' + E.rand(r.priceHigh);
     chart(r);
     BL.store.set('bl-estimate', i);
   }

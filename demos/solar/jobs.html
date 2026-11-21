@@ -41,16 +41,16 @@
   <div class="wrap">
     <h2 id="gal-h" class="sr-only">Gallery</h2>
     <div class="filters" role="group" aria-label="Filter jobs by system type">
-      <button class="filter" type="button" data-f="all" aria-pressed="true">All <span class="c"></span></button>
-      <button class="filter" type="button" data-f="backup" aria-pressed="false">Backup <span class="c"></span></button>
-      <button class="filter" type="button" data-f="hybrid" aria-pressed="false">Hybrid <span class="c"></span></button>
-      <button class="filter" type="button" data-f="grid" aria-pressed="false">Grid-tied <span class="c"></span></button>
-      <button class="filter" type="button" data-f="offgrid" aria-pressed="false">Off-grid <span class="c"></span></button>
+      <button class="filter" type="button" data-f="all" aria-pressed="true">All <span class="c">9</span></button>
+      <button class="filter" type="button" data-f="backup" aria-pressed="false">Backup <span class="c">2</span></button>
+      <button class="filter" type="button" data-f="hybrid" aria-pressed="false">Hybrid <span class="c">2</span></button>
+      <button class="filter" type="button" data-f="grid" aria-pressed="false">Grid-tied <span class="c">2</span></button>
+      <button class="filter" type="button" data-f="offgrid" aria-pressed="false">Off-grid <span class="c">3</span></button>
     </div>
-    <p class="count-line" id="count" aria-live="polite"></p>
+    <p class="count-line" id="count" aria-live="polite">Showing 9 sample projects.</p>
     <div class="jobs-grid" id="grid">
 <article class="job" data-cat="hybrid" data-job="0">
-  <div class="job-photo"><img src="img/house-roof-1000.webp" srcset="img/house-roof-720.webp 720w, img/house-roof-1000.webp 1000w, img/house-roof-1280.webp 1280w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 420px" width="1280" height="960" alt="Two-storey house with a full row of black solar panels across the front roof" loading="lazy" decoding="async"><span class="tag tag--amber">Sample project</span></div>
+  <div class="job-photo"><img src="img/house-roof-1000.webp" srcset="img/house-roof-720.webp 720w, img/house-roof-1000.webp 1000w, img/house-roof-1280.webp 1280w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 960px) 50vw, 420px" width="1280" height="960" alt="Two-storey house with a full row of black solar panels across the front roof" fetchpriority="high" decoding="async"><span class="tag tag--amber">Sample project</span></div>
   <div class="job-body">
     <h3><button class="job-open" type="button" aria-haspopup="dialog">Hybrid, Midrand</button></h3>
     <ul class="job-meta"><li>6.6 kWp, 12 panels</li><li>10 kWh battery</li></ul>
@@ -58,7 +58,7 @@
   </div>
 </article>
 <article class="job" data-cat="offgrid" data-job="1">
-  <div class="job-photo"><img src="img/farmhouse-roof-1000.webp" srcset="img/farmhouse-roof-720.webp 720w, img/farmhouse-roof-1000.webp 1000w, img/farmhouse-roof-1440.webp 1440w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 420px" width="1440" height="960" alt="Farmhouse with its whole roof covered in solar panels, trees and fields behind" loading="lazy" decoding="async"><span class="tag tag--amber">Sample project</span></div>
+  <div class="job-photo"><img src="img/farmhouse-roof-1000.webp" srcset="img/farmhouse-roof-720.webp 720w, img/farmhouse-roof-1000.webp 1000w, img/farmhouse-roof-1440.webp 1440w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 960px) 50vw, 420px" width="1440" height="960" alt="Farmhouse with its whole roof covered in solar panels, trees and fields behind" loading="lazy" decoding="async"><span class="tag tag--amber">Sample project</span></div>
   <div class="job-body">
     <h3><button class="job-open" type="button" aria-haspopup="dialog">Off-grid, Cullinan plot</button></h3>
     <ul class="job-meta"><li>13.2 kWp, 24 panels</li><li>40 kWh battery</li></ul>
@@ -66,7 +66,7 @@
   </div>
 </article>
 <article class="job" data-cat="grid" data-job="2">
-  <div class="job-photo"><img src="img/house-two-roofs-1000.webp" srcset="img/house-two-roofs-720.webp 720w, img/house-two-roofs-1000.webp 1000w, img/house-two-roofs-1440.webp 1440w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 420px" width="1440" height="962" alt="White double-storey house and a garage beside it, both with solar panels on the roof" loading="lazy" decoding="async"><span class="tag tag--amber">Sample project</span></div>
+  <div class="job-photo"><img src="img/house-two-roofs-1000.webp" srcset="img/house-two-roofs-720.webp 720w, img/house-two-roofs-1000.webp 1000w, img/house-two-roofs-1440.webp 1440w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 960px) 50vw, 420px" width="1440" height="962" alt="White double-storey house and a garage beside it, both with solar panels on the roof" loading="lazy" decoding="async"><span class="tag tag--amber">Sample project</span></div>
   <div class="job-body">
     <h3><button class="job-open" type="button" aria-haspopup="dialog">Grid-tied, Centurion</button></h3>
     <ul class="job-meta"><li>8.25 kWp, 15 panels</li><li>No battery</li></ul>
@@ -74,7 +74,7 @@
   </div>
 </article>
 <article class="job" data-cat="hybrid" data-job="3">
-  <div class="job-photo"><img src="img/hero-tiled-roof-1000.webp" srcset="img/hero-tiled-roof-720.webp 720w, img/hero-tiled-roof-1000.webp 1000w, img/hero-tiled-roof-1280.webp 1280w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 420px" width="1280" height="960" alt="Aerial view of a large home with a red clay tile roof carrying solar panels, a pool and palm trees beside it" loading="lazy" decoding="async"><span class="tag tag--amber">Sample project</span></div>
+  <div class="job-photo"><img src="img/hero-tiled-roof-1000.webp" srcset="img/hero-tiled-roof-720.webp 720w, img/hero-tiled-roof-1000.webp 1000w, img/hero-tiled-roof-1280.webp 1280w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 960px) 50vw, 420px" width="1280" height="960" alt="Aerial view of a large home with a red clay tile roof carrying solar panels, a pool and palm trees beside it" loading="lazy" decoding="async"><span class="tag tag--amber">Sample project</span></div>
   <div class="job-body">
     <h3><button class="job-open" type="button" aria-haspopup="dialog">Hybrid, Fourways</button></h3>
     <ul class="job-meta"><li>11 kWp, 20 panels</li><li>20 kWh battery</li></ul>
@@ -82,7 +82,7 @@
   </div>
 </article>
 <article class="job" data-cat="grid" data-job="4">
-  <div class="job-photo"><img src="img/flat-roof-sunset-1000.webp" srcset="img/flat-roof-sunset-720.webp 720w, img/flat-roof-sunset-1000.webp 1000w, img/flat-roof-sunset-1280.webp 1280w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 420px" width="1280" height="836" alt="Rows of solar panels on a flat roof, glowing orange under a sunset sky" loading="lazy" decoding="async"><span class="tag tag--amber">Sample project</span></div>
+  <div class="job-photo"><img src="img/flat-roof-sunset-1000.webp" srcset="img/flat-roof-sunset-720.webp 720w, img/flat-roof-sunset-1000.webp 1000w, img/flat-roof-sunset-1280.webp 1280w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 960px) 50vw, 420px" width="1280" height="836" alt="Rows of solar panels on a flat roof, glowing orange under a sunset sky" loading="lazy" decoding="async"><span class="tag tag--amber">Sample project</span></div>
   <div class="job-body">
     <h3><button class="job-open" type="button" aria-haspopup="dialog">Grid-tied, Bryanston flat roof</button></h3>
     <ul class="job-meta"><li>5.5 kWp, 10 panels</li><li>No battery</li></ul>
@@ -90,7 +90,7 @@
   </div>
 </article>
 <article class="job" data-cat="offgrid" data-job="5">
-  <div class="job-photo"><img src="img/ground-golden-1000.webp" srcset="img/ground-golden-720.webp 720w, img/ground-golden-1000.webp 1000w, img/ground-golden-1440.webp 1440w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 420px" width="1440" height="1080" alt="Two long rows of ground-mounted solar panels on a farm field in golden evening light" loading="lazy" decoding="async"><span class="tag tag--amber">Sample project</span></div>
+  <div class="job-photo"><img src="img/ground-golden-1000.webp" srcset="img/ground-golden-720.webp 720w, img/ground-golden-1000.webp 1000w, img/ground-golden-1440.webp 1440w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 960px) 50vw, 420px" width="1440" height="1080" alt="Two long rows of ground-mounted solar panels on a farm field in golden evening light" loading="lazy" decoding="async"><span class="tag tag--amber">Sample project</span></div>
   <div class="job-body">
     <h3><button class="job-open" type="button" aria-haspopup="dialog">Off-grid, Hartbeespoort farm</button></h3>
     <ul class="job-meta"><li>22 kWp, 40 panels</li><li>60 kWh battery</li></ul>
@@ -98,7 +98,7 @@
   </div>
 </article>
 <article class="job" data-cat="offgrid" data-job="6">
-  <div class="job-photo"><img src="img/dusk-house-1000.webp" srcset="img/dusk-house-720.webp 720w, img/dusk-house-1000.webp 1000w, img/dusk-house-1440.webp 1440w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 420px" width="1440" height="1080" alt="Rows of ground-mounted solar panels at dusk with a lit house and trees behind" loading="lazy" decoding="async"><span class="tag tag--amber">Sample project</span></div>
+  <div class="job-photo"><img src="img/dusk-house-1000.webp" srcset="img/dusk-house-720.webp 720w, img/dusk-house-1000.webp 1000w, img/dusk-house-1440.webp 1440w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 960px) 50vw, 420px" width="1440" height="1080" alt="Rows of ground-mounted solar panels at dusk with a lit house and trees behind" loading="lazy" decoding="async"><span class="tag tag--amber">Sample project</span></div>
   <div class="job-body">
     <h3><button class="job-open" type="button" aria-haspopup="dialog">Off-grid, Magaliesburg</button></h3>
     <ul class="job-meta"><li>16.5 kWp, 30 panels</li><li>30 kWh battery</li></ul>
@@ -106,7 +106,7 @@
   </div>
 </article>
 <article class="job" data-cat="backup" data-job="7">
-  <div class="job-photo"><img src="img/ground-grass-1000.webp" srcset="img/ground-grass-720.webp 720w, img/ground-grass-1000.webp 1000w, img/ground-grass-1440.webp 1440w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 420px" width="1440" height="954" alt="A short row of solar panels on a steel frame on a green lawn, with an inverter on a post" loading="lazy" decoding="async"><span class="tag tag--amber">Sample project</span></div>
+  <div class="job-photo"><img src="img/ground-grass-1000.webp" srcset="img/ground-grass-720.webp 720w, img/ground-grass-1000.webp 1000w, img/ground-grass-1440.webp 1440w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 960px) 50vw, 420px" width="1440" height="954" alt="A short row of solar panels on a steel frame on a green lawn, with an inverter on a post" loading="lazy" decoding="async"><span class="tag tag--amber">Sample project</span></div>
   <div class="job-body">
     <h3><button class="job-open" type="button" aria-haspopup="dialog">Backup, Muldersdrift</button></h3>
     <ul class="job-meta"><li>3.3 kWp, 6 panels</li><li>10 kWh battery</li></ul>
@@ -114,7 +114,7 @@
   </div>
 </article>
 <article class="job" data-cat="backup" data-job="8">
-  <div class="job-photo"><img src="img/roof-install-1000.webp" srcset="img/roof-install-720.webp 720w, img/roof-install-1000.webp 1000w, img/roof-install-1280.webp 1280w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 420px" width="1280" height="852" alt="Installer on a house roof beside a long array of black solar panels, trees behind" loading="lazy" decoding="async"><span class="tag tag--amber">Sample project</span></div>
+  <div class="job-photo"><img src="img/roof-install-1000.webp" srcset="img/roof-install-720.webp 720w, img/roof-install-1000.webp 1000w, img/roof-install-1280.webp 1280w" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 960px) 50vw, 420px" width="1280" height="852" alt="Installer on a house roof beside a long array of black solar panels, trees behind" loading="lazy" decoding="async"><span class="tag tag--amber">Sample project</span></div>
   <div class="job-body">
     <h3><button class="job-open" type="button" aria-haspopup="dialog">Backup, Northcliff</button></h3>
     <ul class="job-meta"><li>4.4 kWp, 8 panels</li><li>10 kWh battery</li></ul>
@@ -128,7 +128,7 @@
 <section class="sec--tight" style="padding-top:0" aria-labelledby="cta-h">
   <div class="wrap">
     <div class="band">
-      <img src="img/installers-pair-1000.webp" srcset="img/installers-pair-720.webp 720w, img/installers-pair-1000.webp 1000w, img/installers-pair-1440.webp 1440w" sizes="(max-width: 1320px) 100vw, 1320px" width="1440" height="964" alt="Two installers in yellow hard hats fixing a solar panel to its frame" loading="lazy" decoding="async">
+      <img src="img/installers-pair-1000.webp" srcset="img/installers-pair-720.webp 720w, img/installers-pair-1000.webp 1000w, img/installers-pair-1440.webp 1440w" sizes="(max-width: 1320px) calc(100vw - 32px), 1320px" width="1440" height="964" alt="Two installers in yellow hard hats fixing a solar panel to its frame" loading="lazy" decoding="async">
       <div class="band-in">
         <h2 id="cta-h">Want one like these?</h2>
         <p>Tell us your bill and roof. We call within one working day and book a site visit.</p>
