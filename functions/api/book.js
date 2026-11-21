@@ -2,7 +2,7 @@
  * Cloudflare Pages Function: POST /api/book
  *
  * Body (JSON, max 4 KB): {slot, name, email, phone, contact:'whatsapp'|'phone',
- *   need, business?, note?, hp, turnstileToken}
+ *   needs:[topic keys, at least one], business?, note?, hp, turnstileToken}
  * Answer: {ok:true, reference, start, end, when, cancelUrl, calendar:{google,outlook}}
  *      or {ok:false, message:"<one sentence for the visitor>"}
  *
@@ -69,12 +69,12 @@ export async function handleBooking(context, now = new Date()) {
         const active = await env.DB.prepare("SELECT COUNT(*) AS c FROM bookings WHERE email = ? AND status = 'booked' AND slot_start > ?").bind(v.email, now.toISOString()).first();
         if ((active?.c ?? 0) >= ACTIVE_PER_EMAIL) return fail('already', 409);
 
-        const answers = JSON.stringify({ business: v.business || undefined, note: v.note || undefined });
+        const answers = JSON.stringify({ needs: v.needs, business: v.business || undefined, note: v.note || undefined });
         try {
             await env.DB.prepare(
                 'INSERT INTO bookings (id, slot_start, name, email, phone, contact, topic, answers_json, status, cancel_token_hash, ip_hash, created_at) ' +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'booked', ?, ?, ?)"
-            ).bind(id, start, v.name, v.email, v.phone, v.contact, v.need, answers, await hashToken(env.BOOKING_SECRET, token), ipHash, now.toISOString()).run();
+            ).bind(id, start, v.name, v.email, v.phone, v.contact, v.needs.join(','), answers, await hashToken(env.BOOKING_SECRET, token), ipHash, now.toISOString()).run();
         } catch (e) {
             if (/UNIQUE|constraint/i.test(String(e && e.message))) {
                 console.log(JSON.stringify({ evt: 'book', outcome: 'taken' }));

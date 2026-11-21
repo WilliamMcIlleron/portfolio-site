@@ -12,7 +12,7 @@
     <link rel="preload" href="/fonts/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/dmsans-var.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/styles.css?v=20261122">
-    <link rel="stylesheet" href="/book/book.css?v=20261122">
+    <link rel="stylesheet" href="/book/book.css?v=20261123">
 
     <script>
         (function () {
@@ -49,14 +49,19 @@
 
             <section class="book__step" data-step="1" aria-labelledby="s1">
                 <fieldset class="field field--choices">
-                    <legend id="s1" tabindex="-1">What do you want to talk about?</legend>
+                    <legend id="s1" tabindex="-1">What do you want to talk about? <span class="optional">(pick all that apply)</span></legend>
                     <div class="choices" id="needChoices">
-                        <label class="choice"><input type="radio" name="need" value="site-check" required><span>A free check of my website</span></label>
-                        <label class="choice"><input type="radio" name="need" value="website"><span>A new website</span></label>
-                        <label class="choice"><input type="radio" name="need" value="ads"><span>Google or Meta ads</span></label>
-                        <label class="choice"><input type="radio" name="need" value="booking"><span>A booking system</span></label>
-                        <label class="choice"><input type="radio" name="need" value="brand"><span>A brand or logo</span></label>
-                        <label class="choice"><input type="radio" name="need" value="other"><span>Not sure yet</span></label>
+                        <label class="choice"><input type="checkbox" name="need" value="site-check"><span>A free check of my website</span></label>
+                        <label class="choice"><input type="checkbox" name="need" value="website"><span>A new website</span></label>
+                        <label class="choice"><input type="checkbox" name="need" value="redesign"><span>A redesign of my current site</span></label>
+                        <label class="choice"><input type="checkbox" name="need" value="fix"><span>Fixing or speeding up my site</span></label>
+                        <label class="choice"><input type="checkbox" name="need" value="upkeep"><span>Ongoing changes and upkeep</span></label>
+                        <label class="choice"><input type="checkbox" name="need" value="ads"><span>Google or Meta ads</span></label>
+                        <label class="choice"><input type="checkbox" name="need" value="booking"><span>A booking system</span></label>
+                        <label class="choice"><input type="checkbox" name="need" value="brand"><span>A brand or logo</span></label>
+                        <label class="choice"><input type="checkbox" name="need" value="social"><span>Social media</span></label>
+                        <label class="choice"><input type="checkbox" name="need" value="system"><span>A system, integration or automation</span></label>
+                        <label class="choice"><input type="checkbox" name="need" value="other"><span>Not sure yet</span></label>
                     </div>
                 </fieldset>
             </section>
@@ -126,6 +131,6 @@
         <p class="book__alt">Prefer not to pick a time? <a href="https://wa.me/27723555350?text=Hi%20William%2C%20I%27d%20like%20a%20free%20call." target="_blank" rel="noopener">Message me on WhatsApp<span class="vh"> (opens in a new tab)</span></a> or
             <a href="mailto:william@williammcilleron.com">email me</a>.</p>
     </main>
-    <script src="/book/book.js?v=20261122" defer></script>
+    <script src="/book/book.js?v=20261123" defer></script>
 </body>
 </html>

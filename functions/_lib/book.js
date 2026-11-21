@@ -11,11 +11,17 @@ export const SITE = 'https://williammcilleron.com';
 export const NEEDS = {
     'site-check': 'A free check of my website',
     website: 'A new website',
+    redesign: 'A redesign of my current site',
+    fix: 'Fixing or speeding up my site',
+    upkeep: 'Ongoing changes and upkeep',
     ads: 'Google or Meta ads',
     booking: 'A booking system',
     brand: 'A brand or logo',
+    social: 'Social media',
+    system: 'A system, integration or automation',
     other: 'Not sure yet',
 };
+export const needLabels = (keys) => keys.map((k) => NEEDS[k]).join(', ');
 
 const EMAIL = /^[^\s@<>"',;]+@[^\s@<>"',;]+\.[A-Za-z]{2,}$/;
 const PHONE = /^\+?[\d\s()-]{7,20}$/;
@@ -28,7 +34,7 @@ export const COPY = {
     email: "That email address doesn't look right.",
     phone: "That number doesn't look right. Digits only, like 082 123 4567.",
     contact: 'Choose how you want me to call: WhatsApp or phone.',
-    need: 'Pick what you want to talk about.',
+    need: 'Pick at least one thing you want to talk about.',
     turnstile: "Couldn't confirm you're not a bot. Refresh the page and try again.",
     limit: "That's a lot of bookings from one place. Try again tomorrow, or email william@williammcilleron.com.",
     already: 'You already have two calls booked. Cancel one from its confirmation email, or email william@williammcilleron.com.',
@@ -61,9 +67,13 @@ export function validateBooking(b) {
     if (!email || email.length > 254 || !EMAIL.test(email)) return { ok: false, key: 'email' };
     if (b.contact !== 'whatsapp' && b.contact !== 'phone') return { ok: false, key: 'contact' };
     if (!phone || !PHONE.test(phone) || phone.replace(/\D/g, '').length < 9) return { ok: false, key: 'phone' };
-    if (typeof b.need !== 'string' || !Object.prototype.hasOwnProperty.call(NEEDS, b.need)) return { ok: false, key: 'need' };
+    // `needs` is a list of topic keys. A lone `need` string is still accepted so a cached old page keeps working.
+    const raw = Array.isArray(b.needs) ? b.needs : typeof b.need === 'string' ? [b.need] : null;
+    if (!raw || raw.length < 1 || raw.length > Object.keys(NEEDS).length) return { ok: false, key: 'need' };
+    if (!raw.every((k) => typeof k === 'string' && Object.prototype.hasOwnProperty.call(NEEDS, k))) return { ok: false, key: 'need' };
+    const needs = Object.keys(NEEDS).filter((k) => raw.includes(k)); // de-duplicated, in a fixed order
     if (business.length > 120 || note.length > 500) return { ok: false, key: 'malformed' };
-    return { ok: true, v: { name, email, phone, contact: b.contact, need: b.need, business, note } };
+    return { ok: true, v: { name, email, phone, contact: b.contact, needs, business, note } };
 }
 
 /* ---- tokens and hashes ---------------------------------------------------- */
@@ -125,7 +135,7 @@ export function ownerEmail({ id, start, v, cancelUrl }) {
         ['Name', v.name],
         ['How', howLabel(v.contact) + ' to ' + v.phone],
         ['Email', v.email],
-        ['Wants to talk about', NEEDS[v.need]],
+        ['Wants to talk about', needLabels(v.needs)],
         ...(v.business ? [['Business', v.business]] : []),
         ...(v.note ? [['Note', v.note]] : []),
         ['Reference', id],

@@ -17,6 +17,7 @@
 .book__step[hidden], .book__done[hidden], [hidden] { display: none !important; }
 .book__q, .book__step legend { font-family: var(--display); font-size: clamp(1.35rem, 4vw, 1.75rem); font-weight: 700; line-height: 1.15; color: var(--ink); text-transform: none; letter-spacing: 0; margin: 0; }
 .book__step legend { padding: 0; margin-bottom: 0.75rem; }
+.book__step legend .optional { display: block; margin-top: 0.3rem; font-family: var(--body); font-size: 0.9375rem; font-weight: 400; color: var(--muted); }
 .book__q:focus, .book__step legend:focus, .book__done:focus, #cTitle:focus { outline: none; }
 .book__q:focus-visible, .book__step legend:focus-visible, .book__done:focus-visible, #cTitle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .book__help, .book__chosen, .book__status { color: var(--muted); font-size: 0.9375rem; line-height: 1.55; }
