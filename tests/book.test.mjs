@@ -259,7 +259,7 @@ test('cancel: a token from another database does not match (HMAC secret)', async
 
 test('unique index: the database itself refuses a second booked row for a slot', () => {
     const e = env();
-    const ins = (id) => e.DB.raw.prepare("INSERT INTO bookings VALUES (?,?,?,?,?,?,?,?,?,?,?,?,NULL)").run(id, SLOT, 'n', 'e@x.com', '0821234567', 'phone', 'other', '{}', 'booked', 'h' + id, 'ip', 'now');
+    const ins = (id) => e.DB.raw.prepare("INSERT INTO bookings VALUES (?,?,?,?,?,?,?,?,?,?,?,?,NULL,NULL)").run(id, SLOT, 'n', 'e@x.com', '0821234567', 'phone', 'other', '{}', 'booked', 'h' + id, 'ip', 'now');
     ins('A');
     assert.throws(() => ins('B'), /UNIQUE/);
     e.DB.raw.prepare("UPDATE bookings SET status='cancelled' WHERE id='A'").run();

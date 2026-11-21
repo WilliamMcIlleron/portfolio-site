@@ -16,12 +16,13 @@ import { json, methodNotAllowed, readJsonBody, truncate } from '../../_lib/http.
 import { whenLabel } from '../../_lib/book-slots.js';
 import { COPY, TOKEN, hashToken, cancelledEmail } from '../../_lib/book.js';
 import { sendMail } from '../../_lib/mail.js';
+import { gcalEnabled, deleteEvent } from '../../_lib/gcal.js';
 
 const fail = (key, status) => json({ ok: false, message: COPY[key] }, status);
 
 async function find(env, token) {
     if (typeof token !== 'string' || !TOKEN.test(token)) return null;
-    return env.DB.prepare("SELECT id, slot_start, name FROM bookings WHERE cancel_token_hash = ? AND status = 'booked'").bind(await hashToken(env.BOOKING_SECRET, token)).first();
+    return env.DB.prepare("SELECT id, slot_start, name, gcal_event_id FROM bookings WHERE cancel_token_hash = ? AND status = 'booked'").bind(await hashToken(env.BOOKING_SECRET, token)).first();
 }
 
 export async function handleCancel(context, now = new Date()) {
@@ -47,9 +48,14 @@ export async function handleCancel(context, now = new Date()) {
 
         const res = await env.DB.prepare("UPDATE bookings SET status = 'cancelled', cancelled_at = ? WHERE id = ? AND status = 'booked'").bind(now.toISOString(), row.id).run();
         if (!(res?.meta?.changes > 0)) return fail('notfound', 404); // someone cancelled between the lookup and the update
-        if (env.CONTACT_TO) {
-            const mail = sendMail(env, { to: env.CONTACT_TO, ...cancelledEmail({ id: row.id, start: row.slot_start, name: row.name }) }).catch(() => null);
-            if (typeof context.waitUntil === 'function') context.waitUntil(mail); else await mail;
+        const work = [];
+        if (env.CONTACT_TO) work.push(sendMail(env, { to: env.CONTACT_TO, ...cancelledEmail({ id: row.id, start: row.slot_start, name: row.name }) }).catch(() => null));
+        if (gcalEnabled(env) && row.gcal_event_id) {
+            work.push(deleteEvent(env, row.gcal_event_id).catch((e) => console.error('book/cancel: calendar event not deleted: ' + truncate(e))));
+        }
+        if (work.length) {
+            const done = Promise.all(work);
+            if (typeof context.waitUntil === 'function') context.waitUntil(done); else await done;
         }
         console.log(JSON.stringify({ evt: 'book-cancel', outcome: 'ok', ref: row.id }));
         return json({ ok: true });

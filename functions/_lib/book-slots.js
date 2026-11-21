@@ -90,12 +90,15 @@ export function endOf(id) {
     return iso(Date.parse(id) + SLOT_MINUTES * MS_MIN);
 }
 
-/** Open slots from now to the horizon, grouped by local date, minus `taken` ids. */
-export function openDays(now, taken = new Set()) {
+/** Open slots from now to the horizon, grouped by local date, minus `taken` ids and any `busy` calendar intervals ([{start,end}] in ms). */
+export function openDays(now, taken = new Set(), busy = []) {
     const w = bookingWindow(now);
     const days = [];
     for (let date = localDate(now.getTime()); date <= w.lastDate; date = addDays(date, 1)) {
-        const slots = slotsForDate(date).filter((id) => Date.parse(id) >= w.earliest && !taken.has(id));
+        const slots = slotsForDate(date).filter((id) => {
+            const ms = Date.parse(id);
+            return ms >= w.earliest && !taken.has(id) && !busy.some((b) => ms < b.end && ms + SLOT_MINUTES * MS_MIN > b.start);
+        });
         if (slots.length) days.push({ date, label: dayLabel(date), slots: slots.map((id) => ({ start: id, time: localTime(id) })) });
     }
     return days;
