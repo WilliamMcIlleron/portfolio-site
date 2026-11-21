@@ -1,0 +1,20 @@
+# Photo sources
+
+Every photo on this demo is a real photograph (no AI images), downloaded from Wikimedia Commons, resized and converted to WebP. No other changes were made. Unsplash and Pexels block automated access from this machine, so all photos come from Commons; the three CC0 files marked "via Unsplash" are Unsplash photos mirrored on Commons from the time Unsplash used CC0.
+
+Attribution licences (CC BY 2.0, CC BY-SA 4.0) require credit, a licence link and a note of changes. The credit line is in the footer of every page, and this file is linked from it.
+
+| File prefix | Used on | Original | Author | Licence |
+| --- | --- | --- | --- | --- |
+| `water-closeup` | Quiz (pool surface question) | [A close up of a swimming pool with water by Markus Spiske (Unsplash).jpg](https://commons.wikimedia.org/wiki/File:A_close_up_of_a_swimming_pool_with_water_by_Markus_Spiske_(Unsplash).jpg) | Markus Spiske (via Unsplash, https://unsplash.com/photos/xFyyOhLJf64) | CC0 ([licence](http://creativecommons.org/publicdomain/zero/1.0/deed.en)) |
+| `hero-backyard` | Home hero, Weekly Care tiles, quiz result (Weekly) | [Backyard swimming pool in Queensland.JPG](https://commons.wikimedia.org/wiki/File:Backyard_swimming_pool_in_Queensland.JPG) | Kgbo | CC BY-SA 4.0 ([licence](https://creativecommons.org/licenses/by-sa/4.0)) |
+| `water-ripples` | Quiz (chlorine or salt question) | [Blue water ripples (Unsplash).jpg](https://commons.wikimedia.org/wiki/File:Blue_water_ripples_(Unsplash).jpg) | Jonas Verstuyft (via Unsplash, https://unsplash.com/photos/_wv6DjOvUkc) | CC0 ([licence](http://creativecommons.org/publicdomain/zero/1.0/deed.en)) |
+| `dusk-pool` | Closing bands, quiz (last question, confirmation) | [Exotic swimming pool at sunset (Unsplash).jpg](https://commons.wikimedia.org/wiki/File:Exotic_swimming_pool_at_sunset_(Unsplash).jpg) | Raining Huang (via Unsplash, https://unsplash.com/photos/U50cEuM2LI0) | CC0 ([licence](http://creativecommons.org/publicdomain/zero/1.0/deed.en)) |
+| `water-feature` | Quiz (first question) | [Modern water feature in backyard pool with clear blue water and green lawn.jpg](https://commons.wikimedia.org/wiki/File:Modern_water_feature_in_backyard_pool_with_clear_blue_water_and_green_lawn.jpg) | Shixart1985 | CC BY 2.0 ([licence](https://creativecommons.org/licenses/by/2.0)) |
+| `heat-pump` | Plans (Equipment Check), quiz result (Equipment Check) | [New thermal heat pump for pool in the garden. (51631858079).jpg](https://commons.wikimedia.org/wiki/File:New_thermal_heat_pump_for_pool_in_the_garden._(51631858079).jpg) | Nenad Stojkovic | CC BY 2.0 ([licence](https://creativecommons.org/licenses/by/2.0)) |
+| `pool-cleaner` | Home (How it works), quiz (need question) | [Pool-cleaner.jpg](https://commons.wikimedia.org/wiki/File:Pool-cleaner.jpg) | Bovineone at English Wikipedia | Public domain |
+| `green-pool` | Home and plans (Green-to-Clean Reset), quiz (water question, Reset result) | [Swimming pool maintenance in Perth, Western Australia, June 2021 13.jpg](https://commons.wikimedia.org/wiki/File:Swimming_pool_maintenance_in_Perth,_Western_Australia,_June_2021_13.jpg) | Calistemon | CC BY-SA 4.0 ([licence](https://creativecommons.org/licenses/by-sa/4.0)) |
+| `backyard-wide` | Home (plans, service area), plans page, quiz (size question, Fortnightly result) | [The backyard with a swimming pool of a house in Corinda, Queensland.jpg](https://commons.wikimedia.org/wiki/File:The_backyard_with_a_swimming_pool_of_a_house_in_Corinda,_Queensland.jpg) | Kgbo | CC BY-SA 4.0 ([licence](https://creativecommons.org/licenses/by-sa/4.0)) |
+| `hose-fill` | Handover and Care tiles, quiz (who looks after it, new-pool result) | [Water pouring from a garden hose in a pool closeup.jpg](https://commons.wikimedia.org/wiki/File:Water_pouring_from_a_garden_hose_in_a_pool_closeup.jpg) | Shixart1985 | CC BY 2.0 ([licence](https://creativecommons.org/licenses/by/2.0)) |
+
+Not used: no identifiable children; no readable third-party brands (the heat pump and the pool cleaner were checked at full size).
