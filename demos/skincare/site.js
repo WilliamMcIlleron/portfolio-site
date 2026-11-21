@@ -137,10 +137,11 @@
     lastFocus = trigger || document.activeElement;
     renderDrawer();
     drawer.hidden = false; scrim.hidden = false;
-    requestAnimationFrame(function () { drawer.classList.add("open"); scrim.classList.add("open"); });
+    void drawer.offsetWidth;
+    drawer.classList.add("open"); scrim.classList.add("open");
     drawer.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
-    setTimeout(function () { var h = $("#bag-title"); if (h) h.focus(); }, 30);
+    var h = $("#bag-title"); if (h) h.focus({ preventScroll: true });
   }
   function closeDrawer() {
     if (!drawer || !drawer.classList.contains("open")) return;

@@ -30,6 +30,14 @@
   function hm(t) { return t; }
   function nowTime() { var d = new Date(); return S.pad(d.getHours()) + ":" + S.pad(d.getMinutes()); }
 
+  /* Enter in a text field moves the step on, as a submit would */
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Enter" || e.defaultPrevented || e.isComposing) return;
+    var el = e.target; if (!el.matches || !el.matches("input:not([type=radio]):not([type=checkbox])")) return;
+    var step = el.closest(".step"); if (!step || el.closest("#code-form") || el.closest("#pay-form")) return;
+    var next = step.querySelector("[data-next]"); if (next) { e.preventDefault(); next.click(); }
+  });
+
   /* =================== BOOKING =================== */
   var B = $("#booking");
   if (B) (function () {
@@ -134,7 +142,7 @@
       $("#c-wa").textContent = waText();
       $("#c-wa-time").textContent = st.bookedAt || nowTime();
       showStep(B, 6, focus);
-      $(".summary", B.parentNode) && ($("#b-summary").hidden = true);
+      $("#b-summary").hidden = true; B.parentNode.classList.add("flow--done");
     }
 
     B.addEventListener("click", function (e) {
@@ -199,7 +207,7 @@
       $("#sum-items").innerHTML = items.map(function (i) { var p = S.byId[i.id]; return '<div class="mini-item"><img src="img/' + p.img + '-480.webp" alt="" width="52" height="64"><div>' + esc(p.name) + '<div class="q">' + p.sizes[i.size][0] + " &times; " + i.qty + "</div></div><b>" + fmt(S.Bag.unit(i) * i.qty) + "</b></div>"; }).join("") || '<p class="form-note">No items yet.</p>';
       $("#sum-sub").textContent = fmt(t.sub);
       $("#sum-disc-row").hidden = !t.disc; $("#sum-disc").textContent = fmt(-t.disc); $("#sum-code").textContent = st.code;
-      $("#sum-del").textContent = st.step >= 2 ? delLabel(t).replace(/^.*, /, "") : (t.sub >= S.Bag.FREE_AT ? "Free" : "From free");
+      $("#sum-del").textContent = st.step >= 2 ? (t.del ? fmt(t.del) : "Free") : (t.sub >= S.Bag.FREE_AT ? "Free" : "From free");
       $("#sum-total").textContent = fmt(t.total);
       $("#sum-toggle-total").textContent = fmt(t.total);
       $$("[data-pay-total]").forEach(function (el) { el.textContent = fmt(t.total); });
@@ -349,7 +357,7 @@
         if (st.step === 2 && !S.validate(dForm)) return;
         st.step++; save(); show(true);
       } else if (back) { st.step = Math.max(1, st.step - 1); save(); show(true); }
-      else if (e.target.closest("#new-order")) { S.write(S.SS, "sl-last-order", null); order = null; st = { step: 1, code: "", delivery: "collect", contact: {}, address: {}, pay: "card" }; save(); location.href = "shop.html"; }
+      else if (e.target.closest("#new-order")) { S.write(S.SS, "sl-last-order", null); order = null; st = { step: 1, code: "", delivery: "collect", contact: st.contact || {}, address: {}, pay: "card" }; save(); location.href = "shop.html"; }
     });
 
     var pr = $('input[name="pay"][value="' + st.pay + '"]'); if (pr) pr.checked = true;
