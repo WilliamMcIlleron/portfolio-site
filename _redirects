@@ -10,6 +10,8 @@
 /tests/*            /404.html  404
 /functions/*        /404.html  404
 /AUDIT-BACKEND.md   /404.html  404
+/migrations/*       /404.html  404
+/BOOKING.md         /404.html  404
 
 # Shareable audit reports are served by functions/check/[id].js (a rewrite here
 # did not work in production: Pages 404ed /check/{id}).

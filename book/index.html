@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Book a free call · William McIlleron</title>
+    <meta name="description" content="Book a free 20 minute call with William McIlleron. Pick a time that suits you, and he calls you on WhatsApp or the phone.">
+    <link rel="canonical" href="https://williammcilleron.com/book/">
+    <meta name="theme-color" content="#14171a">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+    <link rel="preload" href="/fonts/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/dmsans-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/styles.css?v=20261122">
+    <link rel="stylesheet" href="/book/book.css?v=20261122">
+
+    <script>
+        (function () {
+            var root = document.documentElement;
+            root.classList.add('js');
+            try {
+                if (localStorage.getItem('theme') === 'light') root.dataset.theme = 'light';
+            } catch (e) { /* private mode: stay dark */ }
+        })();
+    </script>
+</head>
+<body>
+    <main class="wrap book" id="main">
+        <a class="wordmark" href="/">William McIlleron</a>
+
+        <header class="book__head">
+            <p class="eyebrow">20 minutes, free</p>
+            <h1 class="section__title">Book a free call</h1>
+            <p class="prose">Tell me what you want to talk about, pick a time, and I call you. No pitch deck. If I'm not the right person, I'll say so.</p>
+        </header>
+
+        <noscript>
+            <p class="form__errors" style="display:block">Booking needs JavaScript. You can still reach me on
+                <a href="https://wa.me/27723555350">WhatsApp</a> or at
+                <a href="mailto:william@williammcilleron.com">william@williammcilleron.com</a>.</p>
+        </noscript>
+
+        <form class="book__form form" id="bookForm" novalidate hidden>
+            <p class="book__progress" id="bookProgress" aria-live="polite"></p>
+            <p class="form__errors" id="bookErrors" role="alert"></p>
+
+            <!-- Honeypot: hidden from people, irresistible to bots. -->
+            <p class="hp" aria-hidden="true"><label>Website <input name="hp" id="bookHp" tabindex="-1" autocomplete="off"></label></p>
+
+            <section class="book__step" data-step="1" aria-labelledby="s1">
+                <fieldset class="field field--choices">
+                    <legend id="s1" tabindex="-1">What do you want to talk about?</legend>
+                    <div class="choices" id="needChoices">
+                        <label class="choice"><input type="radio" name="need" value="site-check" required><span>A free check of my website</span></label>
+                        <label class="choice"><input type="radio" name="need" value="website"><span>A new website</span></label>
+                        <label class="choice"><input type="radio" name="need" value="ads"><span>Google or Meta ads</span></label>
+                        <label class="choice"><input type="radio" name="need" value="booking"><span>A booking system</span></label>
+                        <label class="choice"><input type="radio" name="need" value="brand"><span>A brand or logo</span></label>
+                        <label class="choice"><input type="radio" name="need" value="other"><span>Not sure yet</span></label>
+                    </div>
+                </fieldset>
+            </section>
+
+            <section class="book__step" data-step="2" aria-labelledby="s2" hidden>
+                <h2 class="book__q" id="s2" tabindex="-1">A bit about the business</h2>
+                <p class="book__help">Both optional. It means I arrive having looked, instead of asking you to explain from scratch.</p>
+                <div class="field">
+                    <label for="business">Business name or website</label>
+                    <input id="business" name="business" type="text" maxlength="120" autocomplete="organization">
+                </div>
+                <div class="field">
+                    <label for="note">What's the one thing you'd like sorted?</label>
+                    <textarea id="note" name="note" maxlength="500" rows="4"></textarea>
+                </div>
+            </section>
+
+            <section class="book__step" data-step="3" aria-labelledby="s3" hidden>
+                <h2 class="book__q" id="s3" tabindex="-1">Pick a day and a time</h2>
+                <p class="book__help" id="slotHelp">All times are South African time.</p>
+                <div id="slotArea" aria-live="polite" aria-busy="true"><p class="book__status">Loading times…</p></div>
+            </section>
+
+            <section class="book__step" data-step="4" aria-labelledby="s4" hidden>
+                <h2 class="book__q" id="s4" tabindex="-1">Where do I call you?</h2>
+                <p class="book__chosen" id="chosenSlot"></p>
+                <div class="field">
+                    <label for="name">Your name</label>
+                    <input id="name" name="name" type="text" maxlength="80" autocomplete="name" required>
+                </div>
+                <div class="field">
+                    <label for="email">Email <span class="optional">(your confirmation goes here)</span></label>
+                    <input id="email" name="email" type="email" maxlength="254" autocomplete="email" inputmode="email" required>
+                </div>
+                <fieldset class="field field--choices">
+                    <legend>How should I call?</legend>
+                    <div class="choices choices--row">
+                        <label class="choice"><input type="radio" name="contact" value="whatsapp" checked><span>WhatsApp call</span></label>
+                        <label class="choice"><input type="radio" name="contact" value="phone"><span>Phone call</span></label>
+                    </div>
+                </fieldset>
+                <div class="field">
+                    <label for="phone">Phone number</label>
+                    <input id="phone" name="phone" type="tel" maxlength="20" autocomplete="tel" inputmode="tel" placeholder="082 123 4567" required>
+                </div>
+                <div id="bookTs" class="book__ts"></div>
+            </section>
+
+            <div class="book__nav" id="bookNav">
+                <button class="btn btn--ghost" type="button" id="bookBack" hidden>Back</button>
+                <button class="btn" type="button" id="bookNext">Continue <span aria-hidden="true">&#8594;</span></button>
+            </div>
+        </form>
+
+        <section class="book__done" id="bookDone" tabindex="-1" hidden aria-labelledby="doneTitle">
+            <p class="eyebrow">Booked</p>
+            <h2 class="section__title" id="doneTitle">You're booked.</h2>
+            <p class="prose" id="doneText"></p>
+            <ul class="book__cal" id="doneCal">
+                <li><a class="btn btn--ghost" id="calGoogle" target="_blank" rel="noopener">Add to Google Calendar<span class="vh"> (opens in a new tab)</span></a></li>
+                <li><a class="btn btn--ghost" id="calOutlook" target="_blank" rel="noopener">Add to Outlook<span class="vh"> (opens in a new tab)</span></a></li>
+            </ul>
+            <p class="prose" id="doneMail"></p>
+            <p class="message-page__actions"><a class="btn" href="/">Back to the site</a></p>
+        </section>
+
+        <p class="book__alt">Prefer not to pick a time? <a href="https://wa.me/27723555350?text=Hi%20William%2C%20I%27d%20like%20a%20free%20call." target="_blank" rel="noopener">Message me on WhatsApp<span class="vh"> (opens in a new tab)</span></a> or
+            <a href="mailto:william@williammcilleron.com">email me</a>.</p>
+    </main>
+    <script src="/book/book.js?v=20261122" defer></script>
+</body>
+</html>

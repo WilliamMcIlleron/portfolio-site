@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cancel your call · William McIlleron</title>
+    <meta name="robots" content="noindex">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="#14171a">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="/fonts/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/dmsans-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/styles.css?v=20261122">
+    <link rel="stylesheet" href="/book/book.css?v=20261122">
+    <script>
+        (function () {
+            var root = document.documentElement;
+            root.classList.add('js');
+            try { if (localStorage.getItem('theme') === 'light') root.dataset.theme = 'light'; } catch (e) { /* stay dark */ }
+        })();
+    </script>
+</head>
+<body>
+    <main class="wrap message-page" id="main">
+        <a class="wordmark" href="/">William McIlleron</a>
+        <h1 class="section__title" id="cTitle" tabindex="-1">Cancel your call</h1>
+        <p class="prose" id="cText" aria-live="polite">Checking your booking…</p>
+        <p class="form__errors" id="cErr" role="alert"></p>
+        <p class="message-page__actions">
+            <button class="btn" type="button" id="cGo" hidden>Yes, cancel this call</button>
+            <a class="btn btn--ghost" id="cKeep" href="/" hidden>No, keep it</a>
+            <a class="btn" id="cHome" href="/" hidden>Back to the site</a>
+        </p>
+        <p class="book__alt" id="cAlt" hidden>Want a different time? Cancel this one, then <a href="/book/">book a new call</a>.</p>
+    </main>
+    <script>
+    (function () {
+        var $ = function (id) { return document.getElementById(id); };
+        var token = new URLSearchParams(location.search).get('t') || '';
+        var text = $('cText'), err = $('cErr'), go = $('cGo');
+        // Keep the token out of the address bar and history once read.
+        try { history.replaceState(null, '', location.pathname); } catch (e) { /* ignore */ }
+
+        function bad(msg) { text.textContent = msg; $('cHome').hidden = false; go.hidden = true; $('cKeep').hidden = true; }
+
+        if (!token) { bad("That link is missing its code. Use the link in your confirmation email."); return; }
+        fetch('/api/book/cancel?token=' + encodeURIComponent(token), { headers: { accept: 'application/json' } })
+            .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+            .then(function (res) {
+                if (!res.ok || !res.j.ok) { bad(res.j.message || "That link doesn't match a booking. It may have been cancelled already."); return; }
+                text.textContent = 'Your call is on ' + res.j.when + ' (South African time). Cancel it?';
+                go.hidden = false; $('cKeep').hidden = false; $('cAlt').hidden = false;
+            })
+            .catch(function () { bad("Couldn't reach the server. Try the link again in a minute."); });
+
+        go.addEventListener('click', function () {
+            go.disabled = true; err.textContent = '';
+            fetch('/api/book/cancel', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ token: token }) })
+                .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+                .then(function (res) {
+                    if (!res.ok || !res.j.ok) { go.disabled = false; err.textContent = res.j.message || 'Something broke on my side. Try again in a minute.'; return; }
+                    $('cTitle').textContent = 'Cancelled.';
+                    text.textContent = 'Your call is cancelled and the time is free again. Thanks for letting me know.';
+                    go.hidden = true; $('cKeep').hidden = true; $('cAlt').hidden = false; $('cHome').hidden = false;
+                    $('cTitle').focus();
+                })
+                .catch(function () { go.disabled = false; err.textContent = "Couldn't reach the server. Check your connection and try again."; });
+        });
+    })();
+    </script>
+</body>
+</html>
