@@ -51,7 +51,7 @@
     function reduced() { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
 
     function validate(n) {
-        if (n === 1 && !form.querySelector('input[name="need"]:checked')) return { msg: 'Pick what you want to talk about.', field: form.querySelector('input[name="need"]') };
+        if (n === 1 && !form.querySelector('input[name="need"]:checked')) return { msg: 'Pick at least one thing you want to talk about.', field: form.querySelector('input[name="need"]') };
         if (n === 3 && !picked) return { msg: 'Pick a day and a time.', field: form.querySelector('input[name="day"]') };
         if (n === 4) {
             var name = $('name'), email = $('email'), phone = $('phone');
@@ -207,12 +207,12 @@
     function submit() {
         setBusy(true); showError('');
         waitForToken().then(function (token) {
-            var need = form.querySelector('input[name="need"]:checked');
+            var needs = Array.prototype.map.call(form.querySelectorAll('input[name="need"]:checked'), function (i) { return i.value; });
             var contact = form.querySelector('input[name="contact"]:checked');
             return fetch('/api/book', {
                 method: 'POST', headers: { 'content-type': 'application/json' },
                 body: JSON.stringify({
-                    slot: picked.start, need: need ? need.value : '', business: $('business').value.trim(), note: $('note').value.trim(),
+                    slot: picked.start, needs: needs, business: $('business').value.trim(), note: $('note').value.trim(),
                     name: $('name').value.trim(), email: $('email').value.trim(), phone: $('phone').value.trim(),
                     contact: contact ? contact.value : '', hp: $('bookHp').value, turnstileToken: token
                 })
@@ -249,11 +249,12 @@
 
     /* ---- start ----------------------------------------------------------- */
 
-    // The topic can come in on the link: /book/?need=website
+    // Topics can come in on the link: /book/?need=website or /book/?need=ads,brand
     try {
-        var want = new URLSearchParams(location.search).get('need');
-        var pre = want && form.querySelector('input[name="need"][value="' + want.replace(/[^a-z-]/g, '') + '"]');
-        if (pre) pre.checked = true;
+        (new URLSearchParams(location.search).get('need') || '').split(',').forEach(function (w) {
+            var pre = form.querySelector('input[name="need"][value="' + w.replace(/[^a-z-]/g, '') + '"]');
+            if (pre) pre.checked = true;
+        });
     } catch (e) { /* ignore */ }
     go(1, false);
     loadSlots(); // start early so step 3 is ready

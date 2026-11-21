@@ -16,7 +16,7 @@ function env(extra = {}) {
 }
 const good = (over = {}) => ({
     slot: SLOT, name: 'Thandi Nkosi', email: 'Thandi@Example.com', phone: '082 123 4567', contact: 'whatsapp',
-    need: 'site-check', business: 'Nkosi Plumbing', note: 'Site is slow on phones.', hp: '', turnstileToken: 'tok', ...over,
+    needs: ['site-check'], business: 'Nkosi Plumbing', note: 'Site is slow on phones.', hp: '', turnstileToken: 'tok', ...over,
 });
 const req = (method, body, ip = '10.1.1.1', url = 'https://williammcilleron.com/api/book') =>
     new Request(url, { method, headers: { 'content-type': 'application/json', 'cf-connecting-ip': ip }, body: body === undefined ? undefined : typeof body === 'string' ? body : JSON.stringify(body) });
@@ -39,7 +39,7 @@ test('books a slot: stores one row, hashes the token and the IP, returns calenda
     const [r] = rows(e);
     assert.equal(rows(e).length, 1);
     assert.equal(r.slot_start, SLOT); assert.equal(r.email, 'thandi@example.com'); assert.equal(r.status, 'booked');
-    assert.equal(r.topic, 'site-check'); assert.deepEqual(JSON.parse(r.answers_json), { business: 'Nkosi Plumbing', note: 'Site is slow on phones.' });
+    assert.equal(r.topic, 'site-check'); assert.deepEqual(JSON.parse(r.answers_json), { needs: ['site-check'], business: 'Nkosi Plumbing', note: 'Site is slow on phones.' });
     assert.notEqual(r.cancel_token_hash, token); assert.match(r.cancel_token_hash, /^[0-9a-f]{64}$/);
     assert.ok(!JSON.stringify(r).includes('10.1.1.1')); assert.match(r.ip_hash, /^[0-9a-f]{32}$/);
 });
@@ -97,7 +97,9 @@ test('rejects each bad field with a 400 and writes nothing', async () => {
         ['email', { email: 'nope' }], ['email', { email: 'a@b' }], ['email', { email: 'a b@c.com' }], ['email', { email: 'a@b.com,c@d.com' }],
         ['phone', { phone: 'abc' }], ['phone', { phone: '123' }], ['phone', { phone: '' }],
         ['contact', { contact: 'carrier-pigeon' }], ['contact', { contact: undefined }],
-        ['need', { need: 'hack' }], ['need', { need: '__proto__' }], ['need', { need: 'toString' }],
+        ['need', { needs: ['hack'] }], ['need', { needs: ['__proto__'] }], ['need', { needs: ['toString'] }], ['need', { needs: [] }], ['need', { needs: 'ads' }],
+        ['need', { needs: ['ads', 'nope'] }], ['need', { needs: [1] }], ['need', { needs: [['ads']] }], ['need', { needs: undefined, need: undefined }],
+        ['need', { needs: Array(12).fill('ads') }],
         ['malformed', { hp: 'bot filled this' }], ['malformed', { note: 'x'.repeat(501) }], ['malformed', { business: 'x'.repeat(121) }],
     ];
     for (const [, over] of cases) {
@@ -146,6 +148,31 @@ test('one email address holds at most two upcoming calls', async () => {
     const out = [];
     for (const [i, s] of [SLOT, SLOT2, '2026-11-23T14:10:00Z'].entries()) out.push((await book(e, good({ slot: s }), `10.8.0.${i}`)).status);
     assert.deepEqual(out, [200, 200, 409]);
+});
+
+test('several topics can be picked: all stored, de-duplicated, in a fixed order, and shown in both emails', async () => {
+    const e = env(); const f = mockFetch([turnstileOk, resendOk]);
+    const res = await book(e, good({ needs: ['social', 'website', 'ads', 'website', 'system'] }), '10.1.1.1', f);
+    assert.equal(res.status, 200);
+    const [r] = rows(e);
+    assert.equal(r.topic, 'website,ads,social,system');
+    assert.deepEqual(JSON.parse(r.answers_json).needs, ['website', 'ads', 'social', 'system']);
+    const owner = sentTo(f).find((m) => m.to[0] === 'owner@example.com');
+    assert.match(owner.text, /Wants to talk about: A new website, Google or Meta ads, Social media, A system, integration or automation/);
+});
+
+test('every service on the site can be picked, all at once', async () => {
+    const all = ['site-check', 'website', 'redesign', 'fix', 'upkeep', 'ads', 'booking', 'brand', 'social', 'system', 'other'];
+    const e = env();
+    assert.equal((await book(e, good({ needs: all }))).status, 200);
+    assert.deepEqual(JSON.parse(rows(e)[0].answers_json).needs, all);
+});
+
+test('a cached old page that still sends a single `need` string keeps working', async () => {
+    const e = env();
+    const body = good(); delete body.needs; body.need = 'ads';
+    assert.equal((await book(e, body)).status, 200);
+    assert.equal(rows(e)[0].topic, 'ads');
 });
 
 test('GET /api/book/slots lists open days and drops taken slots', async () => {
