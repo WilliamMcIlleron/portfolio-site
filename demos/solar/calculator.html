@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Savings calculator | Brightline Solar (demo)</title>
+<meta name="description" content="Estimate the system size, price range, monthly saving and payback for solar and batteries on your home. Every assumption is listed.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f5f2ea">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/archivo-semiexpanded-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<p class="demo-bar"><strong>Demo site for a made-up business.</strong> Nothing here is real and nothing is sent or signed. <a href="/">Built by William McIlleron</a></p>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#12181e"/><path d="M8.5 20.5a7.5 7.5 0 0 1 15 0z" fill="#f6b21b"/><path d="M5.5 23.5h21" stroke="#f5f2ea" stroke-width="2.4" stroke-linecap="round"/></svg><span>Brightline Solar</span></a>
+    <nav class="nav" id="nav" aria-label="Main"><a href="index.html">Home</a><a href="calculator.html" aria-current="page">Calculator</a><a href="packages.html">Packages</a><a href="jobs.html">Jobs</a><a href="contact.html">Contact</a><a class="nav-phone" href="tel:+27100000000">Call 010 000 0000</a></nav>
+    <a class="top-phone" href="tel:+27100000000">010 000 0000</a>
+    <a class="btn btn--sm btn--quote" href="quote.html">Get a quote</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+      <svg class="i-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+</header>
+<main id="main">
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Savings and system-size calculator</p>
+    <h1>Size it before we visit.</h1>
+    <p class="lede">Five questions give you a system size, a price range, a monthly saving range and a payback range. It is an estimate: the formulas and assumptions are all below, and the site visit sets the real price.</p>
+  </div>
+</section>
+
+<section class="sec--tight" style="padding-top:0" aria-label="Calculator">
+  <div class="wrap calc">
+    <form class="calc-in" id="calc" novalidate>
+      <div class="field">
+        <label for="bill">1. Average monthly electricity bill</label>
+        <div class="range-row">
+          <input id="bill" name="bill" type="range" min="500" max="10000" step="100" value="2500" aria-describedby="bill-hint">
+          <div class="prefix"><span aria-hidden="true">R</span><input class="input num" id="bill-n" type="number" inputmode="numeric" min="300" max="20000" step="50" value="2500" aria-label="Monthly bill in rand" aria-describedby="bill-hint"></div>
+        </div>
+        <div class="range-scale" aria-hidden="true"><span>R500</span><span>R10,000</span></div>
+        <span class="hint" id="bill-hint">Use a 12-month average if you have it. Type up to R20,000 in the box.</span>
+      </div>
+
+      <fieldset>
+        <legend>2. Roof type</legend>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="roof" value="tile" checked><span>Tile<small>Concrete or clay</small></span></label>
+          <label class="choice"><input type="radio" name="roof" value="sheet"><span>Sheeting<small>Corrugated or IBR</small></span></label>
+          <label class="choice"><input type="radio" name="roof" value="flat"><span>Flat concrete<small>Tilt frames</small></span></label>
+          <label class="choice"><input type="radio" name="roof" value="ground"><span>Ground mount<small>Plots and farms</small></span></label>
+          <label class="choice"><input type="radio" name="roof" value="unsure"><span>Not sure<small>We check on site</small></span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>3. Which way does the main roof face?</legend>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="orient" value="north" checked><span>North<small>Best in South Africa</small></span></label>
+          <label class="choice"><input type="radio" name="orient" value="ne"><span>North-east</span></label>
+          <label class="choice"><input type="radio" name="orient" value="nw"><span>North-west</span></label>
+          <label class="choice"><input type="radio" name="orient" value="ew"><span>East or west</span></label>
+          <label class="choice"><input type="radio" name="orient" value="flat"><span>Flat roof<small>Panels tilted north</small></span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>4. What matters most?</legend>
+        <div class="choices choices--2">
+          <label class="choice"><input type="radio" name="goal" value="backup"><span>Backup<small>Keep essentials on in outages</small></span></label>
+          <label class="choice"><input type="radio" name="goal" value="cut"><span>Cut the bill<small>Most solar, small battery</small></span></label>
+          <label class="choice"><input type="radio" name="goal" value="both" checked><span>Both<small>Lower bill and backup</small></span></label>
+          <label class="choice"><input type="radio" name="goal" value="offgrid"><span>Off-grid<small>No grid at all</small></span></label>
+        </div>
+      </fieldset>
+
+      <fieldset style="margin-bottom:0">
+        <legend>5. What must stay on when the grid is down?</legend>
+        <div class="choices choices--2" id="loads"></div>
+        <p class="hint" style="margin-top:12px">Geysers, stoves and ovens are left off the battery on purpose. They would empty it in under an hour.</p>
+      </fieldset>
+      <a class="calc-peek" href="#out-h"><span><b data-o="peek">-</b><small>Estimate so far</small></span><span class="peek-go">See it</span></a>
+    </form>
+
+    <div class="calc-out on-dark" aria-labelledby="out-h">
+      <div class="estimate-tag"><h2 id="out-h" style="font-size:1.4rem;letter-spacing:-.02em">Your estimate</h2><span class="tag tag--amber">Estimate, not a quote</span></div>
+      <div id="out" aria-live="polite" aria-atomic="false">
+        <div class="out-hero">
+          <div><span class="out-k">Panels</span><span class="out-v num" data-o="kwp">-</span><span class="out-sub" data-o="panels"></span></div>
+          <div><span class="out-k">Inverter</span><span class="out-v num" data-o="inv">-</span><span class="out-sub" data-o="peak"></span></div>
+          <div><span class="out-k">Battery</span><span class="out-v num" data-o="bat">-</span><span class="out-sub" data-o="hours"></span></div>
+        </div>
+        <div class="out-money">
+          <div><span class="out-k">Price range</span><span class="out-v num" data-o="price">-</span><span class="out-sub">incl. VAT, installed</span></div>
+          <div><span class="out-k">Saving a month</span><span class="out-v num" data-o="save">-</span><span class="out-sub">year one</span></div>
+          <div><span class="out-k">Payback</span><span class="out-v num" data-o="pb">-</span><span class="out-sub">see chart</span></div>
+        </div>
+      </div>
+      <figure class="chart" style="margin:0 0 18px">
+        <figcaption class="out-k" id="chart-cap">Cumulative saving over 20 years against the price range</figcaption>
+        <svg id="chart" viewBox="0 0 520 240" role="img" aria-labelledby="chart-cap chart-desc"><desc id="chart-desc">Chart drawn from the estimate.</desc></svg>
+        <ul class="chart-legend">
+          <li><i style="background:#f6b21b"></i>Saving, low to high</li>
+          <li><i style="background:rgba(245,242,234,.35)"></i>Price, low to high</li>
+        </ul>
+        <details>
+          <summary>Show the numbers as a table</summary>
+          <table><caption class="sr-only">Cumulative saving by year</caption><thead><tr><th scope="col">Year</th><th scope="col">Low</th><th scope="col">High</th></tr></thead><tbody id="chart-table"></tbody></table>
+        </details>
+      </figure>
+      <div class="actions">
+        <button class="btn" type="button" id="send">Send me this estimate <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <a class="btn btn--ghost" href="packages.html">See packages</a>
+      </div>
+      <p class="note">Carries your answers into the quote form. Nothing is sent from this page.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="ass-h">
+  <div class="wrap">
+    <div class="head">
+      <div><p class="eyebrow">Show your working</p><h2 id="ass-h">Every assumption, in the open.</h2></div>
+      <p class="muted">Change any of these and the answer moves. That is why the written proposal, after a site visit, is the only number to sign against.</p>
+    </div>
+    <dl class="assumptions">
+      <div><dt>Tariff</dt><dd><b>R3.40 per kWh</b>Blended, incl. VAT. Gauteng municipal homes pay roughly R3 to R4.</dd></div>
+      <div><dt>Fixed charges</dt><dd><b>R300 a month</b>Network and service fees you keep paying while grid-tied.</dd></div>
+      <div><dt>Sun</dt><dd><b>5.2 peak sun hours</b>Yearly daily average for Gauteng, north-facing, about 26 degrees tilt.</dd></div>
+      <div><dt>Roof direction</dt><dd><b>North 100%</b>North-east or north-west 95%, flat with frames 93%, east or west 85%.</dd></div>
+      <div><dt>System losses</dt><dd><b>80% performance ratio</b>Heat, wiring, inverter and dust.</dd></div>
+      <div><dt>Panels</dt><dd><b>550 W each</b>About 2.6 m&#178; of roof per panel including gaps.</dd></div>
+      <div><dt>Battery</dt><dd><b>Lithium (LFP), 90% usable</b>Sold in 5 kWh modules.</dd></div>
+      <div><dt>Load-shedding</dt><dd><b>4-hour outage</b>Battery sized to carry your essentials for 4 hours. Most slots are 2 or 4 hours (Stage 4 and above can mean several a day).</dd></div>
+      <div><dt>Over time</dt><dd><b>Tariff +8% a year</b>Panels lose 0.5% output a year. Both are assumptions, not forecasts.</dd></div>
+    </dl>
+    <div class="formula" style="margin-top:16px">
+      <p style="font-weight:600;color:var(--ink)">The formulas</p>
+      <ol>
+        <li>Monthly use: <code>bill / R3.40</code> kWh. Daily use: that divided by 30.4.</li>
+        <li>Solar target: daily use times 30% (backup), 70% (cut the bill), 80% (both) or 125% (off-grid, for cloudy days).</li>
+        <li>Panels: <code>target / (5.2 h x direction x 0.80)</code> kW, rounded up to whole 550 W panels (4 to 40).</li>
+        <li>Battery: essentials watts x 4 h / 0.9; "both" adds 25% of daily use; off-grid holds 60% of daily use for 1.5 days; "cut the bill" gets one 5 kWh module. Rounded up to 5 kWh.</li>
+        <li>Inverter: the next standard size above both 1.25 x the peak of your essentials and panel kW / 1.3.</li>
+        <li>Price: panels at R3,250 to R4,250 each fitted (roof type adjusts the fitting), inverter at R3,300 to R4,700 per kW, battery at R4,200 to R5,900 per kWh, plus R18,000 to R26,000 for protection, wiring, CoC and paperwork. Incl. VAT.</li>
+        <li>Saving: solar made x the share you use yourself (80% to 100%, no feed-in credit) x R3.40, never more than your bill less fixed charges. Shown as 88% to 105% of that.</li>
+        <li>Payback: the year the running total of savings (rising 8% a year, less 0.5% panel ageing) passes the price.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="sec--tight" style="padding-top:0" aria-labelledby="cta-h">
+  <div class="wrap">
+    <div class="band">
+      <img src="img/dusk-array-1000.webp" srcset="img/dusk-array-720.webp 720w, img/dusk-array-1000.webp 1000w, img/dusk-array-1440.webp 1440w" sizes="(max-width: 1320px) calc(100vw - 32px), 1320px" width="1440" height="1080" alt="Rows of ground-mounted solar panels seen from above at dusk, farm lights glowing behind" loading="lazy" decoding="async">
+      <div class="band-in">
+        <h2 id="cta-h">Turn the estimate into a price.</h2>
+        <p>A site visit checks your roof, your DB board and your real usage. The written proposal follows within 5 working days.</p>
+        <div class="actions"><a class="btn" href="quote.html">Get a quote <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#12181e"/><path d="M8.5 20.5a7.5 7.5 0 0 1 15 0z" fill="#f6b21b"/><path d="M5.5 23.5h21" stroke="#f5f2ea" stroke-width="2.4" stroke-linecap="round"/></svg><span>Brightline Solar</span></a>
+        <p>Solar, inverters and batteries for Gauteng homes and plots. Quote, site visit, written proposal, then installation.</p>
+      </div>
+      <div>
+        <h2>Plan</h2>
+        <ul><li><a href="calculator.html">Savings calculator</a></li><li><a href="packages.html">Packages</a></li><li><a href="jobs.html">Finished jobs</a></li><li><a href="proposal.html">Sample proposal</a></li></ul>
+      </div>
+      <div>
+        <h2>Talk to us</h2>
+        <ul><li><a href="quote.html">Get a quote</a></li><li><a href="tel:+27100000000">010 000 0000</a></li><li><a href="https://wa.me/27100000000">WhatsApp 010 000 0000</a></li><li><a href="contact.html">Contact and hours</a></li></ul>
+      </div>
+      <div>
+        <h2>Hours</h2>
+        <ul><li>Mon to Fri, 07:30 to 17:00</li><li>Sat, 08:00 to 12:00</li><li>Fault line, every day</li></ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <p>Brightline Solar is a made-up business. This is a demo website by <a href="/">William McIlleron</a>. The phone numbers are fake, no form sends anything, and nothing on the proposal page is signed or binding. Figures marked Sample are invented for the demo; calculator figures are estimates from the assumptions listed on that page.</p>
+      <p>Photos: public domain and CC0 images from Wikimedia Commons, by the U.S. Department of Energy, U.S. Department of Agriculture, NASA Kennedy Space Center, U.S. Air Force, The Solutions Project and Roy Bury. <a href="PHOTO-SOURCES.md">Full photo credits</a>. Fonts: Archivo and Inter (SIL Open Font License).</p>
+    </div>
+  </div>
+</footer>
+<div class="mbar" aria-label="Quick actions"><a class="btn btn--ghost" href="tel:+27100000000"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Call</a><a class="btn" href="quote.html">Get a quote</a></div>
+<script src="assets/site.js" defer></script>
+<script src="assets/estimate.js" defer></script>
+<script src="assets/calc.js" defer></script>
+</body>
+</html>
