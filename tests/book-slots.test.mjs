@@ -25,11 +25,11 @@ test('Sundays are closed, in term and in the holidays', () => {
     assert.deepEqual(slotsForDate('2026-12-06'), []);
 });
 
-test('holidays: Monday to Saturday 10:00 to 18:00, from 1 Dec to 12 Jan', () => {
+test('holidays: Monday to Saturday 09:00 to 17:00, from 1 Dec to 12 Jan', () => {
     for (const d of ['2026-12-01', '2026-12-05', '2027-01-12']) {
         const s = slotsForDate(d);
-        assert.equal(localTime(s[0]), '10:00', d);
-        assert.equal(localTime(s.at(-1)), '17:40', d);
+        assert.equal(localTime(s[0]), '09:00', d);
+        assert.equal(localTime(s.at(-1)), '16:40', d);
         assert.equal(s.length, 24, d);
     }
     assert.equal(hoursFor('2026-11-30')[0], 15 * 60 + 30); // the day before is still term
@@ -90,6 +90,6 @@ test('labels use South African time', () => {
 });
 
 test('a slot near midnight UTC keeps the right local day', () => {
-    // 2026-12-05 is a Saturday in the holidays: last slot 17:40 SAST = 15:40 UTC; first 10:00 SAST = 08:00 UTC.
-    assert.equal(slotsForDate('2026-12-05')[0], '2026-12-05T08:00:00Z');
+    // 2026-12-05 is a Saturday in the holidays: last slot 16:40 SAST = 14:40 UTC; first 09:00 SAST = 07:00 UTC.
+    assert.equal(slotsForDate('2026-12-05')[0], '2026-12-05T07:00:00Z');
 });

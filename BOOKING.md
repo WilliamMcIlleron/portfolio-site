@@ -31,7 +31,7 @@ Pages: `/book/` (`book/index.html`, `book.js`, `book.css`) and `/book/cancel/`.
 
 Everything is in `functions/_lib/book-config.js`: slot length, notice, how far ahead, term and holiday hours, school-holiday date ranges, blackout days. Times are SAST (UTC+2, no daylight saving). Then run `node --test "tests/*.test.mjs"`.
 
-Items marked `[VERIFY]` in that file are assumptions: Saturday term hours (09:00 to 17:00), the 2028 end of the December 2027 holiday, and the public-holiday blackout list (fixed-date ones only; 2027 movable ones such as Good Friday are not in it).
+Items marked `[VERIFY]` in that file are assumptions: the 2028 end of the December 2027 holiday, and the public-holiday blackout list (fixed-date ones only; 2027 movable ones such as Good Friday are not in it).
 
 ## Limits and what is stored
 
