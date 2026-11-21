@@ -3,13 +3,13 @@
 // Not a test file itself (no .test. in the name), so node --test skips it.
 
 import { DatabaseSync } from 'node:sqlite';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 
-const MIGRATION = new URL('../migrations/0001_bookings.sql', import.meta.url);
+const MIGRATIONS = new URL('../migrations/', import.meta.url);
 
 export function mockD1() {
     const db = new DatabaseSync(':memory:');
-    db.exec(readFileSync(MIGRATION, 'utf8'));
+    for (const f of readdirSync(MIGRATIONS).filter((n) => n.endsWith('.sql')).sort()) db.exec(readFileSync(new URL(f, MIGRATIONS), 'utf8'));
     const statements = [];
     return {
         raw: db,

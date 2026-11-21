@@ -14,15 +14,19 @@
  *
  * Bindings: DB (D1, required), BOOKING_SECRET (secret, required),
  * TURNSTILE_SECRET (required). RESEND_API_KEY, CONTACT_TO, CONTACT_FROM and
- * SITE_URL are optional; without the first two no email is sent.
+ * SITE_URL are optional; without the first two no email is sent. GOOGLE_SERVICE_ACCOUNT +
+ * GOOGLE_CALENDAR_ID (optional): clashes with William's Google Calendar block a time, and each
+ * booking is written to it as an event (see _lib/gcal.js).
  */
 
 import { verifyTurnstile } from '../_lib/turnstile.js';
 import { json, methodNotAllowed, readJsonBody, clientIp, truncate } from '../_lib/http.js';
 import { isBookable, endOf, whenLabel } from '../_lib/book-slots.js';
+import { SLOT_MINUTES } from '../_lib/book-config.js';
+import { gcalEnabled, busyIntervals, overlapsBusy, createEvent } from '../_lib/gcal.js';
 import {
     COPY, SITE, validateBooking, newReference, newToken, hashToken, hashIp,
-    calendarLinks, ownerEmail, visitorEmail,
+    calendarLinks, ownerEmail, visitorEmail, needLabels,
 } from '../_lib/book.js';
 import { sendMail } from '../_lib/mail.js';
 
@@ -57,6 +61,20 @@ export async function handleBooking(context, now = new Date()) {
     if (!ts.ok) {
         console.log(JSON.stringify({ evt: 'book', outcome: 'turnstile', codes: ts.codes }));
         return fail('turnstile', 403);
+    }
+
+    // A clash with William's own calendar is checked live (not from the 45 s cache). If Google
+    // does not answer, carry on: the booking is still valid and the notification email names the time.
+    if (gcalEnabled(env)) {
+        try {
+            const busy = await busyIntervals(env, start, endOf(start), { fresh: true, nowMs: now.getTime() });
+            if (overlapsBusy(Date.parse(start), SLOT_MINUTES, busy)) {
+                console.log(JSON.stringify({ evt: 'book', outcome: 'calendar-busy' }));
+                return fail('taken', 409);
+            }
+        } catch (e) {
+            console.error('book: google calendar unavailable, booking anyway: ' + truncate(e));
+        }
     }
 
     const id = newReference();
@@ -94,9 +112,25 @@ export async function handleBooking(context, now = new Date()) {
     // Saved. Now tell both people; a failure here is logged, never surfaced.
     const owner = ownerEmail({ id, start, v, cancelUrl });
     const visitor = visitorEmail({ id, start, v, links, cancelUrl });
+    const how = v.contact === 'whatsapp' ? 'WhatsApp call' : 'phone call';
+    const calendar = !gcalEnabled(env) ? null : (async () => {
+        try {
+            const eventId = await createEvent(env, {
+                reference: id, startIso: start, endIso: endOf(start),
+                summary: 'Call: ' + v.name,
+                description: [how + ' to ' + v.phone, 'Wants to talk about: ' + needLabels(v.needs),
+                    ...(v.business ? ['Business: ' + v.business] : []), ...(v.note ? ['Note: ' + v.note] : []),
+                    'Email: ' + v.email, 'Reference: ' + id].join('\n'),
+            });
+            await env.DB.prepare('UPDATE bookings SET gcal_event_id = ? WHERE id = ?').bind(eventId, id).run();
+        } catch (e) {
+            console.error('book: calendar event not created: ' + truncate(e));
+        }
+    })();
     const mail = Promise.all([
         env.CONTACT_TO ? sendMail(env, { to: env.CONTACT_TO, ...owner }) : 'skipped',
         sendMail(env, { to: v.email, ...visitor }),
+        calendar,
     ]).catch(() => null);
     if (typeof context.waitUntil === 'function') context.waitUntil(mail); else await mail;
 
