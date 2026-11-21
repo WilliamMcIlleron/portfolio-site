@@ -459,7 +459,6 @@ em { font-style: normal; font-weight: 500; }
 .hw-pause:hover { color: var(--ink); opacity: 1; background: color-mix(in srgb, var(--ink) 10%, transparent); }
 .hw-pause:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; opacity: 1; }
 .hw-pause[data-paused="1"] { color: var(--accent); opacity: 1; }
-.hw-pause[data-paused="1"] .i-pause, .hw-pause:not([data-paused="1"]) .i-play { display: none; }
 .hw-pause--word { top: -0.25rem; left: 4.9rem; }
 .hw-pause--stage { right: 3%; top: 3%; pointer-events: auto; }
 @media (max-width: 71.99rem) { .hw-pause--stage { display: none; } }

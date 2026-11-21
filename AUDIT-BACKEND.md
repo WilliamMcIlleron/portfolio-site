@@ -11,8 +11,7 @@ Served as a 404 by `_redirects`; this is for the repo, not the site.
 | `GET /api/check/{id}` | `functions/api/check/[id].js` | A stored report, for `/check/{id}` |
 | `POST /api/contact` | `functions/api/contact.js` | Unchanged behaviour; now shares `_lib/enquiry.js` |
 
-`_redirects` rewrites `/check/*` to `/check/index.html` (the page itself is
-not in this PR). Helpers live in `functions/_lib/` and export no
+`GET /check/{id}` is served by `functions/check/[id].js`, which returns the static `/check/` page (a `_redirects` rewrite did not work on Pages and 404ed in production). Helpers live in `functions/_lib/` and export no
 `onRequest*`, so they never become routes.
 
 ## Bindings and secrets (Pages project > Settings)
