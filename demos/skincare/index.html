@@ -13,12 +13,12 @@
 <link rel="preload" as="image" href="img/hero-960.webp" imagesrcset="img/hero-480.webp 480w, img/hero-960.webp 960w, img/hero-1400.webp 1400w" imagesizes="(max-width:900px) calc(100vw - 32px), 44vw" fetchpriority="high">
 <link rel="stylesheet" href="site.css">
 </head>
-<body>
+<body class="has-mbar">
 <a class="skip" href="#main">Skip to content</a>
 <p class="demo-bar">Demo site for a made-up business. Nothing you enter is sent or charged. <a href="/">Made by William McIlleron</a></p>
 <header class="site-head">
 <div class="head-in">
-<a class="brand" href="./" aria-label="Soft Light Skin Studio, home"><b>Soft Light</b><small>Skin Studio</small></a>
+<a class="brand" href="./"><b>Soft Light</b><small>Skin Studio</small><span class="sr-only">, home</span></a>
 <nav class="nav" aria-label="Main"><ul><li><a href="treatments.html">Treatments</a></li><li><a href="shop.html">Shop</a></li><li><a href="book.html">Book</a></li><li><a href="visit.html">Visit</a></li></ul></nav>
 <div class="head-actions">
 <a class="btn btn--accent btn--sm" href="book.html">Book a treatment</a>
@@ -27,7 +27,7 @@
 </div>
 </div>
 </header>
-<div class="mnav" id="mnav">
+<div class="mnav" id="mnav" inert>
 <nav aria-label="Mobile"><ul><li><a href="./" aria-current=page>Home</a></li><li><a href="treatments.html">Treatments</a></li><li><a href="shop.html">Shop</a></li><li><a href="book.html">Book</a></li><li><a href="visit.html">Visit</a></li></ul></nav>
 <div class="mnav-foot"><a class="btn btn--accent btn--block" href="book.html">Book a treatment</a><p>Mon to Sat &middot; <a href="tel:+27100000000">010 000 0000</a></p></div>
 </div>
@@ -98,25 +98,25 @@
 <div class="pcard-top"><h3><a href="product.html?id=oat-cleanser">Oat Milk Cleanser</a></h3><span class="price">From R265</span></div>
 <p class="meta">Cleanser &middot; 150 ml or 300 ml</p>
 
-<button type="button" class="btn btn--ghost btn--sm add" data-add="oat-cleanser" aria-label="Add Oat Milk Cleanser to bag">Add to bag</button>
+<button type="button" class="btn btn--ghost btn--sm add" data-add="oat-cleanser" aria-label="Add to bag: Oat Milk Cleanser">Add to bag</button>
 </article><article class="pcard" data-concerns="Dull" data-price="495" data-name="Vitamin C Serum" data-order="1">
 <div class="pcard-img"><img src="img/serum-960.webp" srcset="img/serum-480.webp 480w, img/serum-960.webp 960w" sizes="(max-width:760px) 46vw, (max-width:1000px) 31vw, 23vw" width="960" height="1200" alt="A small glass dropper bottle of amber serum against a dusky pink wall with dried grass" loading="lazy" decoding="async"></div>
 <div class="pcard-top"><h3><a href="product.html?id=vitamin-c-serum">Vitamin C Serum</a></h3><span class="price">From R495</span></div>
 <p class="meta">Serum &middot; 30 ml or 50 ml</p>
 
-<button type="button" class="btn btn--ghost btn--sm add" data-add="vitamin-c-serum" aria-label="Add Vitamin C Serum to bag">Add to bag</button>
+<button type="button" class="btn btn--ghost btn--sm add" data-add="vitamin-c-serum" aria-label="Add to bag: Vitamin C Serum">Add to bag</button>
 </article><article class="pcard" data-concerns="Dry,Sensitive" data-price="385" data-name="Barrier Cream" data-order="2">
 <div class="pcard-img"><img src="img/moisturiser-960.webp" srcset="img/moisturiser-480.webp 480w, img/moisturiser-960.webp 960w" sizes="(max-width:760px) 46vw, (max-width:1000px) 31vw, 23vw" width="960" height="1200" alt="A frosted glass jar with a white lid beside a plain card box on stone" loading="lazy" decoding="async"></div>
 <div class="pcard-top"><h3><a href="product.html?id=barrier-cream">Barrier Cream</a></h3><span class="price">From R385</span></div>
 <p class="meta">Moisturiser &middot; 50 ml or 100 ml</p>
 
-<button type="button" class="btn btn--ghost btn--sm add" data-add="barrier-cream" aria-label="Add Barrier Cream to bag">Add to bag</button>
+<button type="button" class="btn btn--ghost btn--sm add" data-add="barrier-cream" aria-label="Add to bag: Barrier Cream">Add to bag</button>
 </article><article class="pcard" data-concerns="Oily,Sensitive" data-price="345" data-name="Mineral SPF 50" data-order="3">
 <div class="pcard-img"><img src="img/spf-960.webp" srcset="img/spf-480.webp 480w, img/spf-960.webp 960w" sizes="(max-width:760px) 46vw, (max-width:1000px) 31vw, 23vw" width="960" height="1200" alt="A swipe of white cream on a warm beige surface" loading="lazy" decoding="async"></div>
 <div class="pcard-top"><h3><a href="product.html?id=mineral-spf">Mineral SPF 50</a></h3><span class="price">From R345</span></div>
 <p class="meta">Sunscreen &middot; 50 ml</p>
 
-<button type="button" class="btn btn--ghost btn--sm add" data-add="mineral-spf" aria-label="Add Mineral SPF 50 to bag">Add to bag</button>
+<button type="button" class="btn btn--ghost btn--sm add" data-add="mineral-spf" aria-label="Add to bag: Mineral SPF 50">Add to bag</button>
 </article></div>
 </div>
 </section>
@@ -163,7 +163,7 @@
 <footer class="foot on-dark">
 <div class="wrap">
 <div class="foot-grid">
-<div><a class="brand" href="./" aria-label="Soft Light Skin Studio, home"><b>Soft Light</b><small>Skin Studio</small></a>
+<div><a class="brand" href="./"><b>Soft Light</b><small>Skin Studio</small><span class="sr-only">, home</span></a>
 <p class="foot-intro">A small skin studio in Linden, Johannesburg. Facials, honest advice and a short shelf of products we use ourselves.</p></div>
 <div><h2>Explore</h2><ul><li><a href="treatments.html">Treatments</a></li><li><a href="shop.html">Shop</a></li><li><a href="book.html">Book</a></li><li><a href="visit.html">Visit</a></li></ul></div>
 <div><h2>Visit</h2><ul><li>Unit 4, 12 Sample Lane</li><li>Linden, Johannesburg</li><li>Mon to Sat, closed Sunday</li></ul></div>

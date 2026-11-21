@@ -17,7 +17,7 @@
 <p class="demo-bar">Demo site for a made-up business. Nothing you enter is sent or charged. <a href="/">Made by William McIlleron</a></p>
 <header class="site-head">
 <div class="head-in">
-<a class="brand" href="./" aria-label="Soft Light Skin Studio, home"><b>Soft Light</b><small>Skin Studio</small></a>
+<a class="brand" href="./"><b>Soft Light</b><small>Skin Studio</small><span class="sr-only">, home</span></a>
 <nav class="nav" aria-label="Main"><ul><li><a href="treatments.html">Treatments</a></li><li><a href="shop.html" aria-current=page>Shop</a></li><li><a href="book.html">Book</a></li><li><a href="visit.html">Visit</a></li></ul></nav>
 <div class="head-actions">
 <a class="btn btn--accent btn--sm" href="book.html">Book a treatment</a>
@@ -26,7 +26,7 @@
 </div>
 </div>
 </header>
-<div class="mnav" id="mnav">
+<div class="mnav" id="mnav" inert>
 <nav aria-label="Mobile"><ul><li><a href="./">Home</a></li><li><a href="treatments.html">Treatments</a></li><li><a href="shop.html" aria-current=page>Shop</a></li><li><a href="book.html">Book</a></li><li><a href="visit.html">Visit</a></li></ul></nav>
 <div class="mnav-foot"><a class="btn btn--accent btn--block" href="book.html">Book a treatment</a><p>Mon to Sat &middot; <a href="tel:+27100000000">010 000 0000</a></p></div>
 </div>
@@ -43,55 +43,56 @@
 </div>
 <div class="sort"><label for="sort">Sort</label><select id="sort"><option value="featured">Featured</option><option value="low">Price, low to high</option><option value="high">Price, high to low</option><option value="name">Name, A to Z</option></select></div>
 </div>
+<h2 class="sr-only">Products</h2>
 <p class="result-count" id="result-count" aria-live="polite">8 products</p>
 <div class="pgrid" id="shop-grid"><article class="pcard" data-concerns="Dry,Sensitive" data-price="265" data-name="Oat Milk Cleanser" data-order="0">
 <div class="pcard-img"><img src="img/cleanser-960.webp" srcset="img/cleanser-480.webp 480w, img/cleanser-960.webp 960w" sizes="(max-width:760px) 46vw, (max-width:1000px) 31vw, 23vw" width="960" height="1200" alt="A white foaming pump bottle on a woven mat with sprigs of eucalyptus" loading="lazy" decoding="async"></div>
 <div class="pcard-top"><h3><a href="product.html?id=oat-cleanser">Oat Milk Cleanser</a></h3><span class="price">From R265</span></div>
 <p class="meta">Cleanser &middot; 150 ml or 300 ml</p>
 <div class="tags"><span class="tag">Dry</span><span class="tag">Sensitive</span></div>
-<button type="button" class="btn btn--ghost btn--sm add" data-add="oat-cleanser" aria-label="Add Oat Milk Cleanser to bag">Add to bag</button>
+<button type="button" class="btn btn--ghost btn--sm add" data-add="oat-cleanser" aria-label="Add to bag: Oat Milk Cleanser">Add to bag</button>
 </article><article class="pcard" data-concerns="Dull" data-price="495" data-name="Vitamin C Serum" data-order="1">
 <div class="pcard-img"><img src="img/serum-960.webp" srcset="img/serum-480.webp 480w, img/serum-960.webp 960w" sizes="(max-width:760px) 46vw, (max-width:1000px) 31vw, 23vw" width="960" height="1200" alt="A small glass dropper bottle of amber serum against a dusky pink wall with dried grass" loading="lazy" decoding="async"></div>
 <div class="pcard-top"><h3><a href="product.html?id=vitamin-c-serum">Vitamin C Serum</a></h3><span class="price">From R495</span></div>
 <p class="meta">Serum &middot; 30 ml or 50 ml</p>
 <div class="tags"><span class="tag">Dull</span></div>
-<button type="button" class="btn btn--ghost btn--sm add" data-add="vitamin-c-serum" aria-label="Add Vitamin C Serum to bag">Add to bag</button>
+<button type="button" class="btn btn--ghost btn--sm add" data-add="vitamin-c-serum" aria-label="Add to bag: Vitamin C Serum">Add to bag</button>
 </article><article class="pcard" data-concerns="Dry,Sensitive" data-price="385" data-name="Barrier Cream" data-order="2">
 <div class="pcard-img"><img src="img/moisturiser-960.webp" srcset="img/moisturiser-480.webp 480w, img/moisturiser-960.webp 960w" sizes="(max-width:760px) 46vw, (max-width:1000px) 31vw, 23vw" width="960" height="1200" alt="A frosted glass jar with a white lid beside a plain card box on stone" loading="lazy" decoding="async"></div>
 <div class="pcard-top"><h3><a href="product.html?id=barrier-cream">Barrier Cream</a></h3><span class="price">From R385</span></div>
 <p class="meta">Moisturiser &middot; 50 ml or 100 ml</p>
 <div class="tags"><span class="tag">Dry</span><span class="tag">Sensitive</span></div>
-<button type="button" class="btn btn--ghost btn--sm add" data-add="barrier-cream" aria-label="Add Barrier Cream to bag">Add to bag</button>
+<button type="button" class="btn btn--ghost btn--sm add" data-add="barrier-cream" aria-label="Add to bag: Barrier Cream">Add to bag</button>
 </article><article class="pcard" data-concerns="Oily,Sensitive" data-price="345" data-name="Mineral SPF 50" data-order="3">
 <div class="pcard-img"><img src="img/spf-960.webp" srcset="img/spf-480.webp 480w, img/spf-960.webp 960w" sizes="(max-width:760px) 46vw, (max-width:1000px) 31vw, 23vw" width="960" height="1200" alt="A swipe of white cream on a warm beige surface" loading="lazy" decoding="async"></div>
 <div class="pcard-top"><h3><a href="product.html?id=mineral-spf">Mineral SPF 50</a></h3><span class="price">From R345</span></div>
 <p class="meta">Sunscreen &middot; 50 ml</p>
 <div class="tags"><span class="tag">Oily</span><span class="tag">Sensitive</span></div>
-<button type="button" class="btn btn--ghost btn--sm add" data-add="mineral-spf" aria-label="Add Mineral SPF 50 to bag">Add to bag</button>
+<button type="button" class="btn btn--ghost btn--sm add" data-add="mineral-spf" aria-label="Add to bag: Mineral SPF 50">Add to bag</button>
 </article><article class="pcard" data-concerns="Dry,Dull,Sensitive" data-price="230" data-name="Soft Rose Toner" data-order="4">
 <div class="pcard-img"><img src="img/toner-960.webp" srcset="img/toner-480.webp 480w, img/toner-960.webp 960w" sizes="(max-width:760px) 46vw, (max-width:1000px) 31vw, 23vw" width="960" height="1200" alt="A square glass bottle with a blank label lying on a handwritten note" loading="lazy" decoding="async"></div>
 <div class="pcard-top"><h3><a href="product.html?id=soft-toner">Soft Rose Toner</a></h3><span class="price">From R230</span></div>
 <p class="meta">Toner &middot; 200 ml</p>
 <div class="tags"><span class="tag">Dry</span><span class="tag">Dull</span><span class="tag">Sensitive</span></div>
-<button type="button" class="btn btn--ghost btn--sm add" data-add="soft-toner" aria-label="Add Soft Rose Toner to bag">Add to bag</button>
+<button type="button" class="btn btn--ghost btn--sm add" data-add="soft-toner" aria-label="Add to bag: Soft Rose Toner">Add to bag</button>
 </article><article class="pcard" data-concerns="Oily" data-price="310" data-name="Green Clay Mask" data-order="5">
 <div class="pcard-img"><img src="img/clay-960.webp" srcset="img/clay-480.webp 480w, img/clay-960.webp 960w" sizes="(max-width:760px) 46vw, (max-width:1000px) 31vw, 23vw" width="960" height="1200" alt="A small dish of green clay mask with a wooden spatula and green leaves" loading="lazy" decoding="async"></div>
 <div class="pcard-top"><h3><a href="product.html?id=green-clay-mask">Green Clay Mask</a></h3><span class="price">From R310</span></div>
 <p class="meta">Mask &middot; 75 ml</p>
 <div class="tags"><span class="tag">Oily</span></div>
-<button type="button" class="btn btn--ghost btn--sm add" data-add="green-clay-mask" aria-label="Add Green Clay Mask to bag">Add to bag</button>
+<button type="button" class="btn btn--ghost btn--sm add" data-add="green-clay-mask" aria-label="Add to bag: Green Clay Mask">Add to bag</button>
 </article><article class="pcard" data-concerns="Dry" data-price="360" data-name="Eye Balm" data-order="6">
 <div class="pcard-img"><img src="img/eye-960.webp" srcset="img/eye-480.webp 480w, img/eye-960.webp 960w" sizes="(max-width:760px) 46vw, (max-width:1000px) 31vw, 23vw" width="960" height="1200" alt="An open amber jar of rich cream seen from above on grey stone" loading="lazy" decoding="async"></div>
 <div class="pcard-top"><h3><a href="product.html?id=eye-balm">Eye Balm</a></h3><span class="price">From R360</span></div>
 <p class="meta">Eye cream &middot; 15 ml</p>
 <div class="tags"><span class="tag">Dry</span></div>
-<button type="button" class="btn btn--ghost btn--sm add" data-add="eye-balm" aria-label="Add Eye Balm to bag">Add to bag</button>
+<button type="button" class="btn btn--ghost btn--sm add" data-add="eye-balm" aria-label="Add to bag: Eye Balm">Add to bag</button>
 </article><article class="pcard" data-concerns="Dry,Dull" data-price="395" data-name="Body Oil" data-order="7">
 <div class="pcard-img"><img src="img/oil-960.webp" srcset="img/oil-480.webp 480w, img/oil-960.webp 960w" sizes="(max-width:760px) 46vw, (max-width:1000px) 31vw, 23vw" width="960" height="1200" alt="An amber dropper bottle on a turned wooden stand with a palm leaf shadow behind" loading="lazy" decoding="async"></div>
 <div class="pcard-top"><h3><a href="product.html?id=body-oil">Body Oil</a></h3><span class="price">From R395</span></div>
 <p class="meta">Body oil &middot; 100 ml or 200 ml</p>
 <div class="tags"><span class="tag">Dry</span><span class="tag">Dull</span></div>
-<button type="button" class="btn btn--ghost btn--sm add" data-add="body-oil" aria-label="Add Body Oil to bag">Add to bag</button>
+<button type="button" class="btn btn--ghost btn--sm add" data-add="body-oil" aria-label="Add to bag: Body Oil">Add to bag</button>
 </article></div>
 </section>
 <section class="sec sec--tint" aria-labelledby="help-h"><div class="wrap news" style="background:transparent;padding:0">
@@ -102,7 +103,7 @@
 <footer class="foot on-dark">
 <div class="wrap">
 <div class="foot-grid">
-<div><a class="brand" href="./" aria-label="Soft Light Skin Studio, home"><b>Soft Light</b><small>Skin Studio</small></a>
+<div><a class="brand" href="./"><b>Soft Light</b><small>Skin Studio</small><span class="sr-only">, home</span></a>
 <p class="foot-intro">A small skin studio in Linden, Johannesburg. Facials, honest advice and a short shelf of products we use ourselves.</p></div>
 <div><h2>Explore</h2><ul><li><a href="treatments.html">Treatments</a></li><li><a href="shop.html">Shop</a></li><li><a href="book.html">Book</a></li><li><a href="visit.html">Visit</a></li></ul></div>
 <div><h2>Visit</h2><ul><li>Unit 4, 12 Sample Lane</li><li>Linden, Johannesburg</li><li>Mon to Sat, closed Sunday</li></ul></div>
