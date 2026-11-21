@@ -7,7 +7,7 @@
 
 import {
     SLOT_MINUTES, MIN_NOTICE_HOURS, HORIZON_DAYS, UTC_OFFSET_HOURS,
-    TERM_HOURS, HOLIDAY_HOURS, HOLIDAYS, BLACKOUT_DATES, SCHOOL_DAY_CAP,
+    TERM_HOURS, HOLIDAY_HOURS, HOLIDAYS, BLACKOUT_DATES, SCHOOL_DAY_CAP, REMINDER_HOURS_BEFORE, REMINDER_NOT_BEFORE,
 } from './book-config.js';
 
 const MS_MIN = 60000;
@@ -51,6 +51,16 @@ export function isSchoolDay(dateStr) {
     if (wd < 1 || wd > 5) return false;
     if (BLACKOUT_DATES.includes(dateStr)) return false;
     return !HOLIDAYS.some(([a, b]) => dateStr >= a && dateStr <= b);
+}
+
+/**
+ * When the reminder email for a call may go out (ms): REMINDER_HOURS_BEFORE ahead, but not before
+ * REMINDER_NOT_BEFORE on the morning of the call, so an early call is not reminded in the night.
+ */
+export function reminderDueMs(slotId) {
+    const slotMs = Date.parse(slotId);
+    const morning = Date.parse(localDate(slotMs) + 'T00:00:00Z') - OFFSET_MS + toMin(REMINDER_NOT_BEFORE) * MS_MIN;
+    return Math.max(slotMs - REMINDER_HOURS_BEFORE * MS_HOUR, morning);
 }
 
 /** The UTC range [from, to) covering one local date. */

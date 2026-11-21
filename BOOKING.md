@@ -23,6 +23,7 @@ Visitors book a 20 minute call at `/book/`. Storage is **Cloudflare D1** (SQLite
 | `GET /api/book/slots` | `functions/api/book/slots.js` | Open days and times, taken ones removed |
 | `POST /api/book` | `functions/api/book.js` | Validates, Turnstile, limits, inserts, emails both sides |
 | `GET /api/book/cancel?token=` | `functions/api/book/cancel.js` | Read-only: which call this link is for |
+| `POST /api/book/reminders` | `functions/api/book/reminders.js` | Called every 15 min by the cron Worker (`workers/booking-cron/`). Sends due reminder emails, deletes bookings older than 12 months. Needs the `x-reminder-secret` header |
 | `POST /api/book/cancel` | same | Cancels it. A POST on purpose: mail scanners and link previews open links with GET and must not cancel a call |
 
 Pages: `/book/` (`book/index.html`, `book.js`, `book.css`) and `/book/cancel/`.
@@ -36,8 +37,22 @@ Items marked `[VERIFY]` in that file are assumptions: the 2028 end of the Decemb
 ## Limits and what is stored
 
 - 3 bookings per IP per 24 hours; 2 upcoming calls per email address. Both counted in D1.
-- Stored per booking: reference, slot, name, email, phone, how to call, topic, optional business and note, status, an HMAC of the cancel token and an HMAC of the IP (never the token or the IP), timestamps. Logs hold the reference and outcome only, no personal details.
-- Cancelled rows are kept (status `cancelled`). To delete personal data on request: `DELETE FROM bookings WHERE email = '...';` in the D1 console.
+- **Daily cap: 3 calls on a school day** (a term-time Monday to Friday; `SCHOOL_DAY_CAP` in `book-config.js`). Saturdays, school holidays and blackout days have no cap. A full day disappears from `/book/`, and cancelling a call frees a place. The cap is checked inside the INSERT, so simultaneous bookings cannot exceed it.
+- Stored per booking: reference, slot, name, email, phone, how to call, topic, optional business and note, status, an HMAC of the cancel token and an HMAC of the IP (never the token or the IP), the Google Calendar event id, when the reminder was sent, timestamps. Logs hold the reference and outcome only, no personal details.
+- **Retention: 12 months after the call** (`RETENTION_DAYS`). The reminders job deletes older rows, cancelled ones included. `/book/` tells visitors this, so do not shorten the job without updating the privacy paragraph in `book/index.html`.
+- To delete one person's data on request: `DELETE FROM bookings WHERE email = '...';` in the D1 console (and delete their event from Google Calendar by hand).
+
+## Visitor reminders
+
+An email goes to the visitor three hours before the call ("A quick reminder that William McIlleron is calling you today at 15:30..."), but never before 07:00 that morning (`REMINDER_HOURS_BEFORE`, `REMINDER_NOT_BEFORE`). Once only: the send is claimed in the database first, and released if the email fails so the next run retries until the call starts.
+
+Pages Functions cannot run on a schedule, so a tiny Worker, `booking-cron`, has a Cron Trigger every 15 minutes and calls `POST /api/book/reminders` with a shared secret. Setup (done 21 Nov 2026):
+1. Migration `0003_reminded_at.sql` on the D1 database.
+2. A secret `REMINDER_SECRET` on the Pages project (Settings > Variables and Secrets) and **the same value** as a secret on the Worker.
+3. The Worker `booking-cron` (source: `workers/booking-cron/worker.js`) with cron `*/15 * * * *`. Deploy with `npx wrangler deploy` from that folder, or upload it in the dashboard (Workers & Pages > Create > Worker, paste the file, add the secret, then Settings > Triggers > Cron).
+4. To rotate the secret, change it in both places at once.
+
+Check it is alive: Workers & Pages > `booking-cron` > Logs shows a line like `booking-cron: {"ok":true,"sent":0,"failed":0,"purged":0}` every 15 minutes. `401` means the two secrets differ; `404` means the site has not deployed the reminders endpoint.
 
 ## Tests
 

@@ -1,0 +1,8 @@
+# The reminder cron Worker. Deploy from this folder: npx wrangler deploy
+# Then set its secret (must equal REMINDER_SECRET on the Pages project): npx wrangler secret put REMINDER_SECRET
+name = "booking-cron"
+main = "worker.js"
+compatibility_date = "2025-06-01"
+
+[triggers]
+crons = ["*/15 * * * *"]
