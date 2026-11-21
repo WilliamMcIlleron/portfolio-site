@@ -11,6 +11,5 @@
 /functions/*        /404.html  404
 /AUDIT-BACKEND.md   /404.html  404
 
-# Shareable audit reports: every /check/{id} is served by one page, which reads
-# the report from /api/check/{id}.
-/check/*  /check/index.html  200
+# Shareable audit reports are served by functions/check/[id].js (a rewrite here
+# did not work in production: Pages 404ed /check/{id}).

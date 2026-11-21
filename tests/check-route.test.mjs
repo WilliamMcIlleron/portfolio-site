@@ -46,12 +46,12 @@ test('check: other methods are 405', () => {
 
 /* ---- routing hygiene ---------------------------------------------------- */
 
-test('_redirects rewrites /check/* to the report page and keeps tests, functions and backend docs 404', () => {
+test('_redirects has no /check rewrite (functions/check/[id].js serves the page) and keeps tests, functions and backend docs 404', () => {
     const rules = readFileSync(join(ROOT, '_redirects'), 'utf8')
         .split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#'))
         .map((l) => l.split(/\s+/));
     const has = (from, to, status) => rules.some(([f, t, s]) => f === from && t === to && s === status);
-    assert.ok(has('/check/*', '/check/index.html', '200'));
+    assert.ok(!rules.some(([f]) => f === '/check/*'), 'a /check/* rewrite 404ed in production; the Function serves it');
     assert.ok(has('/tests/*', '/404.html', '404'));
     assert.ok(has('/functions/*', '/404.html', '404'));
     assert.ok(has('/AUDIT-BACKEND.md', '/404.html', '404'));

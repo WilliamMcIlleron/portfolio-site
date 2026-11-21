@@ -577,6 +577,10 @@
             btn.addEventListener('click', function () {
                 var paused = hero.classList.toggle('is-paused');
                 btn.dataset.paused = paused ? '1' : '';
+                // One shape, two outlines: swapping the path means the pause bars and the play
+                // triangle can never be drawn together, whatever the browser does with CSS.
+                var ico = btn.querySelector('path');
+                if (ico) ico.setAttribute('d', paused ? 'M4.5 2.5l9 5.5-9 5.5z' : 'M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z');
                 btn.setAttribute('aria-label', (paused ? 'Play' : 'Pause') + ' the moving ' + (btn.dataset.what || 'word'));
             });
         }
