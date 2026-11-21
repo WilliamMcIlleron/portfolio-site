@@ -2,7 +2,6 @@
    Style: Editorial Cinematic (hub/design/STYLES.md #1), light. One accent: line blue. */
 
 @font-face { font-family: "Instrument Serif"; src: url("fonts/is-r.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: "Instrument Serif"; src: url("fonts/is-i.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
 @font-face { font-family: "Manrope"; src: url("fonts/mr-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Manrope"; src: url("fonts/mr-600.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
 
@@ -87,7 +86,7 @@ button { font: inherit; color: inherit; }
 .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10, 16, 18, 0.6) 0%, rgba(10, 16, 18, 0.1) 22%, rgba(10, 16, 18, 0.35) 50%, rgba(10, 16, 18, 0.85) 100%), linear-gradient(90deg, rgba(10, 16, 18, 0.55) 0%, rgba(10, 16, 18, 0.1) 65%); }
 .hero__inner { position: relative; z-index: 1; padding-block: 8rem clamp(2rem, 6vh, 4rem); display: grid; gap: 2rem; }
 .hero h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(3.9rem, 1.2rem + 8.4vw, 9.5rem); line-height: 0.92; letter-spacing: -0.025em; max-width: 11ch; }
-.hero h1 em { font-style: italic; }
+.hero h1 em { font-style: normal; color: var(--accent); }
 .hero__sub { max-width: 34rem; font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); color: rgba(255, 255, 255, 0.92); }
 .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; }
 .hero__meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem 2rem; padding-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.28); }
@@ -107,7 +106,7 @@ button { font: inherit; color: inherit; }
 .section__head { display: grid; gap: 1rem; margin-bottom: clamp(2rem, 5vw, 3.5rem); }
 @media (min-width: 60rem) { .section__head--split { grid-template-columns: 1fr 1fr; align-items: end; } }
 .h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.5rem, 1.4rem + 4.4vw, 5.25rem); line-height: 0.98; letter-spacing: -0.02em; max-width: 14ch; }
-.h2 em { font-style: italic; }
+.h2 em { font-style: normal; color: var(--accent); }
 .lede { max-width: 38rem; color: var(--muted); font-size: 1.0625rem; }
 
 /* Promise rows: numbered, divided by thin vertical rules */
@@ -214,7 +213,7 @@ button { font: inherit; color: inherit; }
 /* Plans page */
 .page-head { padding-block: clamp(3rem, 8vw, 6rem) clamp(2rem, 5vw, 3rem); }
 .page-head h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(3rem, 1.4rem + 6.5vw, 7.5rem); line-height: 0.95; letter-spacing: -0.025em; max-width: 12ch; }
-.page-head h1 em { font-style: italic; }
+.page-head h1 em { font-style: normal; color: var(--accent); }
 .page-head p { margin-top: 1.25rem; max-width: 36rem; color: var(--muted); font-size: 1.0625rem; }
 .plan-rows { display: grid; gap: 1rem; }
 .plan-row { display: grid; gap: 1.5rem; padding: clamp(1.25rem, 3vw, 2.5rem); border-radius: var(--radius); background: var(--panel); }
@@ -262,7 +261,7 @@ button { font: inherit; color: inherit; }
 .screen:focus { outline: none; }
 .q-title { font-family: var(--serif); font-weight: 400; font-size: clamp(2.35rem, 1.5rem + 3.4vw, 4rem); line-height: 1; letter-spacing: -0.02em; }
 .q-title:focus { outline: none; }
-.q-title em { font-style: italic; }
+.q-title em { font-style: normal; color: var(--accent); }
 .q-help { margin-top: 0.85rem; color: var(--muted); max-width: 36rem; }
 .quiz-h1 { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
 

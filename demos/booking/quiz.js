@@ -392,9 +392,9 @@
             '<li><span>Plan after that</span><span>' + r.planName + '</span></li>' +
             '<li><span>Price</span><span>' + esc(r.price) + ' ' + r.per + '</span></li>' +
             '<li><span>We will WhatsApp</span><span>' + esc(b.cell) + '</span></li></ul>' +
-            '<div class="done-actions"><button type="button" class="btn" data-ics>Add to my calendar <span class="btn__arrow" aria-hidden="true">&#8595;</span></button>' +
+            '<div class="done-actions"><a class="btn" data-cal="google" target="_blank" rel="noopener noreferrer" href="' + calLinks().google + '">Add to Google Calendar</a>' +
+            '<a class="btn btn--plain" data-cal="outlook" target="_blank" rel="noopener noreferrer" href="' + calLinks().outlook + '">Add to Outlook</a>' +
             '<button type="button" class="btn btn--plain" data-restart>Start again</button></div>' +
-            '<p class="field__error" data-ics-error style="margin-top:.75rem"></p>' +
             '<section class="owner" aria-labelledby="owner-h"><p class="label">What the owner gets</p>' +
             '<h3 id="owner-h">This lands on the owner\u2019s WhatsApp</h3>' +
             '<p class="owner__why">Every quiz answer comes with the booking, so the owner knows the pool, the water and what the customer wants before calling.</p>' +
@@ -497,7 +497,6 @@
         });
         if (name === "details") bindForm();
         if (name === "done") {
-            screenEl.querySelector("[data-ics]").addEventListener("click", downloadICS);
             screenEl.querySelector("[data-restart]").addEventListener("click", function () {
                 state = fresh(); save(); depth = 0; go("q1", { focus: true });
             });
@@ -557,48 +556,22 @@
         });
     }
 
-    /* ---------- .ics (SAST is UTC+2 all year; emit UTC) ---------- */
-    function icsDate(d) { return d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, ""); }
-    function icsText(s) { return String(s).replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n"); }
-    function fold(line) {
-        var out = [], cur = "";
-        for (var i = 0; i < line.length; i++) {
-            var ch = line[i];
-            if (new Blob([cur + ch]).size > (out.length ? 74 : 75)) { out.push(cur); cur = ch; } else cur += ch;
-        }
-        out.push(cur);
-        return out.join("\r\n ");
-    }
-    function buildICS() {
-        var b = state.booking, r = score(state.answers);
-        var hm = b.time.split(":");
-        var p = b.day.split("-");
+    /* ---------- Calendar links (SAST is UTC+2 all year). Pre-filled event pages in a new tab, nothing downloaded. ---------- */
+    function calLinks() {
+        var b = state.booking, r = score(state.answers), hm = b.time.split(":"), p = b.day.split("-");
         var start = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2], +hm[0] - 2, +hm[1]));
-        var end = new Date(start.getTime() + visitMinutes(r) * 60e3);
-        var desc = r.visits.map(function (v) { return v.name; }).join(", then ") + ". Plan: " + r.planName + " (" + r.price + " " + r.per + "). Reference " + state.ref +
+        var end = new Date(start.getTime() + visitMinutes(r) * 60e3), q = encodeURIComponent;
+        var title = "Pool visit: " + r.visits[0].name + " (demo)", where = "Your pool";
+        var details = r.visits.map(function (v) { return v.name; }).join(", then ") + ". Plan: " + r.planName + " (" + r.price + " " + r.per + "). Reference " + state.ref +
             ". Blue Line Pool Care is a made-up business in a demo, so this visit is not real.";
-        var lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Blue Line Pool Care//Booking demo//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
-            "BEGIN:VEVENT", "UID:" + state.ref + "-" + b.day + "@bluelinepool.demo", "DTSTAMP:" + icsDate(new Date()),
-            "DTSTART:" + icsDate(start), "DTEND:" + icsDate(end),
-            "SUMMARY:" + icsText("Pool visit: " + r.visits[0].name + " (demo)"),
-            "DESCRIPTION:" + icsText(desc), "LOCATION:" + icsText("Your pool"), "STATUS:TENTATIVE", "END:VEVENT", "END:VCALENDAR"];
-        return lines.map(fold).join("\r\n") + "\r\n";
+        function g(d) { return d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, ""); }
+        function iso(d) { return d.toISOString().replace(/\.\d{3}/, ""); }
+        return {
+            google: "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + q(title) + "&dates=" + g(start) + "/" + g(end) + "&details=" + q(details) + "&location=" + q(where),
+            outlook: "https://outlook.live.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&subject=" + q(title) + "&startdt=" + q(iso(start)) + "&enddt=" + q(iso(end)) + "&body=" + q(details) + "&location=" + q(where)
+        };
     }
-    function downloadICS() {
-        var err = screenEl.querySelector("[data-ics-error]");
-        try {
-            var blob = new Blob([buildICS()], { type: "text/calendar;charset=utf-8" });
-            var url = URL.createObjectURL(blob);
-            var a = document.createElement("a");
-            a.href = url; a.download = "blue-line-visit-" + state.ref + ".ics";
-            document.body.appendChild(a); a.click(); a.remove();
-            setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
-            err.textContent = "";
-        } catch (e) {
-            err.textContent = "Your browser blocked the calendar file. Add it by hand: " + dayLabel(state.booking.day) + " at " + state.booking.time + ", reference " + state.ref + ".";
-        }
-    }
-    window.__blpc = { score: score, echo: echo, buildICS: buildICS, Q: Q };
+    window.__blpc = { score: score, echo: echo, calLinks: calLinks, Q: Q };
 
     /* ---------- Keyboard ---------- */
     function onKey(e) {
