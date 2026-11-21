@@ -21,8 +21,8 @@
 
 import { verifyTurnstile } from '../_lib/turnstile.js';
 import { json, methodNotAllowed, readJsonBody, clientIp, truncate } from '../_lib/http.js';
-import { isBookable, endOf, whenLabel } from '../_lib/book-slots.js';
-import { SLOT_MINUTES } from '../_lib/book-config.js';
+import { isBookable, endOf, whenLabel, isSchoolDay, dayRange, localDate } from '../_lib/book-slots.js';
+import { SLOT_MINUTES, SCHOOL_DAY_CAP } from '../_lib/book-config.js';
 import { gcalEnabled, busyIntervals, overlapsBusy, createEvent } from '../_lib/gcal.js';
 import {
     COPY, SITE, validateBooking, newReference, newToken, hashToken, hashIp,
@@ -89,10 +89,20 @@ export async function handleBooking(context, now = new Date()) {
 
         const answers = JSON.stringify({ needs: v.needs, business: v.business || undefined, note: v.note || undefined });
         try {
-            await env.DB.prepare(
+            // The daily cap is checked inside the INSERT itself, so two people booking at the same
+            // moment cannot both squeeze past it: the row goes in only while the day has room.
+            const date = localDate(Date.parse(start));
+            const day = dayRange(date);
+            const cap = isSchoolDay(date) ? SCHOOL_DAY_CAP : 1000000;
+            const ins = await env.DB.prepare(
                 'INSERT INTO bookings (id, slot_start, name, email, phone, contact, topic, answers_json, status, cancel_token_hash, ip_hash, created_at) ' +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'booked', ?, ?, ?)"
-            ).bind(id, start, v.name, v.email, v.phone, v.contact, v.needs.join(','), answers, await hashToken(env.BOOKING_SECRET, token), ipHash, now.toISOString()).run();
+                "SELECT ?, ?, ?, ?, ?, ?, ?, ?, 'booked', ?, ?, ? " +
+                "WHERE (SELECT COUNT(*) FROM bookings WHERE status = 'booked' AND slot_start >= ? AND slot_start < ?) < ?"
+            ).bind(id, start, v.name, v.email, v.phone, v.contact, v.needs.join(','), answers, await hashToken(env.BOOKING_SECRET, token), ipHash, now.toISOString(), day.from, day.to, cap).run();
+            if (!(ins?.meta?.changes > 0)) {
+                console.log(JSON.stringify({ evt: 'book', outcome: 'day-full' }));
+                return fail('dayfull', 409);
+            }
         } catch (e) {
             if (/UNIQUE|constraint/i.test(String(e && e.message))) {
                 console.log(JSON.stringify({ evt: 'book', outcome: 'taken' }));

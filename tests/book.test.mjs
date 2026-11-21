@@ -136,7 +136,8 @@ test('malformed bodies', async () => {
 
 test('one IP gets three bookings a day, the fourth is refused', async () => {
     const e = env();
-    const slots = ['2026-11-23T13:30:00Z', '2026-11-23T13:50:00Z', '2026-11-23T14:10:00Z', '2026-11-23T14:30:00Z'];
+    // Saturday 28 Nov (term): no daily cap, so the IP limit is what stops the fourth.
+    const slots = ['2026-11-28T07:00:00Z', '2026-11-28T07:20:00Z', '2026-11-28T07:40:00Z', '2026-11-28T08:00:00Z'];
     const out = [];
     for (const [i, s] of slots.entries()) out.push((await book(e, good({ slot: s, email: `r${i}@example.com` }), '10.9.9.9')).status);
     assert.deepEqual(out, [200, 200, 200, 429]);
@@ -259,9 +260,65 @@ test('cancel: a token from another database does not match (HMAC secret)', async
 
 test('unique index: the database itself refuses a second booked row for a slot', () => {
     const e = env();
-    const ins = (id) => e.DB.raw.prepare("INSERT INTO bookings VALUES (?,?,?,?,?,?,?,?,?,?,?,?,NULL,NULL)").run(id, SLOT, 'n', 'e@x.com', '0821234567', 'phone', 'other', '{}', 'booked', 'h' + id, 'ip', 'now');
+    const ins = (id) => e.DB.raw.prepare('INSERT INTO bookings (id, slot_start, name, email, phone, contact, topic, answers_json, status, cancel_token_hash, ip_hash, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)').run(id, SLOT, 'n', 'e@x.com', '0821234567', 'phone', 'other', '{}', 'booked', 'h' + id, 'ip', 'now');
     ins('A');
     assert.throws(() => ins('B'), /UNIQUE/);
     e.DB.raw.prepare("UPDATE bookings SET status='cancelled' WHERE id='A'").run();
     ins('C'); // allowed once the first is cancelled
+});
+
+/* ---- daily cap on school days ------------------------------------------------ */
+
+const bookAt = (e, slot, i, extra = {}) => book(e, good({ slot, email: `cap${i}@example.com`, ...extra }), `10.20.${i >> 8}.${i & 255}`);
+const MON = ['2026-11-23T13:30:00Z', '2026-11-23T13:50:00Z', '2026-11-23T14:10:00Z', '2026-11-23T14:30:00Z', '2026-11-23T14:50:00Z'];
+
+test('school day cap: three calls on a term Monday, the fourth is refused and the day disappears', async () => {
+    const e = env();
+    const out = [];
+    for (const [i, s] of MON.slice(0, 4).entries()) out.push((await bookAt(e, s, i)).status);
+    assert.deepEqual(out, [200, 200, 200, 409]);
+    assert.equal(rows(e).length, 3);
+    const fourth = await (await bookAt(e, MON[4], 9)).json();
+    assert.equal(fourth.message, 'That day is fully booked. Pick another day.');
+    const body = await (await handleSlots({ request: req('GET'), env: e }, NOW)).json();
+    assert.ok(!body.days.some((d) => d.date === '2026-11-23'), 'a full day is not offered');
+    assert.equal(body.days[0].date, '2026-11-24');
+});
+
+test('school day cap: a cancelled call frees a place, and cancelled rows do not count', async () => {
+    const e = env(); const tokens = [];
+    for (const [i, s] of MON.slice(0, 3).entries()) tokens.push(new URL((await (await bookAt(e, s, i)).json()).cancelUrl).searchParams.get('t'));
+    assert.equal((await bookAt(e, MON[3], 7)).status, 409);
+    assert.equal((await cancelPost(e, tokens[0])).status, 200);
+    assert.equal((await bookAt(e, MON[3], 8)).status, 200);
+    const body = await (await handleSlots({ request: req('GET'), env: e }, NOW)).json();
+    assert.ok(!body.days.some((d) => d.date === '2026-11-23'));
+});
+
+test('school day cap: five people at once for one Monday, exactly three get in', async () => {
+    const e = env();
+    const res = await Promise.all(MON.map((s, i) => bookAt(e, s, i + 30)));
+    assert.deepEqual(res.map((r) => r.status).sort(), [200, 200, 200, 409, 409]);
+    assert.equal(rows(e).length, 3);
+});
+
+test('no cap on a term Saturday or on a weekday in the school holidays', async () => {
+    const e = env();
+    const sat = ['2026-11-28T07:00:00Z', '2026-11-28T07:20:00Z', '2026-11-28T07:40:00Z', '2026-11-28T08:00:00Z', '2026-11-28T08:20:00Z'];
+    const hol = ['2026-12-01T07:00:00Z', '2026-12-01T07:20:00Z', '2026-12-01T07:40:00Z', '2026-12-01T08:00:00Z', '2026-12-01T08:20:00Z']; // Tuesday 1 Dec, holiday
+    const out = [];
+    for (const [i, s] of [...sat, ...hol].entries()) out.push((await bookAt(e, s, i + 60)).status);
+    assert.deepEqual(out, Array(10).fill(200));
+    const days = (await (await handleSlots({ request: req('GET'), env: e }, NOW)).json()).days.map((d) => d.date);
+    assert.ok(days.includes('2026-11-28') && days.includes('2026-12-01'));
+});
+
+test('the cap counts the day in South African time, not UTC', async () => {
+    const e = env();
+    // 17:30 SAST on Monday is 15:30Z, the same local day as 15:30 SAST (13:30Z): all four are Monday.
+    const late = ['2026-11-23T13:30:00Z', '2026-11-23T14:30:00Z', '2026-11-23T15:10:00Z', '2026-11-23T15:30:00Z'];
+    const out = [];
+    for (const [i, s] of late.entries()) out.push((await bookAt(e, s, i + 80)).status);
+    assert.deepEqual(out, [200, 200, 200, 409]);
+    assert.equal((await bookAt(e, '2026-11-24T13:30:00Z', 90)).status, 200); // Tuesday is a fresh day
 });

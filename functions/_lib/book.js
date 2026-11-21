@@ -30,6 +30,7 @@ export const COPY = {
     malformed: 'Something was wrong with that request. Refresh the page and try again.',
     slot: "That time isn't available any more. Pick another one.",
     taken: 'Someone just took that time. Pick another one.',
+    dayfull: 'That day is fully booked. Pick another day.',
     name: 'Add your name.',
     email: "That email address doesn't look right.",
     phone: "That number doesn't look right. Digits only, like 082 123 4567.",
@@ -174,6 +175,23 @@ function wrap(title, rows) {
         `<h2 style="margin:0 0 20px;font-size:18px">${escapeHtml(title)}</h2>` +
         rows.map(([k, val]) => '<p style="margin:0 0 16px"><strong style="display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5d5a51">' +
             escapeHtml(k) + '</strong>' + escapeHtml(val).replace(/\n/g, '<br>') + '</p>').join('') + '</div>';
+}
+
+/** The reminder the visitor gets a few hours before the call. */
+export function reminderEmail({ start, name, phone, contact, needs }) {
+    const time = whenLabel(start).split(', ')[1];
+    const first = String(name || '').split(' ')[0] || 'there';
+    const how = contact === 'whatsapp' ? 'WhatsApp' : 'the phone';
+    const topics = (needs || []).filter((k) => Object.prototype.hasOwnProperty.call(NEEDS, k));
+    const lines = [
+        `Hi ${first},`,
+        `A quick reminder that William McIlleron is calling you today at ${time} (South African time), for about ${SLOT_MINUTES} minutes, on ${how} at ${phone}. Please keep your phone nearby.`,
+        ...(topics.length ? [`You said you want to talk about: ${needLabels(topics)}.`] : []),
+        "Can't make it? Reply to this email or message 072 355 5350 on WhatsApp and we'll move it.",
+    ];
+    const html = '<div style="font:16px/1.6 -apple-system,Segoe UI,Roboto,sans-serif;color:#15140f">' +
+        lines.map((l) => `<p style="margin:0 0 16px">${escapeHtml(l)}</p>`).join('') + '</div>';
+    return { subject: `Reminder: your call with William today at ${time}`, replyTo: 'william@williammcilleron.com', text: lines.join('\n\n'), html };
 }
 
 export function cancelledEmail({ id, start, name }) {
