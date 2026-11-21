@@ -12,7 +12,7 @@
     <link rel="preload" href="/fonts/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/dmsans-var.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/styles.css?v=20261122">
-    <link rel="stylesheet" href="/book/book.css?v=20261123">
+    <link rel="stylesheet" href="/book/book.css?v=20261124">
 
     <script>
         (function () {
@@ -51,17 +51,83 @@
                 <fieldset class="field field--choices">
                     <legend id="s1" tabindex="-1">What do you want to talk about? <span class="optional">(pick all that apply)</span></legend>
                     <div class="choices" id="needChoices">
-                        <label class="choice"><input type="checkbox" name="need" value="site-check"><span>A free check of my website</span></label>
-                        <label class="choice"><input type="checkbox" name="need" value="website"><span>A new website</span></label>
-                        <label class="choice"><input type="checkbox" name="need" value="redesign"><span>A redesign of my current site</span></label>
-                        <label class="choice"><input type="checkbox" name="need" value="fix"><span>Fixing or speeding up my site</span></label>
-                        <label class="choice"><input type="checkbox" name="need" value="upkeep"><span>Ongoing changes and upkeep</span></label>
-                        <label class="choice"><input type="checkbox" name="need" value="ads"><span>Google or Meta ads</span></label>
-                        <label class="choice"><input type="checkbox" name="need" value="booking"><span>A booking system</span></label>
-                        <label class="choice"><input type="checkbox" name="need" value="brand"><span>A brand or logo</span></label>
-                        <label class="choice"><input type="checkbox" name="need" value="social"><span>Social media</span></label>
-                        <label class="choice"><input type="checkbox" name="need" value="system"><span>A system, integration or automation</span></label>
-                        <label class="choice"><input type="checkbox" name="need" value="other"><span>Not sure yet</span></label>
+                        <div class="choice-item">
+                            <div class="choice-row">
+                                <label class="choice"><input type="checkbox" name="need" value="site-check"><span>A free check of my website</span></label>
+                                <button class="info" type="button" aria-expanded="false" aria-controls="info-site-check" aria-label="What does &quot;A free check of my website&quot; include?"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="6.2" r="1.05" fill="currentColor"/><path d="M10 9v5.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button>
+                            </div>
+                            <p class="info-text" id="info-site-check" hidden>I look at your current site and tell you honestly what is working and what is worth fixing: speed, how it looks on a phone, and whether people can contact you easily. Free, and I'll say so if you don't need me.</p>
+                        </div>
+                        <div class="choice-item">
+                            <div class="choice-row">
+                                <label class="choice"><input type="checkbox" name="need" value="website"><span>A new website</span></label>
+                                <button class="info" type="button" aria-expanded="false" aria-controls="info-website" aria-label="What does &quot;A new website&quot; include?"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="6.2" r="1.05" fill="currentColor"/><path d="M10 9v5.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button>
+                            </div>
+                            <p class="info-text" id="info-website" hidden>A new site, built and then looked after. One well-built page is often all a local business needs. You see the whole thing on a real link before it goes public, and I keep it running after.</p>
+                        </div>
+                        <div class="choice-item">
+                            <div class="choice-row">
+                                <label class="choice"><input type="checkbox" name="need" value="redesign"><span>A redesign of my current site</span></label>
+                                <button class="info" type="button" aria-expanded="false" aria-controls="info-redesign" aria-label="What does &quot;A redesign of my current site&quot; include?"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="6.2" r="1.05" fill="currentColor"/><path d="M10 9v5.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button>
+                            </div>
+                            <p class="info-text" id="info-redesign" hidden>Your current site, rebuilt so it is clearer, faster and easy to use on a phone. We start from what you have and what is not working.</p>
+                        </div>
+                        <div class="choice-item">
+                            <div class="choice-row">
+                                <label class="choice"><input type="checkbox" name="need" value="fix"><span>Fixing or speeding up my site</span></label>
+                                <button class="info" type="button" aria-expanded="false" aria-controls="info-fix" aria-label="What does &quot;Fixing or speeding up my site&quot; include?"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="6.2" r="1.05" fill="currentColor"/><path d="M10 9v5.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button>
+                            </div>
+                            <p class="info-text" id="info-fix" hidden>Something on your site is slow, broken or hard to use on a phone. I find the cause and fix it, instead of rebuilding the whole thing.</p>
+                        </div>
+                        <div class="choice-item">
+                            <div class="choice-row">
+                                <label class="choice"><input type="checkbox" name="need" value="upkeep"><span>Ongoing changes and upkeep</span></label>
+                                <button class="info" type="button" aria-expanded="false" aria-controls="info-upkeep" aria-label="What does &quot;Ongoing changes and upkeep&quot; include?"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="6.2" r="1.05" fill="currentColor"/><path d="M10 9v5.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button>
+                            </div>
+                            <p class="info-text" id="info-upkeep" hidden>Hosting, backups and the small changes you'll want every few weeks, so you never have to learn a dashboard. Optional, from R750 a month, priced by what it covers.</p>
+                        </div>
+                        <div class="choice-item">
+                            <div class="choice-row">
+                                <label class="choice"><input type="checkbox" name="need" value="ads"><span>Google or Meta ads</span></label>
+                                <button class="info" type="button" aria-expanded="false" aria-controls="info-ads" aria-label="What does &quot;Google or Meta ads&quot; include?"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="6.2" r="1.05" fill="currentColor"/><path d="M10 9v5.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button>
+                            </div>
+                            <p class="info-text" id="info-ads" hidden>Google search ads for local service businesses, plus short ad videos made from your own job photos for Facebook and Instagram. You pay Google and Meta directly, and get a monthly report: what was spent, how many enquiries came in, and what each cost.</p>
+                        </div>
+                        <div class="choice-item">
+                            <div class="choice-row">
+                                <label class="choice"><input type="checkbox" name="need" value="booking"><span>A booking system</span></label>
+                                <button class="info" type="button" aria-expanded="false" aria-controls="info-booking" aria-label="What does &quot;A booking system&quot; include?"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="6.2" r="1.05" fill="currentColor"/><path d="M10 9v5.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button>
+                            </div>
+                            <p class="info-text" id="info-booking" hidden>A way for customers to book themselves: pick a service, a day and a time, with no double bookings. This page is the same kind of system.</p>
+                        </div>
+                        <div class="choice-item">
+                            <div class="choice-row">
+                                <label class="choice"><input type="checkbox" name="need" value="brand"><span>A brand or logo</span></label>
+                                <button class="info" type="button" aria-expanded="false" aria-controls="info-brand" aria-label="What does &quot;A brand or logo&quot; include?"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="6.2" r="1.05" fill="currentColor"/><path d="M10 9v5.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button>
+                            </div>
+                            <p class="info-text" id="info-brand" hidden>Logo, colours and fonts that match everywhere your business shows up. A fix when what you have doesn't match, a full brand system when you want it done properly, or a full brand from scratch.</p>
+                        </div>
+                        <div class="choice-item">
+                            <div class="choice-row">
+                                <label class="choice"><input type="checkbox" name="need" value="social"><span>Social media</span></label>
+                                <button class="info" type="button" aria-expanded="false" aria-controls="info-social" aria-label="What does &quot;Social media&quot; include?"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="6.2" r="1.05" fill="currentColor"/><path d="M10 9v5.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button>
+                            </div>
+                            <p class="info-text" id="info-social" hidden>Posts for your own pages, made from your own photos and videos and planned a month at a time, so the feed stays active without you thinking about it every day.</p>
+                        </div>
+                        <div class="choice-item">
+                            <div class="choice-row">
+                                <label class="choice"><input type="checkbox" name="need" value="system"><span>A system, integration or automation</span></label>
+                                <button class="info" type="button" aria-expanded="false" aria-controls="info-system" aria-label="What does &quot;A system, integration or automation&quot; include?"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="6.2" r="1.05" fill="currentColor"/><path d="M10 9v5.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button>
+                            </div>
+                            <p class="info-text" id="info-system" hidden>Backends, integrations and automation: payments, accounts, connecting your tools together. The part that has to be correct, not just look right.</p>
+                        </div>
+                        <div class="choice-item">
+                            <div class="choice-row">
+                                <label class="choice"><input type="checkbox" name="need" value="other"><span>Not sure yet</span></label>
+                                <button class="info" type="button" aria-expanded="false" aria-controls="info-other" aria-label="What does &quot;Not sure yet&quot; include?"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="6.2" r="1.05" fill="currentColor"/><path d="M10 9v5.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button>
+                            </div>
+                            <p class="info-text" id="info-other" hidden>Not sure what you need? Pick this. We'll work it out on the call, and I'll tell you honestly if you don't need me.</p>
+                        </div>
                     </div>
                 </fieldset>
             </section>
@@ -131,6 +197,6 @@
         <p class="book__alt">Prefer not to pick a time? <a href="https://wa.me/27723555350?text=Hi%20William%2C%20I%27d%20like%20a%20free%20call." target="_blank" rel="noopener">Message me on WhatsApp<span class="vh"> (opens in a new tab)</span></a> or
             <a href="mailto:william@williammcilleron.com">email me</a>.</p>
     </main>
-    <script src="/book/book.js?v=20261123" defer></script>
+    <script src="/book/book.js?v=20261124" defer></script>
 </body>
 </html>
