@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Find your pool plan | Blue Line Pool Care demo</title>
+    <meta name="description" content="Eight quick questions about your pool, then a plan, a price and a first visit you can book. A demo for a made-up business; nothing is booked or sent.">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#f3f2ee">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="fonts/is-r.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/mr-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/mr-600.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <script src="quiz.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#screen">Skip to the question</a>
+<p class="demo-banner"><a href="/">Demo site for a made-up business</a><span class="demo-banner__extra">. Nothing you enter is booked or sent.</span></p>
+<div class="quiz-page">
+    <header class="wrap quiz-head">
+        <a class="wordmark" href="index.html" aria-label="Blue Line Pool Care, home"><span class="wordmark__line" aria-hidden="true"></span>Blue Line <small>Pool Care</small></a>
+        <a class="quiz-exit" href="index.html">Exit<span class="sr-only"> the quiz (your answers are kept)</span> <span aria-hidden="true">&#215;</span></a>
+    </header>
+    <main class="quiz-main">
+        <div class="quiz-col">
+            <h1 class="quiz-h1">Find your pool plan</h1>
+            <div class="progress">
+                <div class="progress__top">
+                    <p class="label" id="progress-text" aria-live="polite">Question 1 of 8</p>
+                    <button type="button" class="back" data-restart-top style="min-height:auto;font-size:.8125rem">Start over</button>
+                </div>
+                <div class="progress__track" role="progressbar" aria-labelledby="progress-text" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress__bar"></div></div>
+            </div>
+            <div class="screen" id="screen" tabindex="-1">
+                <noscript>
+                    <h2 class="q-title">This quiz needs JavaScript.</h2>
+                    <p class="q-help">Turn it on to find your plan, or call 010 000 0000 and we will work it out with you. <a href="plans.html">See the plans and prices</a>.</p>
+                </noscript>
+            </div>
+        </div>
+        <figure class="quiz-photo" aria-hidden="true">
+            <figcaption>Blue Line Pool Care is a made-up business.</figcaption>
+        </figure>
+    </main>
+    <footer class="site-foot" style="padding-block:2rem">
+        <div class="wrap">
+            <p>Blue Line Pool Care is a made-up business. Nothing on this site is booked or sent, and 010 000 0000 is not a real number.</p>
+            <div class="credits" style="margin-top:1.25rem">
+                <details class="about-demo">
+                    <summary>About this demo</summary>
+                    <p>A quiz funnel swaps a long form for a few easy taps, so more visitors finish and each one sees a plan and a price made for them. Every answer arrives with the booking, so the owner knows the pool before calling back. William McIlleron built this to show what a booking system on your own site can do. <a href="/#booking">See the booking service</a></p>
+                </details>
+                <p>Photos via Wikimedia Commons, resized: Kgbo and Calistemon (<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>); Nenad Stojkovic and Shixart1985 (<a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>); Raining Huang, Markus Spiske and Jonas Verstuyft (CC0, first published on Unsplash); Bovineone (public domain). <a href="PHOTO-SOURCES.md">Full photo list</a>.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
