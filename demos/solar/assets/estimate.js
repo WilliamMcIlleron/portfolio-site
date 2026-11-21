@@ -16,8 +16,8 @@
  *   PR            0.80 performance ratio (heat, wiring, inverter, dust).
  *   PANEL         550 W panels, 2.6 m2 of roof each including spacing.
  *   SELF-USE      share of solar output a home actually uses (no feed-in
- *                 credit assumed): 0.60 no battery, 0.80 with 5 to 10 kWh,
- *                 0.90 with more, 1.00 off-grid.
+ *                 credit assumed): 0.80 with a 5 to 10 kWh battery, 0.90 with
+ *                 more, 1.00 off-grid. Every recommendation includes a battery.
  *   BATTERY       lithium iron phosphate, 90% usable, sold in 5 kWh modules.
  *   OUTAGE        essentials must run for 4 hours on battery alone (most
  *                 load-shedding slots are 2 or 4 hours).

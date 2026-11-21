@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get a quote | Brightline Solar (demo)</title>
+<meta name="description" content="Request a written solar quote in six short steps. Demo form: nothing is sent.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f5f2ea">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/archivo-semiexpanded-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<p class="demo-bar"><strong>Demo site for a made-up business.</strong> Nothing here is real and nothing is sent or signed. <a href="/">Built by William McIlleron</a></p>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#12181e"/><path d="M8.5 20.5a7.5 7.5 0 0 1 15 0z" fill="#f6b21b"/><path d="M5.5 23.5h21" stroke="#f5f2ea" stroke-width="2.4" stroke-linecap="round"/></svg><span>Brightline Solar</span></a>
+    <nav class="nav" id="nav" aria-label="Main"><a href="index.html">Home</a><a href="calculator.html">Calculator</a><a href="packages.html">Packages</a><a href="jobs.html">Jobs</a><a href="contact.html">Contact</a><a class="nav-phone" href="tel:+27100000000">Call 010 000 0000</a></nav>
+    <a class="top-phone" href="tel:+27100000000">010 000 0000</a>
+    <a class="btn btn--sm btn--quote" href="quote.html" aria-current="page">Get a quote</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+      <svg class="i-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+</header>
+<main id="main">
+<section class="page-hero" style="padding-bottom:28px">
+  <div class="wrap">
+    <p class="eyebrow">Get a quote</p>
+    <h1>Six questions. Then we call.</h1>
+    <p class="lede">About two minutes. Nothing is sent from this demo: your answers stay in this browser tab.</p>
+  </div>
+</section>
+
+<section class="sec--tight" style="padding-top:0" aria-label="Quote request">
+  <div class="wrap quote">
+    <div class="quote-card">
+      <div class="progress" id="progress">
+        <div class="progress-top"><span id="p-label">Step 1 of 7</span><span id="p-name">Property</span></div>
+        <div class="progress-bar" aria-hidden="true"><span id="p-bar"></span></div>
+        <ol id="p-steps" aria-label="Steps"></ol>
+      </div>
+
+      <form id="qform" novalidate>
+        <div class="prefill" id="prefill" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><p id="prefill-text"></p></div>
+
+        <section class="qstep" data-step="1" data-name="Property" tabindex="-1" aria-labelledby="s1-h">
+          <h2 id="s1-h">Your property</h2>
+          <p class="muted">So we know what kind of site we are visiting.</p>
+          <fieldset data-required="ptype" aria-describedby="e-ptype">
+            <legend>Property type</legend>
+            <div class="choices choices--2">
+              <label class="choice"><input type="radio" name="ptype" value="House"><span>House</span></label>
+              <label class="choice"><input type="radio" name="ptype" value="Townhouse or cluster"><span>Townhouse or cluster<small>Body corporate approval may apply</small></span></label>
+              <label class="choice"><input type="radio" name="ptype" value="Small business"><span>Small business<small>Shop, office or workshop</small></span></label>
+              <label class="choice"><input type="radio" name="ptype" value="Plot or farm"><span>Plot or farm</span></label>
+            </div>
+            <p class="err" id="e-ptype"></p>
+          </fieldset>
+          <div class="field">
+            <label for="suburb">Suburb</label>
+            <input class="input" id="suburb" name="suburb" type="text" autocomplete="address-level2" aria-describedby="e-suburb suburb-h" required>
+            <span class="hint" id="suburb-h">No street address needed yet.</span>
+            <p class="err" id="e-suburb"></p>
+          </div>
+        </section>
+
+        <section class="qstep" data-step="2" data-name="Roof" tabindex="-1" aria-labelledby="s2-h">
+          <h2 id="s2-h">Your roof</h2>
+          <p class="muted">A best guess is fine. We confirm it on the site visit.</p>
+          <fieldset data-required="roof" aria-describedby="e-roof">
+            <legend>Roof type</legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="roof" value="tile"><span>Tile<small>Concrete or clay</small></span></label>
+              <label class="choice"><input type="radio" name="roof" value="sheet"><span>Sheeting<small>Corrugated or IBR</small></span></label>
+              <label class="choice"><input type="radio" name="roof" value="flat"><span>Flat concrete</span></label>
+              <label class="choice"><input type="radio" name="roof" value="ground"><span>Ground mount</span></label>
+              <label class="choice"><input type="radio" name="roof" value="unsure"><span>Not sure</span></label>
+            </div>
+            <p class="err" id="e-roof"></p>
+          </fieldset>
+          <fieldset data-required="orient" aria-describedby="e-orient">
+            <legend>Main roof faces</legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="orient" value="north"><span>North</span></label>
+              <label class="choice"><input type="radio" name="orient" value="ne"><span>North-east</span></label>
+              <label class="choice"><input type="radio" name="orient" value="nw"><span>North-west</span></label>
+              <label class="choice"><input type="radio" name="orient" value="ew"><span>East or west</span></label>
+              <label class="choice"><input type="radio" name="orient" value="flat"><span>Flat roof</span></label>
+            </div>
+            <p class="err" id="e-orient"></p>
+          </fieldset>
+        </section>
+
+        <section class="qstep" data-step="3" data-name="Bill and goal" tabindex="-1" aria-labelledby="s3-h">
+          <h2 id="s3-h">Your bill and what you want</h2>
+          <p class="muted">The bill tells us how big. The goal tells us what kind.</p>
+          <div class="field">
+            <label for="bill">Average monthly electricity bill</label>
+            <div class="prefix" style="max-width:240px"><span aria-hidden="true">R</span><input class="input num" id="bill" name="bill" type="number" inputmode="numeric" min="100" max="100000" step="50" aria-describedby="e-bill" required></div>
+            <p class="err" id="e-bill"></p>
+          </div>
+          <fieldset data-required="goal" aria-describedby="e-goal">
+            <legend>What do you want?</legend>
+            <div class="choices choices--2">
+              <label class="choice"><input type="radio" name="goal" value="backup"><span>Backup<small>Keep essentials on in outages</small></span></label>
+              <label class="choice"><input type="radio" name="goal" value="cut"><span>Cut the bill</span></label>
+              <label class="choice"><input type="radio" name="goal" value="both"><span>Both</span></label>
+              <label class="choice"><input type="radio" name="goal" value="offgrid"><span>Off-grid</span></label>
+            </div>
+            <p class="err" id="e-goal"></p>
+          </fieldset>
+          <div class="field">
+            <label for="package">Package you are looking at</label>
+            <select class="input" id="package" name="package">
+              <option value="">Not sure yet</option>
+              <option value="backup">Backup</option>
+              <option value="hybrid">Hybrid</option>
+              <option value="grid">Grid-tied</option>
+              <option value="offgrid">Off-grid</option>
+            </select>
+          </div>
+        </section>
+
+        <section class="qstep" data-step="4" data-name="Timeline" tabindex="-1" aria-labelledby="s4-h">
+          <h2 id="s4-h">Your timeline</h2>
+          <p class="muted">No pressure either way. It helps us plan the visit.</p>
+          <fieldset data-required="timeline" aria-describedby="e-timeline">
+            <legend>When would you like it installed?</legend>
+            <div class="choices choices--2">
+              <label class="choice"><input type="radio" name="timeline" value="As soon as possible"><span>As soon as possible</span></label>
+              <label class="choice"><input type="radio" name="timeline" value="Within a month"><span>Within a month</span></label>
+              <label class="choice"><input type="radio" name="timeline" value="In 1 to 3 months"><span>In 1 to 3 months</span></label>
+              <label class="choice"><input type="radio" name="timeline" value="Just comparing prices"><span>Just comparing prices</span></label>
+            </div>
+            <p class="err" id="e-timeline"></p>
+          </fieldset>
+          <div class="field">
+            <label for="notes">Anything we should know? <span class="muted" style="font-weight:400">(optional)</span></label>
+            <textarea class="input" id="notes" name="notes" rows="4" maxlength="600" placeholder="For example: we already have an inverter, or the borehole must stay on."></textarea>
+          </div>
+        </section>
+
+        <section class="qstep" data-step="5" data-name="Contact" tabindex="-1" aria-labelledby="s5-h">
+          <h2 id="s5-h">How do we reach you?</h2>
+          <p class="muted">One call within one working day. No newsletters.</p>
+          <div class="field">
+            <label for="name">Full name</label>
+            <input class="input" id="name" name="name" type="text" autocomplete="name" aria-describedby="e-name" required>
+            <p class="err" id="e-name"></p>
+          </div>
+          <div class="two">
+            <div class="field">
+              <label for="cell">Cell number</label>
+              <input class="input" id="cell" name="cell" type="tel" inputmode="tel" autocomplete="tel" placeholder="082 000 0000" aria-describedby="cell-h e-cell" required>
+              <span class="hint" id="cell-h">South African cell, like 082 123 4567 or +27 82 123 4567.</span>
+              <p class="err" id="e-cell"></p>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input class="input" id="email" name="email" type="email" autocomplete="email" placeholder="you@example.co.za" aria-describedby="e-email" required>
+              <p class="err" id="e-email"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="qstep" data-step="6" data-name="Site visit" tabindex="-1" aria-labelledby="s6-h">
+          <h2 id="s6-h">When suits a site visit?</h2>
+          <p class="muted">About an hour. We confirm the time when we call.</p>
+          <div class="field">
+            <label for="day">Preferred day</label>
+            <select class="input" id="day" name="day" aria-describedby="e-day" required><option value="">Choose a day</option></select>
+            <p class="err" id="e-day"></p>
+          </div>
+          <fieldset data-required="slot" aria-describedby="e-slot">
+            <legend>Preferred time</legend>
+            <div class="choices choices--2">
+              <label class="choice"><input type="radio" name="slot" value="Morning, 08:00 to 12:00"><span>Morning<small>08:00 to 12:00</small></span></label>
+              <label class="choice"><input type="radio" name="slot" value="Afternoon, 12:00 to 16:00"><span>Afternoon<small>12:00 to 16:00</small></span></label>
+            </div>
+            <p class="err" id="e-slot"></p>
+          </fieldset>
+          <div class="field" style="margin-bottom:0">
+            <label class="check" for="consent"><input type="checkbox" id="consent" name="consent" aria-describedby="e-consent"><span>I agree that Brightline Solar may contact me about this quote and keep these details for that purpose only (POPIA).</span></label>
+            <p class="err" id="e-consent"></p>
+          </div>
+        </section>
+
+        <section class="qstep" data-step="7" data-name="Review" tabindex="-1" aria-labelledby="s7-h">
+          <h2 id="s7-h">Check your answers</h2>
+          <p class="muted">Change anything, then send. In this demo, sending stores nothing outside your browser.</p>
+          <dl class="review-list" id="review"></dl>
+        </section>
+
+        <div class="qnav">
+          <button class="btn btn--ghost" type="button" id="back">Back</button>
+          <button class="btn" type="submit" id="next">Next <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </form>
+
+      <div id="done" hidden tabindex="-1" aria-labelledby="done-h">
+        <p class="eyebrow">Request received (demo)</p>
+        <h2 id="done-h" style="font-size:clamp(1.8rem,1.3rem + 1.8vw,2.8rem);margin-bottom:12px">Thanks, <span id="done-name"></span>.</h2>
+        <p class="muted">In a real site this would now be in the installer's inbox. Here, nothing was sent.</p>
+        <p class="done-ref">Your reference <b id="done-ref"></b></p>
+        <h3 style="margin-bottom:18px">What happens next</h3>
+        <ol class="timeline">
+          <li><b>Within one working day</b><span>A designer calls you on <span id="done-cell"></span> to go through your answers.</span></li>
+          <li><b>Site visit: <span id="done-visit"></span></b><span>We check the roof, the DB board, shading and where the inverter and battery go.</span></li>
+          <li><b>Within 5 working days of the visit</b><span>Your written proposal: design, line-item price, payment schedule, timeline and warranties.</span></li>
+          <li><b>You decide</b><span>Sign online if it suits you. Nothing is owed until you do.</span></li>
+        </ol>
+        <div class="actions"><a class="btn" href="proposal.html">See a sample proposal <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><button class="btn btn--ghost" type="button" id="restart">Start a new request</button></div>
+      </div>
+    </div>
+
+    <aside class="aside-card" aria-labelledby="aside-h">
+      <h2 id="aside-h">What you get</h2>
+      <ul class="ticks">
+        <li>A call within one working day</li>
+        <li>A site visit before any price is final</li>
+        <li>A written, line-item proposal within 5 working days</li>
+        <li>No deposit or obligation until you sign</li>
+      </ul>
+      <p class="small muted" style="margin-top:16px">Rather talk? Call <a href="tel:+27100000000">010 000 0000</a> or <a href="https://wa.me/27100000000">WhatsApp</a>.</p>
+      <div class="photo"><img src="img/installers-pair-1000.webp" srcset="img/installers-pair-720.webp 720w, img/installers-pair-1000.webp 1000w, img/installers-pair-1440.webp 1440w" sizes="(max-width: 960px) 100vw, 400px" width="1440" height="964" alt="Two installers in yellow hard hats fixing a solar panel to its frame" loading="lazy" decoding="async"></div>
+    </aside>
+  </div>
+</section>
+
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#12181e"/><path d="M8.5 20.5a7.5 7.5 0 0 1 15 0z" fill="#f6b21b"/><path d="M5.5 23.5h21" stroke="#f5f2ea" stroke-width="2.4" stroke-linecap="round"/></svg><span>Brightline Solar</span></a>
+        <p>Solar, inverters and batteries for Gauteng homes and plots. Quote, site visit, written proposal, then installation.</p>
+      </div>
+      <div>
+        <h2>Plan</h2>
+        <ul><li><a href="calculator.html">Savings calculator</a></li><li><a href="packages.html">Packages</a></li><li><a href="jobs.html">Finished jobs</a></li><li><a href="proposal.html">Sample proposal</a></li></ul>
+      </div>
+      <div>
+        <h2>Talk to us</h2>
+        <ul><li><a href="quote.html">Get a quote</a></li><li><a href="tel:+27100000000">010 000 0000</a></li><li><a href="https://wa.me/27100000000">WhatsApp 010 000 0000</a></li><li><a href="contact.html">Contact and hours</a></li></ul>
+      </div>
+      <div>
+        <h2>Hours</h2>
+        <ul><li>Mon to Fri, 07:30 to 17:00</li><li>Sat, 08:00 to 12:00</li><li>Fault line, every day</li></ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <p>Brightline Solar is a made-up business. This is a demo website by <a href="/">William McIlleron</a>. The phone numbers are fake, no form sends anything, and nothing on the proposal page is signed or binding. Figures marked Sample are invented for the demo; calculator figures are estimates from the assumptions listed on that page.</p>
+      <p>Photos: public domain and CC0 images from Wikimedia Commons, by the U.S. Department of Energy, U.S. Department of Agriculture, NASA Kennedy Space Center, U.S. Air Force, The Solutions Project and Roy Bury. <a href="PHOTO-SOURCES.md">Full photo credits</a>. Fonts: Archivo and Inter (SIL Open Font License).</p>
+    </div>
+  </div>
+</footer>
+<div class="mbar" aria-label="Quick actions"><a class="btn btn--ghost" href="tel:+27100000000"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Call</a><a class="btn" href="quote.html">Get a quote</a></div>
+<script src="assets/site.js" defer></script>
+<script src="assets/estimate.js" defer></script>
+<script src="assets/quote.js" defer></script>
+</body>
+</html>
