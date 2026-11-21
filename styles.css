@@ -333,6 +333,21 @@ a { color: inherit; }
 
 .btn[disabled] { opacity: 0.5; cursor: not-allowed; transform: none; }
 
+/* Secondary button: same shape, outline only. Used beside the main call to action. */
+.btn--ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--line);
+}
+
+.btn--ghost:hover {
+    background: var(--accent-wash);
+    border-color: var(--accent);
+}
+
+/* The one nav item that is an action, not a section. */
+.nav__list a.nav__book { color: var(--accent); }
+
 /* Section-closing CTA. Both audiences need somewhere to go from the section
    they were routed into; the small-business path used to dead-end here. */
 .cta-row {
