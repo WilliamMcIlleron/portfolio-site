@@ -1,29 +1,185 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-ZA">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Treatments and prices | Soft Light Skin Studio</title>
-<meta name="description" content="Treatments and from-prices at a made-up skin studio.">
+<title>Treatments and prices | Soft Light Skin Studio (demo)</title>
+<meta name="description" content="Every treatment at a made-up Linden skin studio: who it suits, how long it takes, what happens, aftercare and the price.">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#F3EEE7">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css">
+<link rel="preload" href="fonts/InstrumentSerif-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Manrope-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
-<p class="demo-bar" role="note">Demo site for a made-up business. <a href="/">William McIlleron</a></p>
-<header class="top"><div class="in"><a class="brand" href="./">Soft Light Skin Studio</a><nav aria-label="Primary"><a href="./">Home</a><a href="treatments.html" aria-current=page>Treatments</a><a href="book.html">Book</a></nav></div></header>
-<main>
+<a class="skip" href="#main">Skip to content</a>
+<p class="demo-bar">Demo site for a made-up business. Nothing you enter is sent or charged. <a href="/">Made by William McIlleron</a></p>
+<header class="site-head">
+<div class="head-in">
+<a class="brand" href="./" aria-label="Soft Light Skin Studio, home"><b>Soft Light</b><small>Skin Studio</small></a>
+<nav class="nav" aria-label="Main"><ul><li><a href="treatments.html" aria-current=page>Treatments</a></li><li><a href="shop.html">Shop</a></li><li><a href="book.html">Book</a></li><li><a href="visit.html">Visit</a></li></ul></nav>
+<div class="head-actions">
+<a class="btn btn--accent btn--sm" href="book.html">Book a treatment</a>
+<button class="icon-btn" type="button" data-bag-btn aria-haspopup="dialog" aria-controls="bag" aria-label="Bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1 11h-11z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="count" data-bag-count hidden>0</span></button>
+<button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button>
+</div>
+</div>
+</header>
+<div class="mnav" id="mnav">
+<nav aria-label="Mobile"><ul><li><a href="./">Home</a></li><li><a href="treatments.html" aria-current=page>Treatments</a></li><li><a href="shop.html">Shop</a></li><li><a href="book.html">Book</a></li><li><a href="visit.html">Visit</a></li></ul></nav>
+<div class="mnav-foot"><a class="btn btn--accent btn--block" href="book.html">Book a treatment</a><p>Mon to Sat &middot; <a href="tel:+27100000000">010 000 0000</a></p></div>
+</div>
+<main id="main">
+<section class="page-head"><div class="wrap split">
+<div><span class="label">Treatments and prices</span>
+<h1 class="h1">Every treatment, <em>explained.</em></h1>
+<p class="lede">Who it suits, how long it takes, what happens and what to do after. Prices are on the page, and you pay at the studio.</p>
+<div class="cta-row"><a class="btn btn--accent" href="book.html">Book a treatment <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div></div>
+<div class="split-img"><img src="img/hands-960.webp" srcset="img/hands-480.webp 480w, img/hands-960.webp 960w, img/hands-1400.webp 1400w" sizes="(max-width:860px) calc(100vw - 32px), 44vw" width="960" height="640" alt="Hands squeezing a dot of cream onto the back of a hand, with a jade roller and gua sha stone on white linen" fetchpriority="high" decoding="async"></div>
+</div></section>
+<nav class="subnav" aria-label="Treatment categories"><ul>
+<li><a href="#start">Start here</a></li><li><a href="#facials">Facials</a></li><li><a href="#targeted">Targeted</a></li><li><a href="#addons">Add-ons</a></li><li><a href="#faq">Questions</a></li>
+</ul></nav>
+<section class="tcat" id="start" aria-labelledby="start-h">
+<div class="wrap">
+<header><span class="num">01</span><div><h2 class="h2" id="start-h">Start here</h2><p>Not sure what to book? Begin with a conversation.</p></div></header>
+<article class="treat" id="consultation" aria-labelledby="consultation-h">
+<div class="treat-img"><img src="img/room-960.webp" srcset="img/room-480.webp 480w, img/room-960.webp 960w, img/room-1400.webp 1400w" sizes="(max-width:860px) calc(100vw - 32px), 38vw" width="960" height="1200" alt="A treatment bed with a folded towel beside a bright window, seen through a half-open wooden door" loading="lazy" decoding="async"></div>
+<div class="treat-body">
+<span class="label">30 min &middot; from R250</span>
+<h3 class="h3" id="consultation-h">Skin consultation</h3>
+<p class="lede">A half-hour conversation about your skin, before you spend money on treatments or products.</p>
+<dl class="treat-dl">
+<div><dt>Suits</dt><dd>First visits, or anyone unsure which treatment to book.</dd></div>
+<div><dt>Takes</dt><dd>30 minutes, plus 10 minutes to settle in.</dd></div>
+<div class="wide"><dt>What happens</dt><dd>We go through your skin form, look at your skin in good light and talk through what you use at home. Nothing is applied unless you want it.</dd></div>
+<div class="wide"><dt>Aftercare</dt><dd>You leave with a written routine. If you book a facial within 30 days, the R250 comes off it.</dd></div>
 
-<section class="sec"><div class="in"><h1 style="font-size:clamp(2rem,4vw,3rem)">Treatments and prices</h1><p class="lede">From-prices, because skin differs. You'll get an exact price before we start.</p></div></section>
-<section class="sec" style="padding-top:0"><div class="in"><table><thead><tr><th>Treatment</th><th>Time</th><th>Price</th></tr></thead><tbody>
-<tr><td>Signature facial<small>Cleanse, exfoliate, mask, massage. Suits most skin.</small></td><td>60 min</td><td class="p">from R650</td></tr>
-<tr><td>Deep cleanse<small>For congested or oily skin. Includes extractions.</small></td><td>75 min</td><td class="p">from R780</td></tr>
-<tr><td>Gentle peel<small>For uneven tone. Not suitable if you're pregnant.</small></td><td>45 min</td><td class="p">from R550</td></tr>
-<tr><td>Brow and lash tint<small>Patch test needed the first time.</small></td><td>30 min</td><td class="p">from R280</td></tr>
-<tr><td>Skin consultation<small>A first conversation, with a plan you can keep.</small></td><td>30 min</td><td class="p">R200</td></tr>
-</tbody></table><div class="cta"><a class="btn" href="book.html">Book a treatment</a></div></div></section>
+</dl>
+<div class="treat-foot"><p class="price-big"><small>From</small>R250</p><a class="btn btn--accent" href="book.html?treatment=consultation">Book skin consultation <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
+</div>
+</article>
+</div>
+</section><section class="tcat" id="facials" aria-labelledby="facials-h">
+<div class="wrap">
+<header><span class="num">02</span><div><h2 class="h2" id="facials-h">Facials</h2><p>Our everyday treatments. Each one starts with a short talk and ends with written aftercare.</p></div></header>
+<article class="treat" id="signature" aria-labelledby="signature-h">
+<div class="treat-img"><img src="img/facial-960.webp" srcset="img/facial-480.webp 480w, img/facial-960.webp 960w, img/facial-1400.webp 1400w" sizes="(max-width:860px) calc(100vw - 32px), 38vw" width="960" height="1200" alt="A therapist in gloves brushing a white mask onto a client's cheek and chin" loading="lazy" decoding="async"></div>
+<div class="treat-body">
+<span class="label">60 min &middot; from R650</span>
+<h3 class="h3" id="signature-h">Signature facial</h3>
+<p class="lede">Our standard facial, adjusted to your skin on the day.</p>
+<dl class="treat-dl">
+<div><dt>Suits</dt><dd>A first facial, or skin that feels dull, tired or a bit neglected.</dd></div>
+<div><dt>Takes</dt><dd>60 minutes, plus 10 minutes to settle in.</dd></div>
+<div class="wide"><dt>What happens</dt><dd>Double cleanse, a light enzyme exfoliation, steam, a mask chosen for your skin, and a slow face, neck and shoulder massage.</dd></div>
+<div class="wide"><dt>Aftercare</dt><dd>Skip make-up for the rest of the day if you can. Wear SPF the next morning.</dd></div>
 
+</dl>
+<div class="treat-foot"><p class="price-big"><small>From</small>R650</p><a class="btn btn--accent" href="book.html?treatment=signature">Book signature facial <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
+</div>
+</article><article class="treat" id="hydrating" aria-labelledby="hydrating-h">
+<div class="treat-img"><img src="img/texture-gel-960.webp" srcset="img/texture-gel-480.webp 480w, img/texture-gel-960.webp 960w" sizes="(max-width:860px) calc(100vw - 32px), 38vw" width="960" height="1200" alt="Three clear dishes of gel, milk and golden oil textures on a peach background" loading="lazy" decoding="async"></div>
+<div class="treat-body">
+<span class="label">60 min &middot; from R720</span>
+<h3 class="h3" id="hydrating-h">Hydrating facial</h3>
+<p class="lede">Layers of hydration for skin that feels tight, especially in the dry Highveld winter.</p>
+<dl class="treat-dl">
+<div><dt>Suits</dt><dd>Dry, tight or dehydrated skin.</dd></div>
+<div><dt>Takes</dt><dd>60 minutes, plus 10 minutes to settle in.</dd></div>
+<div class="wide"><dt>What happens</dt><dd>Cleanse, a gentle exfoliation, hydrating serums pressed in by hand, and a cream mask left on while we massage your hands.</dd></div>
+<div class="wide"><dt>Aftercare</dt><dd>Keep your routine simple for 48 hours: cleanser, moisturiser, SPF.</dd></div>
+
+</dl>
+<div class="treat-foot"><p class="price-big"><small>From</small>R720</p><a class="btn btn--accent" href="book.html?treatment=hydrating">Book hydrating facial <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
+</div>
+</article><article class="treat" id="massage" aria-labelledby="massage-h">
+<div class="treat-img"><img src="img/glow-960.webp" srcset="img/glow-480.webp 480w, img/glow-960.webp 960w, img/glow-1400.webp 1400w" sizes="(max-width:860px) calc(100vw - 32px), 38vw" width="960" height="1200" alt="Fingertips pressing gently either side of a client's nose in warm, low light" loading="lazy" decoding="async"></div>
+<div class="treat-body">
+<span class="label">45 min &middot; from R520</span>
+<h3 class="h3" id="massage-h">Facial massage</h3>
+<p class="lede">Thirty minutes of slow massage for the face, scalp and neck.</p>
+<dl class="treat-dl">
+<div><dt>Suits</dt><dd>Anyone who holds tension in the jaw, forehead or neck. Also good before an event.</dd></div>
+<div><dt>Takes</dt><dd>45 minutes, plus 10 minutes to settle in.</dd></div>
+<div class="wide"><dt>What happens</dt><dd>A light cleanse, then face, scalp and neck massage with oil. No extractions and no peels.</dd></div>
+<div class="wide"><dt>Aftercare</dt><dd>Drink some water, and leave the oil on for a few hours if you are not heading out.</dd></div>
+
+</dl>
+<div class="treat-foot"><p class="price-big"><small>From</small>R520</p><a class="btn btn--accent" href="book.html?treatment=massage">Book facial massage <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
+</div>
+</article>
+</div>
+</section><section class="tcat" id="targeted" aria-labelledby="targeted-h">
+<div class="wrap">
+<header><span class="num">03</span><div><h2 class="h2" id="targeted-h">Targeted</h2><p>For a specific concern. We may suggest a consultation first.</p></div></header>
+<article class="treat" id="deep-cleanse" aria-labelledby="deep-cleanse-h">
+<div class="treat-img"><img src="img/cleanse-960.webp" srcset="img/cleanse-480.webp 480w, img/cleanse-960.webp 960w" sizes="(max-width:860px) calc(100vw - 32px), 38vw" width="960" height="1200" alt="Close-up of a client's face covered in a fine cleansing foam, eyes closed" loading="lazy" decoding="async"></div>
+<div class="treat-body">
+<span class="label">75 min &middot; from R780</span>
+<h3 class="h3" id="deep-cleanse-h">Deep cleanse</h3>
+<p class="lede">A slower, more thorough facial for congested skin.</p>
+<dl class="treat-dl">
+<div><dt>Suits</dt><dd>Congested, oily or breakout-prone skin.</dd></div>
+<div><dt>Takes</dt><dd>75 minutes, plus 10 minutes to settle in.</dd></div>
+<div class="wide"><dt>What happens</dt><dd>Cleanse, steam, gentle extractions where they help, a clay mask and a calming finish. We tell you before we touch anything.</dd></div>
+<div class="wide"><dt>Aftercare</dt><dd>Expect some redness for a few hours. No make-up, gym or sauna until the next day.</dd></div>
+
+</dl>
+<div class="treat-foot"><p class="price-big"><small>From</small>R780</p><a class="btn btn--accent" href="book.html?treatment=deep-cleanse">Book deep cleanse <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
+</div>
+</article><article class="treat" id="peel" aria-labelledby="peel-h">
+<div class="treat-img"><img src="img/peel-960.webp" srcset="img/peel-480.webp 480w, img/peel-960.webp 960w, img/peel-1400.webp 1400w" sizes="(max-width:860px) calc(100vw - 32px), 38vw" width="960" height="1200" alt="A therapist brushing an amber peel gel along a client's jaw" loading="lazy" decoding="async"></div>
+<div class="treat-body">
+<span class="label">45 min &middot; from R550</span>
+<h3 class="h3" id="peel-h">Gentle peel</h3>
+<p class="lede">A mild acid peel for uneven tone or texture.</p>
+<dl class="treat-dl">
+<div><dt>Suits</dt><dd>Uneven tone or rough texture on skin that is not currently irritated.</dd></div>
+<div><dt>Takes</dt><dd>45 minutes, plus 10 minutes to settle in.</dd></div>
+<div class="wide"><dt>What happens</dt><dd>A patch test first, then a mild peel left on for a few minutes and neutralised. The strength is chosen for your skin.</dd></div>
+<div class="wide"><dt>Aftercare</dt><dd>SPF 50 every day for two weeks. No retinoids or scrubs for five days. Light flaking is normal.</dd></div>
+<div class="wide"><dt>Please note</dt><dd>Not offered during pregnancy or breastfeeding.</dd></div>
+</dl>
+<div class="treat-foot"><p class="price-big"><small>From</small>R550</p><a class="btn btn--accent" href="book.html?treatment=peel">Book gentle peel <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
+</div>
+</article>
+</div>
+</section>
+<section class="tcat" id="addons" aria-labelledby="addons-h"><div class="wrap">
+<header><span class="num">04</span><div><h2 class="h2" id="addons-h">Add-ons</h2><p>Short treatments you can book alone or add to a facial.</p></div></header>
+<div class="addons"><div class="addon"><div><h3>Hand treatment</h3><p>Exfoliation, a warm mask and a hand and forearm massage. Book it on its own or after a facial.</p></div><p class="price-big">R220</p><a class="btn btn--ghost btn--sm" href="book.html?treatment=hands">Book<span class="sr-only"> hand treatment</span></a></div><div class="addon"><div><h3>Brow tidy and tint</h3><p>Shaped with wax and tweezers, then tinted to match your hair. First tints need a patch test 48 hours before.</p></div><p class="price-big">R280</p><a class="btn btn--ghost btn--sm" href="book.html?treatment=brows">Book<span class="sr-only"> brow tidy and tint</span></a></div></div>
+</div></section>
+<section class="sec" id="faq" aria-labelledby="faq-h"><div class="wrap faq">
+<div><span class="label">Questions</span><h2 class="h2" id="faq-h" style="margin-top:14px">Before you book</h2><p class="lede" style="margin-top:16px">Anything else, WhatsApp us on <a href="https://wa.me/27100000000">010 000 0000</a>.</p></div>
+<div class="faq-list"><details><summary>Do I need a consultation before my first facial?</summary><div class="ans"><p>No. Every booking includes a short skin form, and we read it with you before we start. Book the consultation if you would like a full plan first.</p></div></details><details><summary>What does "from" mean on the prices?</summary><div class="ans"><p>It is the price of the treatment as listed. If we suggest adding something on the day, we tell you the price before we do it, so there are no surprises on the bill.</p></div></details><details><summary>Can I book if I am pregnant?</summary><div class="ans"><p>Yes, for most facials and massage. Peels are not offered during pregnancy or breastfeeding. Tick the box on the skin form and we will plan around it.</p></div></details><details><summary>How do I cancel or move a booking?</summary><div class="ans"><p>WhatsApp us at least 24 hours before. Inside 24 hours we may charge half the treatment price.</p></div></details><details><summary>What should I do before I come in?</summary><div class="ans"><p>Come with a clean face if you can, and stop retinoids three days before a peel. Arrive ten minutes early to settle in.</p></div></details></div>
+</div></section>
 </main>
-<footer class="foot"><div class="in"><p>Soft Light Skin Studio is a made-up business, built as a demo by <a href="/">William McIlleron</a>. Nothing here is real and nothing on the forms is sent.</p></div></footer>
+<footer class="foot on-dark">
+<div class="wrap">
+<div class="foot-grid">
+<div><a class="brand" href="./" aria-label="Soft Light Skin Studio, home"><b>Soft Light</b><small>Skin Studio</small></a>
+<p class="foot-intro">A small skin studio in Linden, Johannesburg. Facials, honest advice and a short shelf of products we use ourselves.</p></div>
+<div><h2>Explore</h2><ul><li><a href="treatments.html">Treatments</a></li><li><a href="shop.html">Shop</a></li><li><a href="book.html">Book</a></li><li><a href="visit.html">Visit</a></li></ul></div>
+<div><h2>Visit</h2><ul><li>Unit 4, 12 Sample Lane</li><li>Linden, Johannesburg</li><li>Mon to Sat, closed Sunday</li></ul></div>
+<div><h2>Contact</h2><ul><li><a href="tel:+27100000000">010 000 0000</a></li><li><a href="https://wa.me/27100000000">WhatsApp 010 000 0000</a></li><li><a href="mailto:hello@softlight.example">hello@softlight.example</a></li></ul></div>
+</div>
+<div class="foot-base">
+<p>Soft Light Skin Studio is a made-up business. This is a demo site by <a href="/">William McIlleron</a>: nothing you enter is sent anywhere, nothing is charged, the address and numbers are fake, and the reviews are samples.</p>
+<p>Photography: Unsplash contributors (<a href="PHOTO-SOURCES.md">sources</a>)</p>
+</div>
+</div>
+</footer>
+<div class="scrim" hidden></div>
+<aside class="drawer" id="bag" role="dialog" aria-modal="true" aria-labelledby="bag-title" aria-hidden="true" hidden>
+<div class="drawer-head"><h2 id="bag-title" tabindex="-1">Your bag</h2><button class="icon-btn" type="button" data-close aria-label="Close bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button></div>
+<div class="drawer-body"></div>
+<div class="drawer-foot"></div>
+</aside>
+<p id="live" class="sr-only" aria-live="polite"></p>
+<div class="mbar"><a class="btn btn--light" href="book.html">Book a treatment</a><a class="btn btn--call" href="tel:+27100000000">Call</a></div>
+<script src="site.js" defer></script>
+
 </body>
 </html>

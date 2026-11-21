@@ -1,37 +1,189 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-ZA">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Soft Light Skin Studio | Facials in Linden</title>
-<meta name="description" content="A demo skin studio website: treatments, prices, where to park and how to book.">
+<title>Soft Light Skin Studio | Facials in Linden, Johannesburg (demo)</title>
+<meta name="description" content="Demo site for a made-up skin studio: facials with every price on the page, online booking with a skin form, and a small shop.">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#F3EEE7">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css">
+<link rel="preload" href="fonts/InstrumentSerif-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Manrope-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="img/hero-960.webp" imagesrcset="img/hero-480.webp 480w, img/hero-960.webp 960w, img/hero-1400.webp 1400w" imagesizes="(max-width:900px) calc(100vw - 32px), 44vw" fetchpriority="high">
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
-<p class="demo-bar" role="note">Demo site for a made-up business. <a href="/">William McIlleron</a></p>
-<header class="top"><div class="in"><a class="brand" href="./">Soft Light Skin Studio</a><nav aria-label="Primary"><a href="./" aria-current=page>Home</a><a href="treatments.html">Treatments</a><a href="book.html">Book</a></nav></div></header>
-<main>
+<a class="skip" href="#main">Skip to content</a>
+<p class="demo-bar">Demo site for a made-up business. Nothing you enter is sent or charged. <a href="/">Made by William McIlleron</a></p>
+<header class="site-head">
+<div class="head-in">
+<a class="brand" href="./" aria-label="Soft Light Skin Studio, home"><b>Soft Light</b><small>Skin Studio</small></a>
+<nav class="nav" aria-label="Main"><ul><li><a href="treatments.html">Treatments</a></li><li><a href="shop.html">Shop</a></li><li><a href="book.html">Book</a></li><li><a href="visit.html">Visit</a></li></ul></nav>
+<div class="head-actions">
+<a class="btn btn--accent btn--sm" href="book.html">Book a treatment</a>
+<button class="icon-btn" type="button" data-bag-btn aria-haspopup="dialog" aria-controls="bag" aria-label="Bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1 11h-11z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="count" data-bag-count hidden>0</span></button>
+<button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button>
+</div>
+</div>
+</header>
+<div class="mnav" id="mnav">
+<nav aria-label="Mobile"><ul><li><a href="./" aria-current=page>Home</a></li><li><a href="treatments.html">Treatments</a></li><li><a href="shop.html">Shop</a></li><li><a href="book.html">Book</a></li><li><a href="visit.html">Visit</a></li></ul></nav>
+<div class="mnav-foot"><a class="btn btn--accent btn--block" href="book.html">Book a treatment</a><p>Mon to Sat &middot; <a href="tel:+27100000000">010 000 0000</a></p></div>
+</div>
+<main id="main">
+<section class="hero">
+<div class="hero-grid">
+<div class="hero-copy">
+<span class="label">Facials and skin care &middot; Linden, Johannesburg</span>
+<h1 class="display">Skin care, <em>unhurried.</em></h1>
+<p class="lede">A small studio for facials and honest skin advice. Every treatment is explained before we start, and every price is on the page.</p>
+<div class="cta-row"><a class="btn btn--accent" href="book.html">Book a treatment <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a><a class="btn btn--ghost" href="shop.html">Shop the shelf</a></div>
+<dl class="hero-facts">
+<div><dt>Open</dt><dd>Mon to Sat</dd></div>
+<div><dt>Call</dt><dd><a href="tel:+27100000000">010 000 0000</a></dd></div>
+<div><dt>Parking</dt><dd>Free, behind us</dd></div>
+</dl>
+</div>
+<figure class="hero-media">
+<img src="img/hero-960.webp" srcset="img/hero-480.webp 480w, img/hero-960.webp 960w, img/hero-1400.webp 1400w" sizes="(max-width:900px) calc(100vw - 32px), 44vw" width="960" height="1200" alt="A skin therapist's hands resting either side of a client's face during a facial massage, the client lying under a soft grey towel" fetchpriority="high" decoding="async">
+<a class="next-card" href="book.html"><span><span class="label">Next opening, 60 min</span><strong data-next-slot>See this week</strong></span><span class="circle" aria-hidden="true"><svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+</figure>
+</div>
+</section>
 
-<section class="hero"><div class="in"><div>
-<h1>Skin that's looked after, not rushed.</h1>
-<p class="lede">Facials and skin treatments in Linden, Johannesburg. Every treatment is explained before you book it, and priced on this page.</p>
-<div class="cta"><a class="btn" href="book.html">Book a treatment</a><a class="btn btn--ghost" href="treatments.html">See the prices</a></div></div><svg class="art" viewBox="0 0 400 400" role="img" aria-label="Soft botanical illustration">
-<circle cx="200" cy="200" r="170" fill="#ecd9cf"/><circle cx="200" cy="200" r="120" fill="#f5f4ef"/>
-<g fill="none" stroke="#5c7a6a" stroke-width="3" stroke-linecap="round">
-<path d="M200 330 C200 250 200 190 200 110"/><path d="M200 290 C150 270 130 230 140 190 C185 200 200 240 200 290Z" fill="#cfdcd2"/>
-<path d="M200 240 C250 225 270 185 262 150 C220 160 200 195 200 240Z" fill="#b9cdbf"/><path d="M200 190 C170 175 160 145 168 118 C196 128 205 155 200 190Z" fill="#cfdcd2"/></g>
-<circle cx="300" cy="108" r="26" fill="#5c7a6a" opacity=".85"/><circle cx="96" cy="296" r="14" fill="#2f4a3c" opacity=".8"/></svg></div></section>
-<section class="sec"><div class="in"><h2>Three treatments people ask for most</h2><div class="cards">
-<article class="card"><h3>Signature facial</h3><p>Cleanse, exfoliate, mask and massage. Good for a first visit, or when your skin feels dull and tired.</p><span class="meta">60 min &middot; from R650</span></article>
-<article class="card"><h3>Deep cleanse</h3><p>For congested, oily or breakout-prone skin. Extractions are gentle and you leave without the red.</p><span class="meta">75 min &middot; from R780</span></article>
-<article class="card"><h3>Gentle peel</h3><p>A light peel for uneven tone. We talk through sun care first, so you know what to do afterwards.</p><span class="meta">45 min &middot; from R550</span></article>
-</div></div></section>
-<section class="sec band"><div class="in visit"><div><h2>Find us</h2><p class="lede">Second floor, with its own entrance off Fourth Avenue. Free parking in the lot behind the building.</p></div>
-<dl><dt>Open</dt><dd>Tue to Sat, 09:00 to 17:00</dd><dt>Address</dt><dd>12 Example Street, Linden</dd><dt>Call</dt><dd><a href="tel:+27100000000">010 000 0000</a></dd><dt>WhatsApp</dt><dd><a href="https://wa.me/27100000000">Message us</a></dd></dl></div></section>
+<section class="sec sec--tint" aria-labelledby="promise-h">
+<div class="wrap promise">
+<h2 class="label" id="promise-h">How we work</h2>
+<p>We tell you what we will do <em>before</em> we do it, and the price on the page is the price you pay.</p>
+</div>
+</section>
 
+<section class="sec" aria-labelledby="sig-h">
+<div class="wrap">
+<div class="sec-head"><div><span class="label">Treatments</span><h2 class="h2" id="sig-h">Three to <em>start</em> with</h2></div><a class="link-arr" href="treatments.html">All treatments and prices <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
+<div class="tiles"><article class="tile">
+<a class="tile-img" href="treatments.html#signature"><img src="img/facial-960.webp" srcset="img/facial-480.webp 480w, img/facial-960.webp 960w, img/facial-1400.webp 1400w" sizes="(max-width:600px) calc(100vw - 32px), (max-width:900px) 46vw, 31vw" width="960" height="1200" alt="A therapist in gloves brushing a white mask onto a client's cheek and chin" loading="lazy" decoding="async"><span class="tile-cap"><span><span class="num">01</span><h3>Signature facial</h3><span>60 min &middot; from R650</span></span></span></a>
+<p>Cleanse, exfoliate, mask and a slow massage. The one to book for a first visit.</p>
+<a class="link-arr" href="book.html?treatment=signature">Book this<span class="sr-only">: Signature facial</span> <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
+</article><article class="tile">
+<a class="tile-img" href="treatments.html#deep-cleanse"><img src="img/cleanse-960.webp" srcset="img/cleanse-480.webp 480w, img/cleanse-960.webp 960w" sizes="(max-width:600px) calc(100vw - 32px), (max-width:900px) 46vw, 31vw" width="960" height="1200" alt="Close-up of a client's face covered in a fine cleansing foam, eyes closed" loading="lazy" decoding="async"><span class="tile-cap"><span><span class="num">02</span><h3>Deep cleanse</h3><span>75 min &middot; from R780</span></span></span></a>
+<p>For congested or breakout-prone skin. Gentle extractions, and we tell you before we touch anything.</p>
+<a class="link-arr" href="book.html?treatment=deep-cleanse">Book this<span class="sr-only">: Deep cleanse</span> <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
+</article><article class="tile">
+<a class="tile-img" href="treatments.html#peel"><img src="img/peel-960.webp" srcset="img/peel-480.webp 480w, img/peel-960.webp 960w, img/peel-1400.webp 1400w" sizes="(max-width:600px) calc(100vw - 32px), (max-width:900px) 46vw, 31vw" width="960" height="1200" alt="A therapist brushing an amber peel gel along a client's jaw" loading="lazy" decoding="async"><span class="tile-cap"><span><span class="num">03</span><h3>Gentle peel</h3><span>45 min &middot; from R550</span></span></span></a>
+<p>A mild peel for uneven tone. Strength chosen for your skin after a patch test.</p>
+<a class="link-arr" href="book.html?treatment=peel">Book this<span class="sr-only">: Gentle peel</span> <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
+</article></div>
+</div>
+</section>
+
+<section class="sec sec--tint" aria-labelledby="visit-steps-h">
+<div class="wrap">
+<div class="sec-head"><div><span class="label">Your first visit</span><h2 class="h2" id="visit-steps-h">How a visit works</h2></div><a class="btn btn--ghost" href="book.html">Start a booking <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
+<ol class="steps">
+<li><span class="num">01 / 04</span><h3>Book online</h3><p>Pick a treatment and a time. A short skin form comes with it, so nothing is rushed on the day.</p></li>
+<li><span class="num">02 / 04</span><h3>Talk first</h3><p>We read your form with you and look at your skin in good light before anything touches it.</p></li>
+<li><span class="num">03 / 04</span><h3>The treatment</h3><p>A quiet room and a warm bed. We explain each step as we go, or stay quiet if you prefer.</p></li>
+<li><span class="num">04 / 04</span><h3>Aftercare</h3><p>You leave with written aftercare, and a WhatsApp check-in two days later.</p></li>
+</ol>
+</div>
+</section>
+
+<section class="sec" aria-labelledby="shelf-h">
+<div class="wrap">
+<div class="sec-head"><div><span class="label">The shelf</span><h2 class="h2" id="shelf-h">What we use in the room</h2></div><a class="link-arr" href="shop.html">Shop all eight <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
+<div class="pgrid"><article class="pcard" data-concerns="Dry,Sensitive" data-price="265" data-name="Oat Milk Cleanser" data-order="0">
+<div class="pcard-img"><img src="img/cleanser-960.webp" srcset="img/cleanser-480.webp 480w, img/cleanser-960.webp 960w" sizes="(max-width:760px) 46vw, (max-width:1000px) 31vw, 23vw" width="960" height="1200" alt="A white foaming pump bottle on a woven mat with sprigs of eucalyptus" loading="lazy" decoding="async"></div>
+<div class="pcard-top"><h3><a href="product.html?id=oat-cleanser">Oat Milk Cleanser</a></h3><span class="price">From R265</span></div>
+<p class="meta">Cleanser &middot; 150 ml or 300 ml</p>
+
+<button type="button" class="btn btn--ghost btn--sm add" data-add="oat-cleanser" aria-label="Add Oat Milk Cleanser to bag">Add to bag</button>
+</article><article class="pcard" data-concerns="Dull" data-price="495" data-name="Vitamin C Serum" data-order="1">
+<div class="pcard-img"><img src="img/serum-960.webp" srcset="img/serum-480.webp 480w, img/serum-960.webp 960w" sizes="(max-width:760px) 46vw, (max-width:1000px) 31vw, 23vw" width="960" height="1200" alt="A small glass dropper bottle of amber serum against a dusky pink wall with dried grass" loading="lazy" decoding="async"></div>
+<div class="pcard-top"><h3><a href="product.html?id=vitamin-c-serum">Vitamin C Serum</a></h3><span class="price">From R495</span></div>
+<p class="meta">Serum &middot; 30 ml or 50 ml</p>
+
+<button type="button" class="btn btn--ghost btn--sm add" data-add="vitamin-c-serum" aria-label="Add Vitamin C Serum to bag">Add to bag</button>
+</article><article class="pcard" data-concerns="Dry,Sensitive" data-price="385" data-name="Barrier Cream" data-order="2">
+<div class="pcard-img"><img src="img/moisturiser-960.webp" srcset="img/moisturiser-480.webp 480w, img/moisturiser-960.webp 960w" sizes="(max-width:760px) 46vw, (max-width:1000px) 31vw, 23vw" width="960" height="1200" alt="A frosted glass jar with a white lid beside a plain card box on stone" loading="lazy" decoding="async"></div>
+<div class="pcard-top"><h3><a href="product.html?id=barrier-cream">Barrier Cream</a></h3><span class="price">From R385</span></div>
+<p class="meta">Moisturiser &middot; 50 ml or 100 ml</p>
+
+<button type="button" class="btn btn--ghost btn--sm add" data-add="barrier-cream" aria-label="Add Barrier Cream to bag">Add to bag</button>
+</article><article class="pcard" data-concerns="Oily,Sensitive" data-price="345" data-name="Mineral SPF 50" data-order="3">
+<div class="pcard-img"><img src="img/spf-960.webp" srcset="img/spf-480.webp 480w, img/spf-960.webp 960w" sizes="(max-width:760px) 46vw, (max-width:1000px) 31vw, 23vw" width="960" height="1200" alt="A swipe of white cream on a warm beige surface" loading="lazy" decoding="async"></div>
+<div class="pcard-top"><h3><a href="product.html?id=mineral-spf">Mineral SPF 50</a></h3><span class="price">From R345</span></div>
+<p class="meta">Sunscreen &middot; 50 ml</p>
+
+<button type="button" class="btn btn--ghost btn--sm add" data-add="mineral-spf" aria-label="Add Mineral SPF 50 to bag">Add to bag</button>
+</article></div>
+</div>
+</section>
+
+<section class="sec sec--tint" aria-labelledby="rev-h">
+<div class="wrap">
+<div class="sec-head"><div><span class="label">Sample reviews</span><h2 class="h2" id="rev-h">What clients say</h2><p class="lede">These reviews are samples written for this demo. On a live site, real Google reviews sit here.</p></div></div>
+<div class="reviews">
+<figure class="review"><span class="tag tag--fill">Sample</span><blockquote><p>She explained every step before doing it. My skin felt calm afterwards, not stripped.</p></blockquote><figcaption>Sample review, Signature facial</figcaption></figure>
+<figure class="review"><span class="tag tag--fill">Sample</span><blockquote><p>Booking took a minute, and the skin form meant we did not waste time on the day.</p></blockquote><figcaption>Sample review, Deep cleanse</figcaption></figure>
+<figure class="review"><span class="tag tag--fill">Sample</span><blockquote><p>Free parking right behind the building, which in Linden is half the battle.</p></blockquote><figcaption>Sample review, Facial massage</figcaption></figure>
+</div>
+</div>
+</section>
+
+<section class="sec" aria-labelledby="visit-h">
+<div class="wrap visit">
+<div class="visit-img"><img src="img/room-960.webp" srcset="img/room-480.webp 480w, img/room-960.webp 960w, img/room-1400.webp 1400w" sizes="(max-width:860px) calc(100vw - 32px), 40vw" width="960" height="1200" alt="A treatment bed with a folded towel beside a bright window, seen through a half-open wooden door" loading="lazy" decoding="async"></div>
+<div>
+<span class="label">Visit</span>
+<h2 class="h2" id="visit-h">Easy to find, <em>easy</em> to park.</h2>
+<dl class="facts">
+<dt>Hours</dt><dd>Mon to Fri 09:00 to 18:00, Thu to 19:00<br>Sat 08:30 to 14:00 &middot; Sun closed</dd>
+<dt>Address</dt><dd>Unit 4, 12 Sample Lane, Linden, Johannesburg</dd>
+<dt>Parking</dt><dd>Free, behind the building. The gate code comes with your booking.</dd>
+<dt>Contact</dt><dd><a href="tel:+27100000000">010 000 0000</a> &middot; <a href="https://wa.me/27100000000">WhatsApp</a></dd>
+</dl>
+<div class="cta-row"><a class="btn btn--accent" href="book.html">Book a treatment <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a><a class="link-arr" href="visit.html">Plan your visit <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
+</div>
+</div>
+</section>
+
+<section class="sec" style="padding-top:0" aria-labelledby="news-h">
+<div class="wrap news">
+<div><span class="label">Newsletter</span><h2 class="h2" id="news-h" style="margin-top:14px">A short letter, once a month.</h2><p class="lede" style="margin-top:14px">Seasonal skin notes and the first look at new openings. No daily emails.</p></div>
+<form data-demo="Demo only. Nothing was sent and your email was not stored." novalidate>
+<div class="field"><label for="news-email">Email address</label>
+<div class="inline-field"><input id="news-email" type="email" autocomplete="email" required data-rule="email" data-req="Enter your email address." data-msg="That email address does not look right."><button class="btn" type="submit">Subscribe</button></div></div>
+<p class="notice notice--ok" data-result hidden></p>
+</form>
+</div>
+</section>
 </main>
-<footer class="foot"><div class="in"><p>Soft Light Skin Studio is a made-up business, built as a demo by <a href="/">William McIlleron</a>. Nothing here is real and nothing on the forms is sent.</p></div></footer>
+<footer class="foot on-dark">
+<div class="wrap">
+<div class="foot-grid">
+<div><a class="brand" href="./" aria-label="Soft Light Skin Studio, home"><b>Soft Light</b><small>Skin Studio</small></a>
+<p class="foot-intro">A small skin studio in Linden, Johannesburg. Facials, honest advice and a short shelf of products we use ourselves.</p></div>
+<div><h2>Explore</h2><ul><li><a href="treatments.html">Treatments</a></li><li><a href="shop.html">Shop</a></li><li><a href="book.html">Book</a></li><li><a href="visit.html">Visit</a></li></ul></div>
+<div><h2>Visit</h2><ul><li>Unit 4, 12 Sample Lane</li><li>Linden, Johannesburg</li><li>Mon to Sat, closed Sunday</li></ul></div>
+<div><h2>Contact</h2><ul><li><a href="tel:+27100000000">010 000 0000</a></li><li><a href="https://wa.me/27100000000">WhatsApp 010 000 0000</a></li><li><a href="mailto:hello@softlight.example">hello@softlight.example</a></li></ul></div>
+</div>
+<div class="foot-base">
+<p>Soft Light Skin Studio is a made-up business. This is a demo site by <a href="/">William McIlleron</a>: nothing you enter is sent anywhere, nothing is charged, the address and numbers are fake, and the reviews are samples.</p>
+<p>Photography: Unsplash contributors (<a href="PHOTO-SOURCES.md">sources</a>)</p>
+</div>
+</div>
+</footer>
+<div class="scrim" hidden></div>
+<aside class="drawer" id="bag" role="dialog" aria-modal="true" aria-labelledby="bag-title" aria-hidden="true" hidden>
+<div class="drawer-head"><h2 id="bag-title" tabindex="-1">Your bag</h2><button class="icon-btn" type="button" data-close aria-label="Close bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button></div>
+<div class="drawer-body"></div>
+<div class="drawer-foot"></div>
+</aside>
+<p id="live" class="sr-only" aria-live="polite"></p>
+<div class="mbar"><a class="btn btn--light" href="book.html">Book a treatment</a><a class="btn btn--call" href="tel:+27100000000">Call</a></div>
+<script src="site.js" defer></script>
+
 </body>
 </html>

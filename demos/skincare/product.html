@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product | Soft Light Skin Studio (demo)</title>
+<meta name="description" content="A product from the shelf at a made-up skin studio: sizes, ingredients, how to use it and what pairs well with it.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F3EEE7">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/InstrumentSerif-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Manrope-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<p class="demo-bar">Demo site for a made-up business. Nothing you enter is sent or charged. <a href="/">Made by William McIlleron</a></p>
+<header class="site-head">
+<div class="head-in">
+<a class="brand" href="./" aria-label="Soft Light Skin Studio, home"><b>Soft Light</b><small>Skin Studio</small></a>
+<nav class="nav" aria-label="Main"><ul><li><a href="treatments.html">Treatments</a></li><li><a href="shop.html" aria-current=page>Shop</a></li><li><a href="book.html">Book</a></li><li><a href="visit.html">Visit</a></li></ul></nav>
+<div class="head-actions">
+<a class="btn btn--accent btn--sm" href="book.html">Book a treatment</a>
+<button class="icon-btn" type="button" data-bag-btn aria-haspopup="dialog" aria-controls="bag" aria-label="Bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1 11h-11z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="count" data-bag-count hidden>0</span></button>
+<button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button>
+</div>
+</div>
+</header>
+<div class="mnav" id="mnav">
+<nav aria-label="Mobile"><ul><li><a href="./">Home</a></li><li><a href="treatments.html">Treatments</a></li><li><a href="shop.html" aria-current=page>Shop</a></li><li><a href="book.html">Book</a></li><li><a href="visit.html">Visit</a></li></ul></nav>
+<div class="mnav-foot"><a class="btn btn--accent btn--block" href="book.html">Book a treatment</a><p>Mon to Sat &middot; <a href="tel:+27100000000">010 000 0000</a></p></div>
+</div>
+<main id="main">
+<div class="wrap" style="padding-top:clamp(20px,3vw,36px)"><p class="crumbs"><a href="shop.html">Shop</a><span aria-hidden="true">/</span><span id="p-crumb" aria-current="page">Product</span></p></div>
+<div class="wrap product" id="product" style="padding-top:clamp(20px,3vw,36px)">
+<div class="gallery"><div class="thumbs" id="thumbs" aria-label="Product images"></div><div class="g-main" id="g-main"><img alt="" width="960" height="1200" decoding="async"></div></div>
+<div class="p-info">
+<div class="tags" style="display:flex;gap:6px;flex-wrap:wrap" id="p-tags"></div>
+<p class="label" id="p-type" style="margin-top:16px"></p>
+<h1 class="h1" id="p-name">Product</h1>
+<p class="lede" id="p-short"></p>
+<p class="p-price" id="p-price" aria-live="polite"></p>
+<fieldset><legend id="p-sizes-legend">Size</legend><div class="pills" id="p-sizes"></div></fieldset>
+<div class="buy-row">
+<div class="qty" role="group" aria-label="Quantity"><button type="button" id="q-minus" aria-label="One less"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M4 10h12" stroke="currentColor" stroke-width="1.6"/></svg></button><output id="p-qty" aria-live="polite">1</output><button type="button" id="q-plus" aria-label="One more"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M4 10h12M10 4v12" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
+<button type="button" class="btn btn--accent" id="p-add"><span>Add to bag</span></button>
+</div>
+<ul class="p-notes"><li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Free courier on orders of R800 or more</li><li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Collect free from the studio in Linden</li><li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Unopened items can be returned within 14 days</li></ul>
+<div class="acc">
+<details open><summary>What is in it</summary><div class="ans" id="p-ingredients"></div></details>
+<details><summary>How to use</summary><div class="ans"><p id="p-how"></p></div></details>
+<details><summary>Delivery and returns</summary><div class="ans"><p>Courier delivery takes 2 to 4 working days in South Africa and costs R65, or nothing on orders of R800 or more. Collection from the studio is free. Unopened items can be returned within 14 days.</p></div></details>
+</div>
+</div>
+</div>
+<template id="nf-tpl"><div style="padding-block:var(--sec)"><span class="label">Not found</span><h1 class="h1" style="margin:18px 0 22px">We could not find that product.</h1><p class="lede">It may have been renamed. Everything on the shelf is in the shop.</p><div class="cta-row"><a class="btn btn--accent" href="shop.html">Go to the shop</a></div></div></template>
+<section class="sec sec--tint" id="pairs-sec" aria-labelledby="pairs-h"><div class="wrap">
+<div class="sec-head"><div><span class="label">Pairs well with</span><h2 class="h2" id="pairs-h">Use it alongside</h2></div><a class="link-arr" href="shop.html">All products <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a></div>
+<div class="pgrid pgrid--3" id="pairs"></div>
+</div></section>
+</main>
+<footer class="foot on-dark">
+<div class="wrap">
+<div class="foot-grid">
+<div><a class="brand" href="./" aria-label="Soft Light Skin Studio, home"><b>Soft Light</b><small>Skin Studio</small></a>
+<p class="foot-intro">A small skin studio in Linden, Johannesburg. Facials, honest advice and a short shelf of products we use ourselves.</p></div>
+<div><h2>Explore</h2><ul><li><a href="treatments.html">Treatments</a></li><li><a href="shop.html">Shop</a></li><li><a href="book.html">Book</a></li><li><a href="visit.html">Visit</a></li></ul></div>
+<div><h2>Visit</h2><ul><li>Unit 4, 12 Sample Lane</li><li>Linden, Johannesburg</li><li>Mon to Sat, closed Sunday</li></ul></div>
+<div><h2>Contact</h2><ul><li><a href="tel:+27100000000">010 000 0000</a></li><li><a href="https://wa.me/27100000000">WhatsApp 010 000 0000</a></li><li><a href="mailto:hello@softlight.example">hello@softlight.example</a></li></ul></div>
+</div>
+<div class="foot-base">
+<p>Soft Light Skin Studio is a made-up business. This is a demo site by <a href="/">William McIlleron</a>: nothing you enter is sent anywhere, nothing is charged, the address and numbers are fake, and the reviews are samples.</p>
+<p>Photography: Unsplash contributors (<a href="PHOTO-SOURCES.md">sources</a>)</p>
+</div>
+</div>
+</footer>
+<div class="scrim" hidden></div>
+<aside class="drawer" id="bag" role="dialog" aria-modal="true" aria-labelledby="bag-title" aria-hidden="true" hidden>
+<div class="drawer-head"><h2 id="bag-title" tabindex="-1">Your bag</h2><button class="icon-btn" type="button" data-close aria-label="Close bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button></div>
+<div class="drawer-body"></div>
+<div class="drawer-foot"></div>
+</aside>
+<p id="live" class="sr-only" aria-live="polite"></p>
+<script src="site.js" defer></script>
+
+</body>
+</html>
