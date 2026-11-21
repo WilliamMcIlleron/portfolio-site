@@ -1,247 +1,277 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-ZA">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Booking demo | William McIlleron</title>
-    <meta name="description" content="A working booking flow for a made-up pool business, to show what a booking system on a client's site does. Nothing is booked or sent.">
+    <title>Blue Line Pool Care | Booking demo</title>
+    <meta name="description" content="A demo site for a made-up pool-care business. Answer 8 quick questions, get a plan and a price for your pool, and book a first visit. Nothing is booked or sent.">
     <meta name="robots" content="noindex">
-    <meta name="theme-color" content="#14171a">
+    <meta name="theme-color" content="#12191b">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="preload" href="/fonts/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/dmsans-var.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/styles.css">
-    <style>
-        .demo-banner { position: sticky; top: 0; z-index: 20; padding: 0.7rem var(--gutter); background: var(--accent); color: var(--accent-ink); font: 600 0.8125rem/1.3 var(--body); text-align: center; }
-        .demo-banner a { color: inherit; }
-        .demo { padding-block: clamp(2.5rem, 7vh, 4.5rem) 4rem; }
-        .demo__head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
-        .demo__kicker { font-family: var(--label); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
-        .demo h1 { font-family: var(--display); font-weight: 700; letter-spacing: -0.04em; line-height: 1; font-size: clamp(2rem, 1rem + 4vw, 3.5rem); margin-top: 0.5rem; }
-        .demo__sub { margin-top: 0.75rem; max-width: 46ch; color: var(--muted); }
-        .demo__grid { display: grid; gap: 2rem; margin-top: 2.25rem; }
-        @media (min-width: 62rem) { .demo__grid { grid-template-columns: 1.15fr 1fr; align-items: start; } }
-        .book { display: grid; gap: 1.25rem; }
-        .step { margin: 0; padding: 1.25rem; border: 0; border-radius: 1rem; background: var(--surface); box-shadow: 0 0 0 1px color-mix(in srgb, var(--ink) 9%, transparent); min-width: 0; transition: opacity 0.4s ease; }
-        .step:disabled { opacity: 0.45; }
-        .step legend { float: left; width: 100%; padding: 0; margin-bottom: 0.9rem; font-family: var(--display); font-weight: 600; font-size: 1.25rem; letter-spacing: -0.02em; }
-        .step legend span { display: inline-block; margin-right: 0.6rem; font-family: var(--label); font-size: 0.6875rem; letter-spacing: 0.14em; color: var(--accent); }
-        .opts { clear: both; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-        .opt { position: relative; }
-        .opt input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
-        .opt span { display: block; padding: 0.65rem 1rem; border-radius: 999px; font-size: 0.9375rem; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 22%, transparent); transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease; }
-        .opt input:hover + span { box-shadow: inset 0 0 0 1px var(--accent); }
-        .opt input:checked + span { background: var(--accent); color: var(--accent-ink); box-shadow: none; font-weight: 600; }
-        .opt input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 3px; }
-        .opt input:disabled { cursor: not-allowed; }
-        .opt input:disabled + span { opacity: 0.4; text-decoration: line-through; }
-        .opt--day span { text-align: center; min-width: 4.5rem; line-height: 1.25; }
-        .opt--day small { display: block; font-size: 0.6875rem; opacity: 0.75; }
-        .opt--day input:disabled + span { text-decoration: none; }
-        .opt--day input:disabled + span small { text-decoration: none; }
-        .fields { clear: both; display: grid; gap: 0.9rem; }
-        .fields label { display: grid; gap: 0.3rem; font-size: 0.875rem; color: var(--muted); }
-        .fields input { font: inherit; color: var(--ink); background: var(--paper); border: 0; border-radius: 0.6rem; padding: 0.75rem 0.9rem; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 22%, transparent); }
-        .fields input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-        .fields input[aria-invalid="true"] { box-shadow: inset 0 0 0 2px var(--invalid); }
-        .err { min-height: 1.25rem; font-size: 0.8125rem; color: var(--invalid); }
-        .go { justify-self: start; border: 0; cursor: pointer; font: 600 1rem var(--body); background: var(--accent); color: var(--accent-ink); padding: 0.95rem 1.75rem; border-radius: 999px; transition: background-color 0.25s ease, transform 0.25s ease; }
-        .go:hover { background: var(--accent-hover); }
-        .go:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-        .go[disabled] { opacity: 0.45; cursor: not-allowed; }
-        .out { display: grid; gap: 1rem; }
-        .panel { padding: 1.25rem; border-radius: 1rem; background: var(--surface); box-shadow: 0 0 0 1px color-mix(in srgb, var(--ink) 9%, transparent); }
-        .panel h2 { font-family: var(--display); font-weight: 600; font-size: 1.125rem; letter-spacing: -0.02em; margin-bottom: 0.6rem; }
-        .panel .lbl { display: block; margin-bottom: 0.5rem; font-family: var(--label); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
-        .panel p, .panel li { color: var(--muted); font-size: 0.9375rem; }
-        .panel dl { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 1rem; font-size: 0.9375rem; }
-        .panel dt { color: var(--muted); }
-        .panel dd { margin: 0; }
-        .wa { padding: 0.9rem 1rem; border-radius: 0.75rem 0.75rem 0.75rem 0.2rem; background: color-mix(in srgb, var(--accent) 16%, var(--paper)); color: var(--ink); font-size: 0.9375rem; white-space: pre-line; }
-        .panel .ghost { margin-top: 0.9rem; display: inline-block; font: 600 0.9375rem var(--body); color: var(--ink); background: none; border: 0; padding: 0.5rem 0; cursor: pointer; text-decoration: underline; text-underline-offset: 0.25em; }
-        .panel .ghost:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-        .foot-note { margin-top: 2.5rem; max-width: 60ch; font-size: 0.875rem; color: var(--muted); }
-        .status { min-height: 1.5rem; font-size: 0.875rem; color: var(--muted); }
-        @media (prefers-reduced-motion: reduce) { .step, .opt span, .go { transition: none; } }
-    </style>
+    <link rel="preload" href="fonts/is-r.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/mr-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/is-i.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" as="image" media="(max-width: 40rem)" imagesrcset="img/hero-portrait-480.webp 480w, img/hero-portrait-720.webp 720w, img/hero-portrait-960.webp 960w" imagesizes="100vw" fetchpriority="high">
+    <link rel="preload" as="image" media="(min-width: 40.01rem)" imagesrcset="img/hero-backyard-640.webp 640w, img/hero-backyard-960.webp 960w, img/hero-backyard-1280.webp 1280w, img/hero-backyard-1600.webp 1600w" imagesizes="100vw" fetchpriority="high">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <p class="demo-banner" role="note">Demo. Nothing is booked or sent. Blue Line Pool Care is a made-up business. <a href="/">Back to the site</a></p>
-    <main id="main" class="wrap demo">
-        <div class="demo__head">
+<a class="skip" href="#main">Skip to content</a>
+<p class="demo-banner"><a href="/">Demo site for a made-up business</a><span class="demo-banner__extra">. Built by William McIlleron.</span></p>
+
+<div class="hero">
+    <picture>
+        <source media="(max-width: 40rem)" srcset="img/hero-portrait-480.webp 480w, img/hero-portrait-720.webp 720w, img/hero-portrait-960.webp 960w" sizes="100vw" width="960" height="1280">
+        <img class="hero__img" src="img/hero-backyard-960.webp" srcset="img/hero-backyard-640.webp 640w, img/hero-backyard-960.webp 960w, img/hero-backyard-1280.webp 1280w, img/hero-backyard-1600.webp 1600w" sizes="100vw" width="1600" height="1200" alt="A quiet backyard pool with two chairs on the far edge, under frangipani and palm trees" fetchpriority="high">
+    </picture>
+    <header class="site-head site-head--over">
+        <div class="wrap site-head__bar">
+            <a class="wordmark" href="index.html" aria-label="Blue Line Pool Care, home"><span class="wordmark__line" aria-hidden="true"></span>Blue Line <small>Pool Care</small></a>
+            <nav class="nav" aria-label="Main">
+                <a href="plans.html">Plans</a>
+                <a href="#how">How it works</a>
+                <a href="#area">Area</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+            <div class="head-cta">
+                <a class="head-phone" href="tel:0100000000">010 000 0000</a>
+                <a class="btn btn--small btn--ghost" href="quiz.html">Find your plan</a>
+            </div>
+        </div>
+    </header>
+    <div class="wrap hero__inner" id="main">
+        <p class="label label--light">Pool care in Bluegum Valley</p>
+        <h1>Clear water, <em>every week.</em></h1>
+        <p class="hero__sub">Answer 8 quick questions and get a plan and a price made for your pool. Then pick a day for the first visit, all in one go.</p>
+        <div class="hero__actions">
+            <a class="btn" href="quiz.html">Find your pool plan <span class="btn__arrow" aria-hidden="true">&#8594;</span></a>
+            <a class="continue" href="quiz.html" data-continue>Continue where you left off</a>
+        </div>
+        <div class="hero__meta label label--light">
+            <ol>
+                <li><span>01</span>Weekly Care</li>
+                <li><span>02</span>Fortnightly Care</li>
+                <li><span>03</span>Green-to-Clean Reset</li>
+            </ol>
+            <a href="tel:0100000000">Call 010 000 0000</a>
+        </div>
+    </div>
+</div>
+
+<main>
+    <section class="section section--tight" aria-labelledby="promise-h">
+        <div class="wrap">
+            <h2 class="sr-only" id="promise-h">What you can count on</h2>
+            <ol class="promise" role="list">
+                <li><span class="label">01</span><h3>The same day, every time</h3><p>Your visit falls on the same weekday, with the same technician, so you always know when.</p></li>
+                <li><span class="label">02</span><h3>Proof after each visit</h3><p>A photo of the pool and the water test results arrive on WhatsApp before we leave.</p></li>
+                <li><span class="label">03</span><h3>No contract</h3><p>Stop or pause with one message. No notice period and no cancellation fee.</p></li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="section section--panel" id="plans" aria-labelledby="plans-h">
+        <div class="wrap">
+            <div class="section__head section__head--split">
+                <div>
+                    <p class="label">Plans</p>
+                    <h2 class="h2" id="plans-h">Three plans, <em>one standard.</em></h2>
+                </div>
+                <p class="lede">Every plan covers the full clean, the water test and the chemicals. The price depends on the size of your pool. The quiz tells you which plan fits and what it costs.</p>
+            </div>
+            <ul class="plans" role="list">
+                <li>
+                    <a class="plan-tile" href="plans.html#weekly">
+                        <img src="img/hero-backyard-640.webp" srcset="img/hero-backyard-640.webp 640w, img/hero-backyard-960.webp 960w" sizes="(min-width: 48rem) 33vw, 100vw" width="640" height="480" alt="" loading="lazy" decoding="async">
+                        <div class="plan-tile__body">
+                            <p class="label label--light">01</p>
+                            <h3>Weekly Care</h3>
+                            <p>For family pools and large pools that get used hard.</p>
+                            <p class="plan-tile__price"><span>From</span><strong>R1,150 a month</strong></p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="plan-tile" href="plans.html#fortnightly">
+                        <img src="img/backyard-wide-640.webp" srcset="img/backyard-wide-640.webp 640w, img/backyard-wide-960.webp 960w" sizes="(min-width: 48rem) 33vw, 100vw" width="640" height="461" alt="" loading="lazy" decoding="async">
+                        <div class="plan-tile__body">
+                            <p class="label label--light">02</p>
+                            <h3>Fortnightly Care</h3>
+                            <p>For pools used now and then. A visit every second week.</p>
+                            <p class="plan-tile__price"><span>From</span><strong>R650 a month</strong></p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="plan-tile" href="plans.html#handover">
+                        <img src="img/hose-fill-400.webp" srcset="img/hose-fill-400.webp 400w, img/hose-fill-800.webp 800w" sizes="(min-width: 48rem) 33vw, 100vw" width="400" height="599" alt="" loading="lazy" decoding="async">
+                        <div class="plan-tile__body">
+                            <p class="label label--light">03</p>
+                            <h3>Handover and Care</h3>
+                            <p>For new pools. The first 3 months, while the surface cures.</p>
+                            <p class="plan-tile__price"><span>From</span><strong>R1,250 a month</strong></p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <div class="oneoffs">
+                <div class="oneoff"><h3>Green-to-Clean Reset</h3><strong>From R1,300 once</strong><p>Green water back to clear in up to 3 visits over 7 days, chemicals included.</p></div>
+                <div class="oneoff"><h3>Equipment Check</h3><strong>R550 call-out</strong><p>Pump, filter, timer and salt cell checked. Any repair is quoted before we touch it.</p></div>
+            </div>
+            <p style="margin-top:2rem"><a class="text-link" href="plans.html">Compare the plans in detail</a></p>
+        </div>
+    </section>
+
+    <section class="section" id="how" aria-labelledby="how-h">
+        <div class="wrap how">
+            <div class="how__img">
+                <img src="img/pool-cleaner-960.webp" srcset="img/pool-cleaner-480.webp 480w, img/pool-cleaner-960.webp 960w, img/pool-cleaner-1440.webp 1440w" sizes="(min-width: 60rem) 45vw, 100vw" width="960" height="781" alt="An automatic cleaner working its way across the floor of a slightly cloudy pool" loading="lazy" decoding="async">
+            </div>
             <div>
-                <p class="demo__kicker">Booking system, demo</p>
-                <h1>Blue Line Pool Care</h1>
-                <p class="demo__sub">Pick a service, a day and a time. This is what a customer would do on a client's site, and what the owner would get.</p>
+                <p class="label">How it works</p>
+                <h2 class="h2" id="how-h">A minute now, <em>a clear pool after.</em></h2>
+                <ol class="steps" role="list" style="margin-top:2.5rem">
+                    <li><h3>Answer 8 quick questions</h3><p>Tap through your pool, the water and what matters to you. No typing until the very end.</p></li>
+                    <li><h3>Get your plan and price</h3><p>You see the plan that fits, the first visit you need, what is included and the price for your size.</p></li>
+                    <li><h3>Pick a day and a time</h3><p>Choose a free slot, add your name and cell, and we confirm on WhatsApp.</p></li>
+                </ol>
+                <p style="margin-top:2rem"><a class="btn" href="quiz.html">Find your pool plan <span class="btn__arrow" aria-hidden="true">&#8594;</span></a></p>
             </div>
         </div>
+    </section>
 
-        <div class="demo__grid">
-            <form class="book" id="book" novalidate>
-                <fieldset class="step" id="s1">
-                    <legend><span>01</span>What do you need?</legend>
-                    <div class="opts" id="services"></div>
-                </fieldset>
-                <fieldset class="step" id="s2" disabled>
-                    <legend><span>02</span>Which day?</legend>
-                    <div class="opts" id="days"></div>
-                    <p class="demo__sub" style="margin-top:.75rem">Closed on Sundays.</p>
-                </fieldset>
-                <fieldset class="step" id="s3" disabled>
-                    <legend><span>03</span>What time?</legend>
-                    <div class="opts" id="times"></div>
-                </fieldset>
-                <fieldset class="step" id="s4" disabled>
-                    <legend><span>04</span>Your details</legend>
-                    <div class="fields">
-                        <label>Name<input id="name" name="name" autocomplete="name" maxlength="60"></label>
-                        <label>Cell number<input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="082 123 4567"></label>
-                        <p class="err" id="err" role="alert"></p>
-                    </div>
-                </fieldset>
-                <button class="go" id="go" type="submit" disabled>Book it (demo)</button>
-                <p class="status" id="status" role="status" aria-live="polite"></p>
-            </form>
-
-            <div class="out" id="out" aria-live="polite">
-                <section class="panel" id="empty">
-                    <span class="lbl">What happens next</span>
-                    <h2>You get a confirmation. The owner gets a message.</h2>
-                    <p>After you book, this side fills in: the page a customer sees, the WhatsApp message the owner receives, and a calendar file you can add to your phone.</p>
-                </section>
-                <section class="panel" id="customer" hidden>
-                    <span class="lbl">What the customer sees</span>
-                    <h2>You're booked in.</h2>
-                    <dl>
-                        <dt>Service</dt><dd id="o-service"></dd>
-                        <dt>When</dt><dd id="o-when"></dd>
-                        <dt>Name</dt><dd id="o-name"></dd>
-                    </dl>
-                    <button class="ghost" id="ics" type="button">Add to my calendar</button>
-                    <br><button class="ghost" id="again" type="button">Start again</button>
-                </section>
-                <section class="panel" id="owner" hidden>
-                    <span class="lbl">What the owner gets, on WhatsApp</span>
-                    <div class="wa" id="o-wa"></div>
-                </section>
+    <section class="section section--panel" aria-labelledby="green-h">
+        <div class="wrap feature">
+            <figure>
+                <div class="feature__img">
+                    <img src="img/green-pool-960.webp" srcset="img/green-pool-480.webp 480w, img/green-pool-960.webp 960w, img/green-pool-1440.webp 1440w" sizes="(min-width: 60rem) 52vw, 100vw" width="960" height="720" alt="A pool with green, algae-stained water and dark patches on the floor" loading="lazy" decoding="async">
+                </div>
+                <figcaption>The kind of pool a Reset starts with.</figcaption>
+            </figure>
+            <div>
+                <p class="label">Green-to-Clean Reset</p>
+                <h2 class="h2" id="green-h">Green today. <em>Swimmable next week.</em></h2>
+                <p class="lede" style="margin-top:1.25rem">A green pool needs more than a normal clean. A Reset brings it back in up to 3 visits over 7 days, then your plan keeps it there.</p>
+                <ul class="checks" role="list">
+                    <li>Shock, floc and vacuum to waste</li>
+                    <li>Filter cleaned so the algae does not come back</li>
+                    <li>From R1,300 for a plunge pool, chemicals included</li>
+                </ul>
             </div>
         </div>
+    </section>
 
-        <p class="foot-note">Honest footnote: this demo remembers nothing and sends nothing. On a real site the booking connects to the owner's Google Calendar or a free booking tool, so a time that is taken disappears for the next customer and double bookings cannot happen. The taken times above are made up to show how it behaves.</p>
-        <noscript><p class="foot-note">This demo needs JavaScript to run.</p></noscript>
-    </main>
+    <section class="section" id="area" aria-labelledby="area-h">
+        <div class="wrap area">
+            <div>
+                <p class="label">Service area</p>
+                <h2 class="h2" id="area-h">Close by, <em>so we are on time.</em></h2>
+                <p class="lede" style="margin-top:1.25rem">We keep our rounds tight so the technician is never rushing between jobs. These suburbs are made up for the demo.</p>
+                <ul class="suburbs" role="list">
+                    <li>Bluegum Ridge</li><li>Kingfisher Park</li><li>Willowmere</li><li>Stonehaven</li><li>Marula Heights</li><li>Acacia Glen</li>
+                </ul>
+                <p style="margin-top:1.5rem;color:var(--muted)">Just outside these? Take the quiz anyway and mention it when we call.</p>
+            </div>
+            <div class="area__img">
+                <img src="img/backyard-wide-960.webp" srcset="img/backyard-wide-640.webp 640w, img/backyard-wide-960.webp 960w, img/backyard-wide-1440.webp 1440w" sizes="(min-width: 60rem) 55vw, 100vw" width="960" height="692" alt="A backyard pool below a deck, with palms, a lawn and trees beyond the fence" loading="lazy" decoding="async">
+            </div>
+        </div>
+    </section>
 
-    <script>
-    (function () {
-        var SERVICES = [
-            { id: 'weekly', name: 'Weekly pool service', mins: 45 },
-            { id: 'green', name: 'Green pool clean-up', mins: 120 },
-            { id: 'check', name: 'Equipment check', mins: 60 }
-        ];
-        var TIMES = ['08:00', '09:00', '10:00', '11:00', '13:00', '14:00', '15:00'];
-        var DAYS = 14;
-        var $ = function (id) { return document.getElementById(id); };
-        var state = { service: null, day: null, time: null };
-        var pad = function (n) { return (n < 10 ? '0' : '') + n; };
-        var dayFmt = new Intl.DateTimeFormat('en-ZA', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'Africa/Johannesburg' });
-        var longFmt = new Intl.DateTimeFormat('en-ZA', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Africa/Johannesburg' });
+    <section class="section section--panel" aria-labelledby="reviews-h">
+        <div class="wrap">
+            <div class="section__head">
+                <p class="label">Sample reviews</p>
+                <h2 class="h2" id="reviews-h">What a review <em>could</em> say.</h2>
+                <p class="lede">These are written for the demo. On a real site, reviews come from real customers.</p>
+            </div>
+            <ul class="reviews" role="list">
+                <li class="review">
+                    <blockquote><p>The photo after each visit is the bit I did not know I wanted. I stopped checking the pool myself.</p></blockquote>
+                    <footer><span>Weekly Care, Kingfisher Park</span><span class="tag">Sample</span></footer>
+                </li>
+                <li class="review">
+                    <blockquote><p>It was green when we bought the house. Three visits later the kids were swimming.</p></blockquote>
+                    <footer><span>Reset, then Weekly Care</span><span class="tag">Sample</span></footer>
+                </li>
+                <li class="review">
+                    <blockquote><p>They told me the pump was fine and the timer was the problem. R550 instead of a new pump.</p></blockquote>
+                    <footer><span>Equipment Check, Willowmere</span><span class="tag">Sample</span></footer>
+                </li>
+            </ul>
+        </div>
+    </section>
 
-        function key(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
-        // Which times are taken: a fixed pattern from the date and service, so the demo behaves the same every visit.
-        function taken(dateKey, svc, time) {
-            var h = 0, s = dateKey + svc + time;
-            for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 9973;
-            return h % 4 === 0;
-        }
-        function option(group, id, value, label, extraClass, small, disabled) {
-            var l = document.createElement('label');
-            l.className = 'opt' + (extraClass ? ' ' + extraClass : '');
-            var i = document.createElement('input');
-            i.type = 'radio'; i.name = group; i.value = value; i.id = id; i.disabled = !!disabled;
-            var s = document.createElement('span');
-            s.textContent = label;
-            if (small) { var sm = document.createElement('small'); sm.textContent = small; s.appendChild(document.createElement('br')); s.appendChild(sm); }
-            l.appendChild(i); l.appendChild(s);
-            return l;
-        }
+    <section class="section" id="faq" aria-labelledby="faq-h">
+        <div class="wrap">
+            <div class="section__head">
+                <p class="label">FAQ</p>
+                <h2 class="h2" id="faq-h">Good questions.</h2>
+            </div>
+            <div class="faq">
+                <details><summary>Do I need to be home?</summary><p>No. If we can get to the pool, we do the visit and send you a photo and the test results on WhatsApp. Most customers leave a gate code with us.</p></details>
+                <details><summary>Are chemicals included?</summary><p>Yes. The normal chemicals for balancing and sanitising are in every plan. A Reset includes the extra shock and floc. Salt for a salt pool is quoted separately when it is needed.</p></details>
+                <details><summary>Is there a contract?</summary><p>No. You pay monthly and can stop or pause with one WhatsApp message.</p></details>
+                <details><summary>What if it rains on my day?</summary><p>Light rain, we still come. If a storm makes it unsafe, we move you to the next free day and tell you before the time.</p></details>
+                <details><summary>Why does the quiz ask so much?</summary><p>So the first call is a quick confirmation, not an interview. The technician arrives knowing your pool, the water and what you want, with the right chemicals in the bakkie.</p></details>
+                <details><summary>When do I pay?</summary><p>After the first visit. Nothing is charged when you book.</p></details>
+            </div>
+        </div>
+    </section>
 
-        // 01: services
-        SERVICES.forEach(function (s) { $('services').appendChild(option('service', 'svc-' + s.id, s.id, s.name)); });
+    <section class="band" aria-labelledby="band-h">
+        <img src="img/dusk-pool-960.webp" srcset="img/dusk-pool-640.webp 640w, img/dusk-pool-960.webp 960w, img/dusk-pool-1440.webp 1440w" sizes="100vw" width="960" height="769" alt="" loading="lazy" decoding="async">
+        <div class="wrap band__inner">
+            <p class="label label--light">About a minute</p>
+            <h2 class="h2" id="band-h">Find the plan <em>for your pool.</em></h2>
+            <p>Eight taps, one plan, one price. Book the first visit at the end, or just look.</p>
+            <a class="btn" href="quiz.html">Find your pool plan <span class="btn__arrow" aria-hidden="true">&#8594;</span></a>
+        </div>
+    </section>
+</main>
 
-        // 02: the next 14 days, Sundays closed
-        var today = new Date(); today.setHours(0, 0, 0, 0);
-        for (var n = 1; n <= DAYS; n++) {
-            var d = new Date(today); d.setDate(today.getDate() + n);
-            var closed = d.getDay() === 0;
-            var parts = dayFmt.format(d).replace(',', '').split(' ');
-            $('days').appendChild(option('day', 'day-' + n, key(d), parts[0], 'opt--day', parts[1] + ' ' + parts[2], closed));
-        }
-
-        function renderTimes() {
-            var box = $('times'); box.textContent = '';
-            TIMES.forEach(function (t, i) {
-                box.appendChild(option('time', 'time-' + i, t, t, '', '', taken(state.day, state.service, t)));
-            });
-        }
-        function unlock(id) { $(id).disabled = false; }
-        function lock(id) { $(id).disabled = true; }
-        function say(t) { $('status').textContent = t; }
-        function ready() { $('go').disabled = !(state.service && state.day && state.time); }
-
-        $('book').addEventListener('change', function (e) {
-            var t = e.target;
-            if (t.name === 'service') { state.service = t.value; state.day = state.time = null; unlock('s2'); lock('s3'); lock('s4'); $('times').textContent = ''; [].forEach.call(document.querySelectorAll('input[name=day]'), function (x) { x.checked = false; }); say('Now pick a day.'); }
-            if (t.name === 'day') { state.day = t.value; state.time = null; renderTimes(); unlock('s3'); lock('s4'); say('Some times are taken. Pick one that is free.'); }
-            if (t.name === 'time') { state.time = t.value; unlock('s4'); say('Almost done. Add your name and number.'); }
-            ready();
-        });
-
-        function validPhone(v) { return /^(\+27|0)[\s-]?\d{2}[\s-]?\d{3}[\s-]?\d{4}$/.test(v.trim()); }
-        function svcName() { return SERVICES.filter(function (s) { return s.id === state.service; })[0]; }
-        function when() {
-            var p = state.day.split('-'); var dt = new Date(+p[0], +p[1] - 1, +p[2]);
-            return longFmt.format(dt) + ' at ' + state.time;
-        }
-
-        $('book').addEventListener('submit', function (e) {
-            e.preventDefault();
-            var name = $('name'), phone = $('phone'), err = $('err');
-            err.textContent = ''; name.removeAttribute('aria-invalid'); phone.removeAttribute('aria-invalid');
-            if (!name.value.trim()) { name.setAttribute('aria-invalid', 'true'); err.textContent = 'Add your name so the owner knows who is coming.'; name.focus(); return; }
-            if (!validPhone(phone.value)) { phone.setAttribute('aria-invalid', 'true'); err.textContent = 'Add a cell number like 082 123 4567.'; phone.focus(); return; }
-            var svc = svcName();
-            $('o-service').textContent = svc.name;
-            $('o-when').textContent = when();
-            $('o-name').textContent = name.value.trim();
-            $('o-wa').textContent = 'New booking (demo)\n' + name.value.trim() + ', ' + phone.value.trim() + '\n' + svc.name + '\n' + when();
-            $('empty').hidden = true; $('customer').hidden = false; $('owner').hidden = false;
-            say('Booked (demo). Nothing was sent.');
-            $('customer').scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-        });
-
-        // A calendar file built in the browser. South Africa has no daylight saving, so local time is UTC+2.
-        $('ics').addEventListener('click', function () {
-            var svc = svcName(), p = state.day.split('-'), t = state.time.split(':');
-            var start = Date.UTC(+p[0], +p[1] - 1, +p[2], +t[0] - 2, +t[1]);
-            var end = start + svc.mins * 60000;
-            var f = function (ms) { var d = new Date(ms); return d.getUTCFullYear() + pad(d.getUTCMonth() + 1) + pad(d.getUTCDate()) + 'T' + pad(d.getUTCHours()) + pad(d.getUTCMinutes()) + '00Z'; };
-            var ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//William McIlleron//Booking demo//EN', 'BEGIN:VEVENT',
-                'UID:demo-' + start + '@williammcilleron.com', 'DTSTAMP:' + f(Date.now()), 'DTSTART:' + f(start), 'DTEND:' + f(end),
-                'SUMMARY:' + svc.name + ' (demo booking)', 'DESCRIPTION:Demo only. Blue Line Pool Care is a made-up business.', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
-            var a = document.createElement('a');
-            a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
-            a.download = 'booking-demo.ics';
-            document.body.appendChild(a); a.click(); a.remove();
-            setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
-        });
-
-        $('again').addEventListener('click', function () {
-            $('book').reset(); state = { service: null, day: null, time: null };
-            ['s2', 's3', 's4'].forEach(lock); $('times').textContent = ''; $('go').disabled = true;
-            $('customer').hidden = true; $('owner').hidden = true; $('empty').hidden = false; say('');
-            $('s1').scrollIntoView({ block: 'nearest' });
-        });
-    })();
-    </script>
+<footer class="site-foot">
+    <div class="wrap">
+        <div class="foot-grid">
+            <div>
+                <a class="wordmark" href="index.html"><span class="wordmark__line" aria-hidden="true"></span>Blue Line <small>Pool Care</small></a>
+                <p class="foot-made-up">Blue Line Pool Care is a made-up business. Nothing on this site is booked or sent, and the numbers are not real.</p>
+            </div>
+            <div>
+                <p class="foot-h">Contact (fake)</p>
+                <ul class="foot-list" role="list">
+                    <li><a href="tel:0100000000">010 000 0000</a></li>
+                    <li>Mon to Fri 07:30 to 17:00, Sat 07:30 to 12:00</li>
+                    <li>Bluegum Valley (a made-up area)</li>
+                </ul>
+            </div>
+            <div>
+                <p class="foot-h">Pages</p>
+                <ul class="foot-list" role="list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="plans.html">Plans and prices</a></li>
+                    <li><a href="quiz.html">Find your plan</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="credits">
+            <details class="about-demo">
+                <summary>About this demo</summary>
+                <p>A quiz funnel swaps a long form for a few easy taps, so more visitors finish and each one sees a plan and a price made for them. Every answer arrives with the booking, so the owner knows the pool before calling back. William McIlleron built this to show what a booking system on your own site can do. <a href="/#booking">See the booking service</a></p>
+            </details>
+            <p>Photos via Wikimedia Commons, resized: Kgbo and Calistemon (<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>); Nenad Stojkovic and Shixart1985 (<a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>); Raining Huang, Markus Spiske and Jonas Verstuyft (CC0, first published on Unsplash); Bovineone (public domain). <a href="PHOTO-SOURCES.md">Full photo list</a>. Fonts: Instrument Serif and Manrope (<a href="fonts/OFL-Manrope.txt">SIL Open Font License</a>).</p>
+        </div>
+    </div>
+</footer>
+<script>
+(function () {
+    try {
+        var s = JSON.parse(sessionStorage.getItem("blpc-quiz-v1") || "null");
+        var n = s && s.answers ? Object.keys(s.answers).length : 0;
+        var el = document.querySelector("[data-continue]");
+        if (el && n > 0 && !s.ref) { el.textContent = n >= 8 ? "See your plan again" : "Continue where you left off (question " + (n + 1) + " of 8)"; el.classList.add("is-on"); }
+    } catch (e) {}
+})();
+</script>
 </body>
 </html>
