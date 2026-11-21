@@ -1,28 +1,146 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-ZA">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Book a treatment | Soft Light Skin Studio</title>
-<meta name="description" content="A booking request form and parking directions for a made-up skin studio.">
+<title>Book a treatment | Soft Light Skin Studio (demo)</title>
+<meta name="description" content="Book a facial online at a made-up skin studio: pick a treatment, a day and a time, and fill in a short skin form.">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#F3EEE7">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css">
+<link rel="preload" href="fonts/InstrumentSerif-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Manrope-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
-<p class="demo-bar" role="note">Demo site for a made-up business. <a href="/">William McIlleron</a></p>
-<header class="top"><div class="in"><a class="brand" href="./">Soft Light Skin Studio</a><nav aria-label="Primary"><a href="./">Home</a><a href="treatments.html">Treatments</a><a href="book.html" aria-current=page>Book</a></nav></div></header>
-<main>
-
-<section class="sec"><div class="in"><h1 style="font-size:clamp(2rem,4vw,3rem)">Book a treatment</h1><p class="lede">Send a request and we'll confirm a time by WhatsApp, usually the same day.</p></div></section>
-<section class="sec" style="padding-top:0"><div class="in visit"><form onsubmit="return false">
-<label>Your name<input autocomplete="name"></label><label>Cell number<input type="tel" autocomplete="tel" placeholder="082 123 4567"></label>
-<label>Treatment<select><option>Signature facial</option><option>Deep cleanse</option><option>Gentle peel</option><option>Brow and lash tint</option><option>Not sure yet</option></select></label>
-<label>Days that suit you<input placeholder="Tuesday or Thursday mornings"></label><button class="btn" type="submit">Send request (demo)</button></form>
-<div><h2 style="font-size:1.6rem">Where to park</h2><p class="lede" style="margin-top:.75rem">Turn into the lot behind the building, off Fourth Avenue. Take the lift to the second floor and follow the plants.</p>
-<p class="lede">Already booked and running late? WhatsApp us on 010 000 0000.</p></div></div></section>
-
+<a class="skip" href="#main">Skip to content</a>
+<p class="demo-bar">Demo site for a made-up business. Nothing you enter is sent or charged. <a href="/">Made by William McIlleron</a></p>
+<header class="site-head">
+<div class="head-in">
+<a class="brand" href="./"><b>Soft Light</b><small>Skin Studio</small><span class="sr-only">, home</span></a>
+<nav class="nav" aria-label="Main"><ul><li><a href="treatments.html">Treatments</a></li><li><a href="shop.html">Shop</a></li><li><a href="book.html" aria-current=page>Book</a></li><li><a href="visit.html">Visit</a></li></ul></nav>
+<div class="head-actions">
+<a class="btn btn--accent btn--sm" href="book.html">Book a treatment</a>
+<button class="icon-btn" type="button" data-bag-btn aria-haspopup="dialog" aria-controls="bag" aria-label="Bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1 11h-11z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="count" data-bag-count hidden>0</span></button>
+<button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button>
+</div>
+</div>
+</header>
+<div class="mnav" id="mnav" inert>
+<nav aria-label="Mobile"><ul><li><a href="./">Home</a></li><li><a href="treatments.html">Treatments</a></li><li><a href="shop.html">Shop</a></li><li><a href="book.html" aria-current=page>Book</a></li><li><a href="visit.html">Visit</a></li></ul></nav>
+<div class="mnav-foot"><a class="btn btn--accent btn--block" href="book.html">Book a treatment</a><p>Mon to Sat &middot; <a href="tel:+27100000000">010 000 0000</a></p></div>
+</div>
+<main id="main">
+<section class="page-head" style="padding-bottom:clamp(24px,3vw,40px)"><div class="wrap">
+<span class="label">Online booking</span>
+<h1 class="h1">Book a <em>treatment</em></h1>
+<p class="lede">Five short steps. Your progress is kept if you refresh the page, and you pay at the studio.</p>
+</div></section>
+<div class="wrap flow">
+<div id="booking">
+<ol class="progress" aria-label="Booking steps"><li><span>Treatment</span></li><li><span>Day and time</span></li><li><span>Skin form</span></li><li><span>Details</span></li><li><span>Review</span></li></ol>
+<section class="step" data-step="1" aria-labelledby="b1">
+<h2 id="b1">Choose a treatment</h2>
+<p class="lede">Not sure? The skin consultation is a good place to start.</p>
+<fieldset id="t-list"><legend class="sr-only">Treatment</legend><div class="choices"><label class="choice"><input type="radio" name="treatment" value="consultation"><span class="dot" aria-hidden="true"></span><b>Skin consultation</b><span class="amt">From R250<small>30 min</small></span><span class="sub">Start here</span></label><label class="choice"><input type="radio" name="treatment" value="signature"><span class="dot" aria-hidden="true"></span><b>Signature facial</b><span class="amt">From R650<small>60 min</small></span><span class="sub">Facial</span></label><label class="choice"><input type="radio" name="treatment" value="hydrating"><span class="dot" aria-hidden="true"></span><b>Hydrating facial</b><span class="amt">From R720<small>60 min</small></span><span class="sub">Facial</span></label><label class="choice"><input type="radio" name="treatment" value="massage"><span class="dot" aria-hidden="true"></span><b>Facial massage</b><span class="amt">From R520<small>45 min</small></span><span class="sub">Facial</span></label><label class="choice"><input type="radio" name="treatment" value="deep-cleanse"><span class="dot" aria-hidden="true"></span><b>Deep cleanse</b><span class="amt">From R780<small>75 min</small></span><span class="sub">Targeted</span></label><label class="choice"><input type="radio" name="treatment" value="peel"><span class="dot" aria-hidden="true"></span><b>Gentle peel</b><span class="amt">From R550<small>45 min</small></span><span class="sub">Targeted</span></label><label class="choice"><input type="radio" name="treatment" value="hands"><span class="dot" aria-hidden="true"></span><b>Hand treatment</b><span class="amt">From R220<small>20 min</small></span><span class="sub">Add-on</span></label><label class="choice"><input type="radio" name="treatment" value="brows"><span class="dot" aria-hidden="true"></span><b>Brow tidy and tint</b><span class="amt">From R280<small>30 min</small></span><span class="sub">Add-on</span></label></div></fieldset>
+<p class="err" id="t-err"></p>
+<div class="step-nav"><button class="btn btn--accent" type="button" data-next>Continue <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
+</section>
+<section class="step" data-step="2" aria-labelledby="b2" hidden>
+<h2 id="b2">Pick a day and time</h2>
+<p class="lede">The next two weeks. We are closed on Sundays, and crossed-out times are already taken.</p>
+<fieldset><legend>Day</legend><div class="days" id="days"></div></fieldset>
+<p class="err" id="day-err"></p>
+<fieldset id="time-fs" hidden><legend class="sr-only">Time</legend>
+<div class="slot-head" id="slot-head"><p><b id="slot-date"></b></p><p class="form-note" id="slot-free"></p></div>
+<div class="times" id="times"></div></fieldset>
+<p class="err" id="time-err"></p>
+<div class="step-nav"><button class="btn btn--ghost" type="button" data-back>Back</button><button class="btn btn--accent" type="button" data-next>Continue <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
+</section>
+<section class="step" data-step="3" aria-labelledby="b3" hidden>
+<h2 id="b3">A short skin form</h2>
+<p class="lede">So we can plan your treatment before you arrive. Only the studio sees it. In this demo it stays in your browser.</p>
+<form id="consult-form" class="stack" novalidate style="gap:28px">
+<fieldset data-group="skin" data-req="Choose the skin type closest to yours, or Not sure."><legend>Skin type</legend><div class="pills"><label class="pill"><input type="radio" name="skin" value="Dry"><span>Dry</span></label><label class="pill"><input type="radio" name="skin" value="Oily"><span>Oily</span></label><label class="pill"><input type="radio" name="skin" value="Combination"><span>Combination</span></label><label class="pill"><input type="radio" name="skin" value="Normal"><span>Normal</span></label><label class="pill"><input type="radio" name="skin" value="Sensitive"><span>Sensitive</span></label><label class="pill"><input type="radio" name="skin" value="Not sure"><span>Not sure</span></label></div></fieldset>
+<fieldset><legend>Main concerns <span class="form-note">(tick any)</span></legend><div class="pills"><label class="pill"><input type="checkbox" name="concerns" value="Breakouts"><span>Breakouts</span></label><label class="pill"><input type="checkbox" name="concerns" value="Dryness"><span>Dryness</span></label><label class="pill"><input type="checkbox" name="concerns" value="Uneven tone"><span>Uneven tone</span></label><label class="pill"><input type="checkbox" name="concerns" value="Redness"><span>Redness</span></label><label class="pill"><input type="checkbox" name="concerns" value="Fine lines"><span>Fine lines</span></label><label class="pill"><input type="checkbox" name="concerns" value="Dullness"><span>Dullness</span></label><label class="pill"><input type="checkbox" name="concerns" value="Congestion"><span>Congestion</span></label></div></fieldset>
+<div class="field"><label for="allergies">Allergies or sensitivities</label><p class="hint" id="allergies-hint">Ingredients, fragrance, latex, plasters. Leave blank if none.</p><textarea id="allergies" aria-describedby="allergies-hint" rows="3"></textarea></div>
+<fieldset data-group="pregnant" data-req="Please choose one. Prefer to discuss is fine."><legend>Are you pregnant or breastfeeding?</legend><div class="pills"><label class="pill"><input type="radio" name="pregnant" value="No"><span>No</span></label><label class="pill"><input type="radio" name="pregnant" value="Pregnant"><span>Pregnant</span></label><label class="pill"><input type="radio" name="pregnant" value="Breastfeeding"><span>Breastfeeding</span></label><label class="pill"><input type="radio" name="pregnant" value="Prefer to discuss"><span>Prefer to discuss</span></label></div></fieldset>
+<p class="notice" id="preg-note" hidden>Thank you for telling us. Peels and some deep cleanse steps are not offered during pregnancy or breastfeeding. We will WhatsApp you to suggest a gentler option.</p>
+<fieldset data-group="retinoid" data-req="Please choose one."><legend>Are you using retinoids or acne medication?</legend><div class="pills"><label class="pill"><input type="radio" name="retinoid" value="No"><span>No</span></label><label class="pill"><input type="radio" name="retinoid" value="Yes"><span>Yes</span></label><label class="pill"><input type="radio" name="retinoid" value="Not sure"><span>Not sure</span></label></div></fieldset>
+<div class="field"><label for="meds">Any other medication we should know about?</label><textarea id="meds" rows="2"></textarea></div>
+</form>
+<div class="step-nav"><button class="btn btn--ghost" type="button" data-back>Back</button><button class="btn btn--accent" type="button" data-next>Continue <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
+</section>
+<section class="step" data-step="4" aria-labelledby="b4" hidden>
+<h2 id="b4">Your details</h2>
+<p class="lede">We confirm on WhatsApp, so a cell number matters most.</p>
+<form id="details-form" class="stack" novalidate>
+<div class="field"><label for="d-name">Full name</label><input id="d-name" type="text" autocomplete="name" required data-rule="name" data-req="Enter your name." data-msg="Enter your full name."></div>
+<div class="grid-2">
+<div class="field"><label for="d-cell">Cell number</label><input id="d-cell" type="tel" inputmode="tel" autocomplete="tel" required data-rule="cell" data-req="Enter your cell number." data-msg="Enter a South African cell number, like 082 000 0000." aria-describedby="d-cell-hint"><p class="hint" id="d-cell-hint">For example 082 000 0000 or +27 82 000 0000</p></div>
+<div class="field"><label for="d-email">Email</label><input id="d-email" type="email" autocomplete="email" required data-rule="email" data-req="Enter your email address." data-msg="That email address does not look right."></div>
+</div>
+<div class="field"><label for="d-notes">Anything else? <span class="form-note">(optional)</span></label><textarea id="d-notes" rows="3"></textarea></div>
+</form>
+<div class="step-nav"><button class="btn btn--ghost" type="button" data-back>Back</button><button class="btn btn--accent" type="button" data-next>Review booking <svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
+</section>
+<section class="step" data-step="5" aria-labelledby="b5" hidden>
+<h2 id="b5">Check and confirm</h2>
+<p class="lede">Nothing is charged now. You pay at the studio after your treatment.</p>
+<div id="review"></div>
+<div class="step-nav"><button class="btn btn--ghost" type="button" data-back>Back</button><button class="btn btn--accent" type="button" id="confirm">Confirm booking</button></div>
+</section>
+<section class="step" data-step="6" aria-labelledby="b6" hidden>
+<div class="done-head"><span class="ok-dot" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span>
+<p class="ref" id="c-ref" style="margin-top:20px"></p>
+<h2 class="h2" id="b6">You are booked in.</h2>
+<p class="lede" id="c-what"></p></div>
+<h3 class="h3" style="margin-top:40px">What to expect</h3>
+<ul class="expect">
+<li>A WhatsApp confirmation within the hour, during opening times.</li>
+<li>Arrive ten minutes early. Parking is free behind the building, and the gate code is in your confirmation.</li>
+<li>Come with a clean face if you can. If you use retinoids, skip them for three days before a peel.</li>
+<li>Need to move it? WhatsApp us at least 24 hours before.</li>
+</ul>
+<div class="cta-row"><button class="btn btn--accent" type="button" id="ics">Add to calendar (.ics)</button><button class="btn btn--ghost" type="button" id="again">Make another booking</button></div>
+<div class="wa"><p class="wa-top"><span class="av" aria-hidden="true">S</span>What the studio receives on WhatsApp</p><div class="wa-msg"><span id="c-wa"></span><time id="c-wa-time"></time></div></div>
+</section>
+</div>
+<aside class="summary" id="b-summary" aria-labelledby="bs-h">
+<h2 id="bs-h">Your booking</h2>
+<dl class="sum-list">
+<div><dt>Treatment</dt><dd id="s-treat">Not chosen</dd></div>
+<div><dt>Length</dt><dd id="s-len">-</dd></div>
+<div><dt>When</dt><dd id="s-when">Not chosen</dd></div>
+<div><dt>Price</dt><dd id="s-price">-</dd></div>
+</dl>
+<p class="sum-note">Pay at the studio after your treatment. Free to move up to 24 hours before. Questions? WhatsApp <a href="https://wa.me/27100000000">010 000 0000</a>.</p>
+</aside>
+</div>
 </main>
-<footer class="foot"><div class="in"><p>Soft Light Skin Studio is a made-up business, built as a demo by <a href="/">William McIlleron</a>. Nothing here is real and nothing on the forms is sent.</p></div></footer>
+<footer class="foot on-dark">
+<div class="wrap">
+<div class="foot-grid">
+<div><a class="brand" href="./"><b>Soft Light</b><small>Skin Studio</small><span class="sr-only">, home</span></a>
+<p class="foot-intro">A small skin studio in Linden, Johannesburg. Facials, honest advice and a short shelf of products we use ourselves.</p></div>
+<div><h2>Explore</h2><ul><li><a href="treatments.html">Treatments</a></li><li><a href="shop.html">Shop</a></li><li><a href="book.html">Book</a></li><li><a href="visit.html">Visit</a></li></ul></div>
+<div><h2>Visit</h2><ul><li>Unit 4, 12 Sample Lane</li><li>Linden, Johannesburg</li><li>Mon to Sat, closed Sunday</li></ul></div>
+<div><h2>Contact</h2><ul><li><a href="tel:+27100000000">010 000 0000</a></li><li><a href="https://wa.me/27100000000">WhatsApp 010 000 0000</a></li><li><a href="mailto:hello@softlight.example">hello@softlight.example</a></li></ul></div>
+</div>
+<div class="foot-base">
+<p>Soft Light Skin Studio is a made-up business. This is a demo site by <a href="/">William McIlleron</a>: nothing you enter is sent anywhere, nothing is charged, the address and numbers are fake, and the reviews are samples.</p>
+<p>Photography: Unsplash contributors (<a href="PHOTO-SOURCES.md">sources</a>)</p>
+</div>
+</div>
+</footer>
+<div class="scrim" hidden></div>
+<aside class="drawer" id="bag" role="dialog" aria-modal="true" aria-labelledby="bag-title" aria-hidden="true" hidden>
+<div class="drawer-head"><h2 id="bag-title" tabindex="-1">Your bag</h2><button class="icon-btn" type="button" data-close aria-label="Close bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button></div>
+<div class="drawer-body"></div>
+<div class="drawer-foot"></div>
+</aside>
+<p id="live" class="sr-only" aria-live="polite"></p>
+<script src="site.js" defer></script>
+<script src="flow.js" defer></script>
 </body>
 </html>
