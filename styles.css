@@ -904,6 +904,17 @@ a.proof__item:focus-visible {
     color: var(--muted);
 }
 
+/* --- Case study pages (/work/<client>/) -------------------------------------
+   One screenshot per page. height:auto keeps the 16:10 ratio the width and
+   height attributes reserve, so nothing shifts as it loads.                 */
+.case-shot { margin-top: 1rem; border: 1px solid var(--rule); }
+.case-shot img { width: 100%; height: auto; }
+.case-facts { margin-top: 0.9rem; display: grid; gap: 0.35rem; font-size: 0.9375rem; color: var(--muted); }
+.case-facts b { color: var(--ink); font-weight: 600; }
+.crumbs { font-size: 0.8125rem; color: var(--muted); margin-bottom: 0.9rem; }
+.crumbs a { color: inherit; }
+.crumbs a:hover { color: var(--accent); }
+
 /* --- The syzygy strip ------------------------------------------------------
    Not a card, deliberately. It is a door out of the page, so it gets the
    accent wash and the full measure instead of sitting in the grid with the

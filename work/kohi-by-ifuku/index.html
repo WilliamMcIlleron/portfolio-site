@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Case study. Facts come from the kohi repo README and the /work/ entry
+         (1.1 s vs 5.9 s phone load, live 8 Nov 2026). Do not mention the logo
+         here: that history is settled and is theirs. "Kohi" without macrons
+         sits in the title because that is how people type it into a search. -->
+    <title>Kohi by Ifuku website · case study · William McIlleron</title>
+    <meta name="description" content="Rebuilding the website for Kōhī by Ifuku, a café and listening room in Milpark, Johannesburg: the design taken from the room, images cut from 316 MB to 3.9 MB, and a phone load time down from 5.9 to 1.1 seconds.">
+    <meta name="author" content="William McIlleron">
+    <meta name="theme-color" content="#14171a">
+
+    <link rel="canonical" href="https://williammcilleron.com/work/kohi-by-ifuku/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="William McIlleron">
+    <meta property="og:title" content="Kōhī by Ifuku website · case study">
+    <meta property="og:description" content="A café and listening room in Milpark. Rebuilt around the room itself, and it now loads in 1.1 seconds on a phone, down from 5.9.">
+    <meta property="og:url" content="https://williammcilleron.com/work/kohi-by-ifuku/">
+    <meta property="og:image" content="https://williammcilleron.com/work-kohi.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="750">
+    <meta property="og:image:alt" content="Home page of the Kōhī by Ifuku website.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://williammcilleron.com/work-kohi.webp">
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+    <link rel="preload" href="/fonts/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/dmsans-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/styles.css?v=20261128">
+
+    <script>
+        (function () {
+            var root = document.documentElement;
+            root.classList.add('js');
+            try {
+                if (localStorage.getItem('theme') === 'light') root.dataset.theme = 'light';
+            } catch (e) { /* private mode — stay dark */ }
+        })();
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://williammcilleron.com/work/kohi-by-ifuku/",
+          "url": "https://williammcilleron.com/work/kohi-by-ifuku/",
+          "name": "Kōhī by Ifuku website case study",
+          "author": { "@id": "https://williammcilleron.com/#william" },
+          "about": { "@id": "https://williammcilleron.com/work/kohi-by-ifuku/#site" },
+          "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://williammcilleron.com/" },
+              { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://williammcilleron.com/work/" },
+              { "@type": "ListItem", "position": 3, "name": "Kōhī by Ifuku" }
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://williammcilleron.com/work/kohi-by-ifuku/#site",
+          "name": "Kōhī by Ifuku",
+          "alternateName": "Kohi by Ifuku",
+          "url": "https://www.kohibyifuku.co.za/",
+          "creator": { "@id": "https://williammcilleron.com/#william" },
+          "dateModified": "2026-11-08",
+          "publisher": {
+            "@type": "CafeOrCoffeeShop",
+            "name": "Kōhī by Ifuku",
+            "url": "https://www.kohibyifuku.co.za/",
+            "address": { "@type": "PostalAddress", "streetAddress": "44 Stanley", "addressLocality": "Milpark, Johannesburg", "addressRegion": "Gauteng", "addressCountry": "ZA" }
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="masthead">
+        <div class="masthead__inner wrap">
+            <a class="wordmark" href="/">William McIlleron</a>
+
+            <nav class="nav" id="nav" aria-label="Primary">
+                <ul class="nav__list">
+                    <li><a href="/work/">Work</a></li>
+                    <li><a href="/#services">Services</a></li>
+                    <li><a href="/#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="masthead__actions">
+                <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch to light theme">
+                    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <circle cx="12" cy="12" r="4.2"/>
+                        <path d="M12 2.4v2.6M12 19v2.6M4.2 12H1.6M22.4 12h-2.6M5.6 5.6 7.4 7.4M16.6 16.6l1.8 1.8M18.4 5.6 16.6 7.4M7.4 16.6l-1.8 1.8"/>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M20 14.2A8.4 8.4 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2Z"/>
+                    </svg>
+                </button>
+
+                <button class="nav-toggle" id="navToggle" type="button"
+                        aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+                    <span class="nav-toggle__bar"></span>
+                    <span class="nav-toggle__bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="section">
+            <div class="wrap">
+                <div class="section__head reveal">
+                    <nav class="crumbs" aria-label="Breadcrumb">
+                        <a href="/work/">Work</a> / Kōhī by Ifuku
+                    </nav>
+                    <h1 class="section__title">A café site that loads before the queue moves</h1>
+                    <p class="section__intro">
+                        Kōhī by Ifuku is a coffee shop, micro-gallery and jazz kissa (a
+                        listening room built around a hi-fi) at 44 Stanley in Milpark,
+                        Johannesburg. I rebuilt its website in 2026. On a phone it now loads in
+                        1.1 seconds, down from 5.9, and it went live on 8 November 2026. I still
+                        look after it.
+                    </p>
+                </div>
+
+                <div class="work-list">
+                    <article class="work-item reveal">
+                        <span class="work-item__kind">At a glance</span>
+                        <h2 class="work-item__title">The short version</h2>
+                        <div class="case-facts">
+                            <p><b>Client:</b> Kōhī by Ifuku, 44 Stanley, Milpark</p>
+                            <p><b>Pages:</b> a home page, and a gallery of 17 photographs and 20 short films</p>
+                            <p><b>Phone load time:</b> 1.1 seconds, down from 5.9</p>
+                            <p><b>Images:</b> 316 MB of source photography down to 3.9 MB on the site</p>
+                            <p><b>Home page weight:</b> about 141 KB, with no third-party requests</p>
+                            <p><b>Built with:</b> HTML, CSS and JavaScript, no build step</p>
+                        </div>
+                        <figure class="case-shot">
+                            <img src="/work-kohi.webp" srcset="/work-kohi-640.webp 640w, /work-kohi.webp 1200w" sizes="(min-width: 72rem) 60rem, 92vw" width="1200" height="750" alt="Home page of the Kōhī by Ifuku website: the headline 'Good coffee, and a room built for listening' over a photograph of two people at the counter, with a large speaker behind them." fetchpriority="high" decoding="async">
+                        </figure>
+                        <p class="work-links">
+                            <a class="text-link" href="https://www.kohibyifuku.co.za" target="_blank" rel="noopener">Open the site<span class="vh"> (opens in a new tab)</span></a>
+                        </p>
+                    </article>
+
+                    <article class="work-item reveal">
+                        <span class="work-item__kind">The problem</span>
+                        <h2 class="work-item__title">Slow, on the one screen that mattered</h2>
+                        <p>
+                            People look up a café on their phone, usually standing outside or on the
+                            way there, and they want the hours, the menu and directions. The previous
+                            version took 5.9 seconds to load on a phone. It pulled its fonts and a
+                            review widget from other companies' servers, and its images were far
+                            heavier than anything a phone screen can show.
+                        </p>
+                    </article>
+
+                    <article class="work-item reveal">
+                        <span class="work-item__kind">Design</span>
+                        <h2 class="work-item__title">Built from the room itself</h2>
+                        <p>
+                            The colours are sampled from the café: the near-black of a record sleeve,
+                            the warm off-white of the plaster walls, the wood of the tables, and the
+                            indigo of the curtain over the counter. The type pairs Fraunces for
+                            headings with Inter for everything else, on a numbered editorial grid
+                            that folds down to a single column on a phone.
+                        </p>
+                        <p>
+                            The top of the home page is a still photograph, on purpose. Every clip in
+                            their library is fast-cut social footage, and none of it loops without a
+                            visible jump. A still is the honest choice until there is a steady,
+                            ten-second shot to use.
+                        </p>
+                    </article>
+
+                    <article class="work-item reveal">
+                        <span class="work-item__kind">Speed</span>
+                        <h2 class="work-item__title">How it got from 5.9 seconds to 1.1</h2>
+                        <p>
+                            Every image is WebP, in several sizes, so a phone downloads the small one
+                            and a laptop the large one. That took the photography from 316 MB to
+                            3.9 MB. The fonts are hosted on the site itself and cut down to the
+                            characters it uses. No video loads until someone taps to play it. Nothing
+                            is fetched from another company's server, apart from the map, which only
+                            loads when you scroll to it.
+                        </p>
+                        <p>
+                            The home page now weighs about 141 KB in total.
+                        </p>
+                    </article>
+
+                    <article class="work-item reveal">
+                        <span class="work-item__kind">Access</span>
+                        <h2 class="work-item__title">Usable by everyone who visits</h2>
+                        <p>
+                            It has a skip link, visible focus outlines, a clean heading order, and
+                            text that meets WCAG AA contrast. The menu works from the keyboard and
+                            closes on Escape. The photo viewer uses the browser's own dialog, so focus
+                            behaves properly. The moving parts (the scroll reveals, the marquee and
+                            the spinning record) switch off for anyone whose device asks for reduced
+                            motion. Every page works with JavaScript turned off.
+                        </p>
+                    </article>
+                </div>
+
+                <p class="work-links">
+                    <a class="text-link" href="/work/mvs-global-pools/">Next: MVS Global Pools &#8594;</a>
+                    <a class="text-link" href="/#contact">Start a project</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="wrap footer__inner">
+            <p>&copy; <span id="year">2026</span> William McIlleron &middot; Johannesburg</p>
+            <p class="footer__links">
+                <a href="/work/">Work</a>
+                <a href="/photographers/">Photographers</a>
+                <a href="/solar/">Solar</a>
+                <a href="/skincare/">Skin &amp; beauty</a>
+                <a href="mailto:william@williammcilleron.com">Email</a>
+                <a href="https://github.com/WilliamMcIlleron" target="_blank" rel="noopener">GitHub<span class="vh"> (opens in a new tab)</span></a>
+                <a href="https://www.linkedin.com/in/williammcilleron" target="_blank" rel="noopener">LinkedIn<span class="vh"> (opens in a new tab)</span></a>
+                <a href="https://www.instagram.com/will.builds.things" target="_blank" rel="noopener">Instagram<span class="vh"> (opens in a new tab)</span></a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="/script.js?v=20261121" defer></script>
+    <script src="/mailcopy.js?v=20261127" defer></script>
+</body>
+</html>
