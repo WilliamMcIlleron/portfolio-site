@@ -27,27 +27,127 @@
 
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
+    <!-- Structured data: the person and the business as two linked nodes, so a
+         search engine or AI assistant reads the offer as facts instead of
+         inferring it from prose. Every price here must match the services
+         section below; change both together. No street address, ever: this is
+         a service-area business. Ads carry no price because none is published.
+         The solar and skincare pages point their provider at #william. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "William McIlleron",
-      "url": "https://williammcilleron.com/",
-      "email": "william@williammcilleron.com",
-      "jobTitle": "Software Developer",
-      "description": "Fast websites for growing businesses, kept running after they go live, plus the Google and Meta ads that send people to them.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Johannesburg",
-        "addressRegion": "Gauteng",
-        "addressCountry": "ZA"
-      },
-      "sameAs": [
-        "https://github.com/WilliamMcIlleron",
-        "https://www.linkedin.com/in/williammcilleron",
-        "https://www.instagram.com/will.builds.things"
-      ],
-      "knowsAbout": ["HTML", "CSS", "JavaScript", "TypeScript", "Astro", "Next.js", "Tailwind CSS", "Three.js", "Supabase", "Web accessibility", "Web performance", "Local SEO", "Google Ads"]
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://williammcilleron.com/#william",
+          "name": "William McIlleron",
+          "url": "https://williammcilleron.com/",
+          "image": "https://williammcilleron.com/me.webp",
+          "email": "william@williammcilleron.com",
+          "jobTitle": "Web designer and developer",
+          "worksFor": { "@id": "https://williammcilleron.com/#business" },
+          "description": "Builds fast websites for growing businesses, keeps them running after they go live, and runs the Google and Meta ads that send people to them.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Johannesburg",
+            "addressRegion": "Gauteng",
+            "addressCountry": "ZA"
+          },
+          "sameAs": [
+            "https://github.com/WilliamMcIlleron",
+            "https://www.linkedin.com/in/williammcilleron",
+            "https://www.instagram.com/will.builds.things"
+          ],
+          "knowsAbout": ["Website design", "Web development", "Web performance", "Web accessibility", "Local SEO", "Google Ads", "Meta ads", "HTML", "CSS", "JavaScript", "Supabase", "Cloudflare"]
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://williammcilleron.com/#business",
+          "name": "William McIlleron",
+          "url": "https://williammcilleron.com/",
+          "email": "william@williammcilleron.com",
+          "image": "https://williammcilleron.com/og.png",
+          "logo": "https://williammcilleron.com/favicon.svg",
+          "description": "Websites for growing businesses, built and looked after, plus the Google and Meta ads that send people to them. Based in Johannesburg, working with businesses anywhere.",
+          "founder": { "@id": "https://williammcilleron.com/#william" },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Johannesburg",
+            "addressRegion": "Gauteng",
+            "addressCountry": "ZA"
+          },
+          "areaServed": [
+            { "@type": "City", "name": "Johannesburg" },
+            { "@type": "Country", "name": "South Africa" }
+          ],
+          "priceRange": "R2,000 to R25,000",
+          "currenciesAccepted": "ZAR",
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "name": "Single-page website",
+                "description": "A one-page website, built and put live. R850 for each page after the first; most sites land between R5,000 and R25,000.",
+                "price": "2000",
+                "priceCurrency": "ZAR"
+              },
+              {
+                "@type": "Offer",
+                "name": "Website upkeep",
+                "description": "Optional monthly hosting, changes and keeping the site running. The price depends on what it covers.",
+                "priceSpecification": {
+                  "@type": "UnitPriceSpecification",
+                  "minPrice": "950",
+                  "priceCurrency": "ZAR",
+                  "unitText": "MONTH"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Google and Meta ads",
+                  "description": "Ad campaigns that send people to the website. Quoted per business."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Booking systems",
+                  "description": "A way for customers to book themselves, connected to Google Calendar or a free booking tool. Quoted per business."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Brands",
+                  "description": "Logo, colours, type and templates, so the business looks the same everywhere. Quoted per business."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Social media",
+                  "description": "Posts made from the business's own photos and videos, planned a month at a time. Quoted per business."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Bigger, more technical builds",
+                  "description": "Backends, integrations and automation. Quoted per project."
+                }
+              }
+            ]
+          }
+        }
+      ]
     }
     </script>
 

@@ -16,6 +16,18 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://williammcilleron.com/work/mvs-global-pools/</loc>
+    <lastmod>2026-11-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://williammcilleron.com/work/kohi-by-ifuku/</loc>
+    <lastmod>2026-11-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://williammcilleron.com/photographers/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
